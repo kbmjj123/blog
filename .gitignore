@@ -20,6 +20,9 @@ coverage
 # nyc test coverage
 .nyc_output
 
+.package-lock.json
+yarn.lock
+
 # Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
