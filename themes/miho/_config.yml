@@ -1,0 +1,141 @@
+# hexo-theme-miho
+# https://github.com/wongminho/hexo-theme-miho
+
+# Favicon of your site | 网站icon
+favicon: /favicon.ico
+
+# Header
+
+# Keywords of your site | 网站关键字
+keywords: zhenggl, javascript，css，html，react，android，ios，react-native，Node.js，webpack，gulp，小程序
+# Head headline | 头部标题
+header_title: 一个专注于大前端的技术博客
+# Head description | 头部描述
+header_description: 不是井里没有水，而是你挖的不够深
+# Link to your logo | logo地址
+logo: images/logo.png
+# Link to your banner_img | 首页banner图地址
+banner_img: images/banner.jpg
+# Menu setting | 菜单设置
+#  name:                  Font Awesome icon | Font Awesome 图标
+#    title: Home          Title | 标题
+#    url: //minhow.com    Url, absolute or relative path | 链接，绝对或相对路径
+#    target: true         Whether to jump out | 是否跳出
+menu:
+  home:
+    title: 首页
+    url: /
+    target: false
+  archive:
+    title: 标签
+    url: /archives
+    target: false
+  user:
+    title: 关于我
+    url: /about
+    target: false
+# Social setting, use to display social information | 社交设置，用来展示社交信息
+#  name:                  Font Awesome icon | Font Awesome 图标
+#    title: Home          Icon title | 图标标题
+#    url: //minhow.com    Url, absolute or relative path | 链接，绝对或相对路径
+#    target: true         Whether to jump out | 是否跳出
+social:
+  home:
+    title: Zhenggl
+    url: //91temaichang.com
+    target: true
+  github:
+    title: Github
+    url: //github.com/kbmjj123
+    target: true
+  qq:
+    title: QQ
+    url: ''
+    target: true
+  weixin:
+    title: Weixin
+    url: ''
+    target: true
+  #qq:
+  #weixin:
+  #snapchat:
+  #telegram:
+  #envelope-o:
+  #facebook:
+  #google:
+  #linkedin:
+
+# Content
+
+# Excerpt length | 摘录长度
+excerpt_length: 190
+# Excerpt link | 摘录链接
+excerpt_link: more>>
+# New window open link | 新窗口打开文章
+open_new_link: false
+# Article default cover picture，size：350*150 | 文章默认封面图，尺寸：350*150
+cover_picture: http://img.91temaichang.com/blog/default-cover.jpg
+# Open background particles | 开启背景粒子
+open_bg_particle: true
+# Open animation in homepage and head | 开启主页及头部动画
+open_animation: false
+
+# Article
+
+# Open toc | 是否开启toc
+toc: true
+# Open share | 是否开启分享
+share: true
+
+# Style customization | 样式定制
+style:
+  # Main color tone | 主色调
+  main_color: '#FF8B48'
+
+# Reward | 打赏
+
+reward:
+  # 0-close, 1-All articles are rewarding, 2-Article's md file has reward:true attribute, only reward
+  # 0-关闭, 1-所有文章均有打赏, 2-文章的md文件里有reward:true属性，才有打赏
+  status: 1
+  # 标题
+  title: 请我吃糖~
+  # 微信，关闭设为 false
+  wechat: images/wechat_code.png
+  # 支付宝，关闭设为 false
+  alipay: images/alipay_code.png
+
+# Comments | 评论
+
+# 畅言，输入appid和appkey
+changyan_appid: cyvl74M4O
+changyan_appkey: 721d35beb05a2559bb4a448877fe17b9
+# 友言，输入id
+youyan_id: false
+# disqus
+disqus: false
+# gitment  https://github.com/imsun/gitment
+gitment:
+  owner: false   #你的 GitHub ID
+  repo: ''   #存储评论的 repo
+  client_id: '' #client ID
+  client_secret: ''  #client secret
+
+# Analytics | 分析
+# 站长分析，输入站点id
+cnzz_analytics: false
+# 百度分析，输入key值
+baidu_analytics: ea1e17cf6caa0f77798bde507393cb94
+# google analytics | google分析
+google_analytics: false
+
+# Footer
+
+# Access statistics | “不蒜子”访问量统计
+access_counter:
+  on: true
+  site_uv: 总访客数：
+  site_pv: 总访问量：
+
+# Copyright Information | 版权信息
+copyright: 2021 Zhenggl

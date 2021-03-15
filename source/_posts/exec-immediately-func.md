@@ -1,0 +1,102 @@
+---
+title: 立即执行的js函数有毛用？
+author: Zhenggl
+date: 2021-03-15 09:37:18
+categories:
+  - [前端, javascript]
+tags:
+  - javascript
+  - 基础
+  - function
+cover_picture: https://img.91temaichang.com/blog/js-data-type.jpg
+---
+
+**js立即执行的函数可以让函数在创建之后立马执行，这种编写模式本质上就是函数表达式(命名的或者匿名的)，在创建之后立即执行**
+
+### 一、立即执行函数的写法
+
+![立即执行函数写法](https://img.91temaichang.com/blog/immedialtely-js.png)
+
+一般立即执行的函数，都是正常写一js函数(命名或者匿名的)，然后用一()将整个函数包括函数给括起来，然后再加一()紧跟随其后，有需要的就对应传递相关函数调用参数
+
+```javascript
+  // 匿名函数第一种写法：匿名函数包裹在一个括号运算符中，后面跟一个小括号
+  (function(){console.info('hello')})();      //输出hello
+  // 匿名函数第二种写法：匿名函数后面跟一个小括号，整个包裹在一个括号运算符中
+  (function(){console.info('hello')});
+  (function add(x, y){return x + y;})(1, 2);  //输出3
+  // 错误的写法
+  // function(){}();
+```
+上述第三种写法报错：Uncaught SyntaxError: Unexpected token{
+js词法引擎在解析function关键词之后，认为后面跟随的是函数定义语句，而在一条语句后面加上()会被当作分组操作符，
+分组操作符必须要有表达式，所以这里报错，不应该以圆括号结尾，以圆括号结尾，引擎就会认为后面跟的是一个表达式，而不是函数定义。
+
+**`(), !, +, -, ~, new 等运算符都能够起到立即执行的作用，这些运算符的作用就是将匿名/具名函数声明转换为函数表达式`**
+
+**`要注意两点，一是函数体后要有小括号()，二是函数体必须是函数表达式而不是函数声明`**
+```javascript
+  (function(test){console.info(test)})(123);  //使用()运算符，输出123
+  
+  (function(test){console.info(test)}(123));  //使用()运算符，输出123
+  
+  !function(test){console.info(test)}(123);  //使用!运算符，输出123
+  
+  var fn = function(test){console.info(test)}(123); //使用=运算法，输出123
+```
+
+### 二、立即执行函数的作用
+立即执行的函数只有一个作用：创建一个独立的作用域，这个作用域里面的变量，外面访问不了(即避免了变量的污染)。
+比如，有一面试题：
+```javascript
+  var liList = ul.getElementsByTagName('li');
+  for(var i = 0; i < 6; i ++){
+  	liList.onclick = function(){
+  		alert(i);
+  	}
+  }
+```
+输出：6,6,6,6,6,6
+原因：为毛上述的输出总是6呢？im因为输出的i是全局作用域的，当循环结束后i的值是6，所以i输出的就是6
+幅图：
+
+![幅图](https://img.91temaichang.com/blog/immediately-js-result.png)
+
+解决方案：
+
+用立即执行函数给每个li创造一个独立作用域即可
+```javascript
+  var liList = ul.getElementsByTagName('li');
+  for(var i = 0; i < 6; i ++){
+  	liList.onclick = function(){
+  		alert(i);
+  	}(i);
+  }
+```
+### 三、与闭包的区别
+setTimeout依次输出0 1 2 3 4 5
+```javascript
+  for(var i = 0; i < 6; i ++){
+	(function(i){
+		setTimeout(function(){
+			console.info(i);
+		}, 1000);
+	})(i);
+  }
+  console.info(i);  //输出5，因为for循环后i就会变成5
+```
+解析：第一个5很好输出，因为已经过了一个for循环，因此值变为5，剩下的交给立即执行函数来执行，首先js中调用函数传参都是值传参，
+所以当立即执行函数执行时，首先会将i给copy一份，然后再创建函数作用域来执行函数，循环5次，就会对应创建5个作用域，所以1秒后几乎会同时输出0 1 2 3 4 5，
+这里同时输出，并没有1秒输出，这里需要了解下js的event loop机制
+
+**立即执行函数与闭包没有什么关系，只是两者会经常结合在一起使用而已，但两者有本质的不同**
+立即执行函数和闭包只是有一个共同优点就是能减少全局变量的使用。
+
+立即执行函数只是函数的一种调用方式，只是声明完之后立即执行，这类函数一般都只是调用一次，调用完之后会立即销毁，不会占用内存。
+
+闭包则主要是让外部函数可以访问内部函数的作用域，也减少了全局变量的使用，保证了内部变量的安全，但因被引用的内部变量不能被销毁，增大了内存消耗，使用不当易造成内存泄露。
+
+### 四、使用场景
+1. 你的代码在页面加载完成之后，不得不执行一些设置工作，比如时间处理器，创建对象等等；
+2. 所有这些工作只需要执行一次，比如只需要显示一个时间；
+3. 但是这些代码也需要一些临时的变量，然后在初始化结束之后，就再也不会被用到，如果将这些变量作为全局变量，可能会被全局污染到。
