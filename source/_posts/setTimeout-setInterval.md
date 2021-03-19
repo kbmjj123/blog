@@ -162,7 +162,7 @@ setTimeout的回调将会到第二次宏任务执行的时候，从事件队列�
 ```javascript
 function run() {
   var div = document.getElementById('xxx');
-  for(var i=0xBBB000;i <= 0xBBBBBB;i++) {
+  for(var i=0xBBBB00;i <= 0xBBBBBB;i++) {
     div.style.backgroundColor = '#'+i.toString(16)
   }
 }

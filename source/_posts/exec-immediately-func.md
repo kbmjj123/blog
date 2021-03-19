@@ -21,7 +21,7 @@ cover_picture: https://img.91temaichang.com/blog/js-data-type.jpg
 
 ```javascript
   // 匿名函数第一种写法：匿名函数包裹在一个括号运算符中，后面跟一个小括号
-  (function(){console.info('hello')})();      //输出hello
+  (function(){console.info('hello')})();       //输出hello
   // 匿名函数第二种写法：匿名函数后面跟一个小括号，整个包裹在一个括号运算符中
   (function(){console.info('hello')});
   (function add(x, y){return x + y;})(1, 2);  //输出3

@@ -75,6 +75,7 @@ typings/
 .idea/
 public/
 .deploy_git/
+_multiconfig.yml
 # Serverless directories
 .serverless/
 
