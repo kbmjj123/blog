@@ -84,3 +84,4 @@ public/
 # DynamoDB Local files
 .dynamodb/
 /.deploy_git/
+db.json
