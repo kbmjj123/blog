@@ -74,6 +74,7 @@ typings/
 .vuepress/dist
 .idea/
 public/
+.deploy_git/
 # Serverless directories
 .serverless/
 
@@ -82,6 +83,4 @@ public/
 
 # DynamoDB Local files
 .dynamodb/
-
-# 忽略打包结果文件
-.deploy_git/
+/.deploy_git/
