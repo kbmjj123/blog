@@ -82,3 +82,6 @@ public/
 
 # DynamoDB Local files
 .dynamodb/
+
+# 忽略打包结果文件
+.deploy_git/
