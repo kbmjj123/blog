@@ -133,13 +133,72 @@ JS引擎执行异步代码而不用等待，是因为有消息队列和事件循
 ##### 2.3.1 宏任务、微任务
 除了广义的同步任务和异步任务，JavaScript单线程中的任务可以细分为宏任务和微任务：
 
-    - macro-task：javascript(整体代码)，setTimeout，setInterval，setImmediate，I/O，UI Rendering，process.nextTick，
-    Promise，Object.observe，MutationObserver
+    - macro-task：javascript(整体代码)，setTimeout，setInterval，setImmediate，I/O，UI Rendering，
+    -process.nextTick，Promise，Object.observe，MutationObserver
 
 ##### 2.2.2 事件循环与宏任务、微任务
 每次执行栈执行的代码就是一个宏任务(包括每次从事件队列中获取一个事件回调并放到执行栈中执行)
 
 再检测本次循环中是否存在微任务，存在的话，就依次从为任务的任务队列中读取执行完所有的微任务，再读取宏任务的任务队列中的任务执行，再执行所有的微任务，如此循环。
 JS的执行顺序就是每次事件循环中的宏任务-微任务。
+
     - 第一次事件循环，整段代码作为宏任务进入JS主线程执行
     - 上述代码扔到执行栈中执行，遇到异步代码，就挂起交给其他线程执行(主线程代码依旧继续执行，异步代码执行完毕后)
+    - 同步代码执行完毕，读取微任务队列，若有待执行的微任务，则微任务清空；
+    - 页面渲染
+    - 反复执行上述操作
+
+具体如下示意图所示：
+![宏任务与微任务的调度](https://img.91temaichang.com/blog/task_job_schedule.png)
+用代码来翻译一下就是：
+```javascript
+  //宏任务
+  for(let macrotask of macrotask_list){
+  	// 执行一个宏任务
+    macrotask();
+    // 执行所有的微任务
+    for(let microtask of microtask_list){
+    	microtask();
+    }
+    // UI渲染
+    ui_render();
+  }
+```
+![宏任务与微任务执行流程](https://img.91temaichang.com/blog/task_job_luicheng.png)
+##### 2.2.3 事件循环与页面渲染
+在ECMAScript中，微任务称为jobs，宏任务称为task。
+浏览器为了能够使得JS内部task与DOM任务有序的执行，会在一个task执行结束后，在下一个task执行开始前，对页面进行重新渲染；
+*(task -> ui_render -> task -> ...)*
+具体可以看一下代码
+```javascript
+  document.querySelector('#xxx').style.color = 'yellow';
+  Promise.resolve().then(() => {
+  	document.querySelector('#xxx').style.color = 'red';
+  });
+  setTimeout(() => {
+  	document.querySelector('#xxx').style.color = 'blue';
+  	Promise.resolve().then(() => {
+  	for(let i = 0; i < 99999; i ++ ){
+  		console.log(i);
+    }	
+    })
+  }, 17);
+```
+我们来看一个效果
+![宏任务与微任务效果](https://img.91temaichang.com/blog/task_job_demo.gif)
+刚开始div的文本内容会变红色，跟着等到console打印完成后，变为蓝色
+针对上述的运行效果，我们来分析一波：
+  - 第一轮事件循环，将代码塞到JS线程栈中执行，dom使文本变为黄色，然后遇到Promise微任务，微任务塞到事件队列中，接着遇到宏任务setTimeout，则交由定时器触发线程；
+  - 第一轮宏任务执行完了，检查微任务队列中是否有任务，执行微任务，并清空队列，dom操作使得文本变红色，此时setTimeout还没有执行到；
+  - render渲染线程进行渲染，是文本变红色；
+  - 第二轮循环，执行栈是空的，检查微任务队列；
+  - setTimeout执行了，将任务塞到事件队列中，从事件队列中拿事件出来，塞到线程栈执行；
+  - 执行第一个同步任务，dom使得文本变蓝色，第二个是微任务，塞入微任务队列中，此时同步任务执行完毕，检车微任务中是否有任务执行，并清空队列，微任务中console同步任务，此时JS引擎一直在执行，GUI线程被挂起，一直等到console同步任务执行完；
+  - GUI渲染线程进行渲染，使文本变蓝色
+  - 事件循环结束
+> HTML5标准规定了setTimeout的第二个参数最小值不得低于4毫秒，如果低于这个值，就会自动增加
+
+##### 2.2.4 Vue.$nextTick
+用vue的小伙伴可能在工作中会经常用到这个api，Vue的官方介绍：
+> 将回调延迟到下次DOM更新循环之后。在修改数据之后立即使用它，然后等待DOM更新
+其内部实现就是利用了microtask(微任务)，来延迟执行一段代码(获得dom节点的值)，即当前所有同步代码执行完后执行microtask
