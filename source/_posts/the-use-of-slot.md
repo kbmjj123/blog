@@ -67,3 +67,35 @@ slot通俗一点的理解就是"占坑"，在组件模版中占好了位置，�
 ❓那么，如果这个插槽要访问这个容器组件中的作用域的话，应该怎么整呢？
 
 -->我们把需要传递的内容绑定到插槽<slot>上，然后在容器组件中用`v-slot`设置一个值来定义我们提供插槽的名字：
+```vue
+    <template>
+      <div>
+        <slot v-bind:use="user">{{ user.lastName }}</slot>
+      </div>
+    </template>
+    <script>
+      export default {
+        data(){
+          return {
+          }
+        }
+      }
+    </script>
+```
+然后在宿主组件test.vue中，接收传递过来的值：
+```vue
+    <template>
+      <div>
+        <container v-slot:default="slotProps">
+          {{ slotProps.user.firstName }}
+        </container>
+      </div>
+    </template>
+```
+这样子插槽就可以获取容器组件中值了
+
+-->上述v-bind:user="user"，这里的attribute属性user被称为`插槽prop`，在容器组件用的v-slot定义的是插槽prop的名字
+
+-->容器组件中v-slot:default="defaultProp"，这里的意思是给容器组件的默认插槽的插槽prop命名为defaultProp，所以，我们才可以在插槽中直接使用`defaultProp.user.fisrtName`
+
+### 插槽有什么用处呢？
