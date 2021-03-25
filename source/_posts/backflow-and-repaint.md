@@ -74,6 +74,7 @@ cover_picture:https://img.91temaichang.com/blog/backflow-and-repaint.jpeg
 + offsetWidth、offsetHeight、offsetTop、offsetLeft
 + scrollWidth、scrollHeight、scrollTop、scrollLeft
 + scrollIntoView()、scrollIntoViewIfNeeded()
++ width、height
 + getComputedStyle()
 + getBoundingClientRect()
 + scrollTo()
