@@ -74,10 +74,16 @@ cover_picture:https://img.91temaichang.com/blog/backflow-and-repaint.jpeg
 + offsetWidth、offsetHeight、offsetTop、offsetLeft
 + scrollWidth、scrollHeight、scrollTop、scrollLeft
 + scrollIntoView()、scrollIntoViewIfNeeded()
-+ width、height
 + getComputedStyle()
 + getBoundingClientRect()
 + scrollTo()
 
 
 ### 重绘
+最终，我们通过构造渲染树和回流阶段，我们知道了哪些节点是可见的，以及可见节点的样式和具体的几何信息(位置、大小)，那么我们就可以将渲染树的每个节点都转换为屏幕上的实际像素，这个阶段就叫做重绘。
+
+⚠️ *回流一定会触发重绘，但重绘不一定会触发回流*
+
+### 浏览器的优化机制
+
+### 减少回流和重绘
