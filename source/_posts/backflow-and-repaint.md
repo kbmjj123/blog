@@ -6,7 +6,7 @@ categories:
     - [html]
 tags:
     - 浏览器
-cover_picture:https://img.91temaichang.com/blog/backflow-and-repaint.jpeg
+cover_picture: https://img.91temaichang.com/blog/backflow-and-repaint.jpeg
 ---
 
 ### 写在前面
