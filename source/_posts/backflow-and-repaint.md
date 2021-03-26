@@ -85,5 +85,27 @@ cover_picture:https://img.91temaichang.com/blog/backflow-and-repaint.jpeg
 ⚠️ *回流一定会触发重绘，但重绘不一定会触发回流*
 
 ### 浏览器的优化机制
+现代的浏览器都是很聪明的，由于每次重拍都会造成额外的计算消耗，因此大多数浏览器都会通过队列化修改并批量执行来优化重排过程。浏览器会将修改操作放入到队列里，直到过了一段时间或者操作达到了一个阀值，才会清空队列.
+⚠️，但是，`当获取布局信息的操作的时候，会强制刷新队列`，比如当访问以下属性或者使用以下方法的时候：
++ offsetTop、offsetLeft、offsetWidth、offsetHeight
++ scrollTop、scrollLeft、scrollWidth、offsetHeight
++ clientTop、clientLeft、clientWidth、clientHeight
++ getComputedStyle()
++ getBoundClientRect()
+
+以上属性和方法都需要返回最新的布局信息，因此浏览器不得不清空队列，触发回流重绘来返回正确的值，因此我们在修改样式的时候，`最好避免使用上面列出的属性，他们都会刷新渲染队列`，如果需要使用它们，可以将值存起来。
 
 ### 减少回流和重绘
+
+#### CSS
++ 避免使用`table`布局
++ 尽可能在`DOM`树的最末端改变`class`
++ 避免设置多层内联样式
++ 将动画效果应用到`position`属性为`absolute`或`fixed`的元素上
++ 避免使用`CSS`表达式(比如：calc())
+#### JavaScript
++ 避免频繁操作样式，最好一次性重写`style`属性，或者将样式合并到一`class`并一次性更改`class`属性
++ 避免频繁操作`DOM`，创建一个`documentFragment`，在它上面应用所有`DOM操作`，最后将它添加到文档中
++ 也可以先将元素设置为`display: none`，操作结束后，再将它显示出来。因为在`display`属性为`none`的元素上进行的`DOM`操作不会引发回流和重绘
++ 避免频繁读取会引发回流/重绘的属性，如果确实需要多次使用，就用一变量存起来
++ 对具有复杂动画的元素使用绝对定位，使它脱离文档流，否则会引起父元素以及后续元素频繁回流。
