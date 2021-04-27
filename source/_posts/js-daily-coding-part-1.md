@@ -3,7 +3,10 @@ title: js日常coding小技巧一
 author: Zhenggl
 date: 2021-04-27 09:17:02
 categories:
+    - [前端, javascript]
 tags:
+    - javascript
+    - coding
 cover_picture:https://img.91temaichang.com/blog/js-coding-pratise.jpg
 ---
 
