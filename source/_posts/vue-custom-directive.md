@@ -131,7 +131,8 @@ cover_picture:https://img.91temaichang.com/blog/vue-custom-directive.jpeg
   </script>
 ```
 #### 长按指令：`v-longpress`
-需求：实现长按，用户需要按下并屏住按钮几秒钟，触发对应的事件
+**需求**：实现长按，用户需要按下并屏住按钮几秒钟，触发对应的事件
+**思路**：
 1. 创建一个计时器，3秒后执行函数
 2. 当用户按下按钮时，触发`mousedown`事件，启动计时器；用户松开按钮时调用`mouseout`事件
 3. 如果`mouseup`事件3秒内被触发，就清楚计时器，当作一个普通的点击事件
@@ -188,9 +189,256 @@ cover_picture:https://img.91temaichang.com/blog/vue-custom-directive.jpeg
   </script>
 ```
 #### 输入框防抖指令：`v-debounce`
-
+**背景**：在开发中，有些提交保存按钮有时候会在短时间内被点击多次，这样就会多次重复请求后端接口，造成数据的混乱，比如新增表单的提交按钮，多次点击就会新增多条重复的数据。
+**需求**：防止按钮在短时间内被多次点击，使用防抖函数限制规定时间内只能点击一次。
+**思路**：
+1. 定义一个延迟执行的方法，如果在延迟时间内再调用该方法，则重新开始延迟时间
+2. 在延迟的时间到了之后，执行到click方法
+```javascript
+  // src/directives/modules/debounce.js
+  export default {
+	inserted(el, { value}){
+		if('function' !== typeof value){
+			throw 'directive value must be function';
+		}
+		let timer;
+		el.addEventListener('keyup', () => {
+		  timer && clearTimeout(timer);
+		  timer = setTimeout(() => {
+		  	value&&value();
+		  }, 1000);
+		});
+	}
+  }
+```
+用法见👇
+```vue
+  <template>
+    <button v-debounce="debounceAction">防抖</button>
+  </template>
+  <script>
+    export default{
+      methods: {
+        debounceAction(){
+          console.info('触发了一次');
+        }
+      }
+    }
+  </script>
+```
 #### 禁止表情以及特殊字符：`v-emoji`
 #### 图片懒加载： `v-lazyload`
+**背景**：在电商类型的项目中，往往存在大量的图片，如banner广告图、菜单导航图。一大波图片以及图片提及过大往往会影响页面加载速度，造成不良的用户体验，因此进行图片懒加载优化很有必要。
+**需求**：实现一个图片懒加载指令，只加载浏览器可见区域的图片
+**思路**：
+1. 图片懒加载的原理主要是判断当前图片是否到了可视区域这一核心逻辑来实现的；
+2. 拿到当前图片dom，判断是否到了可视化范围内
+3. 如果到了，就设置图片的`src`属性，否则展示默认图片
+> 图片懒加载有两种方式可以实现，一种是绑定`scroll`事件进行监听，二是使用`Intersection Observer`判断图片是否到了可视区域，但是有浏览器兼容问题。
+>
+> 下面封装一个懒加载指令兼容两种方案，判断浏览器是否支持`IntersectionObserver`API，如果支持就使用该方案实现懒加载，否则使用`scroll`事件监听+节流的方式实现。
+```javascript
+  // src/directives/modules/lazyload.js
+  const defaultSrc = '';//默认图片地址
+  export default {
+	bind(el, binding){
+		this.init(el, binding.value, defaultSrc);
+	},
+	inserted(el){
+		if(IntersectionObserver){
+			this.observe(el);
+		}else{
+			this.listenerScroll(el);
+		}
+	},
+	// 初始化动作，设置默认图片，并且在data-set中设置目标图片+-
+	init(el, val, defaultSrc){
+		el.setAttribute('data-src', val);
+		el.setAttribute('src', defaultSrc);
+	},
+	// 使用IntersectionObserver监听el
+	observe(el){
+		let io = new IntersectionObserver(entries => {
+			const realSrc = el.dataset.src;
+			if(entries[0].isIntersecting){
+				if(realSrc){
+					el.src = realSrc;
+					el.removeAttribute('data-src');
+				}
+			}
+		});
+		io.observe(el);
+	},
+	// 监听scroll事件
+	listenerScroll(el){
+		const handler = this.throttle(this.load, 300);
+		this.load(el);
+		window.addEventListener('scroll', () => {
+			handler(el);
+		})
+	},
+	// 加载真实图片
+	load(el){
+		const windowHeight = document.documentElement.clientHeight;
+		const elTop = el.getBoundingClientRect().top;
+		const elBottom = el.getBoundingClientRect().bottom;
+		const realSrc = el.dataset.src;
+		if(elTop - windowHeight < 0 && elBottom > 0){
+			if(realSrc){
+				el.src = realSrc;
+				el.removeAttribute('data-src');
+			}
+		}
+	},
+	// 节流函数，配合滚动事件
+	throttle(fn, delay){
+		let timer;
+		let prevTime;
+		return function (...args){
+			const currTime = Date.now();
+			const context = this;
+			if(!prevTime) prevTime = currTime;
+			clearTimeout(timer);
+			if(currTime - prevTime > delay){
+				prevTime = currTime;
+				fn.apply(context, args);
+				clearTimeout(timer);
+				return;
+			}
+			timer = setTimeout(() => {
+				prevTime = Date.now();
+				timer = null;
+				fn.apply(context, args);
+			}, delay);
+		}
+	}
+  }
+```
+➡️ 这里我们需要将这个指令定义为插件，给到全局所有的图片资源使用
+```javascript
+  import lazy from '@/diretives/modules/lazy.js';
+  export default {
+  	install(Vue, options){
+      Vue.directive('lazy', lazy);		
+  	}
+  }
+```
+使用方式如下：
+```vue
+  <img v-lazy="xxx.jpg"/>
+```
 #### 权限校验指令：`v-permission`
+**背景**：在一些后台管理系统中，我们可能需要根据用户角色进行一些操作权限的判断，很多时候，我们都是简单粗暴地给一个元素添加`v-if/v-show`来进行显示隐藏，但如果判断条件繁琐且多个地方需要判断，这种方式的代码不仅
+不优雅而且冗余，针对这种情况，我们可以通过全局定义指令来处理。
+**需求**：自定义一个权限指令，对需要权限判断的Dom进行显示/隐藏
+**思路**：
+1. 自定义个一个权限组
+2. 判断用户的权限是否在这个数组内，如果是则显示，否则移除Dom
+```javascript
+  //简单判断是否在权限集中 
+  function checkPermission(key){
+	return ['1', '2', '3', '4'].indexOf(key);
+  }
+  export default {
+	inserted(el, { value }){
+		if(value){
+			let hasPermission = checkPermission(value);
+			if(!hasPermission){
+				// 没有权限，则移除Dom元素
+				el.parentNode && el.parentNode.removeChild(el);
+			}
+		}
+	}
+  };
+```
+👇是对应的使用方式
+```vue
+  <template>
+    <!-- 显示 -->
+    <button v-permission="1">权限1</button>
+    <!-- 隐藏 -->
+    <button v-permission="10">隐藏</button>
+  </template>
+```
 #### 实现页面水印：`v-waterMarker`
+**需求**：给整个页面添加背景水印
+**思路**：
+1. 使用`canvas`特性生成`base64`格式的图片文件，设置其字体大小，颜色等。
+2. 将生成的图片文件设置为背景图片，从而实现页面或组件水印效果
+```javascript
+  // 
+  export default {
+	// value有固定的格式
+	bind(el, { value }){
+		let canvas = document.createElement('canvas');
+		el.appendChild(canvas);
+		canvas.width=200;
+		canvas.height=150;
+		canvas.style.display = 'none';
+		let pen = canvas.getContext('2d');
+		pen.rotate((-20 * Math.PI) / 180);
+		pen.font = value.font || '16px Microsoft JhengHei';
+		pen.fillStyle = value.textColor || 'rgba(180, 180, 180, 255)';
+		pen.textAlign='left';
+		pen.textBaseline='Middle';
+		pen.fillText(value.text, canvas.width/10, canvas.height/2);
+		el.style.backgroundImage = `url(${canvas.toDataURL('image/png')})`;
+	}
+  }
+```
+👇是对应的使用方式
+```vue
+  <template>
+    <div v-waterMaker="waterMaker"></div>
+  </template>
+  <script>
+    export default{
+      data(){
+        return {
+          waterMaker: {
+            text: 'zgl版权所有',
+            textColor: 'rgba(180, 180, 180, 0.4)'
+          }
+        }
+      }
+    }
+  </script>
+```
 #### 拖拽指令：`v-draggable`
+**需求**：实现一个拖拽指令，可在页面可视区域任意拖拽元素。
+**思路**：
+1. 设置需要拖拽的元素为绝对定位，其父元素为相对定位
+2. 鼠标按下`(onmousedown)`时记录目标元素当前的`left`和`top`值
+3. 鼠标移动`(onmousemove)`时计算每次移动的横向以及纵向距离的变化值，并改变元素的`left`和`top`值
+4. 鼠标松开`(onmouseup)`时完成一个拖拽
+```javascript
+  //src/directives/modules/draggable.js
+  export default{
+	inserted(el){
+		el.style.cursor = 'move';
+		el.onmousedown = e => {
+			let disx = e.pageX - el.offsetLeft;
+			let disy = e.pageY - el.offsetTop;
+			document.onmousemove = e => {
+				let x = e.pageX - disx;
+				let y = e.pageY - disy;
+				let maxX = document.body.clientWidth - parseInt(window.getComputedStyle(el).width);
+				let maxY = document.body.clientHeight - parseInt(window.getComputedStyle(el).height);
+				x < 0 ? x = 0: x > maxX ? x = maxX : '';
+				y < 0 ? y = 0: y > maxY ? y = maxY : '';
+				el.style.left = `${x}px`;
+				el.style.top = `${y}px`;
+			};
+			document.onmouseup = () => {
+				document.onmousemove = document.onmouseup = null;
+			};
+		};
+	}
+  }
+```
+👇是对应的使用方式
+```vue
+  <template>
+    <div class="xxx" v-draggable></div>
+  </template>
+```
