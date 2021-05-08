@@ -67,6 +67,7 @@ cover_picture:https://img.91temaichang.com/blog/vue-custom-directive.jpeg
 
 ### share几个实用的Vue自定义指令
 #### 复制粘贴指令：`v-copy`
+---
 **需求**：实现一键复制文本内容，用于鼠标右键粘贴。
 **思路**:
 1. 动态创建`textarea`标签，并设置`readOnly`属性以及移出可视区域
@@ -131,6 +132,7 @@ cover_picture:https://img.91temaichang.com/blog/vue-custom-directive.jpeg
   </script>
 ```
 #### 长按指令：`v-longpress`
+---
 **需求**：实现长按，用户需要按下并屏住按钮几秒钟，触发对应的事件
 **思路**：
 1. 创建一个计时器，3秒后执行函数
@@ -189,6 +191,7 @@ cover_picture:https://img.91temaichang.com/blog/vue-custom-directive.jpeg
   </script>
 ```
 #### 输入框防抖指令：`v-debounce`
+---
 **背景**：在开发中，有些提交保存按钮有时候会在短时间内被点击多次，这样就会多次重复请求后端接口，造成数据的混乱，比如新增表单的提交按钮，多次点击就会新增多条重复的数据。
 **需求**：防止按钮在短时间内被多次点击，使用防抖函数限制规定时间内只能点击一次。
 **思路**：
@@ -227,7 +230,62 @@ cover_picture:https://img.91temaichang.com/blog/vue-custom-directive.jpeg
   </script>
 ```
 #### 禁止表情以及特殊字符：`v-emoji`
+---
+**背景**：开发中遇到的表单输入，往往会对输入内容的限制，比如不能输入表情和特殊字符，只能输入数字或字母等，我们常规方式是在每一个表单的`on-change`事件上做处理
+```vue
+  <template>
+    <input type="text" v-model="txt" @change="validateEmoji">
+  </template>
+  <script>
+    export default {
+      data(){
+        return {
+          txt: ''
+        }
+      },
+      methods: {
+        validateEmoji(){
+          let reg = /[^\u4E00-\u9FA5|\d|\a-zA-Z|\r\n\s,.?!，。？！…—&$=()-+/*{}[\]]|\s/g;
+          this.txt = this.txt.replace(reg, ''); 
+        }
+      }
+    }
+  </script>
+```
+这样的代码量比较大且不好维护，因此我们需要自定义一个指令来解决这个问题
+**需求**：根据正则表达式，设计自定义处理表单输入规则的指令，下面以禁止输入表情和特殊字符为例
+```javascript
+  // src/directives/modules/emoji.js
+  const findEle = (parent, type) => parent.tagName.toLowerCase() === type ? parent : parent.querySelector(type);
+  const trigger = (el, type) => {
+  	const e = document.createEvent('HTMLEvents');
+  	e.initEvent(type, true, true);
+  	el.dispatchEvent(e);
+  };
+  export default {
+    bind(el, binding, vnode){
+      let reg = /[^\u4E00-\u9FA5|\d|\a-zA-Z|\r\n\s,.?!，。？！…—&$=()-+/*{}[\]]|\s/g;
+      let $inp = findEle(el, 'input');
+      el.$inp = $inp;
+      $inp.handle = () => {
+      	let val = $inp.value;
+      	$inp.value=val.replace(reg, '');
+      	trigger($inp, 'input');
+      };
+    },
+    unbind(el){
+    	el.$inp.removeEventListener('keyup', el.$inp.handle);
+    }
+  }
+```
+使用：将需要校验的输入框加上`v-emoji`即可
+```vue
+  <template>
+    <input type="text" v-model="txt" v-emoji>
+  </template>
+```
 #### 图片懒加载： `v-lazyload`
+---
 **背景**：在电商类型的项目中，往往存在大量的图片，如banner广告图、菜单导航图。一大波图片以及图片提及过大往往会影响页面加载速度，造成不良的用户体验，因此进行图片懒加载优化很有必要。
 **需求**：实现一个图片懒加载指令，只加载浏览器可见区域的图片
 **思路**：
@@ -328,6 +386,7 @@ cover_picture:https://img.91temaichang.com/blog/vue-custom-directive.jpeg
   <img v-lazy="xxx.jpg"/>
 ```
 #### 权限校验指令：`v-permission`
+---
 **背景**：在一些后台管理系统中，我们可能需要根据用户角色进行一些操作权限的判断，很多时候，我们都是简单粗暴地给一个元素添加`v-if/v-show`来进行显示隐藏，但如果判断条件繁琐且多个地方需要判断，这种方式的代码不仅
 不优雅而且冗余，针对这种情况，我们可以通过全局定义指令来处理。
 **需求**：自定义一个权限指令，对需要权限判断的Dom进行显示/隐藏
@@ -361,6 +420,7 @@ cover_picture:https://img.91temaichang.com/blog/vue-custom-directive.jpeg
   </template>
 ```
 #### 实现页面水印：`v-waterMarker`
+---
 **需求**：给整个页面添加背景水印
 **思路**：
 1. 使用`canvas`特性生成`base64`格式的图片文件，设置其字体大小，颜色等。
@@ -405,6 +465,7 @@ cover_picture:https://img.91temaichang.com/blog/vue-custom-directive.jpeg
   </script>
 ```
 #### 拖拽指令：`v-draggable`
+---
 **需求**：实现一个拖拽指令，可在页面可视区域任意拖拽元素。
 **思路**：
 1. 设置需要拖拽的元素为绝对定位，其父元素为相对定位
