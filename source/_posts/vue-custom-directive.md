@@ -263,7 +263,7 @@ cover_picture:https://img.91temaichang.com/blog/vue-custom-directive.jpeg
   	el.dispatchEvent(e);
   };
   export default {
-    bind(el, binding, vnode){
+    bind(el){
       let reg = /[^\u4E00-\u9FA5|\d|\a-zA-Z|\r\n\s,.?!，。？！…—&$=()-+/*{}[\]]|\s/g;
       let $inp = findEle(el, 'input');
       el.$inp = $inp;
