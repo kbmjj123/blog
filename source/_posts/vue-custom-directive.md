@@ -3,11 +3,11 @@ title: vue中8个有用的自定义指令
 author: Zhenggl
 date: 2021-05-06 20:06:17
 categories:
-    - [ 开发框架, vue ]
+    - [开发框架, vue]
 tags:
     - vue
     - 指令
-cover_picture:https://img.91temaichang.com/blog/vue-custom-directive.jpeg
+cover_picture: https://img.91temaichang.com/blog/vue-custom-directive.jpeg
 ---
 
 ### 前言

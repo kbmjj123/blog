@@ -1,0 +1,32 @@
+---
+title: slice、splice傻傻分不清
+author: Zhenggl
+date: 2021-05-08 18:42:19
+categories:
+    - [前端,javascript]
+tags:
+    - javascript
+cover_picture: https://img.91temaichang.com/blog/js-slice-and-splice.png
+---
+
+### 前言
+平时在日常开发过程中，总是间歇性的分不清数组的`slice`和`splice`方法，几乎每次需要用到的时候，都怀疑自己会记错了，都要去度娘一下。
+
+#### slice的概念
+---
+> slice() 方法可以从已有的数组中返回选定的元素
+> 语法
+```javascript
+  arrayObject.slice(start, end)
+```
+| 参数 | 描述 |
+| --- | --- |
+| start | 必填，规定从何处开始选取，如果是负数，则从数组尾部开始算起的位置，也就是说，-1指的是最后一个元素，-2是倒数第二个元素，以此类推。|
+| end | 可选，规定从何处结束选取，该参数是数组断结束处的数组下标。如果没有指定该参数，那么切分的数组包含从start到数组结束的所有元素。如果这个参数是负数，那么同上。 |
+
+**返回值**：返回一个新的数组，包含从start到end(不包含该元素)的arrayObject中的元素。
+
+**说明**：⚠️，该方法并不会修改数组，二是返回一个子数组。如果想删除数组中的一段元素，应该使用方法Array.splice()
+
+#### splice
+---
