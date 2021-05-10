@@ -12,7 +12,7 @@ cover_picture: https://img.91temaichang.com/blog/js-slice-and-splice.png
 ### 前言
 平时在日常开发过程中，总是间歇性的分不清数组的`slice`和`splice`方法，几乎每次需要用到的时候，都怀疑自己会记错了，都要去度娘一下。
 
-#### slice的概念
+#### slice
 ---
 > slice() 方法可以从已有的数组中返回选定的元素
 > 语法
@@ -30,3 +30,23 @@ cover_picture: https://img.91temaichang.com/blog/js-slice-and-splice.png
 
 #### splice
 ---
+> splice() 方法 `向/从` 数组中 `添加/删除` 项目，然后返回被删除的项目。
+> ⚠️：该方法会改变到原始数组
+> 语法：
+```javascript
+  arrayObject.splice(index, howmany, item1, ... , itemX);
+```
+| 参数 | 描述 |
+| --- | --- |
+| index | 必须，证书，规定`添加/删除`项目的位置，使用负数可以从数组结尾处规定位置。 |
+| howmany | 必须，要删除的项目数量，如果设置为0，则不会删除项目 |
+| item1,...,itemX | **可选**，向数组添加的新项目 |
+**返回值**
+
+| 类型 | 描述 |
+| --- | --- |
+| Array | 包含被删除项目的新数组，如果有的话。 |
+
+**说明**
+> splice() 方法可删除从 **index** 处开始的零个或多个元素，并且用参数列表中声明的一个或多个项来替换那些被删除的元素。
+> 如果从arrayObject中删除了元素，则返回的是含有被删除的元素的数组。
