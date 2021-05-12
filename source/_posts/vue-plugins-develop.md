@@ -58,6 +58,11 @@ cover_picture: https://img.91temaichang.com/blog/vue-plugins-develop.png
   - $utils: 对本地工具类的统一封装并作为Vue的属性进行使用，Vue.$utils = ...;
   - $log: 开发调试阶段用于打印自定义日志相关，Vue.$log = ...;
 + 全局组件，以this.$dialog类似的方式来调用
+  > 实例方法讲解：vm.$mount([elementOrSelector])
+  > **返回值**：`vm` - 实例本身
+  > **用法**：如果Vue实例在实例化时没有收到el选项，那么它将处于"未挂载"状态，没有关联的DOM元素，可以使用`vm.$mount()`手动地挂载一个未挂载的实例。
+  > 如果没有提供`elementOrSelector`参数，模版将会被渲染为文档之外的元素，并且必须使用DOM API将它插入到文档中。
+  > 由于该方法返回实例本身，因而可以使用链式调用其他实例方法。
   - $dialog: 全局自定义对话框
     ```javascript
       // 假设已正常开发一dialog组件：dialog.vue，当前页面为dialog.js，用于与Vue建立连接，快速调用$dialog动作
@@ -73,7 +78,7 @@ cover_picture: https://img.91temaichang.com/blog/vue-plugins-develop.png
         * 在实例挂载之后，可以通过$vm.$el访问。
         * 如果这个选项在实例化时有用到，实例将立即进入编译过程。否则，需要显示调用vm.$mount()手动开启编译(如下)
         * 提供的元素只能作为挂载点。所有的挂载元素会被vue生成的dom替换。因此不能挂载在顶级元素(html, body)上
-        * let $vm = new toastTpl({
+        * let $vm = new DialogTpl({
         *   el: document.createElement('div')
         * });
         * */
