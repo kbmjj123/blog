@@ -6,3 +6,9 @@
 <p>
   <img src="https://img.91temaichang.com/blog/blog-structure.png" style="width: 100%;">
 </p>
+
+### 相关的指令：
+1. 新增一个博客文件
+```bash
+  hexo new page --path _posts/XXX "XXX"
+```

@@ -86,3 +86,4 @@ _multiconfig.yml
 .dynamodb/
 /.deploy_git/
 db.json
+/themes/._.DS_Store
