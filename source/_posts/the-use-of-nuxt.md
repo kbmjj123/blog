@@ -3,7 +3,11 @@ title: nuxt入门以及实战
 author: Zhenggl
 date: 2021-12-07 10:37:20
 categories:
+- [开发框架, ssr]
 tags:
+- nuxt
+- vue
+- ssr
 cover_picture: https://img.91temaichang.com/blogs/nuxt-cover.png
 ---
 
