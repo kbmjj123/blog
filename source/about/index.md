@@ -3,7 +3,7 @@ title: 关于我
 date: 2021-03-06 09:47:48
 ---
 ### 关于我
-原来从事安卓开发，后转从事 WEB 开发，主要开发语言 `java`, `javascript`，熟悉使用 `vue`、`react`、`react-native` 等主流框架；
+原来从事安卓开发，后转从事 WEB 开发，主要开发语言 `java`, `javascript`，熟悉使用 `vue`、`nuxt`、`react`、`react-native` 等主流框架；
 
 对`服务端`、`前端`、`数据分析`等技能有所了解。
 
