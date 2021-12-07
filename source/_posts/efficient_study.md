@@ -2,8 +2,11 @@
 title: 高效学习
 author: Zhenggl
 date: 2021-08-21 12:09:42
-categories: - [高效学习]
-tags: - [高效学习, 技多不压身]
+categories:
+ - [高效学习]
+tags:
+ - 高效学习
+ - 技多不压身
 cover_picture: https://img.91temaichang.com/blog/efficient_stydu.png
 ---
 
