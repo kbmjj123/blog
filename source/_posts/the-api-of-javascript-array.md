@@ -9,7 +9,9 @@ tags:
   - 基础概念
   - Array
 
-cover_picture:
+cover_picture:javascript-array.png
 ---
 
-![JavaScript中Array一览](JavaScript中Array一览.png)
+
+
+![JavaScript中Array一览](JavaScript中的数组.png)
