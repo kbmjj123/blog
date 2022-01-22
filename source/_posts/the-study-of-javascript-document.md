@@ -54,6 +54,12 @@ document与DOM之间的关系，可以用以下一个等式来表示：
 ![Document的继承关系](Document的继承关系.png)
 
 ![Node与HTMLXXX](Node与HTMLXXX.png)
+
+🤔 HTMLElement与Element的区别：前者代表的是具体对应的某个Html元素，HTMLElement集成与Element，比如要使用`img`节点的src属性，那么我们需要在HTMLImageElement中获取到
+对应的src属性，该属性从HTMLImageElement中继承而来，一般用Image()函数将会创建一个新的HTMLImageElement实例，它的作用是与document.createElement('img')的功能是一致的！
+
+👉 因此，需要了解这个HTMLElement中的属性都有哪些
+
 ### 一、对节点元素的选取
 
 #### 1.1 Node节点家族
