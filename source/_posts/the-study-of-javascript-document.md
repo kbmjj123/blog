@@ -142,15 +142,107 @@ document与DOM之间的关系，可以用以下一个等式来表示：
 以下提供关于Node节点所提供的属性+api，可供上述任何一个孩子节点直接使用，从而来操作到整棵节点树。
 ![Node一览](Node一览.png)
 
-### 二、元素的外观(尺寸与位置)
+#### 1.2、Node节点的属性
+
+![HTMLElement的继承关系](HTMLElement的继承关系.png)
+
+HTMLElement从多个"基类"对象中继承而来，因此可以利用"基类"对象所提供的属性+方法来服务于自身。
+
+![HTMLElement属性一览](HTMLElement属性一览.png)
+
+表示HTML文档元素的HTMLElement对象定义了读/写属性，映射了元素的HTML属性，HTMLElement定义了通用HTTP属性，以及事件处理程序属性，而其特定的Element
+子类型为其对应元素定义了特定的属性。比如要使用img的src属性，则是利用的HTMLElement中的src属性，因此需要了解
+HTMLElement中的属性都有哪些？
+
+✨HTMLElement中的属性：
+写在html标签上的属性都属于HTMLElement的属性，可通过js对属性进行访问，都使用小写单词来表示，若是js中的关键词，比如`for`，则用el.htmlFor来表示，
+若是中横线，比如`tab-index`，则使用ele.tabIndex。进阶用法：HTMLElement提供了一个数据集属性，以data-开头，定义在HTMLElement额外的属性中，这
+种方法便是最原始的操作节点上的数据方法。
+
+#### 1.3、元素的内容
+
+> <p><text>123</text></p>
+
+✨关于innerHtml属性
+ele.innerHtml的赋值很有执行效率，一旦发生赋值动作，浏览器立刻执行解析渲染动作，因此这里一般是**在完成整体字符串的拼接之后，才去对整个字符串进行innerHtml赋值**，
+这样子能够确保在只是目标结果之前，页面计划仅会发生一次解析渲染操作。
+
+✨关于outHtml属性
+可以将原始的p节点进行整个的替换，包括标签
+
+✨关于insertAdjacentHTML()方法
+将任意的HTML标记字符串插入到执行的元素"相邻"的位置，使用方式如下：
+```javascript
+  ele.insertAdjacentHTML(insertPosition, html);
+```
+上述调用中insertPosition是一枚举值：beforebegin、afterBegin、beforeend、afterend其中的一个枚举值，代表将html字符串插入到ele指定的位置上
+![insertAdjacentHTML](insertAdjacentHTML.png)
+
+✨关于textContent属性
+textContent属性，就是将指定元素的所有后代Text节点简单的串联在一起
+
+#### 1.4、创建、插入和删除元素
+![Document操作节点](Document操作节点.png)
+通过Document来创建一个个的节点Node，然后每个节点都有自身的增、删、查、改操作，来完成各自节点的新增或者插入、删除操作，从而达到修改整棵树的目的。
+上述创建出来的节点中有一个比较特殊的节点：DocumentFragment，其parentNode总为null，类似于Node节点，它可以拥有子节点，允许增、删、查、改操作，
+有点类似于安卓中的Fragment部件，将一个个页面拆分为不同的fragment，然后对每个fragment进行各自的维护，一个没有父节点的最小文档对象，与标准的`Document`
+类似，但不是document的一部分，其变化不会出发DOM的重新解析渲染，因此也不会导致性能问题，一般的使用方式是将整个DocumentFragment作为一个子树给完善好，
+然后将整个Document作为一整个节点，插入到其他某个节点元素上，完成一次性渲染动作。
+
+✨template标签：内容模版元素，用于保护客户端内容的机制，该内容在加载页面的时候，不会呈现出来，但随后可以在运行时使用javascript实例化，这里留下一个思考：
+对于vue、模版渲染引擎比如`art-template`等框架的是如何将template给渲染为实际的页面控件的？
+
+### 二、元素的外观(尺寸与位置、与滚动)
+WEB应用程序可以将文档看成是元素的树，在完成布局之后，怎样才能在抽象的基于树的文档模型与几何形状的基于坐标的视图之间来回切换呢？
+
 #### 2.1、文档
-
+WEB应用程序所渲染出来的整个界面，一般都有宽度 + 高度
 #### 2.2、视口
-
+视口，只是实际现实文档内容的浏览器的一部分，它不是包括浏览器的外壳。
+当有`iframe`嵌套的时候，就是从iframe左上角至右下角的整个区域；
+当没有`iframe`嵌套的时候，就是显示器中展示的扣除标题栏、状态栏、工具栏之后的其他剩余肉眼可见的其他部分；
 #### 2.3、文档与视口的联系
+关于滚动条的出现：
+- 文档宽度/高度 > 视口宽度/高度：出现滚动条
+- 文档宽度/高度 < 视口宽度/高度：不出现滚动条
 
-#### 2.4、尺寸
+这里的差值，也就是滚动条的滚动距离`scrollOffset`，那么我们就可以利用整个滚动距离来换算文档与视口之间的关系。
+在现代浏览器中通过document.body.scrollLeft或者document.body.scrollTop就可以获取到浏览器滚动的滚动距离
 
-#### 2.5、位置
+一般来说，文档的坐标不会改变，但视口坐标，会因为滚动条的滚动，导致元素在视口中的位置发生改变，这一点非常重要，从而可以解释文档与视口的真实联系。
 
-#### 2.6、实际测量方案
+#### 2.4、尺寸与位置
+在现代浏览器中，我们可以用document.body.clientWidth以及document.body.clientHeight的方式，来获取一个视口的宽高。
+
+既然浏览器自身有查询滚动位置+自身宽高，那么对于元素而言，是否也有这样子的一个机制来查询元素的位置以及尺寸大小呢？
+> getBoundingClientRect，返回一个包含left、right、top、bottom、width、height的对象，left和top表示该元素的左上角的X和Y坐标，这个方法返回的是当前元素在
+> 视口中位置
+
+根据上述所描述的文档与视口之间的关系，在获取到一个元素的视口位置了之后，我们如果需要获取该元素在文档中的位置的话，就需要借助于滚动距离了，具体如下：
+```javascript
+  var box = ele.getBoundingClientRect();  // 获取元素在视口坐标中的位置
+  var scrollOffset = {x: document.body.scrollLeft, y: document.body.scrollTop}; // 这里假定是在文档中滚动
+  var x = box.left+scrollOffset.x;
+  var y = box.top+scrollOffset.y;
+```
+
+⚠️ ele.getBoundingClientRect获取的是一个块级元素的Rect区域的，如果ele是一个内联元素，比如是span/i标签的话，在没有额外用css进行加以控制的情况下，
+这个时候使用getBoundingClientRect的话，将会返回的Rect区域，将会包含是两行的宽度/高度，如果想要查询内联元素的话，可以是使用getClientRects()来获取
+整个集合，然后在遍历集合中的每个元素，进行返回。
+
+⚠️ ele.getBoundingClientRect调用的是静态快照的方式，也就是说是在视口坐标中的静态快照，当用户滚动或者缩放浏览器的时候，并不会改变getBoundingClientRect
+所返回的结果值。
+
+#### 2.5、实际测量方案
+##### 2.5.1、window提供的滚动方法
++ scrollTo：滚动到指定的点为视口的左上角
++ scroll: 同scrollTo
++ scrollBy：于上述两者相类似，但其参数是相对的，并在当前滚动条的偏移量上增加
+
+⚠️ ele.scrollIntoView：与window.location.hash的命名锚点类似，将一个元素至于可视化的位置的原点，但整个node的api有一个致命性的问题，就是让父容器
+也有滚动条的时候，就无法会跟随着将父容器的滚动条也至与原点。
+
+##### 2.5.2、关于元素尺寸、位置、溢出探讨
+任何Html元素的只读属性offsetWidth和offsetHeight属性，以css像素返回它的屏幕尺寸，这种返回的尺寸包含元素的边框和内边距，去除的外边距，这是一种文档坐标，
+但是对于已经fixed
+
