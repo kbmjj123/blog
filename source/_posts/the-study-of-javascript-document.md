@@ -53,6 +53,9 @@ document与DOM之间的关系，可以用以下一个等式来表示：
 
 ![Document的继承关系](Document的继承关系.png)
 
+##### 0.2.1、document的属性一览
+>  **document**接口表示任何在浏览器中载入的网页，向网页文档本身提供了全局操作功能，能解决如何获取页面的 URL ，如何在文档中创建一个新的元素这样的问题
+
 ![Node与HTMLXXX](Node与HTMLXXX.png)
 
 🤔 HTMLElement与Element的区别：前者代表的是具体对应的某个Html元素，HTMLElement集成与Element，比如要使用`img`节点的src属性，那么我们需要在HTMLImageElement中获取到
@@ -249,3 +252,25 @@ WEB应用程序所渲染出来的整个界面，一般都有宽度 + 高度
 ✨offsetParent指的是offsetTop/offsetLeft所相对的父元素
 
 一般来说，获取一个元素e的位置时，需要一个循环计算，不断累加并遍历其父元素
+
+✨所有的HTMLElement都定义了一下的属性
+![HTMLElement关于位置与尺寸属性一览](HTMLElement关于位置与尺寸属性一览.png)
+
+通过上述这里的对比，我们可以知道三者之间的一个区别，以及在实际的应用中，应当如何选择对应的属性来服务于界面的开发。
+
+👉 一般地，我们可以将元素充当视口，元素的内容可以超过视口，使用css属性overflow: scroll，记可以看到元素内滚动区域效果，这里需要限定元素的高度，才可以
+看到效果，否则元素将自动地被撑开了！
+
+⚠️ 对于内联元素，i, code, span等，其clientWidth/clientHeight，clientLeft/clientTop均都为0；
+
+👉 有这样子的一个计算公式
+> scrollWidth/scrollHeight = content + padding + overflow的尺寸
+
+也就是可以反向地来计算出溢出的尺寸是多少了：overflow的尺寸 = scrollWidth - content - padding；而当没有溢出的时候，
+scrollWidth/scrollHeight = clientWidth/clientHeight
+
+👉 **scrollTop/scrollLeft指示滚动条的位置，该属性可读可写，也就是说我们可以通过设置该值，来达到控制元素中的可见区域**
+
+🤔最终得出的结论是：*一般地，在现代浏览器中，使用的getBoundingClientRect()方法来获取元素在视口中的位置，通过此种方式获取到的数据是静态快照的数据，
+但如果我们配合浏览器的加载/滚动/视口缩放等的回调监听，即可实时获取到元素rect区域的一个变化值！*
+
