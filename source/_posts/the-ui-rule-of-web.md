@@ -14,7 +14,7 @@ cover_picture: the-rule-of-web.jpeg
 ### 前言
 ### PC网站
 公共的要求：
-1. 同一个方向上，有且只能有一个滚动条；
+1. 同一个方向上，有且只能有一个滚动条，比如横向/纵向；
 2. 对于表格类型的视图，需要限制表格的最低高度，但不用限制表格的最高高度，避免表格仅展示一两条数据的情况；
 3. 对于使用的七牛云的图片资源，都必须使用filter过滤器来将图片展示缩略图，避免图片加载慢；比如图片链接应该是追加参数展示的：
 https://img2.zhidianlife.com/temp/cy/shop/2022/01/21/84eda732-4bc0-41c4-a48d-88fdcaabc687.jpg?imageMogr2/thumbnail/480x480!/quality/50
