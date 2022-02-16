@@ -77,5 +77,33 @@ Http的API，比如有get、post请求方式等等。
   - 一般使用浏览器提供的`FormData`对象，通过对*new*出来的`FormData`对象的api来*append*追加内容的
 
 ### 二、借助于script标签发起http请求：JSONP
-script标签，可以作为一种Ajax传输机制，通过设置script的src属性，来获取服务端的数据
-### 三、服务端推送：Coment技术
+script标签，可以作为一种Ajax传输机制，通过设置script的src属性，来获取服务端的数据，它不受浏览器同源的限制，可以从服务器请求数据，包含JSON编码的响应体会自动解码，
+这就是JSONP(JSON with Padding)，将请求返回的数据直接赋值给到`document`进行内容的直接渲染
+比如有以下的一个响应体：
+> handleResponse([2, 3, {"bunk": "self info"}]);
+
+对应的一般会在客户端代码中提供对应的方法操作：
+```javascript
+  function handleResponse(jsonArray){
+	if(jsonArray){
+		var ul = document.createElement('ul');
+		jsonArray.forEach(item => {
+			var li = document.createElement('li');
+			li.innerText = item;
+			ul.appendChild(li);
+		});
+		document.appendChild(ul);
+	}
+  }
+```
+于此对应的HTML内容将会引用以下这样子的一个标签：
+```html
+  <script src="http://xxx/function=handleResponse"></script>
+```
+当访问上述的html的时候，在加载到script中的内容返回到JSONP的内容的时候，将自动调用handleResponse方法，从而来实现数据的跨域请求加载操作！
+
+对应的浏览器客户端于服务器端之间的交互如下：
+![JSONP交互流程](JSONP交互流程.png)
+
+### 三、服务端推送：Comet技术
+一般地，我们如果想要在浏览器中订阅或者被动接收服务器端发送的请求，除了主动轮询的机制，浏览器还提供了一种Comet技术，而该技术提现到对应的浏览器API则是`EventSource`
