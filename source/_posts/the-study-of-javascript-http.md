@@ -106,4 +106,19 @@ script标签，可以作为一种Ajax传输机制，通过设置script的src属�
 ![JSONP交互流程](JSONP交互流程.png)
 
 ### 三、服务端推送：Comet技术
-一般地，我们如果想要在浏览器中订阅或者被动接收服务器端发送的请求，除了主动轮询的机制，浏览器还提供了一种Comet技术，而该技术提现到对应的浏览器API则是`EventSource`
+一般地，我们如果想要在浏览器中订阅或者被动接收服务器端发送的请求，除了主动轮询的机制，浏览器还提供了一种Comet技术，而该技术提现到对应的浏览器API则是`EventSource`，`EventSource`是服务器推送的
+一个网络事件接口，一个EventSource实例会对HTTP服务开启一个持久化的连接，以*text/event-stream*格式发送事件，会一直保持开启知道被要求关闭。
+与WebSockets不同的是，EventTarget是单向的从服务端推送至客户端的
+```javascript
+  var eventSource = new EventSource('url');
+  eventSource.onmessage = function(msg) {
+    console.info(msg.data);
+  };
+  
+```
+上述的onmessage回调方法中的msg对象，为一MessageEvent对象API，包含有以下的属性
++ data：返回的String\Blob\ArrayBuffer，包含来自发送者的数据；
++ origin：返回一个表示消息发送者来源的字符串
++ lastEventId：当前事件唯一id
++ source：代表消息发送者
++ ports：对象数组，代表消息正通过特定通道发送的相关端口
