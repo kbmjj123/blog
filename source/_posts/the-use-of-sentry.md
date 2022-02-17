@@ -60,6 +60,10 @@ cover_picture: sentry-cover.jpeg
       tracesSampleRate: 1.0
   });
 ```
+3. 关于项目的配置信息入口，具体看以下截图介绍
+![进入项目配置](https://img2.zhidianlife.com/image/2022/02/17/d050d158-c4fa-46f5-b5c1-65f67a160994.png)
+![选择SDK安装](https://img2.zhidianlife.com/image/2022/02/17/b3ec64e8-1c09-4a41-80cf-acc2549b13be.png)
+![找到对应配置](https://img2.zhidianlife.com/image/2022/02/17/830190a3-79f9-46bb-a721-0892d4234c99.png)
 
 ### 三、业务/自定义异常汇报
 对于业务方面的异常，一般需要提供发生错误信息的所有相关操作，比如接口地址，接口参数，当前用户状态等等，因此需要业务自行将产生这个业务异常的当前信息全部提交到日志服务器中，来完成远程bug的一个复现，
