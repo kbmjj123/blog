@@ -66,10 +66,62 @@ cover_picture: sentry-cover.jpeg
 这边可以提供1⃣️公共的方法，集成到当前的组件库的方法库中，比如🈶️以下的一个示例代码：
 ```javascript
   // 比如在axios的统一网络请求响应回调处理函数中
-  import { BugReport } from 'XXX';
-  BugReport.report({
-    env: 'product/development/test',  //当前环境
-    errorMsg: ''
-  });
+  import { CustomReport } from '@sentry/browser';
+  CustomReport.setTags({
+      environment: env,
+      error: '接口响应的错误信息'
+    });
+    user && CustomReport.setUser({
+      id: user.id,
+      username: user.username
+    });
+    CustomReport.setExtras({
+      curl
+    })
+    CustomReport.withScope(scope => {
+      scope.setLevel(CustomReport.Severity.Info);
+    });
+    CustomReport.captureException(new Error(errorMsg));
 ```
 
+### 四、组件库统一集成方案(推荐)
+目前前端这边有统一的组件库，在统一的组件库中添加一目录，作为日志监控的入口，只需在需要的位置使用即可，目前这边要求是整体项目位置以及统一的axios接口响应的位置来接入：
+1. main.js入口：
+```javascript
+  // ...
+  import { BugReport } from 'zd-bussiness-component';
+  BugReport({
+    Vue,  // 当前Vue实例
+    router, // 当前vue-router路由器
+    dsn: '',//从sentry控制台获取到的项目配置
+    debug: true,  //开发环境开启调试模式
+    environment: '运行环境',
+    release: process.env.npm_package_version // 当前版本号，对应于目前package.json中的version字段
+  });
+  // ...
+```
+通过上述的配置，即可完成全局异常的捕获并上传日志
+
+2. axios统一的回调入口：
+```javascript
+  //...
+  import { report } from 'zd-bussiness-component'; 
+  // 统一处理响应拦截
+  axios.inceptert.use(res => {
+  	if('业务异常了'){
+  		report({
+  		  env: '',//当前环境
+  		  errorMsg: '接口返回的异常提示信息',
+  		  curl: {
+  		  	...res,
+  		  	params: res.config.data,
+  		  	headers: res.config.headers
+  		  },
+  		  user: 已登录?{id, username}: null,
+  		  tag: {} // 对象类型的自定义标签，可用于自定义错误检索
+  		})
+  	}
+  });
+```
+通过上述的方式，我们可以精准获取到当系统出现异常的时候，将产生异常的瞬间所提交的参数、请求头、异常信息一同提交到Sentry控制台中，对应可以看到如下的效果：
+![异常信息跟踪](https://img2.zhidianlife.com/image/2022/02/17/b427597a-352f-4e2c-b2b2-088c3cd97711.png)
