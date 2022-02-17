@@ -125,3 +125,6 @@ cover_picture: sentry-cover.jpeg
 ```
 通过上述的方式，我们可以精准获取到当系统出现异常的时候，将产生异常的瞬间所提交的参数、请求头、异常信息一同提交到Sentry控制台中，对应可以看到如下的效果：
 ![异常信息跟踪](https://img2.zhidianlife.com/image/2022/02/17/b427597a-352f-4e2c-b2b2-088c3cd97711.png)
+
+### 邮件告警
+安装对应的邮件告警客户端，这里推荐网易邮箱大师，省去了自行配置smtp的流程：[点我下载](https://dashi.163.com/index.html)
