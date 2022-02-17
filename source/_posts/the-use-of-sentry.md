@@ -187,7 +187,7 @@ cover_picture: sentry-cover.jpeg
 ```javascript
   // ...
   import { BugReport } from 'zd-bussiness-component';
-  BugReport({
+  BugReport.init({
     Vue,  // 当前Vue实例
     router, // 当前vue-router路由器
     dsn: '',//从sentry控制台获取到的项目配置
@@ -202,11 +202,11 @@ cover_picture: sentry-cover.jpeg
 2. axios统一的回调入口：
 ```javascript
   //...
-  import { report } from 'zd-bussiness-component'; 
+  import { BugReport } from 'zd-bussiness-component'; 
   // 统一处理响应拦截
   axios.inceptert.use(res => {
   	if('业务异常了'){
-  		report({
+  		BugReport.report({
   		  env: '',//当前环境
   		  errorMsg: '接口返回的异常提示信息',
   		  curl: {
