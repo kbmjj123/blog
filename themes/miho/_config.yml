@@ -78,7 +78,7 @@ cover_picture: https://img.91temaichang.com/blog/default-cover.jpg
 # Open background particles | 开启背景粒子
 open_bg_particle: true
 # Open animation in homepage and head | 开启主页及头部动画
-open_animation: false
+open_animation: true
 
 # Article
 
