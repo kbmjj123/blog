@@ -19,7 +19,7 @@ cover_picture: 浏览器存储封面.jpeg
 > 所做的一些操作，提升用户体验，完善业务闭环，目前较为常见的浏览器存储方式有：
 1. WEB存储(localStorage + sessionStorage)
 2. Cookie
-3. 离线WEB应用
+3. 离线WEB应用(已废弃)
 4. WEB数据库(indexdb)
 5. 文件系统
 
@@ -50,7 +50,31 @@ cover_picture: 浏览器存储封面.jpeg
 > cookie是指WEB浏览器存储的最小量数据，同时与具体的站点相关的服务器与浏览器共同使用的，自动在两者之间传递的，也就是与服务器端共享着同一份数据，这也就说明了为什么像`nuxt.js`这种ssr框架，
 > 可以直接使用客户端的cookie了，而一般在使用cookie之前，都需要进行检测当前浏览器是否支持使用cookie，利用`navigator.cookieEnabled`这个属性来进行判断
 
-#### 2.1、cookie属性：有效期和实现
-### 三、应用程序存储
+#### 2.1、cookie有效性
+cookie有点类似于sessionStorage，但与sessionStorage又有一定的区别
 
-### 四、离线WEB应用
+| API对象 | 关闭浏览器 | 同一浏览器不同tab选项 | 延长有效性 | 读写 |
+|---|---|---|---|---|
+| sessionStorage | 失效 | 各tab独占，互不污染 | - | getItem/setItem |
+| cookie | 失效 | 共一个浏览器共享 | 通过显示设置max-age(秒) | document.cookie，字符串类型，通过字符串拼接 |
+
+✨ 一旦*cookie*设置了`max-age`，则会在浏览器中保存一文件，当时间过期的时候，将会自动删除该文件
+
+#### 2.2、cookie读写操作
+> 由于浏览器关闭时cookie失效，因此有时在特定业务场景下，需要设置cookie的有效性，确保cookie在下次规定时间内浏览器打开的时候，保存有上次的记录，，比如账户的登录状态，
+> 而原本cookie的值是通过对`window.cookie`进行直接字符串赋值的
+
+```javascript
+  document.cookie = 'version' + encodeURIComponent('待编码的内容');
+  // 以下是通过对该属性进行时效性的追加-->👇这行代码设置cookie的有效性是60秒
+  document.cookie = 'version' + encodeURIComponent('待编码的内容') + '; ' + 'max-age=60';
+```
+
+✨ 由于cookie采用的字符串拼接的方式，因此，如果cookie的长度过长的话，就会被忽略，目前的限制是**总体不得超过4KB**
+
+👉 既然cookie通过document.cookie进行写入了，那么读取的时候，也是通过该属性来获取，一般流程是：
+1. 通过document.cookie属性获取到字符串，这里我们叫cookieLabel
+2. 对cookieLabel进行分割: cookieArray = cookieLabel.split('; ');
+3. 再对cookieArray中的每一项进行第二次分割：cookieItemArray = cookieItem.split('=');
+4. 对每一项cookieItem[1]的值进行decodeURIComponent解码，获取到之前所存储的值
+5. 组装成比较容易访问的对象来使用
