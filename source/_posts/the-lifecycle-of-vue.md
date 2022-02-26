@@ -204,6 +204,130 @@ import mixin2 from '../mixins/mixin2.js';
 由此可见对于重载的生命周期方法函数的一个执行顺序是：**extends > mixins > component**
 
 #### 2.2、provide/inject的使用方式与场景
+> 这对选项需要一起使用，以允许一个组件组件向其所有子孙后代注入一个依赖，不论组件层次有多深，并在其上下游关系成立的时间内始终生效，这有点类似于`React`的上下文特性
+> `provide`：选项应该是一个对象或者返回一个对象的函数，该对象包含可注入其子孙的property
+> `inject`：选项是一个字符串数组(拿provide中的对象的key)或者一个对象(key同样是provide中的key)，当其定义为一个对象的时候，该对象中有两个属性：`from`代表从provide中对象的哪个属性，`default`当找不到这个属性的时候，默认用的值
+
+`provide`和`inject`帮助我们解决了多层组件传递的问题，在`provide`中定义了要传递给所有子孙组件的数据，而子孙组件通过`inject`注入的方式来获取祖先
+组件所设置的数据，相比使用`props`和`$emit`的方式，主要有以下两个优势的地方：
++ 祖先组件无须关心那些后代组件有使用到这个数据；
++ 后代组件无须关心从哪里来获取这个注入的属性；
+
+具体使用方式可以见下方的例子：
+```vue
+  <!-- 孩子组件 -->
+<template>
+	<div>
+		<Grandson/>
+	</div>
+</template>
+
+<script>
+import BaseComponent from './BaseComponent.vue';
+import mixin1 from '../mixins/mixin1.js';
+import mixin2 from '../mixins/mixin2.js';
+import Grandson from './Grandson.vue';
+	export default {
+		name: 'ChildComponent',
+		extends: BaseComponent,
+
+		components: {
+			Grandson
+		},
+		provide: {
+			obj: {
+				id: '123',
+				name: '我的名字'
+			}
+		},
+		mixins: [mixin1, mixin2],
+		data(){
+			return {
+				content: '这个是孩子的元素'
+			};
+		},
+		mounted(){
+			console.info('这个是来自于孩子的mounted');
+		},
+		methods: {
+			clickMe(){
+				console.info('这个是来自于孩子的点击动作');
+			}
+		}
+	}
+</script>
+```
+```vue
+<!-- 孙子组件 -->
+<template>
+	<div>
+		这个是孙子组件
+		<Grandsonson/>
+	</div>
+</template>
+
+<script>
+import Grandsonson from './Grandsonson.vue';
+	export default{
+		name: 'Grandson',
+		components: {Grandsonson},
+		inject: ['obj'],
+		data(){
+			return {
+
+			}
+		},
+		mounted(){
+			console.info('来自于Grandson的输出：', this.obj);
+		},
+		computed: {
+
+		}
+	}
+</script>
+```
+```vue
+  <!-- 曾孙子组件 -->
+<template>
+	<div>
+		这个是曾孙子组件
+	</div>
+</template>
+
+<script>
+	export default{
+		name: 'Grandsonson',
+		inject: ['obj'],
+		data(){
+			return {
+				xx: {
+					id: '',
+					name: '999'
+				}
+			}
+		},
+		mounted(){
+			console.info('来自于Grandsonson的输出：', this.obj);
+			console.info('来自于Grandsonson的输出：', this.xx);
+		}
+	}
+</script>
+```
+简单描述上述的代码逻辑，就是
+```xml
+  <ChildComponent provide="obj对象">
+    <Grandsonson inject="['obj']">
+      <Grandsonson inject="['obj']"></Grandsonson>
+    </Grandsonson>
+  </ChildComponent>
+```
+对应的输出结果如下：
+![provide与inject的结果](provide与inject的结果.png)
+
+⚠️ 有一个地方需要注意的是，从组件`inject`而来的数据，都是**非响应式的**，与自身的data中的属性是不一样的，因此也就没有说数据直接捆绑到UI上后，
+inject数据一变动也就跟着变动的情况，因此，正常是需要做一个转换的
+![inject的数据](inject的数据.png)
+
 
 ### 三、为什么会是这样子的生命周期
 初始化事件和生命周期方法
