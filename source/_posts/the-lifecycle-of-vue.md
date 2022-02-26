@@ -9,7 +9,7 @@ tags:
     - vue
     - 查漏补缺
     - 生命周期
-cover_picture: vue生命周期封面.jpeg
+cover_picture: vue生命周期封面.png
 ---
 
 ### 前言
