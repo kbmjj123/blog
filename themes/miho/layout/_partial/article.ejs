@@ -40,7 +40,7 @@
                                 <img src="<%- (/^(http:|https:)?\/\//.test(post.cover_picture) ? post.cover_picture : config.url.replace(/\/$/, '') + '/' + post.cover_picture) %>"
                                      alt="<%- post.title %>" title="<%- post.title %>">
                             <% } else{ %>
-                                    <img src="<%-  post.path.substring(0, post.path.lastIndexOf("/")) + '/' + post.cover_picture %>"
+                                    <img src="<%- url_for(post.path) + post.cover_picture %>"
                                          alt="<%- post.title %>" title="<%- post.title %>">
                             <% } %>
                         <% } else { %>
