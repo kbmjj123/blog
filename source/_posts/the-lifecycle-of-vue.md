@@ -1,5 +1,5 @@
 ---
-title: vue组件声明周期
+title: vue组件的生命周期与options属性一览
 author: Zhenggl
 date: 2021-05-11 17:35:48
 categories:
@@ -330,5 +330,19 @@ inject数据一变动也就跟着变动的情况，因此，正常是需要做�
 
 
 ### 三、为什么会是这样子的生命周期
-初始化事件和生命周期方法
-![Vue初始化动作_init](https://img.91temaichang.com/blog/vue-init.png)
+首先，先从Vue函数的入口开始：
+![Vue函数入口](Vue函数入口.png)
+
+![Vue的options参数合并](Vue的options参数合并.png)
+
+![beforeCreate+created](beforeCreate+created.png)
+
+![callHook](callHook.png)
+
+![$mount]($mount.png)
+
+![$mount运行时加载]($mount运行时加载.png)
+
+![beforeMount回调](beforeMount回调.png)
+
+![mounted方法执行](mounted方法执行.png)
