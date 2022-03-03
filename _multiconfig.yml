@@ -93,9 +93,9 @@ include: null
 exclude: null
 ignore: null
 theme: miho
-url: https://blog-document.gitee.io/t-blog/
+url: https://www.91temaichang
 deploy:
   type: git
-  repo: https://gitee.com/blog-document/t-blog.git
-  branch: master
-root: /t-blog/
+  repo: git@github.com:kbmjj123/hexo-blog.git
+  branch: main
+  token: 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
