@@ -22,9 +22,9 @@ cover_picture: 抽象工厂模式封面.jpeg
   // 这里subType假定是BMW，superType假定是Car
   var VehicleFactory = function(subType, superType) {
     function F() {}
-    F.prototype = new superType();  // 这里采用构造调用，这里以👇的Car为例子，使得F的prototype拥有了实际的getPrice + getSpeed方法，
+    F.prototype = new superType();  // 这里采用构造调用，这里以👇的Car为例子，使得F的prototype拥有了实际的getPrice + getSpeed方法，但需要注意的是通过这种方式，如果在superType中定义了this上的属性/方法，将会被子类所继承到
     // 使得当调用var f = new F()的时候，创建出来的对象拥有自身的方法，也就是f.hasOwnProperty('getPrice') === true
-    subType.constructor = subType;  //使子类的构造器指向子类
+    subType.constructor = subType;  //使子类的构造器指向子类，代表通过new所创建出来的对象，使用子类subType自身的构造方法来初始化对象
     subType.prototype = new F();  //使得创建出来的子类拥有统一一份抽象函数的自身拷贝
   }
 ```
@@ -77,5 +77,58 @@ cover_picture: 抽象工厂模式封面.jpeg
 ![ES5抽象工厂方法输出结果](ES5抽象工厂方法输出结果.png)
 从输出结果我们可以看出bmw的原型拥有自己的getPrice以及getSpeed方法，因为在定义BMW的时候，直接"重载"了在原型上的getPrice以及getSpeed方法，当`new`出来的bmw调用getPrice方法的时候，第一时间找到自己原型上的getPrice方法。
 
-
 ### 优化后的ES6代码
+```javascript
+  // Car.js
+  export default class Car{
+	constructor(price, speed) {
+		this.price = price;
+		this.speed = speed;
+	}
+	getPrice() {
+	  return new Error('抽象方法不能被直接调用');
+	}
+	getSpeed() {
+	  return new Error('抽象方法不能被直接调用');
+	}
+  }
+```
+```javascript
+  // BMW.js
+  export default class extends Car{
+	constructor(price, speed) {
+	 super(price, speed);
+	}
+	getPrice() {
+	  console.info('BMW子类自身实现的getPrice方法');	
+	  return this.price;
+	}
+	getSpeed() {
+	  console.info('BMW子类自身实现的getSpeed方法');	
+	  return this.speed;
+	}
+  }
+```
+```javascript
+  // Audi.js
+  export default class extends Car{
+	constructor(price, speed) {
+	 super(price, speed);
+	}
+	getPrice() {
+	  console.info('Audi子类自身实现的getPrice方法');	
+	  return this.price;
+	}
+	getSpeed() {
+	  console.info('Audi子类自身实现的getSpeed方法');	
+	  return this.speed;
+	}
+  }
+```
+```javascript
+  // AbstractFactory.js 抽象工厂
+  export default function(subType, superType) {
+	// 直接借助于ES6在Object中提供的语法，直接创建两个对象之间的一个关联关系
+    subType.prototype = Object.create(superType.prototype);
+  }
+```
