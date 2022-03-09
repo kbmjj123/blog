@@ -31,7 +31,9 @@ bower_components
 
 # node-waf configuration
 .lock-wscript
-
+gitee.yml
+github.yml
+self.yml
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 

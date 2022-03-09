@@ -1,0 +1,8 @@
+deploy:
+  type: sftp
+  host: 175.178.180.62
+  user: zhenggl
+  pass: zgl3843386
+  remotePath: /usr/local/nginx/html/blog
+  port: 22
+
