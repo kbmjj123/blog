@@ -10,7 +10,7 @@
     "oneKeyDeploy": "hexo clean && hexo generate && hexo deploy",
     "githubDeploy": "hexo clean && hexo generate --config _config.yml,github.yml && hexo d --config _config.yml,github.yml",
     "giteeDeploy": "hexo clean && hexo generate --config _config.yml,gitee.yml && hexo d --config _config.yml,gitee.yml",
-    "selfDeploy": "hexo clean && hexo generate --config _config.yml,gitee.yml && hexo d --config _config.yml,self.yml"
+    "selfDeploy": "hexo clean && hexo generate --config _config.yml,self.yml && hexo d --config _config.yml,self.yml"
   },
   "hexo": {
     "version": "5.4.0"

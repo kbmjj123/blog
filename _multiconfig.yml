@@ -103,3 +103,4 @@ deploy:
   pass: zgl3843386
   remotePath: /usr/local/nginx/html/blog
   port: 22
+root: /

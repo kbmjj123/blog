@@ -1,3 +1,5 @@
+url: https://www.91temaichang
+root: /
 deploy:
   type: sftp
   host: 175.178.180.62
