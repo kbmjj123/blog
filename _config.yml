@@ -169,3 +169,26 @@ deploy:
 #      branch: master
 
 #pwa:
+#pwa:
+#  manifest:
+#    path: /manifest.json
+#    body:
+#      name: zhenggl
+#      short_name: zhenggl
+#      lang: zh-CN
+#      display: standalone
+#      background_color: "#ecedee"
+#      theme_color: "#414852"
+#      icons:
+#        - src: /images/favicon/xin-32.png
+#          sizes: 32x32
+#          type: image/png
+#        - src: /images/favicon/xin-192.png
+#          sizes: 192x192
+#          type: image/png
+#        - src: /images/favicon/xin-512.png
+#          sizes: 512x512
+#          type: image/png
+#  serviceWorker:
+#    options:
+#      offlineGoogleAnalytics: true
