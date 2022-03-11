@@ -2,12 +2,13 @@
 title: 从新开始认识JavaScript原型
 author: Zhenggl
 date: 2022-03-09 08:45:20
+description: 从新开始认识JavaScript原型
 categories:
-    -[javascript, prototype]
+    - [javascript, prototype]
 tags:
-    -javascript
-    -prototype
-    -constructor
+    - javascript
+    - prototype
+    - constructor
 cover_picture: 原型封面.jpeg
 ---
 

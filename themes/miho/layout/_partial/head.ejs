@@ -21,9 +21,22 @@
   %>
   <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <% if (theme.keywords){ %>
+  <% if (page.title){ %>
+    <meta name="keywords" content="<%- theme.keywords + '-' +  page.title %>" />
+  <% } else if(theme.keywords){ %>
     <meta name="keywords" content="<%- theme.keywords %>" />
   <% } %>
+
+  <% if (page.description){ %>
+    <meta name="description" itemprop="description" content="<%= page.description %>">
+  <% } else if (config.description&&(!is_post())){ %>
+    <meta name="description" content="<%= config.description %>">
+  <% } else if (page.excerpt){ %>
+    <meta name="description" content="<%= strip_html(page.excerpt).replace(/^s*/, '').replace(/s*$/, '') %>">
+  <% } else if (page.content){ %>
+    <meta name="description" content="<%= strip_html(page.content).replace(/^s*/, '').replace(/s*$/, '').substring(0, 150) %>">
+  <% } %>
+
   <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
   <% if (theme.rss){ %>
     <link rel="alternate" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
