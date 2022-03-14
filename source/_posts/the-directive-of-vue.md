@@ -151,10 +151,175 @@ cover_picture: vue指令封面.jpeg
 ```
 
 #### 2、长按指令`v-longpress`
+需求：实现长按，用户需要按下并按住按钮几秒钟，触发对应的事件
+
+思路：
+1. 创建一个计时器，2秒后执行函数；
+2. 当用户按下按钮时触发mousedown事件，启动计时器；用户松开按钮时调用mouseout事件；
+3. 如果用户mouseup事件在2秒内被触发，就清除计时器，当作一个普通的点击事件；
+4. 如果计时器没有在2秒内清除，则判定为一次长按，可以执行关联的函数；
+5. 在移动端需要考虑touchstar，touchend事件
+
+```javascript
+  const longpress = {
+	bind: function(el, binding) {
+	  if('function' !== typeof binding.value){
+	  	throw 'callback must be a function';
+	  }
+	  let pressTimer = null;
+	  let start = e => {
+	  	if('click' === e.type && e.button !== 0){
+	  		return;
+	  	}
+	  	if(null === pressTimer){
+	  		pressTimer = setTimeout(handler, 2000);
+	  	}
+	  };
+	  const handler = e => {
+	  	binding.value(e);
+	  };
+	  let cancel = e => {
+	  	if(null !== pressTimer){
+	  		clearTimeout(pressTimer);
+	  		pressTimer = null;
+	  	}
+	  };
+	  el.addEventListener('mousedown', start);
+	  el.addEventListener('touchstart', start);
+	  el.addEventListener('click', cancel);
+	  el.addEventListener('mouseout', cancel);
+	  el.addEventListener('touchend', cancel);
+	  el.addEventListener('touchcancel', cancel);
+	},
+	componentUpdated(el, binding){
+		el.$value=binding.value;
+	},
+	unbind(el){
+		el.removeEventListener('click', el.handler);
+	}
+  };
+```
+```vue
+   <template>
+      <button v-longpress="longpress">长按</button>
+    </template>
+ 
+<script> export default {
+  methods: {
+    longpress () {
+      alert('长按指令生效')
+    }
+  }
+} </script>
+```
+
 
 #### 3、输入框防抖指令`v-debounce`
+背景：在实际业务开发过程中，有些提交保存按钮有时候需要在短时间内被点击多次，这样就会多次重复请求后端接口，造成数据的混乱；
 
+需求： 防止按钮在短时间被多次点击，使用防抖函数限制规定时间内只能点击一次；
+
+思路：
+1. 定义一个延迟执行的方法，如果在延迟时间内再调用该方法，则重新计算执行时间；
+2. 将时间绑定在click事件上
+
+```javascript
+  const debouse = {
+	inserted: function(el, binding) {
+	  if('function' !== typeof binding.value){
+	  	throw 'callback must be function!';
+	  }	
+	  let timer;
+	  el.addEventListener('keyup', () => {
+	  	if(timer){
+	  		clearTimeout(timer);
+	  		timer = null;
+	  	}
+	  	timer = setTimeout(() => {
+	  		binding.value && binding.value();
+	  	}, 1000);
+	  });
+	}
+  };
+```
+```vue
+  <template>
+      <button v-debounce="debounceClick">防抖</button>
+    </template>
+ 
+<script> 
+export default {
+  methods: {
+    debounceClick () {
+      console.log('只触发一次')
+    }
+  }
+} 
+</script>
+```
 #### 4、图片懒加载`v-lazyload`
+背景：在平时加载较多图片资源的时候，需要控制图片延迟加载，需要控制img节点在展示的时候，才进行对应的显示；
+
+需求：实现一个图片懒加载指令，只加载浏览器可见区域的图片；
+
+思路：
+1. 图片懒加载的原理主要是判断当前图片img节点是否到了可视区域这一个核心逻辑实现的；
+2. 拿到所有图片的dom，遍历每个图片判断当前图片是否到了可视区域范围内；
+3. 如果到了可视范围内，就设置图片的src属性，否则显示默认图片；
+4. 图片懒加载有两种方式可以实现，一是绑定`scroll`事件进行监听，二是使用IntersectionObserver判断图片是否到了可视区域，但有浏览器兼容问题
+5. 由于需要配置默认的参数，因此，需要从全局的地方将参数值给传递进来，也就是通过在注册指令的时候，顺便将值一起传递进来
+
+```javascript
+  const LazyLoad = {
+	// 由于需要单独进行属性的传递，因此需要与其他的指令区分开来，这样子就可以在
+	install(Vue, options){
+		const defaultSrc = options.default;
+		Vue.directive('lazy', {
+			bind(el, binding){
+				LazyLoad.init(el, binding.value, defaultSrc);
+			},
+			inserted(el){
+				if(IntersectionObserver){
+					LazyLoad.observe(el);
+				}else{
+					LazyLoad.observe(el);
+				}
+			}
+		});
+	},
+	init(el, val, def){
+        el.setAttribute('data-src', val);
+        el.setAttribute('src', def);
+    },
+    observe(el){
+		var io = new IntersectionObserver(entries => {
+			const realSrc = el.dataset.src;
+			if(realSrc){
+                if(entries[0].isIntersecting){
+                    el.src = realSrc;
+                    el.removeAttribute('data-src');
+                }
+			}
+		});
+		io.observe(el);
+    },
+    scroll(el){
+		// const handler = LazyLoad
+    },
+    throttle(fn, delay){
+		let timer, prevTime;
+		return function(...args) {
+		  const currTime = Date.now();
+		  const context = this;
+		  if(!prevTime){
+		  	prevTime = currTime;
+		  }
+		  clearTimeout(timer);
+		}
+    }
+  };
+  
+```
 
 #### 5、权限校验指令`v-permission`
 背景： 在一些后台管理系统中，我们可能需要根据当前登录用户角色进行一些操作权限的判断，很多时候，我们都是简单粗暴的给一个元素添加`v-if/v-show`指令来进行显示/隐藏，但是如果判断条件繁琐或者有多个地方都需要进行判断的化，后期代码的维护
@@ -192,5 +357,3 @@ cover_picture: vue指令封面.jpeg
   </div>
 ```
 
-
-#### 6、实现页面水印`v-waterMaker`
