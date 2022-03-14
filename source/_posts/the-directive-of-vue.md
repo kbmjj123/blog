@@ -157,5 +157,40 @@ cover_picture: vue指令封面.jpeg
 #### 4、图片懒加载`v-lazyload`
 
 #### 5、权限校验指令`v-permission`
+背景： 在一些后台管理系统中，我们可能需要根据当前登录用户角色进行一些操作权限的判断，很多时候，我们都是简单粗暴的给一个元素添加`v-if/v-show`指令来进行显示/隐藏，但是如果判断条件繁琐或者有多个地方都需要进行判断的化，后期代码的维护
+量会相当的大，而且也不好做统一的管理，针对这种情况，我们可以定义一全局自定义指令，来满足业务需求；
+
+需求：自定义一个权限指令，对需要进行权限判断的DOM进行显示/隐藏。
+
+思路：
+1. 自定义一个权限数组，模拟后台的角色数据源;
+2. 判断用户的权限是否在这个数组中，如果是则显示，否则则移除DOM
+
+```javascript
+  function checkArray(key) {
+    let array = ['1', '2', '3', '4'];
+    return array.indexOf(key) > -1;
+  }
+  const permission = {
+	inserted: function(e, binding) {
+	  if(binding.value){
+	  	if(!checkArray(binding.value)){
+	  		// 没有权限
+	  		el.parentNode && el.parentNode.removeChild(el);
+	  	}
+	  }
+	}
+  };
+```
+使用：给`v-permission`赋值判断即可
+```javascript
+  <div class="btns">
+    <!-- 显示 -->
+    <button v-permission="'1'">权限按钮1</button>
+    <!-- 不显示 -->
+    <button v-permission="'10'">权限按钮2</button>
+  </div>
+```
+
 
 #### 6、实现页面水印`v-waterMaker`
