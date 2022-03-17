@@ -46,6 +46,35 @@ Object.prototype中含有一个constructor属性代表的是用这个constructor
 将对应的属性/方法包含在各个对象中，归类归属到每个对象中，需要记住一下的一句话：
 > ✨ 定义在`prototype`上的属性/方法，其实例对象instance均通过引用的方式来访问到对应的属性/方法
 
+![再次分析原型继承](再次分析原型继承.png)
+
+✨ 后续由于JavScript中提供了`Object.create()`静态方法，用于从一个现有对象来创建新对象的prototype，因此，我们不需要从头去编写一行行的代码来实现对象之间的一个关联关系
+
+```javascript
+  const person = {
+      isHuman: false,
+      printIntroduction: function() {
+        console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+      }
+    };
+    person.prototype = {
+      callMe: function(){
+        console.info('callMe');
+      }
+    };
+    
+    const me = Object.create(person);
+    me.isHuman = true;
+    
+    console.info(person)
+    
+    console.debug(me)
+```
+
+![Object.create输出结果](Object.create输出结果.png)
+
+通过`Object.create`方法，根据person对象以及它的原型，来创建一个新的对象me，新创建出来的me对象，将person对象以及它的prototype作为自己的prototype，而且每个me都是一份拷贝，修改每个me都不会影响到person以及person.prototype
+
 ### 函数是一等对象与prototype
 函数也于对象Object类似，是一等对象，只不过是可以被执行的对象罢了，Foo构造函数new出来的实例与Object相比，构造函数创建出来的对象中包含了一属性constructor，该属性指向的创建对象的方法，
 其实也就可以理解为告诉了编译器，要用哪个构造函数来创建对象
