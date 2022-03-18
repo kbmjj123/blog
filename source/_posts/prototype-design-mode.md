@@ -3,7 +3,7 @@ title: 每天一设计模式-建造者模式
 author: Zhenggl
 date: 2022-03-09 08:08:42
 categories:
-    -[javascript, 设计模式]
+    - [javascript, 设计模式]
 tags:
     -javascript
     -设计模式

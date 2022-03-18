@@ -3,7 +3,7 @@ title: vue组件的生命周期与options属性一览
 author: Zhenggl
 date: 2021-05-11 17:35:48
 categories:
-    -[开发框架, vue]
+    - [开发框架, vue]
 tags:
     - 开发框架
     - vue

@@ -4,7 +4,7 @@ description: 每天一设计模式-适配器模式
 author: Zhenggl
 date: 2022-03-14 08:09:33
 categories:
-    -[javascript, 设计模式]
+    - [javascript, 设计模式]
 tags:
     -javascript
     -设计模式

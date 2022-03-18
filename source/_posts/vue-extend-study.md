@@ -3,7 +3,7 @@ title: 深入浅出Vue.extend
 author: Zhenggl
 date: 2021-05-11 15:59:00
 categories:
-    -[开发框架, vue]
+    - [开发框架, vue]
 tags:
     - vue
 cover_picture: https://img.91temaichang.com/blog/vue-extend-study.jpeg

@@ -66,11 +66,14 @@ slot通俗一点的理解就是"占坑"，在组件模版中占好了位置，�
 
 ❓那么，如果这个插槽要访问这个容器组件中的作用域的话，应该怎么整呢？
 
--->我们把需要传递的内容绑定到插槽<slot>上，然后在容器组件中用`v-slot`设置一个值来定义我们提供插槽的名字：
+-->我们把需要传递的内容绑定到插槽<slot>上，然后在容器组件中用`v-slot`设置一个值来定义我们提供插槽的名字，
+> 也就是在定义slot插槽的时候，对slot插槽节点添加一自定义捆绑的key+value，告知这个组件的调用者，我将会从关键词user中来获取它的值。
+
 ```vue
+  <!-- container.vue -->
     <template>
       <div>
-        <slot v-bind:use="user">{{ user.lastName }}</slot>
+        <slot v-bind:user="user">{{ user.lastName }}</slot>
       </div>
     </template>
     <script>
@@ -82,7 +85,8 @@ slot通俗一点的理解就是"占坑"，在组件模版中占好了位置，�
       }
     </script>
 ```
-然后在宿主组件test.vue中，接收传递过来的值：
+👆这里container.vue组件中，告知container.vue的调用者，container.vue将从这个user中来获取对象，这里的v-bind:user我可以称之为**插槽prop**
+然后在宿主组件test.vue中，使用带值的`v-slot`传递需要的值：
 ```vue
     <template>
       <div>
@@ -96,7 +100,7 @@ slot通俗一点的理解就是"占坑"，在组件模版中占好了位置，�
 
 -->上述v-bind:user="user"，这里的attribute属性user被称为`插槽prop`，在容器组件用的v-slot定义的是插槽prop的名字
 
--->容器组件中v-slot:default="defaultProp"，这里的意思是给容器组件的默认插槽的插槽prop命名为defaultProp，所以，我们才可以在插槽中直接使用`defaultProp.user.fisrtName`
+-->容器组件中v-slot:default="defaultProps"，这里的意思是给容器组件的默认插槽的插槽prop命名为`defaultProps`，所以，我们才可以在插槽中直接使用`defaultProps.user.fisrtName`
 
 在上述情况下，如果容器组件只有默认一个插槽的话，可以简写为以下方式：
 ```vue
@@ -118,14 +122,14 @@ slot通俗一点的理解就是"占坑"，在组件模版中占好了位置，�
       </template>
     </container>
 ```
--->因此，只要容器组件有多个插槽，都必须始终为所有的插槽使用完整的基于<template>的语法：
+-->因此，只要容器组件有多个插槽，都必须始终为所有的插槽使用完整的基于template的语法：
 ```vue
     <container v-slot="slotProps">
       <template v-slot:default="slotProps">
         {{ slotProps.user.firstName }}
       </template>
       <template v-slot:other="otherSlotProps">
-        ...
+        {{ otherSlotProps.other.XXX }}
       </template>
     </container>
 ```
@@ -167,7 +171,7 @@ slot通俗一点的理解就是"占坑"，在组件模版中占好了位置，�
 product-item.vue通过$emit方式，将item的数据往product-list.vue传递，这样子就完成了由子到父的数据传递
 
 > 如果是由多个不同product-list.vue来组成不同的区域，也就是由product-item.vue组成product-list.vue，然后再由product-list.vue组成product-area.vue，那么，
-> 就需要将product-list.vue也抽出来，假如有这样子一场景，点击product-item.vue的时候，需要由product-area.vue来处理这个点击时间，那么应该怎么处理？
+> 就需要将product-list.vue也抽出来，假如有这样子一场景，点击product-item.vue的时候，需要由product-area.vue来处理这个点击事件，那么应该怎么处理？
 
 --> 正常情况是product-item.vue通过$emit通知product-list.vue，然后product-list.vue再通过$emit来通知product-area.vue。
 
@@ -195,3 +199,7 @@ product-item.vue通过$emit方式，将item的数据往product-list.vue传递，
 ```
 👆这里将product-list.vue给抽象出来，通过对product-list.vue中的slot添加一个插槽prop，然后在product-area.vue宿主中对该插槽prop进行指向，这里采用对象解构的
 方式，获取到item，然后对product-item.vue进行赋值，并在点击事件中将item给传递出来，最终实现了组件与业务的剥离
+
+![插槽数据获取](插槽数据获取.png)
+
+![插槽实际运用场景结果](插槽实际运用场景结果.png)

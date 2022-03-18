@@ -4,7 +4,7 @@ description: 每天一设计模式-代理模式
 author: Zhenggl
 date: 2022-03-14 08:27:07
 categories:
-    -[javascript, 设计模式]
+    - [javascript, 设计模式]
 tags:
     -javascript
     -设计模式

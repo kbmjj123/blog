@@ -4,7 +4,7 @@ description: 每天一设计模式-外观模式
 author: Zhenggl
 date: 2022-03-14 06:15:58
 categories:
-    -[javascript, 设计模式]
+    - [javascript, 设计模式]
 tags:
     -javascript
     -设计模式

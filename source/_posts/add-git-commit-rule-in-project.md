@@ -3,7 +3,7 @@ title: 在你的项目代码层面中加入git提交代码的规范
 author: Zhenggl
 date: 2021-05-16 16:34:03
 categories:
-    -[编码规范, git]
+    - [编码规范, git]
 tags:
     - 工具
     - git

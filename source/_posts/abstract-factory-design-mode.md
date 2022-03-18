@@ -3,7 +3,7 @@ title: 每天一设计模式-抽象工厂模式
 author: Zhenggl
 date: 2022-03-05 08:13:22
 categories:
-    -[javascript, 设计模式]
+    - [javascript, 设计模式]
 tags:
     -javascript
     -设计模式
