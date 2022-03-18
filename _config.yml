@@ -140,6 +140,9 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: miho
 
+# 备案号信息
+icp: 粤ICP备14102113号-1
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 

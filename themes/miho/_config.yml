@@ -137,5 +137,8 @@ access_counter:
   site_uv: 总访客数：
   site_pv: 总访问量：
 
+# 备案号信息
+icp: 粤ICP备14102113号-1
+
 # Copyright Information | 版权信息
 copyright: 2021 Zhenggl
