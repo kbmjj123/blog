@@ -67,12 +67,12 @@ $.fn.popImg = function() {
     });
 
     $(window).on("click keydown", function(evt){
-        if(evt.type == "keydown" && evt.keyCode === 27) {
+        if(evt.type === "keydown" && evt.keyCode === 27) {
             $layer.fadeOut(300);
             $("img[data-b-img]").remove();
         }
         var $this = $(evt.target);
-        if($this.attr("data-id") == "b_layer" || $this.attr("data-b-img") == 1) {
+        if($this.attr("data-id") === "b_layer" || $this.attr("data-b-img") == 1) {
             $layer.fadeOut(300);
             $("img[data-b-img]").remove();
         }
