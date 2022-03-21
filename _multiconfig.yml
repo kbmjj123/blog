@@ -3,13 +3,13 @@ subtitle: 一个专注于大前端的技术博客
 description: >-
   专注于大前端行业领域的学习，javascript，css，html，react，android，ios，react-native，Node.js，webpack，gulp，小程序，一个都不能少
 keywords: >-
-  zhenggl,
+  zhenggl, koby,
   javascript，css，html，react，android，ios，react-native，Node.js，webpack，gulp，小程序
 author: Genglin Zheng
 language: zh-CN
 timezone: Asia/Shanghai
 jsonContent:
-  meta: false
+  meta: true
   pages: false
   posts:
     title: true
@@ -19,8 +19,8 @@ jsonContent:
     raw: false
     content: false
     slug: false
-    updated: false
-    comments: false
+    updated: true
+    comments: true
     link: false
     permalink: false
     excerpt: false
@@ -51,7 +51,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: ':lang'
-skip_render: null
+skip_render: diy/**
 new_post_name: ':title.md'
 default_layout: post
 titlecase: false
@@ -93,7 +93,7 @@ include: null
 exclude: null
 ignore: null
 theme: miho
-icp: 粤ICP备14102113号-1
+icp: 粤ICP备14102113号
 url: https://www.91temaichang
 deploy:
   type: sftp
