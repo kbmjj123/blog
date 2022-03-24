@@ -1,4 +1,4 @@
-url: https://www.91temaichang
+url: https://www.91temaichang.com
 root: /
 deploy:
   type: sftp

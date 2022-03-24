@@ -38,7 +38,7 @@ content_max_width: 800px
 # Links:
 links:
   - svg: ./source/svg/_github.svg
-    url: https://www.91temaichang
+    url: https://www.91temaichang.com
   - svg: ./source/svg/_more.svg
     url: http://weibo.com/sanonz
   - svg: ./source/svg/_twitter.svg
@@ -148,7 +148,7 @@ icp: 粤ICP备14102113号
 ## Docs: https://hexo.io/docs/one-command-deployment
 
 #  以下是github的部署
-url: https://www.91temaichang
+url: https://www.91temaichang.com
 # 以下是码云的部署
 #url: https://blog-document.gitee.io/t-blog/
 #root: /t-blog/

@@ -1,4 +1,4 @@
-url: https://www.91temaichang
+url: https://www.91temaichang.com
 deploy:
   type: git
   #repo: https://github.com/kbmjj123/hexo-blog.git # 关联github仓库
