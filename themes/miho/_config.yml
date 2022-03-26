@@ -79,6 +79,8 @@ cover_picture: https://img.91temaichang.com/blog/default-cover.jpg
 open_bg_particle: true
 # Open animation in homepage and head | 开启主页及头部动画
 open_animation: true
+# 开始自定义的wife-css
+open_wife: true
 
 # Article
 
