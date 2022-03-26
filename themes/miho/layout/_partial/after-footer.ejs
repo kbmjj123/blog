@@ -54,22 +54,13 @@
 <% } %>
 
 <% if(theme.open_wife){ %>
-  <%- css('css/wife/flat-ui.min.css') %>
+<!--  <%- css('css/wife/flat-ui.min.css') %>-->
   <%- css('css/wife/waifu.css') %>
   <div class="waifu">
       <div class="waifu-tips" style="opacity: 0;">这句一言出处是
           <span style="color:#0099cc;">『青之驱魔师』</span>，
           是 <span style="color:#0099cc;">FGHRSH</span> 在 2015.09.23 23:05:17 收藏的！</div>
       <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
-      <div class="waifu-tool">
-          <span class="fui-home"></span>
-          <span class="fui-chat"></span>
-          <span class="fui-eye"></span>
-          <span class="fui-user"></span>
-          <span class="fui-photo"></span>
-          <span class="fui-info-circle"></span>
-          <span class="fui-cross"></span>
-      </div>
   </div>
   <%- js('js/core/wife/waifu-tips.js') %>
   <%- js('js/core/wife/live2d.js') %>

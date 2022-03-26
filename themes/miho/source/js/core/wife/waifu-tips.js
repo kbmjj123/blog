@@ -20,7 +20,6 @@
 };
 
 var re = /x/;
-console.log(re);
 re.toString = function() {
     showMessage('哈哈，你打开了控制台，是想要看看我的秘密吗？', 5000, true);
     return '';
@@ -38,7 +37,6 @@ $('#hitokoto').mouseover(function (){
 });
 
 $('.waifu-tool .fui-home').click(function (){
-    //window.location = 'https://www.fghrsh.net/';
     window.location = window.location.protocol+'//'+window.location.hostname+'/'
 });
 
