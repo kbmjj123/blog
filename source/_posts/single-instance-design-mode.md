@@ -6,9 +6,9 @@ date: 2022-03-14 05:53:57
 categories:
     - [javascript, 设计模式]
 tags:
-    -javascript
-    -设计模式
-    -创建对象
+    - javascript
+    - 设计模式
+    - 创建对象
 cover_picture: 单例模式封面.jpeg
 ---
 

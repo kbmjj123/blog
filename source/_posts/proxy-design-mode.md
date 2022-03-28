@@ -6,9 +6,9 @@ date: 2022-03-14 08:27:07
 categories:
     - [javascript, 设计模式]
 tags:
-    -javascript
-    -设计模式
-    -结构性模式
+    - javascript
+    - 设计模式
+    - 结构性模式
 cover_picture: 代理模式封面.jpeg
 ---
 

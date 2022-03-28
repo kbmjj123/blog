@@ -6,9 +6,9 @@ date: 2022-03-14 08:09:33
 categories:
     - [javascript, 设计模式]
 tags:
-    -javascript
-    -设计模式
-    -结构性模式
+    - javascript
+    - 设计模式
+    - 结构性模式
 cover_picture: 适配器模式封面.jpeg
 ---
 

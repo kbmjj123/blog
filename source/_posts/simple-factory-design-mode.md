@@ -5,9 +5,9 @@ date: 2022-03-02 18:20:34
 categories:
     - [javascript, 设计模式]
 tags:
-    -javascript
-    -设计模式
-    -创建对象
+    - javascript
+    - 设计模式
+    - 创建对象
 cover_picture: 简单工厂模式封面.jpeg
 ---
 
