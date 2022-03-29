@@ -13,11 +13,11 @@
     "selfDeploy": "hexo clean && hexo generate --config _config.yml,self.yml && hexo d --config _config.yml,self.yml"
   },
   "hexo": {
-    "version": "5.4.0"
+    "version": "6.1.0"
   },
   "dependencies": {
     "@jiangtj/hexo-next-pwa": "^3.0.2",
-    "hexo": "^5.0.0",
+    "hexo": "^6.0.0",
     "hexo-deployer-git": "^3.0.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
