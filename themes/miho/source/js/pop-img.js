@@ -46,12 +46,7 @@ $.fn.popImg = function() {
 
     this.each(function(){
         $(this).css("cursor", "zoom-in").on("click", function(){
-            var $b = $("body");
-            $layer.appendTo($b);
-            $layer.fadeIn(300);
-            var $c = cloneImg($(this));
-            $c.appendTo($b);
-            justifyImg($c);
+            window.open(this.src);
         });
     });
 
