@@ -17,7 +17,7 @@
               <li>
                   <i class="fa fa-book"></i>
                   <% post.categories.forEach(function (category) { %>
-                      <a href="<%= config.root %>categories/<%= category.name.replace(/\s+/g, '') %>/">
+                      <a href="<%= config.root %>categories/<%= category.name.replace(/\s+/g, '') %>/" target="_blank" >
                         <%- category.name %>
                       </a>
                   <% }) %>

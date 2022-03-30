@@ -42,11 +42,11 @@ menu:
 social:
   home:
     title: Zhenggl
-    url: //91temaichang.com
+    url: //www.91temaichang.com
     target: true
   github:
     title: Github
-    url: //github.com/kbmjj123
+    url: //www.github.com/kbmjj123
     target: true
   qq:
     title: QQ
@@ -72,7 +72,7 @@ excerpt_length: 190
 # Excerpt link | 摘录链接
 excerpt_link: more>>
 # New window open link | 新窗口打开文章
-open_new_link: false
+open_new_link: true
 # Article default cover picture，size：350*150 | 文章默认封面图，尺寸：350*150
 cover_picture: https://img.91temaichang.com/blog/default-cover.jpg
 # Open background particles | 开启背景粒子

@@ -16,7 +16,7 @@
                             cate = cate + '/' + category.name;
                         }
                     %>
-                    <a href="<%= config.root %>categories<%= cate.replace(/\s+/g, '') %>/">
+                    <a href="<%= config.root %>categories<%= cate.replace(/\s+/g, '') %>/" target="_blank">
                         <% if(index < post.categories.length - 1){ %>
                             <%- category.name %>/
                         <% } else{ %>
