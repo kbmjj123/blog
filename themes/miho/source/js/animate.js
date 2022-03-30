@@ -3,7 +3,7 @@ $(function () {
     if (mihoConfig.isHome === true && document.body.clientWidth > 700) {
         // 滚动条监听使用 https://github.com/jlmakes/scrollreveal.js
         // http://daneden.github.io/animate.css/
-        var randomAnimationName = 'zoomIn';
+        var randomAnimationName = 'fadeIn';
         window.sr = ScrollReveal();
         //头部动画
         sr.reveal('#header-row', {
