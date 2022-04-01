@@ -94,3 +94,6 @@ _multiconfig.yml
 /.deploy_git/
 db.json
 /themes/._.DS_Store
+diy/
+jmeter/
+puppeteer/
