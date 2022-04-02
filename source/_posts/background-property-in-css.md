@@ -186,3 +186,4 @@ cover_picture: css中的background属性封面.jpeg
 3. 解析为100%。
 
 ✨ **覆盖与容纳：**
+![background-size的执行结果](background-size的执行结果.png)
