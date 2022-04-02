@@ -105,6 +105,7 @@ cover_picture: css中的background属性封面.jpeg
 | 动画性 | false |
 
 而对于该值的不同属性描述如下：
+
 | 取值 | 描述 |
 |---|---|
 | border-box | **默认值**，背景绘制在边框内 |
@@ -125,6 +126,7 @@ cover_picture: css中的background属性封面.jpeg
 | 动画性 | false |
 
 取值描述如下：
+
 | 取值 | 描述 |
 |---|---|
 | repeat | 横竖方向都平铺 |
@@ -133,6 +135,7 @@ cover_picture: css中的background属性封面.jpeg
 | no-repeat | 不平铺，仅有一图像背景 |
 | space | 类似于flex布局中的justify-content属性，根据图像大小来设置屏幕数量，并采用类似于space-between的分布效果 |
 | round | 如果背景区域的一边到对边之间无法重复整数次，那么图像将被缩小或者放大，使其刚好重复整数次 |
+
 
 ✨ 与其他属性`background-position`的配合，如果`background-position`被设置为'center'的话，那么这个背景图像将从中间的位置向两侧开始平铺，如果只设置单个方向上进行平铺的话，那么对应的只会在对应方向居中的位置进行平铺的
 
@@ -148,6 +151,7 @@ cover_picture: css中的background属性封面.jpeg
 | 动画性 | false |
 
 取值描述如下：
+
 | 取值 | 描述 |
 |---|---|
 | scroll | **默认值**，`随着页面滚动而滚动` |
@@ -168,6 +172,7 @@ cover_picture: css中的background属性封面.jpeg
 | 动画性 | false |
 
 取值描述如下：
+
 | 取值 | 描述 |
 |---|---|
 | length | 设置背景图的宽度和高度，第一个值设置宽度，第二个值设置高度，如果只给一个值，则第二是auto |
