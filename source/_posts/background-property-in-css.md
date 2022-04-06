@@ -43,6 +43,78 @@ cover_picture: css中的background属性封面.jpeg
 </style>
 ```
 
+#### 渐变背景
+> 渐变指从一个颜色到另一个颜色的平滑过度，比如从黑色过度到白色的渐变，从黑色开始，经过一系列不同深度的灰白色之后，最终变为白色，渐变的平缓或者骤变程度取决于渐变的作用空间(即元素大小)，
+> 比如在100像素的长度内由黑色渐变为白色，渐变累进的过程中每次变白1%。
+> 首先"祭出"渐变机制的一个原理介绍图：
+
+![渐变梯形的原理](渐变梯形的原理.png)
+
+⚠️ **渐变是图像！渐变是图像！渐变是图像！！！**
+
+##### 1. linear-gradient
+> 线性渐变，指的是沿线性向量填充得到的渐变，这个向量称之为梯度线(gradient line)，也就是这个属性命名的由来。
+
+**语法：**
+
+> linear-gradient(
+>   [[ <angle> | to <side-or-quadrant> ], ]? [ <color-stop> [, <color-hint>] ], # <color-stop>
+> );
+
+上述的属性名词解释：
+1. angle: 代表梯度线于水平线的角度，默认是90deg，代表从上往下，如果是*负数则代表从下往上*，一般使用deg作为单位；
+2. to side-or-quadrant: 代表梯度线指向的象限，这里不一定代表是指向所在象限的正中间；
+3. color-stop: 定位色标，代表每个渐变区间的结束颜色值，这里渐变可以是有多段区间范围的，因此需要有对应的色标；
+   - 完整句法： `<color> [ <length> | <percentage> ]?`
+   - 句法解释：在每个颜色值之后可以提供一个位置值，这样子就可以将常规情况下的均匀累进的色标变换调整为自定义的方式
+4. color-hint: 中色点，代表一段渐变区间的中间位置，默认是正中间
+
+对应于如下的实例：
+
+```css
+    .ext { background-image: linear-gradient(purple, gold); }
+    .ext { background-image: linear-gradient(90deg, purple, gold); }
+    .ext { background-image: linear-gradient(to left, purple, gold); }
+    .ext { background-image: linear-gradient(-135deg, purple, gold, navy); }
+    .ext { background-image: linear-gradient(to bottom left, purple, gold, navy); }
+    .ext {
+        // 这里代表从左往右，先是红色，渐变到25px为橙色，然后渐变到50px为黄色，然后渐变到75px为蓝色，然后渐变到100px为绿色，这里的像素值也可以替换为百分比
+        background-image: linear-gradient(90deg, red, orange 25px, yellow 50px, blue 75px, green 100px);
+    }
+    /* 针对color-stop可以有以下的一个应用，形成分段式的背景 */
+    .ext{
+        background-image: linear-gradient(90deg, red 0%, red 25%, orange 25%, orange 50%, yellow 50%, yellow 75%, blue 75%, blue 100%);
+    }
+```
+以下是针对上述的分段式的效果：
+
+![linear-gradient分段式效果](linear-gradient分段式效果.png)
+
+##### 2. radial-gradient
+> 径向渐变的方式来创建图像，径向渐变由中心点来定义，为了创建径向渐变的效果，我们必须设置好两个终止色
+
+**语法：**
+
+> background-image: radial-gradient(shapre, size at position, start-color, ..., last-color);
+
+上述的属性名词解释：
+1. shape: 确定圆的类型：
+   - ellipse(默认)：指定椭圆形的径向渐变；
+   - circle: 指定原型的径向渐变；
+2. size: 定义渐变的大小，可以是以下的值：
+   - farthest-corner(默认): 指定径向渐变的半径长度为从圆心到离圆心最远的角；
+   - closest-side: 指定径向渐变的半径长度为从圆心到离圆心最近的边；
+   - closest-corner: 指定径向渐变的半径长度为从原心到离圆心最近的角；
+   - farthest-side: 指定径向的半径长度为从圆心到离圆心最远的边。
+3. position: 定义渐变的位置
+   - center(默认): 设置中间为径向渐变圆心的纵坐标值；
+   - top: 设置顶部为径向渐变圆心的纵坐标值；
+   - bottom: 设置底部为径向渐变圆心的纵坐标值
+   - start-color, ..., last-color: 用于指定渐变圆心的纵坐标值
+
+##### 3. repeating-linear-gradient与repeating-radial-gradient
+> 用于创建重复线性渐变的背景图像
+
 ![background-image多张图片效果](background-image多张图片效果.png)
 
 ✨ 由此可见，我们通过对应在顺序位置上进行属性的配置，可以达到针对一个元素进行多个背景的同时配置。
