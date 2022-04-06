@@ -29,7 +29,7 @@ cover_picture: css中的background属性封面.jpeg
 | 继承性 | false |
 | 动画性 | false |
 
-`<image>`中的取值范围为：[<uri>|<linear-gradient>|<repeating-linear-gradient>|<radial-gradient>|<repeating-radial-gradient>]
+`<image>`中的取值范围为：`[<uri>|<linear-gradient>|<repeating-linear-gradient>|<radial-gradient>|<repeating-radial-gradient>]`
 
 ⚠️ 这里🈶️一个点需要注意的是：background-image允许接收多个不同的参数，代表这不同的背景，同时需要配合background-position来控制不同的背景元素。如下代码所示：
 ```html
