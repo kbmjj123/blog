@@ -58,7 +58,7 @@ cover_picture: css中的background属性封面.jpeg
 **语法：**
 
 > linear-gradient(
->   [[ <angle> | to <side-or-quadrant> ], ]? [ <color-stop> [, <color-hint>] ], # <color-stop>
+>   `[[ <angle> | to <side-or-quadrant> ], ]? [ <color-stop> [, <color-hint>] ], # <color-stop>`
 > );
 
 上述的属性名词解释：
@@ -124,12 +124,12 @@ cover_picture: css中的background属性封面.jpeg
 
 | 描述 | 描述 |
 |---|---|
-| 取值 | <position> |
+| 取值 | `<position>` |
 | 继承性 | false |
 | 动画性 | false |
 
 `<postion>` 中的取值范围为：
-[left|center|right|top|bottom] | [<percentage>] | [<length>] && [left|center|right|top|bottom] | [<percentage>] | [<length>]
+`[left|center|right|top|bottom] | [<percentage>] | [<length>] && [left|center|right|top|bottom] | [<percentage>] | [<length>]`
 也就是它接收两个参数，分辨指定其x位置还有y位置
 
 ✨ 当它设置为center值的时候，代表着背景图片的中心点与元素的中心点重合
