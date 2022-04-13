@@ -30,8 +30,7 @@ plugins.push(
       }
     },
     canPrint: true
-  }),
-  // new TransfromAssets()
+  })
 )
 
 module.exports = plugins;
