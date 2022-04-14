@@ -87,4 +87,20 @@ API、Loader、Plugin的配合，来深入学习如何使用webpack来打包自�
 
 ![webpack中的chunk依赖](webpack中的chunk依赖.png)
 
+##### manifest与runtime
+> 在使用`webpack`构建的典型应用程序或者站点中，有三种主要的代码类型：
+> 1. 团队所编写的源码；
+> 2. 依赖的第三方的库或者vendor代码
+> 3. webpack的runtime和manifest，管理所有模块的交互
+
+**runtime(chunk加载逻辑以及解析逻辑代码)**
+> runtime以及伴随的manifest数据，主要指的是在浏览器运行过程中，webpack用来连接模块化应用程序所需的所有代码(chunk)，包含有以下几个逻辑动作：
+> 1. 在模块交互时，连接模块所需的加载和解析逻辑；
+> 2. 已经加载到浏览器中的连接模块逻辑
+> 3. 尚未加载模块的待延迟加载逻辑
+
+**manifest(保留的所有chunk的标识符)**
+> 一旦通过浏览器打开*.html的时候，它会自动去加载bundle以及其他的通过依赖来关联的chunk，这些chunk是已经通过打包、压缩、延迟加载等操作的细小的chunk，与源代码中的文件结构已经
+> 完全没有半毛钱关系了，manifest就是管理打包后的chunk与打包前的源代码模块之间的一个关联关系
+
 ### 🤔课题预留：如何根据学习的webpack来优化自己目前的项目
