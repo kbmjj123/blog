@@ -210,4 +210,28 @@ a. `-webkit-line-clamp`: 用来限制在一个*块元素*显示的文本的行�
 b: `-webkit-box`: 必须被👆所结合的属性，将对象作为弹性伸缩盒子模型显示；
 c: `-webkit-box-orient`: 必须被👆结合的属性，设置或检索伸缩盒子对象的自元素的排列方式
 
-2. 
+2. 文字描边，利用阴影来实现的效果，其实也就是使用1px的阴影效果往文字四周添加1px的效果
+```css
+    div{
+      font-size: 40px;
+      color: yellowgreen;
+      text-shadow: -1px 0 black,
+                    0 1px black,
+                    1px 0 black,
+                    0 -1px black;
+    }
+```
+![文字描边效果](文字描边效果.png)
+
+3. 模糊效果，且鼠标移入时高亮，相当于设置一个默认比较低沉的颜色或者透明色，然后再hover的时候设置一个高亮的白色
+```css
+    div{
+        background: #1c1f2b;
+        color: transparent;
+        text-shadow: 0 0 .1rem white, 0 0 .3rem white;
+        transition: .5s;
+    }
+    div:hover{
+        color: white;
+    }
+```
