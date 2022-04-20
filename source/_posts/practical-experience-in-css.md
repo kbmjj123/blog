@@ -88,8 +88,44 @@ cover_picture: css视觉效果经验分析封面.jpeg
 ![box-sizing的不同取值对应效果](box-sizing的不同取值对应效果.png)
 
 + 横向格式化
+> 横向格式化属性有7⃣️个，分别是：
+> margin-left, border-left, padding-left, width, padding-right, border-right, margin-right
+> 这7⃣️个属性影响着块级框的横向布局，而一般地这7⃣️个属性加起来的值要等于*容纳块*的宽度。
+> 这7⃣️个属性中能够使用**auto值**的属性是：width，margin-left和margin-right，其他的属性只能是具体的值，或者是默认的值0
+
+![能够设置为auto值的横向格式化属性](能够设置为auto值的横向格式化属性.png)
+
 + auto的使用
+> 在width、margin-left和margin-right三个属性中，如果将其中一个属性设置为具体的值，那么设置为auto值的那个属性长度要能够满足元素框等于父元素。
+> 举个例子：比如7⃣️个属性加起来的值等于500px，margin-right=100px，margin-left=auto，padding以及border横向值都为0⃣️，width=100px，那么最终得出的结果将会是：margin-left=300px
+
+![margin-left自动计算](margin-left自动计算.png)
+
+✨ 从👆某种意义上来将，`auto`可以用于补全总和所缺的尺寸，但是，🤔如果将这3个属性都设置为auto的话，会是怎样的一个情况呢？？
+![三个属性都是auto的情况](三个属性都是auto的情况.png)
+
+根据上图的效果，如果都是auto的话，那么将会直接与默认的情况一直，也就是为0⃣️，还有另外一种情况，如果3个加起来的值不等于500的话，那么会是怎样的状况呢？
+![三个加起来不等于容纳块的宽度](三个加起来不等于容纳块的宽度.png)
+
+✨ 如果有width=auto，以及其中一个外边距的值为auto的话，那么又会是怎样的一个情况了呢？
+![width以及另外一个边距值为auto](width以及另外一个边距值为auto.png)
+这里设置为auto值的外边距将为0。
+
+🪐 在常规的流动方式下，要想让元素居中布局，一般是采用margin-left=margin-right=同样的宽度，然后中间width采用auto来实现。
+
 + 负外边距(margin < 0)
+**7⃣️个属性中只有margin-left以及margin-right允许设置为负值**，🤔当设置为负数的属性时，发生了什么事情呢？效果图如下：
+![负外边距](负外边距.png)
+
+👆 这里由于margin-right设置为负数，因此它往外跑了50px
+
+⚠️ 就算是设置为负数的外边距，它还是符合最开始所提出来的公式：
+> margin-left + border-left + padding-left + width + padding-right + border-right + margin-right = 容纳块的宽度
+> 对于上述的负数的情况，依然有以下的公式成立：
+> margin-left(100px) + border-left(0) + padding-left(0) + width(450px) + padding-right(0) + border-right(0) + margin-right(-50px) = 容纳块(500px)
+> 👆这里的450px是通过公式反向计算出来的，不信看下图：
+> ![负数外边距的实际测量结果](负数外边距的实际测量结果.png)
+
 + 置换元素
 + 纵向格式化
 + 百分数高度
