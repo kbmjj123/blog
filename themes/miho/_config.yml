@@ -110,8 +110,10 @@ reward:
 # Comments | 评论
 
 # 畅言，输入appid和appkey
-changyan_appid: cyvl74M4O
-changyan_appkey: 721d35beb05a2559bb4a448877fe17b9
+changyan_appid:
+#changyan_appid: cyvl74M4O
+changyan_appkey:
+#changyan_appkey: 721d35beb05a2559bb4a448877fe17b9
 # 友言，输入id
 youyan_id: false
 # disqus
