@@ -124,12 +124,11 @@ cover_picture: 理解不一样的padding-border-margin封面.jpeg
 }
 ```
 
-| 取值 | 代码 | 运行效果 |
-|---|---|---|
-| stretch | `border-image-repeat: stretch` | ![stretch运行结果](stretch运行结果.png) |
-| repeat | `border-image-repeat: repeat` | ![repeat运行结果](repeat运行结果.png) |
-| round | `border-image-repeat: round;` | ![round运行结果](round运行结果.png) |
-| space | `border-image-repeat: space;` | ![space运行结果](space运行结果.png) |
+以下是对应的每个属性的一个运行效果
+![stretch效果](stretch效果.png)
+![repeat效果](repeat效果.png)
+![round效果](round效果.png)
+![space效果](space效果.png)
 
 
 ### 轮廓(outline)
