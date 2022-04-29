@@ -8,7 +8,7 @@
       isHome: <%=is_home()%>,
       share: <%=theme.share%>,
       reward: <%=theme.reward.status%>
-  }
+  };
 </script>
 <%- partial('_partial/sidebar') %>
 <%- js('js/search') %>
@@ -54,7 +54,6 @@
 <% } %>
 
 <% if(theme.open_wife){ %>
-<!--  <%- css('css/wife/flat-ui.min.css') %>-->
   <%- css('css/wife/waifu.css') %>
   <div class="waifu">
       <div class="waifu-tips" style="opacity: 0;">这句一言出处是
@@ -64,7 +63,11 @@
   </div>
   <%- js('js/core/wife/waifu-tips.js') %>
   <%- js('js/core/wife/live2d.js') %>
-  <script type="text/javascript">initModel()</script>
+  <script type="text/javascript">
+    if(!navigator.userAgent.match(/Mobi/i)) {
+			initModel()
+		}
+  </script>
   <%- js('js/mouse') %>
 <% } %>
 
