@@ -224,15 +224,394 @@ cover_picture: flex布局查漏补缺封面.jpeg
 🪐 **当`flex-basis`设置为auto的时候，该弹性元素的基准等于元素在主轴方向上的尺寸，相当于没有设置一样，而如果width设置了长度值的话，那么弹性基准就等于这个width的长度值，而如果width的值也是auto的话，那么
 弹性基准则会回落为`content`**
 
+**使用长度单位的基准：**
+![使用了长度单位的基准计算规则](使用了长度单位的基准计算规则.png)
+
+从👆我们可以得知，在使用了实际长度单位来作为弹性元素的基准的时候，优先以对应的长度单位来作为元素的基准来计算，而不是采用默认的auto以元素的长度单位了！！
+
 ##### 百分数基准
+> `flex-basis`的百分数值相对于弹性容器的主轴尺寸来计算的！！
+
 
 ##### 零基准
+> 如果样式中根本没有`flex-basis`或者`flex`属性，弹性基准默认是**auto**，如果声明了`flex`属性，但是没有设定弹性基准要素，那么弹性基准默认为0⃣️，
+> 从表面上看，零基准貌似与auto基准类似，实际上零基准与auto基准相去甚远！！！
+> **设置为auto时，只有多出来的空间按照比例分配给允许增大的弹性元素**
+> **设置为0⃣️基准时，弹性容器的尺寸根据增长因子按比例分配给各个弹性元素**
+
+![auto与零基准的区别](auto与零基准的区别.png)
 
 #### 合并的flex属性(flex-grow + flex-shrink + flex-basis)
->
 > 🤔为什么建议要使用简写的flex属性，因为如果缩减因子和增长因子各不相同的时候，结果很难以理解的！！！
+> ![flex的组成](flex的组成.jpg)
+
+| flex属性 | 描述 |
+|---|---|
+| 取值 | [<flex-grow> <flex-shrink>? <flex-basis>] / none |
+| 初始值 | 0 1 auto，代表着不拉伸，允许按比例1来缩放，且优先各弹性元素的声明尺寸 |
+| 适用于 | 弹性元素 |
+| 百分数 | 只能是flex-basis的取值，代表相对于弹性容器的主轴尺寸来计算 |
+| 继承性 | 否 |
+
+🪐 `flex`属性允许只写一个值，**flex: 3 === flex: 3 0 0**，此时目标弹性元素具有弹性，也就是可以按照比例因子(3)来增大，而缩减因此减少为0，则不允许缩小，参考基准默认为0⃣️！！！！
+👉 这也就明确解释了我们在平时只会简单的直接使用：flex: 1，而不知道这个过程发生了什么事情，比如有👇的情况：
+![flex=1的过程认识](flex=1的过程认识.png)
+
+👆这里设置了每个弹性元素的`flex: 1`，有👇几个步骤的流程：
+1. 每个元素都是`flex: 1 0 0`;
+2. `flex-basia=0`，代表着每个弹性元素按照统一的一个基准来计算，这个基准是0，则意味着将拿主轴尺寸的100%来分配;
+3. `flex-grow=1`，每个元素根据自身比例因子1来分配弹性容器的剩余空间，👆第二点提及到这里的剩余空间为100%；
+4. `flex-shrink=0`，每个元素在弹性容器不够宽度的时候，不会发生缩减的情况。
 
 #### 主轴上的顺序(order)
+> 默认情况下，所有的弹性元素的顺序都是0，归属于同一个排序体系当中，以出现在源码中的顺序沿着主轴的方向显示，
+> 若想修改弹性元素的视觉顺序，将`order`属性设置为一个非0⃣️整数
 
+| order属性 | 描述 |
+| 取值 | integer |
+| 初始值 | 0 |
+| 适用于 | 弹性元素 |
+| 继承性 | 否 |
+
+![不同的order取值对应的顺序位置](不同的order取值对应的顺序位置.png)
 
 ### 弹性布局实战(模拟筒子展示)
+1. 一饼效果
+![图一效果](图一效果.jpg)
+```html
+<div class="container">
+  <div class="top-container">
+    <img class="one" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+</div>
+```
+```css
+.container{
+  display: flex;
+  border: 1px solid;
+  width: 200px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+}
+img{
+  width: 100px;
+  height: 100px;
+}
+
+```
+2. 二饼效果
+![图二效果](图二效果.jpg)
+```html
+<div class="container">
+    <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+</div>
+```
+```css
+.container{
+  display: flex;
+  border: 1px solid;
+  width: 200px;
+  height: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+img{
+  width: 80px;
+  height: 80px;
+}
+
+```
+3. 三饼效果
+![图三效果](图三效果.jpg)
+```html
+<div class="container">
+    <img class="one" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  <img class="three" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+</div>
+```
+```css
+.container{
+  display: flex;
+  border: 1px solid;
+  width: 200px;
+  height: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+  padding: 12px;
+}
+img{
+  width: 50px;
+  height: 50px;
+}
+.one{
+  align-self: flex-end;
+}
+.three{
+  align-self: flex-start;
+}
+```
+4. 四饼效果
+![图四效果](图四效果.jpg)
+```html
+<div class="container">
+  <div>
+    
+    <img class="one" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    
+    <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    </div>
+  <div>
+    <img class="three" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  <img class="three" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  </div>
+  
+</div>
+```
+```css
+.container{
+  display: flex;
+  border: 1px solid;
+  width: 200px;
+  height: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+  padding: 12px;
+}
+img{
+  width: 50px;
+  height: 50px;
+}
+
+```
+5. 五饼效果
+![图五效果](图五效果.jpg)
+```html
+<div class="container">
+  <div>
+    
+    <img class="one" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    </div>
+  <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  <div>
+    <img class="three" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  <img class="three" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  </div>
+  
+</div>
+```
+```css
+.container{
+  display: flex;
+  border: 1px solid;
+  width: 200px;
+  height: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+  padding: 12px;
+}
+img{
+  width: 50px;
+  height: 50px;
+}
+
+```
+6. 六饼效果
+![图六效果](图六效果.jpg)
+```html
+<div class="container">
+  <div>
+    <img class="one" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  </div>
+  <div>
+    <div>
+        <img class="one" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+        <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    </div>
+  <div>
+    <img class="three" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img class="three" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  </div>
+  </div>
+</div>
+```
+```css
+.container{
+  display: flex;
+  border: 1px solid;
+  width: 200px;
+  height: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 12px;
+}
+img{
+  width: 50px;
+  height: 50px;
+}
+
+```
+7. 七饼效果
+![图七效果](图七效果.jpg)
+```html
+<div class="container">
+  <div class="top-container">
+    <img class="one" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img class="three" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  </div>
+  <div class="bottom-container">
+    <div class="bottom-item-container">
+    
+    <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    </div>
+  
+  <div class="bottom-item-container">
+    <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  <img class="" src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    
+  </div>
+  </div>
+  
+</div>
+```
+```css
+.container{
+  display: flex;
+  border: 1px solid;
+  width: 200px;
+  height: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 12px;
+}
+img{
+  width: 30px;
+  height: 30px;
+}
+.top-container{
+  width: 50%;
+}
+.top-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bottom-container{
+  width: 50%;
+  flex-direction: column;
+}
+.bottom-item-container{
+  display: flex;
+  justify-content: space-around;
+}
+.one{
+  align-self: flex-end;
+}
+.three{
+  align-self: flex-start;
+}
+```
+8. 八饼效果
+![图八效果](图八效果.jpg)
+```html
+<div class="container">
+  <div class="item-container">
+    <img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+	<img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  </div>
+  <div class="item-container">
+    <img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+	<img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  </div>
+ 
+</div>
+```
+```css
+.container{
+  display: flex;
+  border: 1px solid;
+  width: 200px;
+  height: 200px;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+  padding: 12px;
+}
+img{
+  width: 30px;
+  height: 30px;
+  
+}
+.item-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+```
+9. 九饼效果
+![图九效果](图九效果.jpg)
+```html
+<div class="container">
+  <div class="item-container">
+    <img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+	<img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  </div>
+  <div class="item-container">
+    <img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+	<img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  </div>
+  <div class="item-container">
+    <img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+	<img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+    <img src="https://img2.zhidianlife.com/image/2022/05/09/8c8dc36e-dea8-4003-8a7a-edbf785ff352.jpeg">
+  </div>
+</div>
+```
+```css
+.container{
+  display: flex;
+  border: 1px solid;
+  width: 200px;
+  height: 200px;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+  padding: 12px;
+}
+img{
+  width: 30px;
+  height: 30px;
+  
+}
+.item-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+```
