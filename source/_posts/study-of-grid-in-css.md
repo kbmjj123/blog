@@ -176,7 +176,70 @@ cover_picture: 初次见你栅格布局.jpeg
 ![溢出的栅格元素二](溢出的栅格元素二.png)
 
 ##### 根据轨道中的内容适配(fit-content)
+> 除了使用`min-content`以及`max-content`之外，还可以使用`fit-content()`函数以简练的方式表达特定类型的尺寸模式，这个函数的一个伪公式如下：
+> `fit-content(argument) = min(max-content , max(min-content, argument))`
+> 针对👆这个公式的基本意思是：
+> 1. 确定`min-content`与`argument`中的较大值；
+> 2. 然后拿上面的较大值与`max-content`比如，去其中的较小值，作为最终的值的
+
+```html
+<div class="container">
+  <p>
+    asdijoiq qweoijas qoiwe
+  </p>
+  <p>
+    阿斯顿李克强为哦i橘子偶见哦吖司机到is简单阿婆撕破粉底很高
+  </p>
+  <p>
+    起哦为u离开；发的感慨；脸上的肌肤个；卢卡斯简单；法律框架啊是；开发丹丽就是的；可当爽肤水卡解放路口；考拉是否了解到；否；立法局啊是打开链接啊快点睡懒觉阿莱克斯大家阿里将圣诞快乐
+  </p>
+</div>
+```
+```css
+.container{
+  display: grid;
+  grid-template-columns: fit-content(200px) fit-content(260px) fit-content(360px);
+  background: #FFC;
+}
+p{
+  margin: 0;
+  border: 1px solid;
+}
+```
+![fit-content的计算公式套用结果](fit-content的计算公式套用结果.jpg)
 
 ##### 重复的栅格线(repeat函数)
+> 如果我们想要创建的每一个栅格轨道的尺寸是一样的话，或许我们不想一个个地输入尺寸值，这里可以借助于`repeat()`函数，减少一次次的录入
+
+```html
+<div class="container">
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+</div>
+```
+```css
+.container{
+display: grid;
+grid-template-columns: repeat(10, 80px);
+  border: 1px solid;
+}
+p{
+  background: #CCF;
+  margin: 12px;
+}
+```
+![重复的栅格元素](重复的栅格元素.png)
+
+👆这样子我们就创建了10个列轨道，每个轨道的宽度都是80px
+
+✨ 如果我们想要实现一个有规律的循环重复的话，也可以利用`repeat()`函数来
 
 **自动填充的轨道：**
