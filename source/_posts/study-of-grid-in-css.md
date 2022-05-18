@@ -243,3 +243,107 @@ p{
 ✨ 如果我们想要实现一个有规律的循环重复的话，也可以利用`repeat()`函数来
 
 **自动填充的轨道：**
+> 重复简单的模式，直到填满整个栅格容器为止。
+> grid-template-rows: repeat(auto-fill, [top] 5em [bottom]);
+> 👆这里每隔5em放置一条栅格线，直到没有空间为止，比如对于一个限定高度为21em的栅格容器，则上面的代码相当于重复了4x5em的轨道。
+> ⚠️在一个轨道模版中只能有一个自动重复的模式，也就是不能同时有repeat(auto-fill, ...)的情况出现，🈶️且只能🈶️一个；但是，如果是固定的重复模式于自动填充的重复模式结合在一起，是可以的，如下所示：
+> grid-template-columns: repeat(auto-fill, 2em) repeat(3, 4em);
+
+#### 栅格区域(grid-template-area)
+> 前面提及到，栅格区域是由一个或者多个栅格cell组件的**规则**区域
+
+| 栅格区域属性 | 描述 |
+|---|---|
+| 取值 | none / <string> |
+| 初始值 | none |
+| 适用于 | 栅格容器 |
+| 继承性 | 否 |
+
+🤔 在初次遇见整个属性时，觉得也忒奇葩了，基本没有固定的内容，拥有的仅仅是一个带组织结构的布局效果，如下所示：
+```html
+  <div id="grid">
+      <span class="h">我是h</span>
+      <span class="l">我是l</span>
+      <span class="c">我是c</span>
+      <span class="f">我是f</span>
+  </div>
+```
+```css
+    #grid{
+        display: grid;
+        grid-template-areas: 
+        "h h h h"
+        "l c c c"
+        "l f f f";
+    }
+    span{
+      padding: 12px;
+      background: #FFC;
+      border: 1px solid;
+      text-align: center;
+    }
+    .h{
+      grid-area: h;
+    }
+    .l{
+      grid-area: l;
+    }
+    .c{
+      grid-area: c;
+    }
+    .f{
+      grid-area: f;
+    }
+```
+👆代码对应的效果如下：
+![grid-template-area效果](grid-template-area效果.png)
+
+实际在栅格容器中的栅格区域效果如下：
+![栅格容器中的栅格区域](栅格容器中的栅格区域.jpg)
+
+✨ 在栅格容器设定好对应的栅格区域布局之后，需要针对每个跨多个栅格cell的元素进行配置所占领的区域，使用`grid-area`来声明所占据的栅格区域空间，才能够实现上述的效果！！！
+栅格区域的每个栅格cell代表，可以是任意的自定义字符串
+
+⚠️ 对于`grid-template-areas`的值的设置，必须是由一个/多个字符串组成的结果，而且如果组成的栅格区域形状太过于复杂的话，整个栅格区域的值将会变得无效，目前仅支持是**矩形**形状的！！！！
+
+✨ 如果只是想把部分栅格单元定义为栅格区域的一部分，其他的单元不标注其名称，那么可以使用一个或者多个.字符占位，如下所示：
+```css
+    #grid{
+      border: 1px solid red;
+      height: 200px;
+      display: grid;
+      grid-template-areas: 
+        "h h h h" 
+        "l . . ." 
+        "l f f f";
+    }
+```
+![没有名称的栅格单元](没有名称的栅格单元.png)
+👆这里的空白区域的栅格单元不属于任何区域
+
+🪐 定义好栅格容器的布局之后，需要设置容器中每个栅格轨道的尺寸，借助于上面的`grid-template-rows/columns`属性来配合定义
+```html
+  #grid{
+      border: 1px solid red;
+      height: 300px;
+      display: grid;
+      grid-template-areas: 
+        "h h h h" 
+        "l c c c" 
+        "l f f f";
+      grid-template-columns: repeat(4, 200px);
+      grid-template-rows: 80px 1fr 60px;
+      
+    }
+```
+![区域配合栅格线的使用](区域配合栅格线的使用.png)
+
+### 在栅格中附加元素
+
+#### 使用行线和列线
+
+#### 隐式栅格
+
+#### 错误处理
+
+#### 使用区域
