@@ -9,8 +9,10 @@
     "server": "hexo clean && hexo server",
     "oneKeyDeploy": "hexo clean && hexo generate && hexo deploy",
     "githubDeploy": "hexo clean && hexo generate --config _config.yml,github.yml && hexo d --config _config.yml,github.yml",
-    "giteeDeploy": "hexo clean && hexo generate --config _config.yml,gitee.yml && hexo d --config _config.yml,gitee.yml",
-    "selfDeploy": "hexo clean && hexo generate --config _config.yml,self.yml && hexo d --config _config.yml,self.yml",
+    "giteeDeploy": "hexo clean && hexo generate --config _config.yml,gitee.yml && hexo d --config _config.yml,gitee.yml && npm run clean:git-file",
+    "selfDeploy": "hexo clean && hexo generate --config _config.yml,self.yml && hexo d --config _config.yml,self.yml && npm run clean:self-file",
+    "clean:git-file": "rm -rf .deploy_git",
+    "clean:self-file": "rm -rf public",
     "build:diy": "webpack --config diy/build/webpack.config.js",
     "dev:diy": "webpack-dev-server --inline --progress --config diy/build/webpack.config.js"
   },
