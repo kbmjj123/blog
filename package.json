@@ -8,7 +8,7 @@
     "deploy": "hexo deploy",
     "server": "hexo clean && hexo server",
     "oneKeyDeploy": "hexo clean && hexo generate && hexo deploy",
-    "githubDeploy": "hexo clean && hexo generate --config _config.yml,github.yml && hexo d --config _config.yml,github.yml",
+    "githubDeploy": "hexo clean && hexo generate --config _config.yml,github.yml && hexo d --config _config.yml,github.yml && npm run clean:git-file",
     "giteeDeploy": "hexo clean && hexo generate --config _config.yml,gitee.yml && hexo d --config _config.yml,gitee.yml && npm run clean:git-file",
     "selfDeploy": "hexo clean && hexo generate --config _config.yml,self.yml && hexo d --config _config.yml,self.yml && npm run clean:self-file",
     "clean:git-file": "rm -rf .deploy_git",
