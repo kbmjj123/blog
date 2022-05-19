@@ -43,13 +43,13 @@ cover_picture: 初次见你栅格布局.jpeg
 
 | 栅格线属性(grid-template-rows/columns) | 描述 |
 |---|---|
-| 取值 | <track-list> / <auto-track-list> |
+| 取值 | `<track-list>` / `<auto-track-list>` |
 | 初始值 | none |
 | 适用于 | 栅格容器 |
 | 百分数 | 百分数值相对于对应的栅格容器行/列内轴尺寸来计算 |
 | 继承性 | 否 |
 
-✨ <track-list>与<auto-track-list>的句法十分复杂，而且可以嵌套很多层
+✨ `<track-list>`与`<auto-track-list>`的句法十分复杂，而且可以嵌套很多层
 
 ✨ 栅格线可以使用数字来引用，也可以为其命名，一条栅格线可以有多个不同的名字，可以使用其中一个名字来使用，在实际的运用过程中，尽量是使用不重复的名字来作为栅格线的引用，如下图所示：
 ![栅格线的编号与命名](栅格线的编号与命名.jpg)
@@ -254,7 +254,7 @@ p{
 
 | 栅格区域属性 | 描述 |
 |---|---|
-| 取值 | none / <string> |
+| 取值 | none / `<string>` |
 | 初始值 | none |
 | 适用于 | 栅格容器 |
 | 继承性 | 否 |
@@ -338,9 +338,192 @@ p{
 ```
 ![区域配合栅格线的使用](区域配合栅格线的使用.png)
 
-### 在栅格中附加元素
+✨ 一般情况下，如果没有特殊的长度限定，设置的栅格区域会填充整个栅格容器，如果栅格区域比栅格容器要小，则会根据情况额外新增多至少一条栅格线
 
-#### 使用行线和列线
+👉 现在具名栅格区域所创建的行和列🈶️了轨道尺寸了，如果提供的轨道尺寸数量比区域轨道的数量要多，那么多出来的轨道将放在具名区域之后，如下代码所示：
+```html
+  <div class="grid">
+      <header class="header">header</header>
+      <nav class="left">left</nav>
+      <nav class="right">right</nav>
+      <section class="footer">footer</section>
+    </div>
+```
+```css
+    .grid{
+      display: grid;
+      grid-template-areas: 
+        "header header header header"
+        "left ... ... right"
+        "footer footer footer footer";
+      border: 1px solid red;
+      background: #FFC;
+      padding: 2px;
+      grid-template-rows: 40px 10em 3em 20px;
+      grid-template-columns: 1fr 20em 1fr 1fr 1fr;
+    }
+    .header{
+      grid-area: header;
+      text-align: center;
+      border: 1px solid;
+    }
+    .left{
+      grid-area: left;
+      border: 1px solid;
+      text-align: center;
+    }
+    .right{
+      grid-area: right;
+      border: 1px solid;
+      text-align: center;
+    }
+    .footer{
+      grid-area: footer;
+      text-align: center;
+      border: 1px solid;
+    }
+```
+![栅格容器轨道多于栅格区域.png](栅格容器轨道多于栅格区域.png)
+
+✨ 在使用栅格区域的时候，其实已经对应地生成栅格线的名字了，比如👆这里的栅格区域，划分为了header、left、right、footer4个区域，
+比如header，header区域的行起边以及列起边都叫做`header-start`，header区域的行终边与列终边都叫做`header-end`，而footer也是类似，栅格线都是直接穿过整个栅格区域的，如下图所示：
+![栅格区域中自动命名的栅格线](栅格区域中自动命名的栅格线.png)
+👆这里这种机制，我们称之为`栅格线的隐式命名`
+
+### 在栅格中附加元素
+> 👆花了这么庞大的篇幅来讲解整个栅格容器、栅格线，目前是为了后续方便的附加栅格元素来做铺垫的，只有清楚了解了关于栅格容器中栅格线的配置与其在容器中的分布规则，才可以根据整个栅格线来附加栅格元素！！
+
+#### 使用行线和列线(grid-row-start/end，grid-column-start/end)
+> 我想把元素的边界附加在某条栅格线上，通过这种方式将元素附加在行线与列线上
+
+| 行/列线属性 | 描述 |
+|---|---|
+| 取值 | auto / `<custom-ident>` / `[<integer> && <custom-ident>]` / `[span && [<integer> && <custom-ident>]]` |
+| 初始值 | auto |
+| 适用于 | 栅格元素和绝对定位的元素(前提是容纳块为栅格容器) |
+| 继承性 | 否 |
+
+🤔第一次看见这个属性的描述，真的是万脸懵逼，直接上代码，方便理解：
+```html
+<div class="grid">
+  <div class="one">
+    one
+  </div>
+  <div class="two">
+    two
+  </div>
+  <div class="three">
+    three
+  </div>
+</div>
+```
+```css
+.grid{
+  display: inline-grid;
+  border: 1px solid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(5, 40px);
+}
+.one{
+  background: #FFC;
+  text-align: center;
+  border: 2px solid;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+.two{
+  background: #FCC;
+  text-align: center;
+  border: 2px solid;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  grid-column-start: 5;
+  grid-column-end: 10;
+}
+.three{
+  background: #CFC;
+  text-align: center;
+  border: 2px solid;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  grid-column-start: 6;
+  grid-column-end: 7;
+}
+```
+![将栅格元素附加到栅格线上](将栅格元素附加到栅格线上.png)
+👆这里通过设置行线与列线的起边与终边，将元素**附加**到栅格线上，通过栅格线的编号指明元素应该放在栅格容器中的什么位置，编号从左到右、从上到下、从1开始逐渐增加。
+
+⚠️ **如果省略结束栅格线，那么结束栅格线使用序列中的下一条栅格线**。
+
+🤔这里为什么要叫附加呢？原因是原本通过栅格容器的容器布局与栅格区域的设定，已经是将
+栅格容器给划分为不同的区域的了，那么再通过👆这种方式是额外地追加元素到栅格容器中的，并且追加的元素，将会以挤压其他栅格单元的方式，展示在栅格容器中，被挤压的栅格单元则被自动往后排！！！
+![附加与普通栅格元素的效果](附加与普通栅格元素的效果.png)
+
+🪐 此外，还可以使用另外一种表达方式来表示附加的元素，将结束值改为**span 1**，或者只使用**span**
+```css
+.one{
+    grid-row-start: 4; 
+    grid-row-end: span 1;
+    grid-column-start: 5;
+    grid-column-end: span;
+}
+```
+👆这里如果span后面有数字的话，意思是**跨指定数目的栅格轨道**
+
+关于属性值*span*的使用，可以在start也可以在end使用，**向确定了编号的栅格线的反方向计数**，有以下两种具体的行为：
+1. 如果确定了开始栅格线，将结束值设定为span，则向栅格线的结束方向计数；
+2. 如果确定了结束栅格线，将开始值设置为span，则向栅格线的开始方向计数；
+
+🪐 在指定栅格线的位置的时候，正数代表是从栅格线编号递增的方向上数，而负数则代表的是从后往前数，比如说，想要将一个元素放在栅格右下角那个栅格单元中，而不用去管这个栅格容器中有
+多少行多少列，可以直接是按照下面的定义：
+```css
+.four{
+  background: #FCF;
+  text-align: center;
+  border: 2px solid;
+  grid-row-start: -1;
+  grid-column-start: -1;
+}
+```
+![固定在右下角的附加栅格元素](固定在右下角的附加栅格元素.png)
+⚠️ 而且使用了-1作为行线以及列线的值的时候，将会从原本的栅格轨道中往外怼出另外的一个栅格轨道出来，根据其自身的内容进行填充
+
+🪐 **与自定义名称的栅格线的配合使用:**
+如果我们在栅格容器中使用了自定义名称来定义栅格线的话，那么与行线/列线的配合使用，可以达到不一样的效果，如下所示：
+```css
+.grid{
+  display: inline-grid;
+  border: 1px solid;
+  grid-template-columns: 2em repeat(8, [col-a] 40px [col-b] 40px) 2em;
+  grid-template-rows: repeat(5, [R] 40px);
+}
+nav{
+  border: 1px dashed;
+  text-align: center;
+}
+.four{
+  background: #FCF;
+  text-align: center;
+  border: 2px solid;
+  grid-row-start: R 3;
+  grid-column-start: col-b 6;
+}
+```
+![自定义栅格线名称与行线列线的配合](自定义栅格线名称与行线列线的配合.png)
+针对上述的代码以及运行结果做一个分析：
+1. 首先，设置栅格容器的行列栅格线分布，从而来确定其基础的效果；
+2. 其次，利用行/列线的值来进行定义，确定元素从哪一条行线、列表开始分布;
+3. 然后，利用span属性值来限定该附件的元素应该横跨多少个栅格单元；
+
+⚠️ 这里由于栅格容器设置的重复的栅格线的属性为`repeat(8, [col-a] 40px [col-b] 40px)`，这意味着里面由8组col-a + col-b所组成的16个轨道，然后配合span来定义横跨多少个col-a轨道组
+![横跨多个自定义的区域](横跨多个自定义的区域.png)
+
+🪐 这里再联合之前所学习到的栅格区域的配置，由于配置后所形成的自动栅格线的关系，可以直接从生成后的栅格线名称(*-start/end)来直接使用
+
+#### 行线与列线的简写属性(grid-row/column)
+
 
 #### 隐式栅格
 
