@@ -523,14 +523,93 @@ nav{
 🪐 这里再联合之前所学习到的栅格区域的配置，由于配置后所形成的自动栅格线的关系，可以直接从生成后的栅格线名称(*-start/end)来直接使用
 
 #### 行线与列线的简写属性(grid-row/column)
-> grid-row-start、grid-row-end的简写属性grid-row代表的是：grid-row-start/grid-row-end的机制
+> grid-row-start、grid-row-end的简写属性grid-row代表的是：grid-row-start/grid-row-end的机制，
+> 前一部分定义的是开始的栅格线，后一部分定义的是结束栅格线。
+
+⚠️ 如果值中没有/，只有一个值的话，那么定义的是开始栅格线，结束栅格线取决于开始栅格线的值，如果栅格线是用名称来引用的话，那么结束的栅格线也是用这个名称来引用，也就是：
+`grid-column: col;` === `grid-column: col / col;`
+代表的啥意思呢？👉栅格线将从指定的名称的栅格线开始一直延伸到下一条同名栅格线，不管中间有多少栅格单元！！！👉这也同时说明了在使用栅格区域的时候，可以使用同一个名称来表示行线以及列线，表示这个栅格单元区域！！！
+
+✨ 如果只提供了一个数字，那么第二个数字则被设置为`auto`，也就是：
+`grid-column: 1;` === `grid-column: 1 / auto;`
+
+```html
+<div id="grid">
+  <div id="header">
+    header
+  </div>
+  <div id="footer">
+    footer
+  </div>
+  <div id="sidebar">
+    sidebar
+  </div>
+  <div id="content">
+    content
+  </div>
+  <div id="custom">
+    自定义块
+  </div>
+</div>
+```
+```css
+#grid{
+  height: 200px;
+  border: 1px solid;
+  display: grid;
+  grid-template-areas: 
+    "header header"
+    "sidebar content"
+    "footer footer"
+    ;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 25% 75%;
+}
+#header{
+  grid-row: header;
+  grid-column: header;
+  text-align: center;
+  background: #FFC;
+}
+#footer{
+  grid-row: footer;
+  grid-column: footer-start / footer-end;
+  text-align: center;
+  background: #CFC;
+}
+#sidebar{
+  text-align: center;
+  background: #FCF;
+  grid-row: sidebar;
+  grid-column: sidebar;
+}
+#content{
+  grid-row: content;
+  grid-column: content;
+  background: #CCF;
+}
+#custom{
+  background: #DDA;
+  grid-row: 1;
+  grid-column: 1;
+}
+```
+![简写的行线与列线的使用](简写的行线与列线的使用.png)
+👆这里有一个情况需要注意一下，就是通过行线+列线来附件元素的时候，有可能会导致附件的元素发生重叠现象，比如👆上面的*自定义块*，它将盖住*header*，挡在其上面
 
 👉**最佳实践：**
 不要使用相同的名称命名栅格区域和栅格线，有些情况下可能不会受到这一问题的影响，但是最好始终把线和区域的名称分开，以免导致命名解析冲突！！
 
 #### 隐式栅格
+> 一般情况下，我们所定义的栅格都是显示定义的，也就是通过`grid-template-rows/columns`来定义行与列的，以及显示地将元素附加到栅格线上的。
+> 🤔假如栅格元素超出了显示定义的栅格容器的话，会出现一个怎样的情况呢？
+
+![隐式创建的栅格线以及生成的栅格轨道](隐式创建的栅格线以及生成的栅格轨道.jpg)
+
+🪐 从上面👆我们可以看出，当栅格元素单元超过栅格容器的高度/宽度的时候，将会自动的创建栅格容器的额外的栅格线，而且如果没有定义它**流出部分**的宽度以及高度(grid-auto-rows以及grid-auto-columns)的话，它将会根据自身的内容进行适当性的流出！！！！
 
 #### 错误处理
+
 
 #### 使用区域(grid-area)
 > 把元素指定给定义好的栅格区域，一般是配合栅格区域(grid-template-areas)来使用的，先在定义好栅格区域，然后再通过区域的赋予(grid-area)属性，将栅格单元赋予到对应的区域上
