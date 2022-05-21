@@ -768,11 +768,39 @@ nav{
 
 ### 释放栅格空间
 > 目前缩减的栅格元素大都挤在一起的，元素与元素之间并没有间隔，🤔如果想要拥有间隔在不同的元素之间的话，应当如何处理呢？
-> 一般的又👇下面集中方式
+> 一般的又👇下面几种方式:
 
 #### 栏距(gap)
+> 栏距(gutter)是两个栅格轨道之间的间隔，好像把轨道之间的栅格先加粗，让它具有一定的宽度，这有点类似于表格样式中的`border-spacing`，
+> 一方面栏距能在栅格单元之间添加间隔，另一方面，一个轴上只能设置一个间隔值
+
+| grid-row/column-gap属性 | 描述 |
+|---|---|
+| 取值 | `<length>` |
+| 初始值 | 0 |
+| 适用于 | 栅格容器 |
+| 继承性 | 否 |
+
+⚠️ 这里的取值说明这两个值只能是一个长度值，而且是必须大于0⃣️的，使用了该属性之后的栅格元素，每一行/列都向后移对应长度。
+
+```css
+#grid{
+  display: grid;
+  grid-template-rows: 80px 80px 80px;
+  grid-template-columns: 80px 80px;
+  grid-auto-flow: row;
+  grid-auto-rows: 80px;
+  grid-auto-columns: 80px;
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+}
+```
+![设置了栅格栏距的栅格容器](设置了栅格栏距的栅格容器.png)
+
+✨ 简写的栏距(`grid-gap = grid-row-gap grid-column-gap`)
 
 #### 与盒模型的配合
+
 
 #### 复用弹性盒子的对齐方式
 
