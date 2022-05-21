@@ -608,8 +608,172 @@ nav{
 
 🪐 从上面👆我们可以看出，当栅格元素单元超过栅格容器的高度/宽度的时候，将会自动的创建栅格容器的额外的栅格线，而且如果没有定义它**流出部分**的宽度以及高度(grid-auto-rows以及grid-auto-columns)的话，它将会根据自身的内容进行适当性的流出！！！！
 
-#### 错误处理
-
+#### grid-row/column-start/end的错误处理
+> 当我们编写的属性不小心写错的时候，它也提供了一些错误处理机制供给我们：
+> 1. 比如grid-row-start与grid-row-end不小心写反了，那么它将会自动对调两个值；
+> 2. 如果grid-row-start与grid-row-end的声明为span跨度，那么结束线的跨度将被放弃，替换为auto，而开始线则相当于span 1
 
 #### 使用区域(grid-area)
-> 把元素指定给定义好的栅格区域，一般是配合栅格区域(grid-template-areas)来使用的，先在定义好栅格区域，然后再通过区域的赋予(grid-area)属性，将栅格单元赋予到对应的区域上
+> 使用行线与列线可以附件元素到某条栅格线上，但有更加方便的机制，直接是把元素指定给定义好的栅格区域，
+> 一般是配合栅格区域(grid-template-areas)来使用的，先在定义好栅格区域，然后再通过区域的赋予(grid-area)属性，将栅格单元赋予到对应的区域上
+
+| grid-area属性 | 描述 |
+|---|---|
+| 取值 | `<grid-line>[<grid-line>]{0, 3}` |
+| 初始值 | - |
+| 适用于 | 栅格元素和绝对定位的元素(在栅格容器中) |
+| 继承性 | 否 |
+
+根据它的一个使用情况，个人将其分为以下两种方式的配置：
+
+##### 仅用一个"区域单词"来🈯️定某个区域
+```html
+<div id="grid">
+  <div id="masthead">
+    masthead
+  </div>
+  <div id="sidebar">
+    sidebar
+  </div>
+  <div id="main">
+    main
+  </div>
+  <div id="navbar">
+    navbar
+  </div>
+  <div id="footer">
+    footer
+  </div>
+</div>
+```
+```css
+#grid{
+  display: grid;
+  grid-template-areas: 
+    "masthead masthead masthead masthead"
+    "sidebar main main navbar"
+    "sidebar footer footer footer"
+    ;
+}
+#grid > div{
+  border: 2px solid;
+  text-align: center;
+  padding: 20px;
+}
+#masthead{
+  grid-area: masthead;
+}
+#sidebar{
+  grid-area: sidebar;
+}
+#main{
+  grid-area: main;
+}
+#navbar{
+  grid-area: navbar;
+}
+#footer{
+  grid-area: footer;
+}
+```
+![声明各个区域的栅格布局](声明各个区域的栅格布局.png)
+
+上面👆这里简单的通过`grid-area`属性直接🈯️定栅格区域中的某个块，可以快捷的指定某个区域的对应关系
+
+##### 利用4条栅格线来🈯️某个区域
+✨ 除了用一个"区域单词"来指定之后，还可以使用栅格线来🈯️定
+```css
+#grid{
+  display: grid;
+  grid-template-rows: [r1-start] 1fr [r1-end r2-start] 2fr [r2-end];
+  grid-template-columns: [c1-start] 1fr [c1-end c2-start] 1fr [c2-end];
+}
+#grid > div{
+  border: 2px solid;
+  text-align: center;
+  padding: 20px;
+}
+#one{
+  grid-area: r1-start / c2-start / r1-end / c2-end;
+  background: #FFC;
+}
+#two{
+  grid-area: r1-start / c1-start / r1-end / c1-end;
+  background: #CCF;
+}
+#three{
+  grid-area: 2 / 1 / 3 / 3;
+  background: #CFC
+}
+
+```
+![直接声明区域的4条栅格线](直接声明区域的4条栅格线.png)
+
+上面👆用了4条栅格线来指定某个栅格区域的方式，这里需要⚠️注意这里4条栅格线的一个顺序，与盒子模型的属性相反方向的，遵循
+> `上 -> 左 -> 下 -> 右`
+> 也就是对应于：
+> `grid-row-start -> grid-column-start -> grid-row-end -> grid-column-end`
+
+🪐⚠️ 这里如果提供的值少于4个，那么它将会按照与*盒子模型*️类似的替换规则方式：
+1. 如果只有3个值，那么最后一个`grid-column-end`则与`grid-column-start`的取值一致；
+2. 如果只有两个值，那么`grid-row-end`与`grid-row-start`一致，`grid-column-end`与`grid-column-start`一致；
+3. 如果只有1个值，那么则代表另外3个值都复制了提供的这个值，**这里也就说明了如果只配置了一个值的时候，它会直接拿`grid-template-areas`区域中的区域来指定**。
+
+
+#### 栅格元素重叠
+> 一般情况下，我们在使用栅格布局的时候都尽量避免重叠，然后，在实际使用的过程中，如果没有注意，是有可能导致栅格元素的重叠的
+> 比如上面的🌰中，我们将第二栅格元素的结束列线设置为与第一个的一致的时候，将会导致其产生一个重叠的效果，如下图所示：
+
+![重叠的栅格元素](重叠的栅格元素.jpg)
+
+### 栅格流(grid-auto-flow)
+> 上面👆已提及到的所有的场景以及例子，除了测试用做为效果展示的元素之外，其他的栅格元素基本上都已经是确定🈯️定了自身在栅格容器中的位置，🤔那么如果没有明确🈯定的节点元素，它们是如何摆放的呢？
+> 根据上面的🌰我们可以看出，没有明确🈯️定的元素，将会在默认的栅格流的作用下，按照**顺序**一个一个地放入到栅格容器中，但实际的情况，有可能比较复杂，下面👇就一一道来！！
+
+| grid-auto-flow属性 | 描述 |
+|----|----|
+| 取值 | `[row / column] / dense` |
+| 初始值 | row |
+| 适用于 | 栅格容器 |
+| 继承性 | 否 |
+
+✨ 栅格流主要分为两种模式：
+1. 行优先/列优先(row/column)
+2. 密集流(dense)
+
+👇下面针对这两种模式来进行一个对比分析，从而来理解其用法：
+
+![不同栅格流模式对比](不同栅格流模式对比.png)
+
+🤔针对栅格流模式，特别是关于密集型模式下，可以实现一个自定义的栅格画廊效果，将这个计算出每个栅格所需要占据的尺寸，然后进行一个无规则栅格效果的展示
+
+### 自动增加的栅格线(grid-auto-rows/columns)
+> 前面我们也已经提及到，如果栅格元素的**尺寸或者数量**超过原本定义的栅格容器，那么将会在原本的栅格容器中自动创建隐式栅格线，而且，这里如果创建出来的栅格线在没有定义其隐式轨道的尺寸的话，将根据元素自身的内容进行创建以及延伸，
+> 听起来🈶️些许抽象，这里同样也是以对比的方式来罗列出来
+
+| 自动增加的栅格线属性 | 描述 |
+|---|---|
+| 取值 | `<track-breadth> / minmax(<track-breadth>, <track-breadth>)` |
+| 初始值 | auto |
+| 适用于 | 栅格容器 |
+| 计算值 | 取决于具体的栅格轨道尺寸 |
+| 备注 | `<track-breadth>`🈯️的是`length / percentage / flex / min-content / max-content / auto` |
+
+✨ 关于取值的范围看起来🈶️些许抽象，这里同样也是以对比的方式来罗列出来
+
+![声明了隐式轨道尺寸的对比](声明了隐式轨道尺寸的对比.png)
+
+
+### grid简写属性
+
+### 释放栅格空间
+> 目前缩减的栅格元素大都挤在一起的，元素与元素之间并没有间隔，🤔如果想要拥有间隔在不同的元素之间的话，应当如何处理呢？
+> 一般的又👇下面集中方式
+
+#### 栏距(gap)
+
+#### 与盒模型的配合
+
+#### 复用弹性盒子的对齐方式
+
+#### 分层与排序
