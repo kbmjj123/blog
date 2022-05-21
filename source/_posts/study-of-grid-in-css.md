@@ -841,6 +841,8 @@ nav{
 | 取值 | left / right / start / end / center / stretch / `[space-between / space-around / space-evenly]` |
 | 备注 | `[space-between / space-around / space-evenly]`这个仅针对`justify-content`以及`align-content`有效 |
 
+![栅格布局中的弹性属性取值](栅格布局中的弹性属性取值.png)
+
 1. justify-self的使用
 💎用法：作用于单个栅格元素，仅针对单个栅格单元中的内容有效
 ```html
