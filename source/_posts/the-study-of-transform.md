@@ -36,7 +36,7 @@ cover_picture: css变形学习封面.jpeg
 5. 变形仅针对自身所在的坐标轴来言(比如旋转了，其坐标轴也跟着旋转，后续的其他变形操作将在此操作的基础坐标轴上变形)
 
 #### 无效的变形函数
-> 如果我们
+> 如果我们在使用变形函数的时候，不小心写错了单位(比如旋转的角度)的话，那么整个变形将完全无效，跟没有设置之前完全一致！！！
 
 #### 按照一定的顺序变形函数
 > 不同的单个变形函数的先后顺序，有可能会导致不同的变形结果
@@ -85,3 +85,33 @@ cover_picture: css变形学习封面.jpeg
 
 
 
+### 变形函数一览
+
+| 平移 | 缩放 | 旋转 | 偏移 | 其他 |
+|---|---|---|---|---|
+| translate() | scale() | rotate() | skew() | matrix() |
+| translateX() | scaleX() | rotateX() | skewX() | matrix3d() |
+| translateY() | scaleY() | rotateY() | skewY() | perspective() |
+| translateZ() | scaleZ() | rotateZ() | - | - |
+
+#### 平移变形(translate、translateX、translateY、translateZ)
+> 平移变形🈯️的是沿着一个轴或者多个轴进行移动，可接收`length/percentage`类型的数据，一般我们使用`translate()`函数指的是在2d维度下的平移变形，如果这个时候省略了第二个值的话，就相当于是使用了`translateX`。
+> 而使用的`translateZ`则是控制元素往z轴方向上的变形，并且需要⚠️一个点：**translateZ不允许接收带单位的长度值，并且translate3d必须要完全传递3个参数，否则就当作是一个失败的变形动作**
+> 以下图是对应的三个轴方向上的一个平移过程拆解
+> ![translate3d的过程](translate3d的过程.jpg)
+
+#### 缩放函数(scale、scaleX、scaleY、scaleZ)
+
+#### 旋转函数(rotate、rotateX、rotateY、rotateZ)
+✨名词解析：向量，在数学中，向量也称为欧几里得向量、几何向量、矢量，🈯️的是具有大小和方向的量，它可以形象化地表示为带箭头的线段，箭头所指的方向代表向量的方向。
+
+
+#### 倾斜函数(skew、skewX、skewY)
+
+#### 视域函数(perspective)
+
+### 辅助变形属性
+
+#### 移动原点(transform-origin)
+
+#### 选择3D变形方式(transform-style)
