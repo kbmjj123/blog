@@ -94,9 +94,14 @@ exclude: null
 ignore: null
 theme: miho
 icp: 粤ICP备14102113号
-url: https://kbmjj123.github.io/hexo-blog/
+url: https://www.91temaichang.com
 deploy:
-  type: git
-  repo: git@github.com:kbmjj123/hexo-blog.git
+  type: sftp
+  repo: https://github.com/kbmjj123/hexo-blog.git
   branch: main
-  token: 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
+  host: 175.178.180.62
+  user: zhenggl
+  pass: zgl3843386
+  remotePath: /usr/local/nginx/html/blog
+  port: 22
+root: /

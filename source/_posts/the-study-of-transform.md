@@ -209,3 +209,55 @@ cover_picture: css变形学习封面.jpeg
 | 继承性 | 否 |
 
 ![不同变形结果样式的对比](不同变形结果样式的对比.png)
+
+#### 背面处理(backface-visibility)
+> 决定元素的背面在朝向我们的时候，是否要渲染背面
+
+| backface-visibility属性 | 描述 |
+|---|---|
+| 取值 | visible/hidden |
+| 初始值 | visible |
+| 继承性 | 否 |
+| 动画性 | 无 |
+
+```html
+<div class="section">
+  <img src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/84827/39/28981/357192/629486a3Ef7aaba33/bf987411a07f7056.jpg">
+  <div class="back">
+    我是背面的内容
+  </div>
+</div>
+```
+```css
+.section{
+  position: relative;
+  transition: ease 1s;
+  width: 200px;
+}
+.back, img{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.back{
+  position: absolute;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  background: rgba(255, 255, 255, 0.85);
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+img{
+  width: 200px;
+}
+.section:hover{
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+}
+```
+![backface-visibility属性的应用效果](backface-visibility属性的应用效果.png)
