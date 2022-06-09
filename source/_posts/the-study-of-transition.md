@@ -8,7 +8,7 @@ categories:
 tags:
     - css
     - transition
-cover_picture: css过渡封面
+cover_picture: css过渡封面.jpeg
 ---
 
 ### 前言
