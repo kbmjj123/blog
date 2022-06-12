@@ -452,5 +452,44 @@ div{
 | backwards | 0%或者from对应的属性值将在动画应用到元素的那一刻就作用，这里可以理解为替换元素的默认属性值，而无需等待`animation-delay`来控制 |
 | both | both则同时具备`forwards`与`backwards`两者的效果，也就是一旦使用该值，则动画前与动画后都直接使用动画的from/to的值(相对的) |
 
-
 ### 动画简写(animation)
+> animation简写属性，无需分别定义8个属性，在一行声明中就能为元素定义全部动画属性，animation属性的值是一个列表，以空格分隔，
+> 分别对应于各个单独属性，如果需要在元素上应用多个动画，则在列出的各个动画之间加上逗号即可。
+
+![animation的组成](animation的组成.png)
+
+| animation属性 | 描述 |
+|---|---|
+| 取值 | 见上图 |
+| 初始值 | 0s ease 0s 1 normal none running none |
+| 适用于 | 所有元素以及伪元素 |
+| 继承性 | 否 |
+
+🤔 对于简写属性中这么多的8个属性，要一个个去记住，并且按照顺序来编写，个人觉得是有点不大现实的，好在它提供了一个机制：
+**对于未编写出来的属性，则采用默认的值**，这个非常方便，比如我们有以下的一个编写方式：
+```css
+@keyframes xxx{}
+div{
+    animation: xxx 2s;
+}
+```
+上面👆这里则代表的是
+```css
+div{
+    animation-name: xxx;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: none;
+    animation-play-state: running;
+}
+```
+
+⚠️ 关于简写属性有两个需要注意的地方：
+1. 其中有两个时间属性(animation-duration 以及 animation-delay)，如果只定义了1个属性，则表示只定义了duration，而delay为0s；
+2. 假如不小心将animation-name定义为与某个属性值一样(实际编码上🈲️止这么定义)，那么animation-name放到最后。
+
+✨ 综上所述，使用`animation`简写属性是个很不错的主意，但是需要记住的是：**持续时间、延迟时间和动画名称的位置很重要，而省略的值将会被设置为默认值，永远别使用关键词来作为动画的标识符！！！**
+
