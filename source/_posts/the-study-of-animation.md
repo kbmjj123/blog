@@ -493,3 +493,90 @@ div{
 
 ✨ 综上所述，使用`animation`简写属性是个很不错的主意，但是需要记住的是：**持续时间、延迟时间和动画名称的位置很重要，而省略的值将会被设置为默认值，永远别使用关键词来作为动画的标识符！！！**
 
+### 自由落体的⚽️
+```css
+.container{
+  height: 200px;
+}
+.ball{
+  width: 100px;
+  height: 100px;
+  background-color: #CFC;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 72px;
+  padding: 0;
+  margin: 0;
+  animation-name: fall;
+  animation-duration: 3s; 
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both; 
+}
+
+@keyframes fall{
+  0%{
+    transform: translateY(0px) rotateZ(0deg);
+    animation-timing-function: ease-in;
+  }
+  25%{
+    transform: translateY(20px) rotateZ(80deg);
+    animation-timing-function: ease-in; 
+  }
+  50%{
+    transform: translateY(60px) rotateZ(100deg);
+    animation-timing-function: ease-in;
+  }
+  75%{
+    transform: translateY(120px) rotateZ(120deg);
+    animation-timing-function: ease-in;
+  }
+  95%{
+    transform: translateY(160px) rotateZ(200deg);
+    animation-timing-function: ease-in;
+  }
+  12.5%, 35%, 65%, 94%{
+    transform: translateY(180px) rotateZ(180deg);
+    animation-timing-function: ease-out;
+  }
+  100%{
+    transform: translateY(180px) rotateZ(230deg); 
+    animation-timing-function: ease-out;
+  }
+} 
+@keyframes hit{
+  0%{
+    transform: rotateX(0deg);
+  }
+  99%{
+    transform: rotateX(0deg);
+  }
+  100%{
+    transform: rotateX(70deg);
+  }
+}
+.sharower{
+  width: 100px;
+  height: 100px;
+  background-color: #999999;
+  box-shadow: 0px 50px 50px #888888;
+  border-radius: 50px;
+  transform: rotateX(70deg);
+  animation-name: sharower;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in;
+}
+@keyframes sharower{
+  from{
+    transform: rotateX(70deg) scaleX(0.5);
+    opacity: 0.1;
+  }
+  to{
+    transform: rotateX(70deg) scaleX(1);
+    opacity: 1;
+  }
+}
+```
+![自由落体球的效果](自由落体球的效果.gif)
