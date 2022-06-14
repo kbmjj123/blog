@@ -80,7 +80,7 @@ cover_picture: 如何利用gitbook来编写自己的网络书籍.jpeg
 | plugins | 要加载的插件列表，默认插件有：fontsettings、highlight、livereload、lunr、search、sharing |
 | pluginsConfig | 插件的配置 |
 
-✨ 去处自带的插件，可以在插件名称前面加`-`
+✨  去除自带的插件，可以在插件名称前面加`-`
 ```json
   {
       "plugins": [
@@ -110,7 +110,7 @@ cover_picture: 如何利用gitbook来编写自己的网络书籍.jpeg
 4. copy-code-button: 代码块复制按钮
 5. todo: 添加待办事项
 6. insert-logo: 将logo插入到导航栏的上方中
-7. search-pro: 高级搜索(支持中文)
+7. search-pro: 高级搜索(支持中文，需要将原本的lunr、search去掉)
 8. advanced-emoji: 支持emoji表情
 9. shareing-plus: 分享当前页面，比默认的sharing插件多了一些分享方式
 10. page-copyright: 页面页脚版权(内容比较多，具体看对应的配置)
@@ -121,7 +121,8 @@ cover_picture: 如何利用gitbook来编写自己的网络书籍.jpeg
 15. pageview-count: 阅读量计数
 16. auto-scroll-table: 表格滚动条
 17. popup: 弹出大图
-18. custom-favicon: 修改标题栏图标
+18. custom-favicon: 修改标题栏图标(采用绝对路径引用本地资源)
+19. anchor-navigation-ex: 页面内生成悬浮目录
 
 
 ### 开始编写
