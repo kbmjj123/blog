@@ -196,3 +196,10 @@ deploy:
 #  serviceWorker:
 #    options:
 #      offlineGoogleAnalytics: true
+
+# codepen
+codepen:
+  src_prefix: 'https://codepen.io/kbmjj123/embed'
+  default_tab: 'html,css,js'
+  theme_id: light
+  style: 'height: 400px; width: 100%;'
