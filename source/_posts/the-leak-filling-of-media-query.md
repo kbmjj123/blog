@@ -145,17 +145,28 @@ font: 12pt "Times New Roman", "Times NR", Times, serif;
 ![@page属性的兼容性](@page属性的兼容性.png)
 ![page属性的兼容性](page属性的兼容性.png)
 
+✨ 这里附上相关的伪类整理：
+
+| 伪类一览 | 描述 |
+|---|---|
+| `:left` | 指的页面的左侧 |
+| `:right` | 🈯️页面的右侧 |
+| `:first` | 选择文档的第一页面为目标 |
+| `:blank` | 针对任何"故意留白"的页面 |
+
+✨ `:left`以及`:right`伪类，主要是用来设置page左右两边不同的间距用的
+
 ##### 页面区域(size)
 > 整个属性用于定义页面区域的尺寸
 
 | size属性 | 描述 |
 |---|---|
-| 取值 | `auto/length[1,2]/page-size/portrait/landscape` |
+| 取值 | `auto/length[1,2]/page-size/(portrait/landscape)` |
 | 初始值 | auto |
 | 适用于 | 页面区域 |
 | 继承性 | 否 |
 
-✨ 值landscape是表示将布局旋转90度！！！
+✨ 值landscape是表示将布局旋转90度，一般是作为辅助属性来配置的，比如有size: auto landscape！！！
 这里说着关于整个页面区域的使用，看着着实有些抽象，直接上代码具体讲解以下：
 ```html
 <html>
@@ -193,7 +204,5 @@ font: 12pt "Times New Roman", "Times NR", Times, serif;
 上面👆🌰中针对h1设置了在该元素之后都分页，因此打印的时候，页面将会自动分页，**这对于在控制我们的书籍打印输出的时候，非常有用，我们想在阅读网站的时候内容紧凑一点，然后又想在打印书籍的时候，按照标题来打印**
 
 ✨ 而像`page-break-inside`属性则是用于控制元素内容尽量不分页打印，但是，假如元素的内容过多的话，也是避无可避的！！！
-
-##### 分页最佳实践
 
 ### 关于打印印刷的额外知识点
