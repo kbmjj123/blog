@@ -137,3 +137,79 @@ cover_picture: bootstrap从入门到掌握.jpeg
 
 #### 不等宽的列
 > 由于它是采用的*flex*来实现的响应式布局，在实际的编码过程中，经常会遇到不同等宽度的列的使用。
+> 同样借助于*flex*布局，我们可以很方便的实现不同等分比例的列，通过**col-num**来实现即可
+
+```html
+<div class="container">
+  <div class="row">
+    <div class="col">
+      1 of 3
+    </div>
+    <div class="col-6">
+      2 of 3 (wider)
+    </div>
+    <div class="col">
+      3 of 3
+    </div>
+  </div>
+</div>
+```
+```css
+.col-5{
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+}
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+```
+✨通过上述这里*col*以及*col-5*两者的实际原理简单说明，可以清楚得出关于bootstrap中行的等分机制。
+
+
+#### 自适应内容宽度
+> 假如我们需要自动根据元素的尺寸，来自动的适配其宽度，那么我们可以使用`col-{breakpoint}-auto`类，来设置元素按照其尺寸进行自适应展示
+
+```css
+.col-md-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+}
+```
+以此来实现元素的自适应缩放，而且这里需要⚠️有一关键的地方：**所有的元素在设置响应式布局的时候，当屏幕尺寸缩放到最小尺寸的时候，都采用100%宽度来填充**
+
+#### 不同屏幕尺寸下的列不同均分
+> 🤔啥意思呢？就是控制在不同的屏幕宽度下的元素组成情况，比如在sm下，孩子元素以1-10-1的比例，在md下，孩子元素以2-8-2的比例来展示，
+> 仅需要对应设置其中的`col-{breakpoint}-num`来对应控制其在不同的屏幕尺寸下的比例分配规则
+
+```html
+<div class="container">
+<div class="row">
+    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+  </div>
+</div>
+```
+![不同媒体断点下的效果](不同媒体断点下的效果.png)
+✨通过上面👆的配置方式，我们可以很方便地控制在不同屏幕尺寸下元素的组成比例，这里与单纯的通过`col-num`的方式相比，要灵活得多！！
+
+#### 统一配置行的列数(row-cols-num)
+> bootstrap提供了一个超级简便的类(row-cols-num/row-cols-{breakpoint}-num)，通过该类，我们可以很快速且简单地控制每一行
+> 的分布比例，使其按照一定的比例进行分布，也可以做到在不同的屏幕尺寸比例中进行分布！！！
+
+```html
+<div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+  </div>
+</div>
+```
+✨ 上面👆这里的列数，将在md下有4列，在sm下只有两列，而在其他屏幕下只有一列！
+
+
