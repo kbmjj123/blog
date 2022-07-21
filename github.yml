@@ -1,7 +1,0 @@
-url: https://kbmjj123.github.io/hexo-blog/
-deploy:
-  type: git
-  #repo: https://github.com/kbmjj123/hexo-blog.git # 关联github仓库
-  repo: git@github.com:kbmjj123/hexo-blog.git
-  branch: main
-  token: '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'

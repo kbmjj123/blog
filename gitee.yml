@@ -1,6 +1,0 @@
-url: https://blog-document.gitee.io/t-blog/
-root: /t-blog/
-deploy:
-  type: git
-  repo: https://gitee.com/blog-document/t-blog.git # 关联github仓库
-  branch: master
