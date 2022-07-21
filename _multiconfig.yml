@@ -106,7 +106,13 @@ deploy:
   port: 22
 codepen:
   src_prefix: https://codepen.io/kbmjj123/embed
-  default_tab: html,css,js
+  default_tab: html,css,js,result
   theme_id: light
   style: 'height: 400px; width: 100%;'
+githubEmojis:
+  enable: true
+  className: github-emoji
+  inject: true
+  styles: null
+  customEmojis: null
 root: /
