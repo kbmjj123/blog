@@ -4,7 +4,7 @@ description: 认知突围读后感(一)
 author: Zhenggl
 date: 2022-07-20 11:02:42
 categories:
-    -[读书笔记, 个人提升]
+    - [读书笔记, 个人提升]
 tags:
     - 读书笔记
     - 个人提升
