@@ -11,4 +11,12 @@
       </p>
     </div>
   </div>
+  <div class="outer friend-link">
+    <div>友情链接：</div>
+    <div>
+      <% config.friendLink.forEach(function (item) { %>
+        <a href="<%= item.link%>" target="_blank"><%= item.title%></a> <span class="block">  </span>
+      <% }) %>
+    </div>
+  </div>
 </footer>

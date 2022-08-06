@@ -210,3 +210,10 @@ githubEmojis:
   inject: true
   styles:
   customEmojis:
+
+# 以下是友链
+friendLink:
+  - title: 技术知识堂
+    link: https://www.jhelp.net
+  - title: Jason技术流水账
+    link: http://tech.jasonsoso.com
