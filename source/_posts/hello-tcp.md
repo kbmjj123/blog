@@ -4,7 +4,10 @@ description: 你好TCP
 author: Zhenggl
 date: 2022-10-18 05:47:37
 categories:
+  - [http, tcp]
 tags:
+  - http
+  - tcp
 cover_picture: 你好TCP封面.jpeg
 ---
 
