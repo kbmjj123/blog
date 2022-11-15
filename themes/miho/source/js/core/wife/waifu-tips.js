@@ -54,7 +54,7 @@ $('.waifu-tool .fui-user').click(function (){
 });
 
 $('.waifu-tool .fui-info-circle').click(function (){
-    window.open('https://www.cnblogs.com/yjlblog/p/8724881.html');
+    window.open('https://www.91temaichang.com');
 });
 
 $('.waifu-tool .fui-cross').click(function (){
@@ -71,8 +71,7 @@ $('.waifu-tool .fui-photo').click(function (){
 
 function waifuWelcome(){
     var text;
-    var SiteIndexUrl = 'https://www.fghrsh.net/';  // 手动指定主页
-    //var SiteIndexUrl = window.location.protocol+'//'+window.location.hostname+'/';  // 自动获取主页
+    var SiteIndexUrl = 'https://www.91temaichang.com/';  // 手动指定主页
 
     if (window.location.href == SiteIndexUrl) {      // 如果是主页
         var now = (new Date()).getHours();

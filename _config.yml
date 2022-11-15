@@ -217,3 +217,8 @@ friendLink:
     link: https://www.jhelp.net
   - title: Jason技术流水账
     link: http://tech.jasonsoso.com
+
+# 以下是图片懒加载
+lazyload:
+  enable: true
+  onlypost: false
