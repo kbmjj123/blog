@@ -173,7 +173,6 @@ deploy:
 #      branch: master
 
 #pwa:
-#pwa:
 #  manifest:
 #    path: /manifest.json
 #    body:

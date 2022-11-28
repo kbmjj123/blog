@@ -8,7 +8,16 @@
 ![模块目录框架](https://img.91temaichang.com/blog/blog-structure.png)
 
 ### 相关的指令：
+`hexo new [Layout] <title>`
+用来创建一个新的文档或者新的页面，这里的layout支持三种类型的布局，默认是post，还可以是page、draft，它们会被保存到不同的路径，而自定义的路径则与`post`相同
 1. 新增一个博客文件
 ```bash
   hexo new page --path _posts/XXX "XXX"
 ```
+
+2. 关于codepen的使用
+直接在项目中使用以下的配置即可在界面中加入这个codepen的代码例子：
+```markdown
+{% codepen slug_hash:'KKeeJrG' %}
+```
+:point_up: 这里的`KKeeJrG`就是我们在codepen中的项目名称
