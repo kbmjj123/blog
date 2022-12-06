@@ -199,7 +199,7 @@ deploy:
 # codepen
 codepen:
   src_prefix: 'https://codepen.io/kbmjj123/embed'
-  default_tab: 'html,css,js,result'
+  default_tab: html,result
   theme_id: light
   style: 'height: 400px; width: 100%;'
 
