@@ -9,6 +9,7 @@ tags:
   - 工具插件
   - grunt
   - handlebars
+  - assemble
 cover_picture: assemble使用与源码分析封面.png
 ---
 
@@ -178,5 +179,5 @@ module.exports = function(grunt){
 3. `async`三方库的使用学习，能够顺序异步执行的便捷库
 
 ### 搭建自己的html渲染基础项目(grunt + assemble + grunt + md)
-> 在学习完成了关于`assemble`的基础框架之后，想要模仿less来存自己的一个在线man浏览系统，搭建一个基础的自带分类、自动导航功能的基于mk文档来编写的在线文档系统！
+> 在学习完成了关于`assemble`的基础框架之后，想要模仿less来存自己的一个在线man浏览系统，搭建一个基础的自带分类、自动导航功能的基于mk文档来编写的在线文档系统！详情查看[链接](../2022/12/13/build-man-website-with-assemble-handlebars/)
 
