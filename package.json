@@ -17,7 +17,7 @@
     "dev:diy": "webpack-dev-server --inline --progress --config diy/build/webpack.config.js"
   },
   "hexo": {
-    "version": "6.2.0"
+    "version": "6.3.0"
   },
   "dependencies": {
     "hexo": "^6.0.0",

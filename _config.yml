@@ -210,6 +210,8 @@ githubEmojis:
   styles:
   customEmojis:
 
+google_ad: true
+
 # 以下是友链
 friendLink:
   - title: 技术知识堂

@@ -33,6 +33,7 @@ bower_components
 gitee.yml
 github.yml
 self.yml
+.config.yml
 _multiconfig.yml
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
