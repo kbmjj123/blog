@@ -89,3 +89,5 @@ module.exports.register = function (Handlebars, options, params) {
 :point_right: 可以通过一变量并与脚本命令进行一个关联，通过node参数，来实现的环境与日志的关联输出！
 
 2. 有时需要深入到`grunt`脚本层面进行对应的断点调试，因此需要借助于`grunt-cli`以及`vscode`的调试助手，来实现本地源码的断点调试；
+3. `grunt`调试比较麻烦，我们可以借助于`grunt --stack`的方式，让其在执行的过程中，进行相关的详细日志的输出，如下图所示：
+   ![grunt调试](grunt调试.png)

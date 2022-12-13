@@ -143,6 +143,9 @@ module.exports = function(grunt){
 
 :stars: 从 :point_up: 中可以看出这里的`md`其实是已经在`assemble`中已注册好的`helper`，应该是做了一个读取对应路径的md文件，将其内容转变为对应的html字符串
 
+##### 额外的handlebars-helpers代码块助手
+> `assemble`提供了额外的超过20个分类的200来个代码块助手，帮助我们在编写对应的hbs文件时，提升编写代码的速度，优化代码，详情可查看[官方链接](https://github.com/helpers/handlebars-helpers)
+
 ### assemble源码分析
 ![Assemble架构](Assemble架构.png)
 > 针对上述的使用过程的所产生的疑惑 :confused: ，结合`Assemble`的源码来一通分析一波：
