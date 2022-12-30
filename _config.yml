@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Koby
+title: online阳光
 subtitle: '一个专注于大前端的技术博客'
 description: '专注于大前端行业领域的学习，javascript，css，html，react，android，ios，react-native，Node.js，webpack，gulp，小程序，一个都不能少'
 keywords: 'zhenggl, koby, javascript，css，html，react，android，ios，react-native，Node.js，webpack，gulp，小程序'
@@ -142,7 +142,7 @@ ignore:
 theme: miho
 
 # 备案号信息
-icp: 粤ICP备14102113号
+icp: 粤ICP备14102113号-1
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
