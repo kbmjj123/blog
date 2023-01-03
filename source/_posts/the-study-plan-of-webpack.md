@@ -33,6 +33,7 @@ cover_picture: webpack学习计划封面.jpg
 :point_up: 从这里我们可以看出要理解`webpack`的使用，关键在于理解这个`Compiler`对象是如何被创建出来的，因为`webpack`创建完成`Compiler`对象之后，可以说他的任务就完成了，接下来将任务转交给`Compiler`对象来接管了！ :point_down: 来具体分析每一个步骤的过程都是怎样的！！
 
 #### 1、将普通的webpack.config.js中的配置转换为标准的webpack配置对象
+![webpack.config.js配置组成](webpack.config.js配置组成.png)
 ```javascript
 // 位于lib/config/normalization.js的116行
 const getNormalizedWebpackOptions = config => {
