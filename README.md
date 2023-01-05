@@ -21,3 +21,13 @@
 {% codepen slug_hash:'KKeeJrG' %}
 ```
 :point_up: 这里的`KKeeJrG`就是我们在codepen中的项目名称
+
+3. 关于使用外部链接，并采用新开窗口的方式
+```markdown
+{% link "ProgressPlugin.js" "https://www.91temaichang.com/2023/01/04/webpack-plugin-progress/" true ProgressPlugin.js %}
+```
+
+4. 关于使用内部链接的方式
+```markdown
+{% post_link webpack-plugin-progress ProgressPlugin.js %}
+```

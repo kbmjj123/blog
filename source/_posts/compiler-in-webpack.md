@@ -13,10 +13,60 @@ cover_picture: Compiler封面.jpg
 ### 前言
 > 上文中我们所提及到的`webpack`创建了一个`Compiler`对象，由它来进行相关的打包任务动作的启动等，而且作为所有的插件所共同访问的到的一个`编译器`对象，:confused: 那么，这个`Compiler`是什么呢？？它做了哪些事情呢？
 
-### Compiler是什么
+### Compiler是什么?执行过程是怎样的？
 > Compiler 模块是 webpack 的主要引擎，它通过 CLI 或者 Node API 传递的所有选项创建出一个 compilation 实例。 它扩展（extends）自 [Tapable](Tapable) 类，用来注册和调用插件。 大多数面向用户的插件会首先在 Compiler 上注册。
 > 首先，先来看一下 :point_down: 的一副Compile的`run`方法的执行过程所触发的钩子函数，以及都有哪些插件在对应的钩子容器中添加了各自的钩子函数动作：
 ![Compiler的run方法触发的钩子函数](Compiler的run方法触发的钩子函数.png)
+:point_up: 我们可以清楚地了解到`run`方法的执行过程， :point_down: 将一一来分析每一个节点过程
+
+#### 1、触发beforeRun方法
+> 在开始执行一次构建之前调用，`compiler.run` 方法开始执行后立刻进行调用
+
+| 描述 | 值 |
+|:---|:---|
+| 回调参数 | `Compiler`对象 |
+| 调用方式 | AsyncSeriesHook |
+| 相关插件 | {% post_link webpack-plugin-progress ProgressPlugin.js %}、{% post_link webpack-plugin-node-environment NodeEnvironmentPlugin.js %} |
+
+:point_up: 两个插件，主要做的动作有：
+1. `ProgressPlugin`负责进行进度的输出信息；
+2. `NodeEnviromentPlugin`负责日志环境以及相关的`fs`环境的赋值操作等！
+
+#### 2、进入run方法
+> 开始进入run动作，目前`webpack`中只有`ProgressPlugin`触发了对应的钩子函数！上面已经具体介绍过，这里就不再重复阐述
+
+#### 3、readRecords方法
+> 读取之前是否有缓存过的相关记录动作，该方法对应的介绍如下：
+
+| 描述 | 值 |
+|:---|:---|
+| 回调参数 | 当前调用的plugin对象，以及一个回调函数，作为异步回调通知的动作 |
+| 调用方式 | AsyncSeriesHook |
+| 相关插件 | {% post_link webpack-plugin-sync-module-ids SyncModuleIdsPlugin.js %} |
+
+:point_up: 插件`SyncModuleIdsPlugin`做的主要事情有：
+:point_right: 获取`Compiler`对象中的`intermediateFileSystem`属性，用来从之前缓存中获取已经存储的信息
+
+#### 4、创建模块工厂对象normalModuleFactory
+![创建编译所需的参数](创建编译所需的参数.png)
+
+#### 5、创建上下文工厂对象contextModuleFactory
+
+#### 6、进入beforeCompile方法
+
+#### 7、进入compile方法
+
+#### 8、thisCompilation创建一个Compilation对象
+
+#### 9、进入compilation方法
+
+#### 10、开始make进行打包动作，完成打包finishMake
+
+#### 11、收尾工作afterCompile
+
+#### 12、是否通知shouldEmit
+
+#### 13、完成所有工作done以及afterDone
 
 ### Compiler的组成
 ![Compiler](Compiler.png)
