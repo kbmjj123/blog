@@ -49,6 +49,23 @@ cover_picture: Compiler封面.jpg
 
 #### 4、创建模块工厂对象normalModuleFactory
 ![创建编译所需的参数](创建编译所需的参数.png)
+> 将创建好的`NormalModuleFactory`对象缓存到`_lastNormalModuleFactory`属性中，触发`NormalModuleFactory`对象被创建的钩子动作
+
+| 描述 | 值 |
+|:---|:---|
+| 回调参数 | 当前调用的`normalModuleFactory`对象 |
+| 调用方式 | AsyncSeriesHook |
+| 相关插件 | {% post_link webpack-plugin-ignore IgnorePlugin.js %}、{% post_link webpack-normal-module-replacement NormalModuleReplacement.js %} |
+
+**具体的过程描述如下：**
+:point_down: 创建一个`NormalModuleFactory`对象，并触发`hooks.normalModuleFactory`钩子方法，将`normalModuleFactory`作为参数传递过去！
+
+**IgnorePlugin所做的事情：**
+![IgnorePlugin间接对NormalModuleFactory以及ContextModuleFactory设置钩子监听](IgnorePlugin间接对NormalModuleFactory以及ContextModuleFactory设置钩子监听.png)
+:point_up: 所做的事情主要是间接设置对`normalModuleFactory.hooks.beforeResolve`以及`contextModuleFactory.hooks.beforeResolve`钩子函数的监听，当这两个钩子容器触发的时候，调用自身的checkIgnore方法
+
+**NormalModuleReplacement所做的事情：**
+:point_right: 针对`NormalModuleFactory.hooks.beforeResolve以及afterResolve`设置监听，当由`NormalModuleFactory`来创建的时候，触发该动作，实现采用正则匹配的方式，来替换即将导入的依赖文件，比如将文件A替换为文件B等骚操作！
 
 #### 5、创建上下文工厂对象contextModuleFactory
 

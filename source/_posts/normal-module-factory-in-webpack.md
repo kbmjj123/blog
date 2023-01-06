@@ -54,5 +54,15 @@ myResolve("/some/path/to/folder", "ts-module", (err, result) => {
 
 :stars: 综上所述，结合`webpack.config.js`中的`resolve`属性，我们不难想到，原来这个`webpack.config.js`中`resolve`可以说是同一个，也就是`webpack`对`enhanced-resolve`做了一层封装，那么两者所需的配置应该是一致的！
 
-### NormalModuleFactory是什么
-> 与`Compiler`一样，`NormalModuleFactory`也聚合了`Tapable`类对象`hooks`，提供的相对应的钩子容器方法
+### NormalModuleFactory是什么？
+> 与`Compiler`一样，`NormalModuleFactory`也聚合了`Tapable`类对象`hooks`，提供的相对应的钩子容器方法，如下图所示：
+> ![NormalModuleFactory组成结构图](NormalModuleFactory组成结构图.png)
+
+### NormalModuleFactory创建过程设置的钩子函数
+1. factorize：在其回调方法中触发`resolve` --> `afterResolve` --> `createModule` --> `module`
+2. resolve
+
+### NormalModuleFactory的create方法的执行过程是怎样的？
+![NormalModuleFactory的create方法执行过程](NormalModuleFactory的create方法执行过程.jpg)
+
+:confused: 这里有一个疑问，就是`Compiler`在创建完成这个`NormalModuleFactory`对象之后，就撒手不管了，放在这里，等到进入其`compilation`钩子方法的时候，因需通过依赖相关的文件而需要使用该`NormalModuleFactory.create`方法，这里咱们等到触发该方法时，调用对应的方法即可，此处预留相应的学习链接!!!
