@@ -55,7 +55,7 @@ cover_picture: Compiler封面.jpg
 |:---|:---|
 | 回调参数 | 当前调用的`normalModuleFactory`对象 |
 | 调用方式 | AsyncSeriesHook |
-| 相关插件 | {% post_link webpack-plugin-ignore IgnorePlugin.js %}、{% post_link webpack-normal-module-replacement NormalModuleReplacement.js %} |
+| 相关插件 | {% post_link webpack-plugin-ignore IgnorePlugin.js %}、{% post_link webpack-plugin-normal-module-replacement NormalModuleReplacement.js %} |
 
 **具体的过程描述如下：**
 :point_down: 创建一个`NormalModuleFactory`对象，并触发`hooks.normalModuleFactory`钩子方法，将`normalModuleFactory`作为参数传递过去！

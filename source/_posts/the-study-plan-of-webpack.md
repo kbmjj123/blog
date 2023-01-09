@@ -52,6 +52,7 @@ const getNormalizedWebpackOptions = config => {
   - 高级用法：传递函数作为入口，代表动态入口
   - 实现原理：关键在于`getNormalizedEntryStatic`方法的实现，关于此方法的实现逻辑如下图所示：
   ![entry的解析过程](entry的解析过程.jpg)
+  - entry中的属性：![webpack.config.js中的entry属性](webpack.config.js中的entry属性.png)
 + externals
   - 描述：外部扩展，用于防止将某些bundle打包到bundle，采用从外部(比如cdn)的方式来加载
   - 可接收的值：`string` `object` `function` `RegExp` `[string, object, function, RegExp]`

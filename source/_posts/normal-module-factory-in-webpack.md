@@ -1,5 +1,5 @@
 ---
-title: NormalModuleFactory
+title: NormalModuleFactory的工作过程
 description: NormalModuleFactory
 author: Zhenggl
 date: 2023-01-05 06:36:50
@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - NormalModuleFactory
-cover_picture:
+cover_picture: NormalModuleFactory封面.png
 ---
 
 ### 前言
@@ -59,6 +59,8 @@ myResolve("/some/path/to/folder", "ts-module", (err, result) => {
 > ![NormalModuleFactory组成结构图](NormalModuleFactory组成结构图.png)
 
 ### NormalModuleFactory创建过程设置的钩子函数
+> 在了解关于`NormalModuleFactory`的创建过程所涉及到的钩子函数时，先来看一下`NormalModuleFactory`中所拥有的钩子容器，如下图所示：
+![]()
 1. factorize：在其回调方法中触发`resolve` --> `afterResolve` --> `createModule` --> `module`
 2. resolve
 
