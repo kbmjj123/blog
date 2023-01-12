@@ -13,7 +13,7 @@ cover_picture: ProgressPlugin封面.jpg
 
 ### 前言
 > `ProgressPlugin`提供了一种自定义编译过程中进度报告方式的方法！
-> [官方链接](https://webpack.js.org/plugins/progress-plugin/)
+> {% link 官方链接 https://webpack.js.org/plugins/progress-plugin/ true 官方链接 %}
 
 ### 使用方式
 > 一般地，我们可以通过创建一个`ProgressPlugin`对象并传递允许的可选参数，来实现自定义输出的目的！

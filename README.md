@@ -31,3 +31,6 @@
 ```markdown
 {% post_link webpack-plugin-progress ProgressPlugin.js %}
 ```
+
+5. 引用外部链接，通过`target=_blank`的方式打开链接
+{% link 展示的文字 外部链接地址 true hover的标题 %}

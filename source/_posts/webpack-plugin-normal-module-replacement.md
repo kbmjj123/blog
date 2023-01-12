@@ -12,7 +12,7 @@ cover_picture: NormalModuleReplacementPlugin封面.png
 ---
 
 ### 前言
-[官方链接](https://www.webpackjs.com/plugins/normal-module-replacement-plugin/)
+{% link 官方链接 https://www.webpackjs.com/plugins/normal-module-replacement-plugin/ true 官方链接 %}
 > NormalModuleReplacementPlugin 允许我们将与 `resourceRegExp` 匹配的资源替换为 `newResource`。如果 `newResource` 是相对的，则它是相对于先前资源解析的。如果 `newResource` 是一个函数，它应该覆盖所提供资源的请求属性。
 > :point_up: 官方的描述有点绕，简而言之，就是模块的在加载之前进行一个替换，这个替换按照正则表达式`resourceRegExp`所定义的表达式来实现替换，可以实现到类似于`cross-env`工具的效果：通过自定义变量的方式来达到根据不同的变量来尽性替换的目的！
 

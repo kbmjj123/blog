@@ -70,6 +70,17 @@ cover_picture: Compiler封面.jpg
 #### 5、创建上下文工厂对象contextModuleFactory
 
 #### 6、进入beforeCompile方法
+> 通过 :point_up: 第4、5步中创建的`params(包含有：normalModuleFactory、contextModuleFactory)`参数，进入`beforeCompile`钩子容器，将params作为参数来进行触发`beforeCompile`方法
+
+| 描述 | 值 |
+|:---|:---|
+| 回调参数 | `{normalModuleFactory, contextModuleFactory}` |
+| 调用方式 | AsyncSeriesHook |
+| 相关插件 | {% post_link webpack-plugin-dll-reference DllReferencePlugin.js %}、{% post_link webpack-plugin-lazy-compilation LazyCompilationPlugin.js %} |
+
+**插件DllReferencePlugin的执行过程如下：**
+![beforeCompile阶段DllReferencePlugin的执行过程](beforeCompile阶段DllReferencePlugin的执行过程.png)
+简单描述： :point_right: 读取通过`webpack.config.js`传递进来的插件配置，并获取该配置中的`manifest`属性，将这个属性的值进行解析获取，并最后将解析的结果值存储在当前对象中的`_compilationData`属性中，以便于后续使用
 
 #### 7、进入compile方法
 

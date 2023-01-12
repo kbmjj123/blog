@@ -50,7 +50,9 @@ myResolve("/some/path/to/folder", "ts-module", (err, result) => {
 });
 ```
 
-:stars: 而`webpack`所提供的`ResolverFactory`，则是聚合了hooks以及`enhance-resolve`，通过“懒加载”的方式，来加载对应的resolve方法，从而用其来加载对应的文件资源
+:stars: 而`webpack`所提供的`ResolverFactory`，则是聚合了hooks以及`enhance-resolve`，通过“懒加载”的方式，来加载对应的resolve方法，从而用其来加载对应的文件资源，当创建一个`NormalModuleFactory`对象的时候，将会对应触发其属性`resolverFactory.get('loader', resolveOptions)`方法，来获取通过`webpack.config.js`配置文件中所传递的`resolve`对象属性来获取对应的`enhance-resolve`的工厂方法来resolve成为对应的模块
+![底层调用的enhance-resolve来创建一个resolver](底层调用的enhance-resolve来创建一个resolver.png)
+:point_up: 这里所创建的`loaderResolver`对象，其内部包含了`fs`模块，主要利用其来加载对应的模块
 
 :stars: 综上所述，结合`webpack.config.js`中的`resolve`属性，我们不难想到，原来这个`webpack.config.js`中`resolve`可以说是同一个，也就是`webpack`对`enhanced-resolve`做了一层封装，那么两者所需的配置应该是一致的！
 
@@ -60,9 +62,15 @@ myResolve("/some/path/to/folder", "ts-module", (err, result) => {
 
 ### NormalModuleFactory创建过程设置的钩子函数
 > 在了解关于`NormalModuleFactory`的创建过程所涉及到的钩子函数时，先来看一下`NormalModuleFactory`中所拥有的钩子容器，如下图所示：
-![]()
+
+![NormalModuleFactory的钩子容器属性](NormalModuleFactory的钩子容器属性.png)
+
+:star: 在创建一个`NormalModuleFactory`工厂对象的时候，注册了以下两个钩子函数：
 1. factorize：在其回调方法中触发`resolve` --> `afterResolve` --> `createModule` --> `module`
-2. resolve
+2. resolve: 执行文件的resolve动作，从entry入口文件开始，将所依赖的项都 `point_right` 成为`module`
+
+:stars: 最终生成一个个的`NormalModule`模块对象，这里的`NormalModule`对象的一个依赖关系是：
+![NormalModule模块的继承关系](NormalModule模块的继承关系.jpg)
 
 ### NormalModuleFactory的create方法的执行过程是怎样的？
 ![NormalModuleFactory的create方法执行过程](NormalModuleFactory的create方法执行过程.jpg)
