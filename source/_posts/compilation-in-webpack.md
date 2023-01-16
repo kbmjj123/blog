@@ -11,3 +11,42 @@ cover_picture: Compilation封面.jpg
 ---
 
 ### 前言
+{% link 官方链接 "https://www.webpackjs.com/api/compilation-hooks/" true 官方链接 %}
+> `webpack`中真正的"编译器执行者"，`Compilation`实例能够访问所有的模块和它们的依赖（大部分是循环依赖）。 它会对应用程序的依赖图中所有模块， 进行字面上的编译(literal compilation)。 在编译阶段，模块会被加载(`load`)、封存(`seal`)、优化(`optimize`)、 分块(`chunk`)、哈希(`hash`)和重新创建(`restore`)。
+> :point_down: 是关于`Compilation`对象的组成结构：
+
+### Compilation的工作流程是怎样的呢？
+> :alien: 其实`Compilation`自身并没有做任何的动作，而是一堆的插件它们负责来实现的！因为`Compiler`创建完这个`Compilation`对象之后，就没有针对这个`Compilation`对象进行调用其相关的API了，而是将`Compilation`以及`params`作为参数，来触发`Complier.hooks.thisCompilation`
+
+![最简单webpack对应的Compilation的待执行插件队列](最简单webpack对应的Compilation的待执行插件队列.png)
+
+:trollface: 首先，针对一个最简单的`webpack.config.js`进行一个针对`thisCompilation`事件的一个插件执行队列分析，从上图中我们可以对应整理对应的执行队列：
+
+:point_down: 表中的"是否webpack内置集成"，指的是在`WebpackOptionsApply.js`中默认集成的！
+
+| 插件名称 | 是否webpack内置集成 | 描述 |
+|---|---|:---|
+| ArrayPushCallbackChunkFormatPlugin | :white_check_mark: | 格式化输出`*.js`中的内容执行者 |
+| JsonpChunkLoadingPlugin | :x: |  |
+| StartupChunkDependenciesPlugin | :x: |  |
+| FetchCompileWasmPlugin | :x: |  |
+| FetchCompileAsyncWasmPlugin | :x: |  |
+| WorkerPlugin | :white_check_mark: |  |
+| SplitChunksPlugin | :white_check_mark: | 根据“条件”自动拆分chunks |
+| ResolverCachePlugin | :white_check_mark: |  |
+
+#### 加载模块--load
+
+#### 模块封存--seal
+
+#### 模块优化--optimeze
+
+#### 模块分块--chunk
+
+#### 模块哈希--hash
+
+#### 模块重创--restore
+
+### 我能够做点什么？
+
+

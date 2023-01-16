@@ -223,4 +223,5 @@ friendLink:
 # 以下是图片懒加载
 lazyload:
   enable: true
-  onlypost: false
+  onlypost: true
+  isSPA: false

@@ -34,3 +34,5 @@
 
 5. 引用外部链接，通过`target=_blank`的方式打开链接
 {% link 展示的文字 外部链接地址 true hover的标题 %}
+
+6. 项目中采用的是`fontawesome4.7.0`版本的字体图片，要使用的时候，可以直接浏览[fontawesome.com](https://fontawesome.com/v4/icons/)进行浏览

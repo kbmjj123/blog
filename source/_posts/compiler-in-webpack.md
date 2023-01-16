@@ -24,7 +24,7 @@ cover_picture: Compiler封面.jpg
 
 | 描述 | 值 |
 |:---|:---|
-| 回调参数 | `Compiler`对象 |
+| 传递参数 | `Compiler`对象 |
 | 调用方式 | AsyncSeriesHook |
 | 相关插件 | {% post_link webpack-plugin-progress ProgressPlugin.js %}、{% post_link webpack-plugin-node-environment NodeEnvironmentPlugin.js %} |
 
@@ -40,7 +40,7 @@ cover_picture: Compiler封面.jpg
 
 | 描述 | 值 |
 |:---|:---|
-| 回调参数 | 当前调用的plugin对象，以及一个回调函数，作为异步回调通知的动作 |
+| 传递参数 | 当前调用的plugin对象，以及一个回调函数，作为异步回调通知的动作 |
 | 调用方式 | AsyncSeriesHook |
 | 相关插件 | {% post_link webpack-plugin-sync-module-ids SyncModuleIdsPlugin.js %} |
 
@@ -53,7 +53,7 @@ cover_picture: Compiler封面.jpg
 
 | 描述 | 值 |
 |:---|:---|
-| 回调参数 | 当前调用的`normalModuleFactory`对象 |
+| 传递参数 | 当前调用的`normalModuleFactory`对象 |
 | 调用方式 | AsyncSeriesHook |
 | 相关插件 | {% post_link webpack-plugin-ignore IgnorePlugin.js %}、{% post_link webpack-plugin-normal-module-replacement NormalModuleReplacement.js %} |
 
@@ -74,7 +74,7 @@ cover_picture: Compiler封面.jpg
 
 | 描述 | 值 |
 |:---|:---|
-| 回调参数 | `{normalModuleFactory, contextModuleFactory}` |
+| 传递参数 | `{normalModuleFactory, contextModuleFactory}` |
 | 调用方式 | AsyncSeriesHook |
 | 相关插件 | {% post_link webpack-plugin-dll-reference DllReferencePlugin.js %}、{% post_link webpack-plugin-lazy-compilation LazyCompilationPlugin.js %} |
 
@@ -82,11 +82,30 @@ cover_picture: Compiler封面.jpg
 ![beforeCompile阶段DllReferencePlugin的执行过程](beforeCompile阶段DllReferencePlugin的执行过程.png)
 简单描述： :point_right: 读取通过`webpack.config.js`传递进来的插件配置，并获取该配置中的`manifest`属性，将这个属性的值进行解析获取，并最后将解析的结果值存储在当前对象中的`_compilationData`属性中，以便于后续使用
 
-#### 7、进入compile方法
+**插件LazyCompilationPlugin的执行过程如下(内部插件)：**
+![LazyCompilationPlugin的实验性使用](LazyCompilationPlugin的实验性使用.png)
+简单描述： :point_right: 该插件是一个实验性的插件，由`webpack.config.js`通过`experiments.lazyCompilation`配置属性来进行配置，目的是使用动态导入的方式来编译！
 
-#### 8、thisCompilation创建一个Compilation对象
+#### 7、触发compile方法
+> 触发compile方法，并传递`{normalModuleFactory, contextModuleFactory}`对象作为参数
 
-#### 9、进入compilation方法
+| 描述 | 值 |
+|:---|:---|
+| 传递参数 | `{normalModuleFactory, contextModuleFactory}` |
+| 调用方式 | AsyncSeriesHook |
+| 相关插件 | {% post_link webpack-plugin-dll-reference DllReferencePlugin.js %}、{% post_link webpack-plugin-delegated DelegatedPlugin.js %}、{% post_link webpack-plugin-externals ExternalsPlugin.js %} |
+
+**插件DllReferencePlugin的执行过程如下：**
+简单描述： :point_right: 获取从上一步(`beforeCompile`)阶段所缓存下来的`_compilationData`属性中的值，并结合当前插件所传递的dll配置参数，组装成为一个`externals`对象，然后触发`ExternalModuleFactoryPlugin`插件以及`DelegatedModuleFactoryPlugin`插件，并同时以`NormalModuleFactory`作为参数来进行传递!
+
+:alien: 而这里的`ExternalModuleFactoryPlugin`插件，则是对`NormalModuleFactory.hooks.factorize`设置监听，当监听被触发时，将从额外的插件中将dll给单独打包！
+
+:alien: 这里的`DelegatedModuleFactoryPlugin`插件，则是根据Dll配置参数的前缀属性`scope`，来对应分别对`NormalModuleFactory.hooks.factorize`或者是`module`钩子容器添加监听函数，然后返回最终的`DelegatedModule`模块交给`NormalModuleFactory`模块的对应钩子函数去执行操作，它是实现从dll以及externals中外部导入或者剔除打包的具体实现！
+
+#### 8、thisCompilation创建一个Compilation对象，并进入compilation方法
+> 首先，先看一下`Compilation`对象的创建过程，如下图所示：
+> ![Compiler创建Compilation对象](Compiler创建Compilation对象.png)
+> :point_up: 通过创建一`Compilation`对象，并将其作为参数，触发钩子容器中的：`thisCompilation`以及`compilation`方法
 
 #### 10、开始make进行打包动作，完成打包finishMake
 
