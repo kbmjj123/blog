@@ -44,6 +44,16 @@
   <% if (theme.favicon){ %>
     <link rel="icon" href="<%- theme.favicon %>">
   <% } %>
+  <% if(config.google_ad){ %>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2363518550463295" crossorigin="anonymous"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-2363518550463295",
+        enable_page_level_ads: true,
+        overlays: {bottom: true}
+      });
+    </script>
+  <% } %>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <%- css('css/style') %>
   <%- js('js/pace.min') %>
