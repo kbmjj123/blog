@@ -4,6 +4,9 @@ description: ExternalsPlugin
 author: Zhenggl
 date: 2023-01-13 08:34:38
 categories:
+  - [webpack, plugin]
 tags:
-cover_picture:
+  - webpack
+  - plugin
+cover_picture: ExternalsPlugin封面.png
 ---
