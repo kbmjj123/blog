@@ -56,16 +56,16 @@
 <% if(theme.open_wife){ %>
   <%- css('css/wife/waifu.css') %>
   <div class="waifu">
-      <div class="waifu-tips" style="opacity: 0;">这句一言出处是
-          <span style="color:#0099cc;">『青之驱魔师』</span>，
-          是 <span style="color:#0099cc;">FGHRSH</span> 在 2015.09.23 23:05:17 收藏的！</div>
+      <div class="waifu-tips" style="opacity: 0;">这一句
+          是 <span style="color:#0099cc;">在 2015.09.23 23:05:17 收藏的！</div>
       <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
   </div>
-  <%- js('js/core/wife/waifu-tips.js?=1') %>
+  <%- js('js/core/wife/waifu-tips.js?=2') %>
   <%- js('js/core/wife/live2d.js') %>
   <script type="text/javascript">
     if(!navigator.userAgent.match(/Mobi/i)) {
-			initModel()
+      // 非手机端加载妹子图
+			initModel();
 		}
   </script>
   <%- js('js/mouse') %>

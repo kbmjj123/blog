@@ -30,7 +30,7 @@ $(document).on('copy', function (){
 });
 
 $('#hitokoto').mouseover(function (){
-    var text = '这句一言出处是 <span style="color:#0099cc;">『{source}』</span>，是 <span style="color:#0099cc;">FGHRSH</span> 在 {date} 收藏的！';
+    var text = '这句一言出处是 <span style="color:#0099cc;">『{source}』</span>，在 {date} 收藏的！';
     var hitokoto = JSON.parse($(this)[0].dataset.raw);
     text = text.render({source: hitokoto.source, author: hitokoto.author, date: hitokoto.date});
     showMessage(text, 3000);
@@ -117,7 +117,6 @@ function waifuWelcome(){
     showMessage(text, 6000);
 }
 
-//window.hitokotoTimer = window.setInterval(showHitokoto,30000);
 /* 检测用户活动状态，并在空闲时 定时显示一言 */
 var getActed = false;
 window.hitokotoTimer = 0;
@@ -139,18 +138,19 @@ function elseActed(){
 }
 
 function showHitokoto(){
+  if(!navigator.userAgent.match(/Mobi/i){
     $.getJSON('//api.fghrsh.net/hitokoto/rand/?encode=jsc&uid=3335',function(result){
-        var text = '这句一言出处是 <span style="color:#0099cc;">『{source}』</span>，是 <span style="color:#0099cc;">FGHRSH</span> 在 {date} 收藏的！';
+        var text = '这句一言出处是 <span style="color:#0099cc;">『{source}』</span>，在 {date} 收藏的！';
         text = text.render({source: result.source, date: result.date});
         showMessage(result.hitokoto, 5000);
         window.setTimeout(function() {showMessage(text, 3000);}, 5000);
     });
+  }
 }
 
 function showMessage(text, timeout, flag){
     if(flag || sessionStorage.getItem('waifu-text') === '' || sessionStorage.getItem('waifu-text') === null){
         if(Array.isArray(text)) text = text[Math.floor(Math.random() * text.length + 1)-1];
-        //console.log(text);
 
         if(flag) sessionStorage.setItem('waifu-text', text);
 
@@ -438,23 +438,6 @@ function loadModel(modelId, modelTexturesId){
     if (modelTexturesId === undefined) modelTexturesId = 0;
     localStorage.setItem('modelTexturesId', modelTexturesId);
     loadlive2d('live2d', 'https://www.91temaichang.com/js/core/wife/model.json', console.log('live2d','模型 '+modelId+'-'+modelTexturesId+' 加载完成'));
-    // loadlive2d('live2d', '//api.fghrsh.net/live2d/get/?id='+modelId+'-'+modelTexturesId, console.log('live2d','模型 '+modelId+'-'+modelTexturesId+' 加载完成'));
-}
-
-function loadRandModel(){
-    var modelId = localStorage.getItem('modelId');
-    var modelTexturesId = localStorage.getItem('modelTexturesId');
-
-    var modelTexturesRandMode = 'rand';     // 可选 'rand'(随机), 'switch'(递增)
-
-    $.ajax({
-        cache: false,
-        url: '//api.fghrsh.net/live2d/'+modelTexturesRandMode+'_textures/?id='+modelId+'-'+modelTexturesId,
-        dataType: "json",
-        success: function (result){
-            loadModel(modelId, result.textures['id']);
-        }
-    });
 }
 
 function loadOtherModel(){
