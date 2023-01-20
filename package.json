@@ -39,7 +39,6 @@
     "hexo-theme-landscape": "^0.0.3"
   },
   "devDependencies": {
-    "hexo-deployer-sftp": "^0.4.1",
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "autoprefixer": "^9.6.0",
@@ -47,6 +46,8 @@
     "css-loader": "^2.1.1",
     "cssnano": "^4.1.10",
     "ejs-loader": "^0.3.3",
+    "hexo-deployer-sftp": "^0.4.1",
+    "hexo-generator-sitemap": "^3.0.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.9.0",

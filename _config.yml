@@ -225,3 +225,14 @@ lazyload:
   enable: true
   onlypost: true
   isSPA: false
+
+# 以下是生成网站的
+sitemap:
+  path: 
+    - sitemap.xml
+    - sitemap.txt
+  template: ./sitemap_template.xml
+  template_txt: ./sitemap_template.txt
+  rel: false
+  tags: true
+  categories: true
