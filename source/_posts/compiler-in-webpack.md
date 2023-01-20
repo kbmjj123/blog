@@ -93,7 +93,7 @@ cover_picture: Compiler封面.jpg
 |:---|:---|
 | 传递参数 | `{normalModuleFactory, contextModuleFactory}` |
 | 调用方式 | AsyncSeriesHook |
-| 相关插件 | {% post_link webpack-plugin-dll-reference DllReferencePlugin.js %}、{% post_link webpack-plugin-delegated DelegatedPlugin.js %}、{% post_link webpack-plugin-externals ExternalsPlugin.js %} |
+| 相关插件 | {% post_link webpack-plugin-dll-reference DllReferencePlugin.js %}、DelegatedPlugin.js、ExternalsPlugin.js |
 
 **插件DllReferencePlugin的执行过程如下：**
 简单描述： :point_right: 获取从上一步(`beforeCompile`)阶段所缓存下来的`_compilationData`属性中的值，并结合当前插件所传递的dll配置参数，组装成为一个`externals`对象，然后触发`ExternalModuleFactoryPlugin`插件以及`DelegatedModuleFactoryPlugin`插件，并同时以`NormalModuleFactory`作为参数来进行传递!
