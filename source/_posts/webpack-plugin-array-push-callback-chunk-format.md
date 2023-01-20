@@ -25,7 +25,14 @@ cover_picture: ArrayPushCallbackChunkFormatPlugin封面.png
 2. 从`compilation`中创建出全新的临时`hooks`，该hooks的内容如下：
    ![从compilation中创建出来的全新hooks](从compilation中创建出来的全新hooks.png)
 3. 针对全新的`hooks`的`renderChunk`以及`chunkHash`钩子函数设置监听动作
-
+> 这里的`renderChunk`主要是关于chunk内容被渲染出来的时候呗触发的， :confused: 那么它是在哪里被触发的呢？
+> 这里我们定位到`JavascriptModulesPlugin`中的第642行
+```javascript
+  let source = tryRunOrWebpackError(
+		() => hooks.renderChunk.call(moduleSources, chunkRenderContext),
+		"JavascriptModulesPlugin.getCompilationHooks().renderChunk"
+	);
+```
 
 ### 全新hooks关键动作具体解析
 // TODO 什么时候被触发的呢？待学习

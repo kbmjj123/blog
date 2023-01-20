@@ -102,7 +102,7 @@ cover_picture: Compiler封面.jpg
 
 :alien: 这里的`DelegatedModuleFactoryPlugin`插件，则是根据Dll配置参数的前缀属性`scope`，来对应分别对`NormalModuleFactory.hooks.factorize`或者是`module`钩子容器添加监听函数，然后返回最终的`DelegatedModule`模块交给`NormalModuleFactory`模块的对应钩子函数去执行操作，它是实现从dll以及externals中外部导入或者剔除打包的具体实现！
 
-#### 8、thisCompilation创建一个Compilation对象，并进入compilation方法
+#### 8、thisCompilation创建一个Compilation对象，并触发compilation方法
 > 首先，先看一下`Compilation`对象的创建过程，如下图所示：
 > ![Compiler创建Compilation对象](Compiler创建Compilation对象.png)
 > :point_up: 通过创建一`Compilation`对象，并将其作为参数，触发钩子容器中的：`thisCompilation`以及`compilation`方法

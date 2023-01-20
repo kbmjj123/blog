@@ -80,12 +80,14 @@ const getNormalizedWebpackOptions = config => {
 ![第一插件给Compiler追加日志属性](第一插件给Compiler追加日志属性.png)
 
 #### 4、执行webpack.config.js中的plugins对应的插件
+> 这里与其说是执行，还不如说是**将插件嫁接到各个钩子容器中，准备被触发执行**
 ![插件被调用的时机](插件被调用的时机.png)
 ![插件定义的规范要求来源](插件定义的规范要求来源.png)
 ![自定义插件的实现](自定义插件的实现.png)
 
 #### 5、对webpack基础的配置属性进行额外追加动作
 > 详见`/lib/config/defaults.js`中的`applyWebpackOptionsDefaults`方法中的实现
+> 通过调用该方法，实现默认统一的webpack参数对象基础类，也就是`webpack.config.js`中参数形成的地方！
 
 #### 6、对compiler赋予公共的webpack基础性插件动作，实现公共的webpack打包动作流水线
 > 此环节主要是`webpack`生态中的内部插件的使用，通过封装的公共的options中的属性参数，来决定是否使用`webpack`中的内部插件来提供额外的支撑，比如`webpack.config.js`中定义了以下的代码：
@@ -98,6 +100,112 @@ module.exports = {
 };
 ```
 ![externals额外的配置](externals额外的配置.png)
+
+:stars: 这里关于其中所加载的插件，第一次看到的时候，吓尿了，居然在里面集成了这么大的一波插件！！！
+:point_down: 来整理一下关于`webpack`中自带的都有哪些插件！
+
+| 插件名称  | 描述 | 所属配置 |
+|---|:---|
+| ExternalsPlugins |  | `webpack.externals`、`externalsPresets.nwjs`、`externalsPresets.webAsync` |
+| NodeTargetPlugin |  | `externalsPresets` |
+| ElectronTargetPlugin |  | `externalsPresets` |
+| ChunkPrefetchPreloadPlugin | 模块预加载插件 | `webpack` |
+| ArrayPushCallbackChunkFormatPlugin |  | `webpack.output.chunkFormat===array-push` |
+| CommonJsChunkFormatPlugin |  | `webpack.output.chunkFormat===commonjs` |
+| ModuleChunkFormatPlugin |  | `webpack.output.chunkFormat===module` |
+| EnableChunkLoadingPlugin |  | `webpack.output.enabledChunkLoadingTypes` |
+| EnableWasmLoadingPlugin |  | `webpack.output.enableWasmLoadingTypes` |
+| EnableLibraryPlugin |  | `webpack.output.enabledLibraryTypes` |
+| ModuleInfoHeaderPlugin |  | `webpack.output.pathinfo` |
+| CleanPlugin | 产物文件清除插件 | `webpack.output.clean` |
+| EvalSourceMapDevToolPlugin |  | `webpack.devtool.source-map.eval` |
+| SourceMapDevToolPlugin |  | `webpack.devtool.source-map.eval` |
+| EvalDevToolModulePlugin |  | `webpack.devtool.source-map.eval` |
+| JavascriptModulesPlugin | javascript解析器插件 | `webpack` |
+| JsonModulesPlugin | json解析器插件 | `webpack` |
+| AssetModulesPlugin | 资源加载插件 | `webpack` |
+| WebAssemblyModulesPlugin |  | `webpack.experiments.syncWebAssembly` |
+| AsyncWebAssemblyModulesPlugin |  | `webpack.experiments.asyncWebAssembly` |
+| CssModulesPlugin |  | `webpack.experiments.css` |
+| LazyCompilationPlugin |  | `webpack.experiments.lazyCompilation` |
+| HttpUriPlugin |  | `webpack.experiments.buildHttp` |
+| EntryOptionPlugin | 入口处理插件，使得不同写法的entry成为可能 | `webpack` |
+| RuntimePlugin |  | `webpack` |
+| InferAsyncModulesPlugin |  | `webpack` |
+| DataUriPlugin |  | `webpack` |
+| FileUriPlugin |  | `webpack` |
+| CompatibilityPlugin |  | `webpack` |
+| HarmonyModulesPlugin |  | `webpack` |
+| CommonJsPlugin |  | `webpack` |
+| LoaderPlugin |  | `webpack` |
+| NodeStuffPlugin |  | `webpack.node` |
+| APIPlugin |  | `webpack` |
+| ExportsInfoApiPlugin |  | `webpack` |
+| WebpackIsIncludedPlugin |  | `webpack` |
+| ConstPlugin |  | `webpack` |
+| UseStrictPlugin |  | `webpack` |
+| RequireIncludePlugin |  | `webpack` |
+| RequireEnsurePlugin |  | `webpack` |
+| RequireContextPlugin |  | `webpack` |
+| ImportPlugin |  | `webpack` |
+| SystemPlugin |  | `webpack` |
+| ImportMetaPlugin |  | `webpack` |
+| URLPlugin |  | `webpack` |
+| WorkerPlugin |  | `webpack` |
+| DefaultStatsFactoryPlugin |  | `webpack` |
+| DefaultStatsPresetPlugin |  | `webpack` |
+| DefaultStatsPrinterPlugin |  | `webpack` |
+| JavascriptMetaInfoPlugin |  | `webpack` |
+| WarnNoModeSetPlugin |  | `webpack.mode` |
+| InferAsyncModulesPlugin |  | `webpack` |
+| EnsureChunkConditionsPlugin |  | `webpack` |
+| RemoveParentModulesPlugin |  | `webpack.optimization.removeAvailableModules` |
+| RemoveEmptyChunksPlugin |  | `webpack.optimization.removeEmptyChunks` |
+| MergeDuplicateChunksPlugin |  | `webpack.optimization.mergeDuplicateChunks` |
+| FlagIncludedChunksPlugin |  | `webpack.optimization.flagIncludedChunks` |
+| SideEffectsFlagPlugin |  | `webpack.optimization.sideEffects` |
+| FlagDependencyExportsPlugin |  | `webpack.optimization.providedExports` |
+| FlagDependencyUsagePlugin |  | `webpack.optimization.usedExports` |
+| InnerGraphPlugin |  | `webpack.optimization.innerGraph` |
+| MangleExportsPlugin |  | `webpack.optimization.mangleExports` |
+| ModuleConcatenationPlugin |  | `webpack.optimization.concatenateModules` |
+| SplitChunksPlugin |  | `webpack.optimization.splitChunks` |
+| RuntimeChunkPlugin |  | `webpack.optimization.runtimeChunk` |
+| NoEmitOnErrorsPlugin |  | `webpack.optimization.emitOnErrors` |
+| RealContentHashPlugin |  | `webpack.optimization.realContentHash` |
+| WasmFinalizeExportsPlugin |  | `webpack.optimization.checkWasmTypes` |
+| NaturalModuleIdsPlugin |  | `webpack.optimization.moduleIds===natural` |
+| NamedModuleIdsPlugin |  | `webpack.optimization.moduleIds===named` |
+| WarnDeprecatedOptionPlugin |  | `webpack.optimization.moduleIds===hashed` |
+| HashedModuleIdsPlugin |  | `webpack.optimization.moduleIds===hashed` |
+| DeterministicModuleIdsPlugin |  | `webpack.optimization.moduleIds===deterministic` |
+| OccurrenceModuleIdsPlugin |  | `webpack.optimization.moduleIds===size` |
+| NaturalChunkIdsPlugin |  | `webpack.optimization.chunkIds===natural` |
+| NamedChunkIdsPlugin |  | `webpack.optimization.chunkIds===named` |
+| DeterministicChunkIdsPlugin |  | `webpack.optimization.chunkIds===deterministic` |
+| OccurrenceChunkIdsPlugin |  | `webpack.optimization.chunkIds===size` |
+| OccurrenceChunkIdsPlugin |  | `webpack.optimization.chunkIds===total-size` |
+| DefinePlugin |  | `webpack.optimization.nodeEnv` |
+| function/object传入的插件 |  | `webpack.optimization.minimize` |
+| SizeLimitsPlugin |  | `webpack.performance` |
+| TemplatedPathPlugin |  | `webpack` |
+| RecordIdsPlugin |  | `webpack` |
+| WarnCaseSensitiveModulesPlugin |  | `webpack` |
+| AddManagedPathsPlugin |  | `webpack` |
+| MemoryWithGcCachePlugin/MemoryCachePlugin |  | `webpack.cache.type===memory` |
+| AddBuildDependenciesPlugin |  | `webpack.cache.type===filesystem` |
+| IdleFileCachePlugin、PackFileCacheStrategy |  | `webpack.cache.store===pack` |
+| ResolverCachePlugin |  | `webpack` |
+| IgnoreWarningsPlugin |  | `webpack.ignoreWarnings` |
+| TemplatedPathPlugin |  | `webpack` |
+
+
+:point_up: 这里有这么多的插件，将在后续的相关`webpack`的执行过程的文章中来分析一波！
+
+#### 7、针对已经设置的监听的函数对象，执行make操作
+> 开始进入真正的编译阶段，原来 :trollface: 上面做了那么多的一系列操作，就只是设置监听器动作而已，真正到了make阶段才是实际的触发操作！
+![从入口开始执行插件](从入口开始执行插件.png)
+:stars: 与我们编写的`webpack.config.js`一样，从入口处entry开始执行
 
 ### 如何来学习webpack
 > 既然`webpack`如此的复杂，那么我想要来熟悉并掌握关于`webpack`的话，应该如何来整呢？

@@ -13,6 +13,7 @@ cover_picture: NormalModuleFactory封面.png
 
 ### 前言
 > [官方链接](https://webpack.docschina.org/api/normalmodulefactory-hooks/)
+> **单从其名字上来看，可以简单理解为创建`module`的工厂！** 而实际在阅读完它的源码的时候发现，其实它就真的是用来创建`module`的工厂！
 > `Compiler`使用`NormalModuleFactory`模块生成各类模块，从`entry`入口开始，此模块回分解每个请求，解析配置文件`webpack.config.js`内容来查找进一步的请求，然后通过分解所有的请求以及解析新的文件来爬去全部的文件，最后，每个依赖项都会成为一个模块实例！！
 > :confused: 那么`NormalModuleFactory`是如何从entry开始来解析的呢？解析过程是怎样的？
 ![NormalModuleFactory的创建过程](NormalModuleFactory的创建过程.png)
