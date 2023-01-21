@@ -36,3 +36,15 @@
 {% link 展示的文字 外部链接地址 true hover的标题 %}
 
 6. 项目中采用的是`fontawesome4.7.0`版本的字体图片，要使用的时候，可以直接浏览[fontawesome.com](https://fontawesome.com/v4/icons/)进行浏览
+
+7. 关于草稿箱的使用
+  + 新增一草稿文档文件，无需定义其完整目录
+  ```bash
+    hexo new draft --path webpack-plugin-delegated "DelegatedPlugin"
+  ``` 
+  这个命令将会在对应的`_drafts`目录中创建对应的草稿文件以及对应的文件夹
+  + 迁移草稿文件以及文件夹，调整为正式的博客文档
+  ```bash
+    hexo publish webpack-plugin-delegated
+  ```
+
