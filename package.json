@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "hexo": "^6.0.0",
+    "hexo-calendar": "^1.0.6",
     "hexo-codepen-snippet": "^1.0.0",
     "hexo-deployer-git": "^3.0.0",
     "hexo-filter-github-emojis": "^3.0.5",
