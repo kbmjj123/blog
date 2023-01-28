@@ -47,4 +47,5 @@
   ```bash
     hexo publish webpack-plugin-delegated
   ```
+8. 对于`hexo-calendar`日历的调整，由于接入该插件后，因为hexo版本的不同而导致的读取基础的配置文件所有调整，因此需要调整到库的源码，需调整`hexo-calendar/index.js/visualMap.color字段` 
 
