@@ -20,7 +20,7 @@ cover_picture: Compilation封面.jpg
 
 ![最简单webpack对应的Compilation的待执行插件队列](最简单webpack对应的Compilation的待执行插件队列.png)
 
-:trollface: 首先，针对一个最简单的`webpack.config.js`进行一个针对`thisCompilation`事件的一个插件执行队列分析，从上图中我们可以对应整理对应的执行队列：
+:trollface: 首先，针对一个上面最简单的`webpack.config.js`进行一个针对`thisCompilation`事件的一个插件执行队列分析，从上图中我们可以对应整理对应的执行队列：
 
 :point_down: 表中的"是否webpack内置集成"，指的是在`WebpackOptionsApply.js`中默认集成的！
 
@@ -35,9 +35,19 @@ cover_picture: Compilation封面.jpg
 | SplitChunksPlugin | :white_check_mark: | 根据“条件”自动拆分chunks |
 | ResolverCachePlugin | :white_check_mark: |  |
 
-#### 加载模块--load
+#### 编译动作触发的开始：加载模块--load
+> 一切从`compiler.hooks.make` --> `EntryPlugin中触发` --> `Compilation.addEntry`操作！
+> 而在这个`addEntry`方法中，最终进入到了`addModuleTree`以及`handleModuleCreation`阶段，然后到了`addModule`，该方法则是实际的`module-build`阶段！
+> :stars: ==> 最终在这个`handleModuleCreation`方法中，调用的`_handleModuleBuildAndDependencies()`方法中，通过AsyncQueue的processor，来触发到了`_buildModule(module, callback)`。
+> 真正通过每个`NormalModule`对象自身的`build`方法，通过传递的参数，来进行每个module自身的build动作
+
+:point_right: parser解析动作的过程：
+在`NormalModule`对象中，都拥有一个`parser`属性，该属性代表着当前模块的一个解析器对象，关于这个`NormalModule`的解析过程，具体可以看 [NormalModule](/2023/01/29/module-and-its-children/#NormalModule)
+
+:alien: 至此，已经完成的module的加载，其中的依赖树也已经形成
 
 #### 模块封存--seal
+
 
 #### 模块优化--optimeze
 

@@ -205,7 +205,7 @@ module.exports = {
 #### 7、针对已经设置的监听的函数对象，执行make操作
 > 开始进入真正的编译阶段，原来 :trollface: 上面做了那么多的一系列操作，就只是设置监听器动作而已，真正到了make阶段才是实际的触发操作！
 ![从入口开始执行插件](从入口开始执行插件.png)
-:stars: 与我们编写的`webpack.config.js`一样，从入口处entry开始执行
+:stars: 与我们编写的`webpack.config.js`一样，从入口处entry开始执行，当我们直接执行`compiler.run()`方法的时候，在做好了一系列的准备工作后，开始进入`compiler.hooks.make`的方法中，该触发方法中主要调用的 {% post_link webpack-plugin-entry-option EntryOptionPlugin.js %}
 
 ### 如何来学习webpack
 > 既然`webpack`如此的复杂，那么我想要来熟悉并掌握关于`webpack`的话，应该如何来整呢？
