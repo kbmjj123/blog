@@ -24,6 +24,9 @@ cover_picture: webpack学习计划封面.jpg
 ![webpack就是一个接收配置以及回调函数的函数](webpack就是一个接收配置以及回调函数的函数.png)
 
 ### webpack的执行过程？
+![webpack的完整工作流程](webpack的完整工作流程.png)
+:alien: 这个工作流程图，并不是自己一开始就整理出来的，而是在经过一遍遍的死磕代码，进行的自己的角度来阅读分析代码，并一点点整理出来的！
+
 > 一般地，我们 :u6709: :two: 种方式来使用`webpack`进行打包动作，如下图所示：
 > ![webpack被调用的方式](webpack被调用的方式.png)
 
