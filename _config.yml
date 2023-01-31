@@ -236,3 +236,8 @@ sitemap:
   rel: false
   tags: true
   categories: true
+
+# 以下是标签云插件的定义
+tagcloud:
+  enable: true
+  documentId: card-tag-cloud

@@ -27,6 +27,7 @@
             backTop.css('display', (scrollTop > clientHeight) ? "block" : "none");
         },
         setTags: function (tags) {
+            console.info(tags);
             var labels = tags.find("a");
             labels.css({"font-size" : "15px"});
             for(var i = 0, len = labels.length; i < len; i++){

@@ -1,0 +1,6 @@
+<% if(config.tagcloud.enable){ %>
+  <%- js('/js/tagcloud/echarts.simple.js') %>
+  <%- js('/js/tagcloud/echarts-wordcloud.min.js') %>
+  <%- js('/js/tagcloud/tagcloud.js') %>
+  <div id="card-tag-cloud" class="card-tag-cloud" style="height: 300px;"></div>
+<% } %>

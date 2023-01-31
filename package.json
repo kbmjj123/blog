@@ -26,6 +26,7 @@
     "hexo-calendar": "^1.0.6",
     "hexo-codepen-snippet": "^1.0.0",
     "hexo-deployer-git": "^3.0.0",
+    "hexo-echarts-tagcloud": "^1.1.4",
     "hexo-filter-github-emojis": "^3.0.5",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
