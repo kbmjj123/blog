@@ -46,6 +46,8 @@ cover_picture: Compilation封面.jpg
 
 :alien: 至此，已经完成的module的加载，其中的依赖树也已经形成
 
+#### 模块完成--finish
+
 #### 模块封存--seal
 
 

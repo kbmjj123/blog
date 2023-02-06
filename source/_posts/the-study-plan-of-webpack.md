@@ -16,6 +16,7 @@ cover_picture: webpack学习计划封面.jpg
 ### webpack的组成结构
 > 通过简单的通读`webpack`的相关源代码，自己整理了关于`webpack`的几个比较重要模块，如下图所示：
 > ![Webpack的几个关键模块](Webpack的几个关键模块.png)
+> 关于几个模块，我觉得有点像战场上的战斗一般，指挥官(Compiler)根据上级指令(webpack.config.js配置)安排好一切之后，下达指令给士兵(Compilation)，士兵接收命令进行作战(编译/打包)，在作战的过程中，拥有一系列的装备(Plugin)的加持，使得士兵拥有不同工种的角色，最后指挥官(Compiler)针对结果进行总结(加载/输出文件)!
 > 这边也将在后续的几篇文章中进行详细分析！
 
 ### webpack是什么？

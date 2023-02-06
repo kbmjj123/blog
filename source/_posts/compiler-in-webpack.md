@@ -109,10 +109,35 @@ cover_picture: Compiler封面.jpg
 > 关于这里具体调用的那些插件的动作，可见
 
 #### 9、开始make进行打包动作，完成打包finishMake
+![Compiler执行make动作并触发真正的编译动作](Compiler执行make动作并触发真正的编译动作.png)
+**从这里开始，进入编译阶段**，具体可以浏览 {% post_link webpack-plugin-entry-option EntryOptionPlugin插件 %}
+
+然后是`finishMake`阶段，一般来说，该阶段暂无具体的插件干预，除了*ProvideSharedPlugin*，在完成`finishMake`阶段之后，将自动执行`compilation.finish()`以及`compilation.seal()`完成模块的编译以及内容的生成和优化动作，具体可分别查看
+[compilation.finish阶段](/2023/01/11/compilation-in-webpack/#模块完成–finish)以及[compilation.seal阶段](/2023/01/11/compilation-in-webpack/#模块封存–seal)
 
 #### 10、收尾工作afterCompile
+> 收尾工作主要由`AutomaticPrefetchPlugin`来完成，通过该插件，获取编译阶段的module，并将其进行缓存下来
 
 #### 11、是否通知shouldEmit
+> 此阶段完成`Compiler.run(callback)`方法的执行，并进入其callback方法(onCompiled)的回调，
+> 随后将调用自身的`emitAssets()`方法来根据`compilation`所生成的module来打包输出文件！
+> 并触发`compiler.hooks.emit`钩子方法，告知即将要结果字符串写入到文件中了，在这个阶段，可以在文件被输出时，拦截获取其文件以及对应的内容，如下插件所示：
+```javascript
+class OutputLogPlugin {
+	constructor(options) {
+		this.options = options;
+	}
+	apply(compiler) {
+		compiler.hooks.emit.tapAsync('OutputLogPlugin', (compilation, callback) => {
+			console.info(compilation.getAssets());
+			callback && callback();
+		});
+	}
+}
+module.exports = OutputLogPlugin;
+```
+![emit阶段获取文件以及其内容](emit阶段获取文件以及其内容.png)
+:stars: 通过`compilation.getAssets()`可获取即将要生成的文件内容！
 
 #### 12、完成所有工作done以及afterDone
 
