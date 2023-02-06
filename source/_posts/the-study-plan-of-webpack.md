@@ -11,7 +11,7 @@ cover_picture: webpack学习计划封面.jpg
 ---
 
 ### 前言
-> 现在基本上每一个前端童鞋都与webpack在工作学习上都有所依赖，不管是以前还是未来，webpack都将占据非常重要的地位，而且都会与每一位前端童鞋息息相关，那么我是否可以像之前阅读其他的源码一样，来通过阅读`webpack`的源码，一步一步跟着代码来读懂这个`webpack`呢？起初我也是这么做的，然后我放弃了，其中的代码量之多，而且又超级复杂，错综复杂我觉得已经不能够用来形容这个`webpack`了，:tired_face: 不可能完全通过单纯的硬着头皮来阅读代码来理解，因此，我觉得需要整理一套方便自己来理解这个`webpack`的一整套方案来理解整个`webpack`框架
+> 现在基本上每一个前端童鞋都与webpack在工作学习上都有所依赖，不管是以前还是未来，webpack都将占据非常重要的地位，而且都会与每一位前端童鞋息息相关，那么我是否可以像之前阅读其他的源码一样，来通过阅读`webpack`的源码，一步一步跟着代码来读懂这个`webpack`呢？起初我也是这么做的，然后我放弃了，其中的代码量之多，而且又超级复杂，错综复杂我觉得已经不能够用来形容这个`webpack`了，:tired_face: 不可能完全通过单纯的硬着头皮来阅读代码来理解，因此，我觉得需要整理一套方便自己来理解这个`webpack`的一整套方案来理解整个`webpack`框架，本次学习基于**V5.75.0**版本的！
 
 ### webpack的组成结构
 > 通过简单的通读`webpack`的相关源代码，自己整理了关于`webpack`的几个比较重要模块，如下图所示：
@@ -108,7 +108,7 @@ module.exports = {
 :point_down: 来整理一下关于`webpack`中自带的都有哪些插件！
 
 | 插件名称  | 描述 | 所属配置 |
-|---|:---|
+|---|:---|---|
 | ExternalsPlugins |  | `webpack.externals`、`externalsPresets.nwjs`、`externalsPresets.webAsync` |
 | NodeTargetPlugin |  | `externalsPresets` |
 | ElectronTargetPlugin |  | `externalsPresets` |
@@ -209,6 +209,9 @@ module.exports = {
 > 开始进入真正的编译阶段，原来 :trollface: 上面做了那么多的一系列操作，就只是设置监听器动作而已，真正到了make阶段才是实际的触发操作！
 ![从入口开始执行插件](从入口开始执行插件.png)
 :stars: 与我们编写的`webpack.config.js`一样，从入口处entry开始执行，当我们直接执行`compiler.run()`方法的时候，在做好了一系列的准备工作后，开始进入`compiler.hooks.make`的方法中，该触发方法中主要调用的 {% post_link webpack-plugin-entry-option EntryOptionPlugin.js %}
+
+### 执行完成后，生成的文件内容为什么是这样子的
+关于生成的文件内容的具体描述，可以查看这个 {% post_link webpack-plugin-javascript-modules webpack中的代码生成器插件 %} 中具体的描述！ 
 
 ### 如何来学习webpack
 > 既然`webpack`如此的复杂，那么我想要来熟悉并掌握关于`webpack`的话，应该如何来整呢？
