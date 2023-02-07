@@ -112,6 +112,7 @@ cover_picture: Compiler封面.jpg
 > 关于这里具体调用的那些插件的动作，可见
 
 #### 9、开始make进行打包动作，完成打包finishMake
+> **make阶段实现module的自我build动作！！！**
 ![Compiler执行make动作并触发真正的编译动作](Compiler执行make动作并触发真正的编译动作.png)
 **从这里开始，进入编译阶段**，具体可以浏览 {% post_link webpack-plugin-entry-option EntryOptionPlugin插件 %}
 

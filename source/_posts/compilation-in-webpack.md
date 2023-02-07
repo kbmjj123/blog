@@ -47,9 +47,10 @@ cover_picture: Compilation封面.jpg
 :alien: 至此，已经完成的module的加载，其中的依赖树也已经形成
 
 #### 模块完成--finish
+> **此阶段实现chunk的生成动作！！！**
 
 #### 模块封存--seal
-
+> **此阶段实现将chunk生成在js中引用的外部依赖内容，并结合框架注释以及其他相关代码实现目标代码的生成！！！**
 
 #### 模块优化--optimeze
 
