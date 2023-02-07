@@ -1,6 +1,6 @@
 ---
 title: webpack学习计划
-description: webpack学习计划
+description: 什么是webpack，webpack的执行过程，webpack学习计划
 author: Zhenggl
 date: 2022-12-30 08:54:59
 categories:
