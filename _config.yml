@@ -5,8 +5,8 @@
 # Site
 title: online阳光
 subtitle: '一个专注于大前端的技术博客'
-description: '专注于大前端行业领域的学习，javascript，css，html，react，android，ios，react-native，Node.js，webpack，gulp，小程序，一个都不能少'
-keywords: 'zhenggl, koby, 阳光online, javascript，css，html，react，android，ios，react-native，Node.js，webpack，gulp，小程序'
+description: 'online阳光, 专注于大前端行业领域的学习，javascript，css，html，react，android，ios，react-native，Node.js，webpack，gulp，小程序，一个都不能少'
+keywords: 'online阳光, zhenggl, koby, 阳光online, javascript，css，html，react，android，ios，react-native，Node.js，webpack，gulp，小程序'
 author: Genglin Zheng
 language: zh-CN
 timezone: 'Asia/Shanghai'
