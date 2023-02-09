@@ -70,7 +70,7 @@ console.log(template({ name: "张三" }));
 3. `Handlebars.excapeExpression(string)`使得字符串可以安全地在HTML内容中渲染为文字。
 
 #### 块助手代码
-> 块助手代码使得调用通过传递上下文参数的代码块的迭代器或自定义函数成为可能，其定义的语法规则与自定义助手一样，使用`registerHelper`，只不过使用的方式有点不同，见 :poing_down: 的代码
+> 块助手代码使得调用通过传递上下文参数的代码块的迭代器或自定义函数成为可能，其定义的语法规则与自定义助手一样，使用`registerHelper`，只不过使用的方式有点不同，见 :point_down: 的代码
 {% codepen slug_hash:'LYrBOZR' %}
 ![块助手代码的不同使用方式](块助手代码的不同使用方式.png)
 

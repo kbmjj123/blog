@@ -39,7 +39,7 @@ child.add({}, err => {
 
 :point_up: 这里当调用了`AsyncQueue`对象的一个`add`方法的时候，将自动执行它的`processor`方法，而且该`processor`还与创建该`AsyncQueue`对象时所传递的`parallelism`限制相关，也就是说这个异步队列对象是可以被数量器所限制的！
 
-:poing_down: 再来看另外的一个进阶使用例子
+:point_down: 再来看另外的一个进阶使用例子
 
 ```javascript
 const AsyncQueue = require("../../lib/util/AsyncQueue");
