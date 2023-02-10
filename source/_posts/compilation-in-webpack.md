@@ -39,7 +39,8 @@ cover_picture: Compilation封面.jpg
 > 一切从`compiler.hooks.make` --> `EntryPlugin中触发` --> `Compilation.addEntry`操作！
 > 而在这个`addEntry`方法中，最终进入到了`addModuleTree`以及`handleModuleCreation`阶段，然后到了`addModule`，该方法则是实际的`module-build`阶段！
 > :stars: ==> 最终在这个`handleModuleCreation`方法中，调用的`_handleModuleBuildAndDependencies()`方法中，通过AsyncQueue的processor，来触发到了`_buildModule(module, callback)`。
-> 真正通过每个`NormalModule`对象自身的`build`方法，通过传递的参数，来进行每个module自身的build动作
+> 真正通过每个`NormalModule`对象自身的`build`方法，通过传递的参数，来进行每个module自身的build动作，而且在此动作中将促成`Source`对象的生成！！！
+> ![source对象的生成](source对象的生成.png)
 
 :point_right: parser解析动作的过程：
 在`NormalModule`对象中，都拥有一个`parser`属性，该属性代表着当前模块的一个解析器对象，关于这个`NormalModule`的解析过程，具体可以看 [NormalModule](/2023/01/29/module-and-its-children/#NormalModule)
@@ -96,8 +97,9 @@ cover_picture: Compilation封面.jpg
 | SizeOnlySource | 表示只有尺寸大小的源代码 | `new SizeOnlySource(size: Number)` |
 
 :trollface: 这里着重介绍一下**CachedSource**以及**ReplaceSource**两个对象
+
 **CachedSource**
----
+
 :star: 描述：包装一个Source，将map、source、buffer、size、sourceAndMap的返回结果缓存到内存中，尝试重用来自其他方法的缓存结果以避免计算！
 
 :star: 构造方法：
@@ -122,7 +124,9 @@ new CachedSource(() => Source, cachedData? CachedData);
 
 :warning: 这里的位置并不受其他的替换或者插入动作的影响！
 
+
 ##### generator关系图
+> :confused: 当程序直接操作字符串而不解析字符串的内容来进行相应的`导入`、`依赖处理`等在nodejs层面才拥有的动作时，是不可能将其直接放在浏览器中就可以直接运行的，因此需要将其中对应的“特殊”操作，转换为在对应环境下(比如浏览器)才可以识别到的动作，而`generator`就是负责这样子的工作，它主要负责将字符串内容生成不同的`Source`对象！
 > 在开始进行代码生成的时候，针对不同的文件扩展名，对应会有不同的解析协议，而`generator`就是作为不同解析的服务对象，对外暴露统一的方法api，实现运行时确认解析类型，以及针对类型生成不同的`source`源代码对象
 ![Generator继承关系图](Generator继承关系图.jpg)
 :confused: 在开始之前，先来看以下的一个例子：
@@ -155,22 +159,29 @@ generate(
     return new RawSource(content);
   }
 ```
+然后将结果存储在`sources`这个Map对象中，而且用另外的一个`CachedSource`来包裹，表示避免对源码source对象的直接访问！
 
-##### dependency关系图
+##### dependency与DenpendencyTemplate关系图
+> 在生成*.js文件的字符串内容为`Source`对象时，通过从`module.originalSource()`来获取`SourceMapSource`对象(包含sourcemap以及source)的对象，然后将其用`ReplaceSource`对象包装起来，随后调用`sourceModule()`方法，针对`module`中的依赖模块进行`sourceDependency()`方法的分析
+> ![根据不同的依赖生成不同的template](根据不同的依赖生成不同的template.png)
+关于`Dependency`在之前的[Dependency介绍](/2023/01/29/module-and-its-children/#Dependency)中已有提及到！
+而`ModuleDependency`则作为`Dependency`子类，则提供了在`webpack`中的所有依赖模块的超类，关于`Dependency`的生态如下：
+![Dependency生态](Dependency生态.png)
+:star: `ModuleDependency`作为`webpack`中的超类依赖实现对象，在`webpack/lib/dependencies/`目录中密密麻麻大部分都是其子类依赖实现，针对不同的业务场景进行对应实现！
 
+:alien: 而这个`DenpendencyTemplate`则是提供了一个超类机制，通过统一提供的`apply(dependency, source, templateContext)`方法，来针对不同的源码对象source生成不同的依赖替换字符串源代码对象！
 
+##### seal代码生成阶段
 > 在此阶段，`chunk`将会被转换为"可替换的对象"，等待被替换，具体过程，可以见 :point_down: 的关于seal阶段中的chunk转换过程：
 
 
 
-#### 模块优化--optimeze
-
-#### 模块分块--chunk
-
-#### 模块哈希--hash
-
-#### 模块重创--restore
-
 ### 我能够做点什么？
-
+> 从上述的关于`compilation`的工作过程的学习，可以对module生成、chunk生成、代码生成等阶段的监听/干预，追加自己的业务场景，比如有以下的几个：
+> 1. 干预代码生成过程，追加自定义注释，使得打包出来的代码统一在某个位置带上自己的表示；
+> 2. 干预js代码解析过程，监听是否在代码中使用了某个不合法的库，可以在编译打包阶段将其去掉；
+> 3. 干预js代码生成过程，统一隐藏项目中的console.log()等输出日志的方法；
+> 4. 理解同步导入以及异步导入的原理，根据实际业务场景进行合理安排依赖导入；
+> 5. 模仿module、generator、dependency、source等生态的设计，对外暴露统一的方法api，设计统一的接口api服务；
+> 6. 未完待续......
 

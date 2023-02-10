@@ -22,7 +22,7 @@ cover_picture: module封面.jpg
 > 2. 通过其成员属性`block(AsyncDependenciesBlock数组类型)`，来维护引用依赖的其他模块，采用异步分割代码加载的方式来加载的其他模块；
 > 3. parent属性，指向父模块；
 
-#### Depencency
+#### Dependency
 > 作为依赖模块形成的基本单元，是一个模块关系的基本单元，可以认为是依赖的代码位置描述对象，其成员属性/方法主要有：
 > 1. loc: 是一个DepencencyLocation对象，代表依赖形成所在的源码位置；
 > 2. getReference(): 根据模版依赖图，来获取所引用的模块以及导出的模块；
