@@ -170,11 +170,13 @@ generate(
 :star: `ModuleDependency`作为`webpack`中的超类依赖实现对象，在`webpack/lib/dependencies/`目录中密密麻麻大部分都是其子类依赖实现，针对不同的业务场景进行对应实现！
 
 :alien: 而这个`DenpendencyTemplate`则是提供了一个超类机制，通过统一提供的`apply(dependency, source, templateContext)`方法，来针对不同的源码对象source生成不同的依赖替换字符串源代码对象！
+![生成待导入的替换字符串源码对象](生成待导入的替换字符串源码对象.png)
 
 ##### seal代码生成阶段
 > 在此阶段，`chunk`将会被转换为"可替换的对象"，等待被替换，具体过程，可以见 :point_down: 的关于seal阶段中的chunk转换过程：
-
-
+![初级代码的生成以及chunk的简单生成](初级代码的生成以及chunk的简单生成.png)
+而真正的代码生成阶段，则由额外的插件来提供的：
+![生成文件内容的时候所触发的插件](生成文件内容的时候所触发的插件.png)
 
 ### 我能够做点什么？
 > 从上述的关于`compilation`的工作过程的学习，可以对module生成、chunk生成、代码生成等阶段的监听/干预，追加自己的业务场景，比如有以下的几个：
