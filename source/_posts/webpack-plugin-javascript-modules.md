@@ -1,6 +1,6 @@
 ---
 title: webpack中的代码生成插件
-description: webpack中的代码生成插件
+description: webpack中的代码生成插件, webpack是如何生成代码的
 author: Zhenggl
 date: 2023-02-01 08:36:44
 categories:
