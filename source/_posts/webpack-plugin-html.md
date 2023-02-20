@@ -13,16 +13,85 @@ cover_picture: HtmlWebpackPlugin封面.jpg
 ---
 
 ### 前言
+{% link 官方文档 https://github.com/jantimon/html-webpack-plugin true 官方文档 %}
+> 关于`HtmlWebpackPlugin`插件的时间，相信不少童鞋应该都是比较熟悉的了，在一些现成的脚手架(像`vue-cli`、`react-cli`等开源三方脚手架)中，都被集成进去成为其核心成员脚手架模块，负责将结果目标内容文件给输出出来， :zero: 配置的方式来快速开发这个业务项目， :confused: 但是，在实际的项目开发过程中，避无可避地需要针对现有的采用脚手架搭建起来的项目进行定制化的配置，来满足不断变更的业务需求，提升编码的效率，因此，很有必要来对所使用的相关插件(`HtmlWebpackPlugin`)进行深入的了解！
+> 关于官方的解释是：`HtmlWebpackPlugin` 简化了 HTML 文件的创建，以便为你的 `webpack` 包提供服务。这对于那些文件名中包含哈希值，并且哈希值会随着每次编译而改变的 `webpack` 包特别有用。你可以**让该插件为你生成一个 HTML 文件，使用 `lodash` 模板提供模板，或者使用你自己的 `loader`。**
+> :space_invader: 这里提及的使用默认的`lodash`模版来生成Html文件，还可以使用自己的loader，比如像`handlerbars-loader`、`html-loader`、`vue-loader`等等，实现将由不同编码实现的相关代码，打包出统一的html文件效果目的！！！
 
-### WebpackHtmlPlugin是如何使用的？
+### HtmlWebpackPlugin是如何使用的？
+> `HtmlWebpackPlugin`是 :one: webpack插件，那么它也就像其他普通的插件一样，通过导入，并在对应的webpack.config.js配置文件中定义好使用的姿势即可！如下代码所示：
+```javascript
+  // webpack.config.js配置文件
+  const HtmlWebpackPlugin = require(/**这里指定webpack的路径*/'../..');
+  module.exports = {
+    plugins: [
+      new HtmlWebpackPlugin({
+        // 这里隐藏相关的插件配置，也可使用默认的HtmlWebpackPlugin配置！
+      })
+    ]
+  };
+```
+而默认的`HtmlWebpackPlugin`配置内容如下：
+![默认的HtmlWebpackPlugin配置](默认的HtmlWebpackPlugin配置.png)
+:point_right: 也就是说，如果我们在该插件中没有传递任何的配置，那么则采用 :point_up: 这里默认的配置来进行文件的打包动作！！
 
-### WebpackHtmlPlugin的执行过程是怎样的？
+#### html模版中可使用的变量
+![模版中能够使用的变量](模版中能够使用的变量.png)
 
-### WebpackHtmlPlugin所提供的钩子容器函数都有哪些以及它们的生命周期
+### HtmlWebpackPlugin的执行过程是怎样的？
+> 要分析这个`HtmlWebpackPlugin`它是如何执行的话，需要先准备一下源码，以及对源码的调试分析过程！
 
-### 官方提供的基于WebpackHtmlPlugin的三方插件
+#### 源码调试小技巧
+> 一般地，要熟悉了解关于相关库代码里面具体是如何执行的，我一般是借助于`vscode`自带的可视化调试服务，而这个`HtmlWebpackPlugin`是基于`webpack`上运行的，我不大可能将其代码挂到`webpack`的源码上，因此，
+> 我采用的是在其可执行程序目录中(`node_modules/.bin/webpack`)，将这个`webpack`程序copy到根目录中，然后配合调试配置文件：`.vscode/launcher.json`
+```json
+{
+  // 使用 IntelliSense 了解相关属性。
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "启动程序",
+      "skipFiles": [
+        // "<node_internals>/**"
+      ],
+      "runtimeVersion": "12.3.1",
+      "program": "${workspaceFolder}/webpack",
+      "args": [
+        "-c", "${workspaceFolder}/examples/default/webpack.config.js"
+      ]
+    }
+  ]
+}
+```
+:stars: 这里我指定程序运行的node版本为12.3.1，执行的具体程序为当前根目录下的`webpack`程序，以及传递的参数为`-c examples/default/webpack.config.js`，
+也就是等同于在根目录中执行以下对应脚本：
+```bash
+  webpack -c example/default/webpack.config.js
+```
+然后启动vscode的调试模式，则可以进入到源码层面的调试工作，入下图所示：
+![调试HtmlWebpackPlugin插件](调试HtmlWebpackPlugin插件.png)
+
+#### 打包产物分析
+> 在对上述最简单的demo项目的结果做一个简单的分析之前，先 :confused: 思考一下，如果我们的css文件、js程序需要在对应html文件中能够被运行到，那么应该是需要在对应的html文件中引入对应的文件标签(`<style></style>`、`<script><script>`)文件的引用，:point_right: 那么这个`HtmlWebpackPlugin`也是如此，如下图所示：
+![生成的html文件](生成的html文件.png)
+![实际生成的内容](实际生成的内容.png)
+从上述的实际运行结果来看主要是在`index.html`文件中引入了一个`bundle.js`文件，**然后由bundle.js文件来创建对应的style标签以及填充对应的样式内容**！
+
+:point_right: 也就是说通过这个bundle.js文件，将自动创建对应的html标签节点！
+
+####  HtmlWebpackPlugin所提供的钩子容器函数都有哪些以及它们的生命周期
+
+:point_down: 是`HtmlWebpackPlugin`所提供的钩子容器函数的执行顺序以及`HtmlWebpackPlugin`的成员角色：
+![HtmlWebpackPlugin所提供的钩子函数的生命周期](HtmlWebpackPlugin所提供的钩子函数的生命周期.png)
+![HtmlWebpackPlugin钩子容器函数](HtmlWebpackPlugin钩子容器函数.png)
+
+### 官方提供的基于HtmlWebpackPlugin的三方插件
 {% link 三方插件 https://github.com/jantimon/html-webpack-plugin#plugins true 三方插件 %}
 
-### 自定义基于WebpackHtmlPlugin的插件
+### 自定义基于HtmlWebpackPlugin的插件
 
 ### 我能够做点什么？
