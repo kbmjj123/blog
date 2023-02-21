@@ -37,6 +37,14 @@ cover_picture: HtmlWebpackPlugin封面.jpg
 
 #### html模版中可使用的变量
 ![模版中能够使用的变量](模版中能够使用的变量.png)
+:point_up: 这里所提及的变量，其具体参数格式以及用法，可参见 {% link options参数一览 https://github.com/jantimon/html-webpack-plugin#options true HtmlWebpackPlugin参数一览 %}
+
+
+:space_invader: 而对于在实际运用过程中，我们还可以在`模版html`文件中使用 :point_down: 几个变量：
+![HtmlWebpackPlugin在html中支持的变量](HtmlWebpackPlugin在html中支持的变量.png)
+:stars: 也就是说，我们可以通过在模版html文件中引用 :point_up: 几个变量，进而直接创建html元素，从`webpack`打包编译过程，到最终文件输出，形成有js :point_right: 的单向通讯！
+
+:confused: 这里 :u6709: :one: 疑问，就是这个在`html模版`中所使用的变量，它是如何最终渲染成为对应的html到界面上的呢？？？这个问题，将在下方的对`HtmlWebpackPlugin`的执行过程进行一个具体的分析时顺带提及一下，主要还是借助于 {% post_link loadash-study-and-usage Lodash三方库 %} 所提供的支持！！
 
 ### HtmlWebpackPlugin的执行过程是怎样的？
 > 要分析这个`HtmlWebpackPlugin`它是如何执行的话，需要先准备一下源码，以及对源码的调试分析过程！
@@ -83,11 +91,44 @@ cover_picture: HtmlWebpackPlugin封面.jpg
 
 :point_right: 也就是说通过这个bundle.js文件，将自动创建对应的html标签节点！
 
-####  HtmlWebpackPlugin所提供的钩子容器函数都有哪些以及它们的生命周期
-
+####  HtmlWebpackPlugin所提供的钩子容器函数都有哪些
 :point_down: 是`HtmlWebpackPlugin`所提供的钩子容器函数的执行顺序以及`HtmlWebpackPlugin`的成员角色：
 ![HtmlWebpackPlugin所提供的钩子函数的生命周期](HtmlWebpackPlugin所提供的钩子函数的生命周期.png)
 ![HtmlWebpackPlugin钩子容器函数](HtmlWebpackPlugin钩子容器函数.png)
+
+**:warning: `HtmlWebpackPlugin` 本身并没有在钩子容器函数中做任何的处理动作，它只是将其生命周期给暴露出来给到外部的插件来进行干预使用！！！**
+
+:confused: 那么，我们可以对它做点什么呢？ :u6709: :point_down: 一个场景，我们可以通过这个这个自定义插件(MyPlugin.js)，对生成的html进行做一个干预动作，对每一个即将要生成的html追加一js
+```javascript
+const { getHtmlWebpackPluginHooks } = require('../../lib/hooks');
+class MyPlugin{
+  constructor(options){}
+  apply(compiler){
+    compiler.hooks.thisCompilation.tap('MyPlugin', compilation => {
+      getHtmlWebpackPluginHooks(compilation).beforeAssetTagGeneration.tapPromise('MyPlugin', ({assets, outputName, plugin}) => {
+        return new Promise(resolve => {
+          console.info('MyPlugin插件干预');
+          assets.js = assets.js.concat(['https://lib.baomitu.com/jquery/1.12.4/jquery.js']);
+          console.info(assets);
+          console.info(outputName);
+          console.info(plugin);
+          resolve({assets});
+        });
+      });
+    });
+  }
+}
+module.exports = MyPlugin;
+```
+:point_up: 这里对应输出的内容为：
+![干预输出-追加统一的js](干预输出-追加统一的js.png)
+
+:alien: 从上面我们可以看出其实这个`HtmlWebpackPlugin`给我们所提供的插件，就是让我们能够干预到输出的html内容，只要我们根据`tapable`所提供的钩子容器函数的使用方式来使用并传递对应的参数即可，这里都是采用的`AsyncSeriesWaterfallHook`类型，因此我们只需要对应整一个`Promise`来包裹并返回出来最终的结果即可！！！
+
+#### 模版中的变量是如何被加载为html中的内容的？
+![使用默认的loader](使用默认的loader.png)
+
+:space_invader: 从上述我们可以看出`HtmlWebpackPlugin`默认使用其自带的loader来对这个模版文件进行加载，而这个loader最终调用的`lodash`库的`template`方法来渲染的
 
 ### 官方提供的基于HtmlWebpackPlugin的三方插件
 {% link 三方插件 https://github.com/jantimon/html-webpack-plugin#plugins true 三方插件 %}
