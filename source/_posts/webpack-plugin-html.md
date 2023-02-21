@@ -44,10 +44,11 @@ cover_picture: HtmlWebpackPlugin封面.jpg
 ![HtmlWebpackPlugin在html中支持的变量](HtmlWebpackPlugin在html中支持的变量.png)
 :stars: 也就是说，我们可以通过在模版html文件中引用 :point_up: 几个变量，进而直接创建html元素，从`webpack`打包编译过程，到最终文件输出，形成有js :point_right: 的单向通讯！
 
-:confused: 这里 :u6709: :one: 疑问，就是这个在`html模版`中所使用的变量，它是如何最终渲染成为对应的html到界面上的呢？？？这个问题，将在下方的对`HtmlWebpackPlugin`的执行过程进行一个具体的分析时顺带提及一下，主要还是借助于 {% post_link loadash-study-and-usage Lodash三方库 %} 所提供的支持！！
+:confused: 这里 :u6709: :one: 疑问，就是这个在`html模版`中所使用的变量，它是如何最终渲染成为对应的html到界面上的呢？？？这个问题，将在下方的对`HtmlWebpackPlugin`的执行过程进行一个具体的分析时顺带提及一下，主要还是借助于 {% post_link lodash-study-and-usage Lodash三方库 %} 所提供的支持！！
 
 ### HtmlWebpackPlugin的执行过程是怎样的？
 > 要分析这个`HtmlWebpackPlugin`它是如何执行的话，需要先准备一下源码，以及对源码的调试分析过程！
+> :confounded: **个人感觉这个源码就是一promise地狱，疯狂地promiese以及then嵌套，程序的执行顺序到处飞！**
 
 #### 源码调试小技巧
 > 一般地，要熟悉了解关于相关库代码里面具体是如何执行的，我一般是借助于`vscode`自带的可视化调试服务，而这个`HtmlWebpackPlugin`是基于`webpack`上运行的，我不大可能将其代码挂到`webpack`的源码上，因此，
@@ -128,11 +129,69 @@ module.exports = MyPlugin;
 #### 模版中的变量是如何被加载为html中的内容的？
 ![使用默认的loader](使用默认的loader.png)
 
-:space_invader: 从上述我们可以看出`HtmlWebpackPlugin`默认使用其自带的loader来对这个模版文件进行加载，而这个loader最终调用的`lodash`库的`template`方法来渲染的
+:space_invader: 从上述我们可以看出`HtmlWebpackPlugin`默认使用其自带的loader来对这个模版文件进行加载，而这个loader最终调用的`lodash`库的`template`方法来渲染的，而关于这里为什么要使用`!`来将loader与实际的ejs文件给分割开来，这个在之前关于 [webpack中的loader](/2023/02/15/loader-work-in-wepback/#如何使用Loader？) 一文中已经详细介绍过了！
+
+![使用lodash渲染模版字符串](使用lodash渲染模版字符串.png)
+:point_down: 是渲染完成后的字符串内容(这边做了一个换行符的相关替换)：
+```javascript
+var HTML_WEBPACK_PLUGIN_RESULT;
+/******/ 
+(() => { 
+// webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+/***/ 685:
+/***/ ((module) => {
+
+var _ = require("/Users/zhenggl/Desktop/wait_to_study/webpack/源码/插件源码/html-webpack-plugin-main/node_modules/lodash/lodash.js");
+module.exports = function (templateParams) {
+ with(templateParams) {
+ return (function(data) {
+ var __t, __p = '';
+ __p += '<!DOCTYPE html>\\n<html>\\n  <head>\\n    <meta charset="utf-8">\\n    <title>' +
+ ((__t = ( htmlWebpackPlugin.options.title) == null ? '' : __t) +
+'</title>\n </head>\n </body>\n </html>\n';
+ return __p;
+ /******/ 	})();
+ /******/ 	
+ /************************************************************************/
+ /******/ 	
+ /******/ // startup
+ /******/ // Load entry module and return exports
+ /******/ __webpack_require__(295);
+ /******/ // This entry module is referenced by other modules so it can't be inlined
+ /******/ var __webpack_exports__ = __webpack_require__(685);
+ /******/ HTML_WEBPACK_PLUGIN_RESULT = __webpack_exports__;
+ /******/
+ /******/ })()
+ 	;;
+ 	HTML_WEBPACK_PLUGIN_RESULT
+```
+
+:smiling_imp: 最终借助于`vm`来针对这个字符串来创建生成对应的可执行程序js，通过使用`with`语法，来实现将`htmlWebpackPlugin.options.title`做实际的一个替换工作，然后最终将结果输出到`HTML_WEBPACK_PLUGIN_RESULT`变量中！
+
+:clown_face: 关于这个`lodash.template()`方法，具体可见 {% link lodash的template方法 "https://www.lodashjs.com/docs/lodash.template" true lodash的template方法 %} 的使用描述!!
+
+:point_down: **附带上关于`HtmlWebpackPlugin`插件的完整执行过程！！！**
+
+![HtmlWebpackPlugin的执行过程](HtmlWebpackPlugin的执行过程.jpg)
+
+#### 依赖库及其使用说明
+> `HtmlWebpackPlugin`插件中使用了 :point_down: 几个依赖库，下面简单说明一下
+
+| 依赖库 | 当前使用说明 |
+|---|:---|
+| lodash | 作为模版渲染引擎来使用 |
+| `html-minifier-terser` | 优化html字符串 |
+| tapable | 钩子容器函数的实现者 |
+| vm | 用于执行模版内容输出的可执行字符串函数，并输出替换后的结果 |
+
 
 ### 官方提供的基于HtmlWebpackPlugin的三方插件
 {% link 三方插件 https://github.com/jantimon/html-webpack-plugin#plugins true 三方插件 %}
 
-### 自定义基于HtmlWebpackPlugin的插件
-
 ### 我能够做点什么？
+> 在通过对`HtmlWepbackPlugin`插件的学习之后，我想我可以更好的来了解关于自己所研发的项目的执行过程，从比较全局的层面来更好的维护整个项目，这边整理了 :point_down: 几个点！
+1. 在实际的项目研发中，尽量多采用自定义的模版html文件，可做到对项目在满足不同的场景的下的统一配置；
+2. 可尝试从零搭建自己的一个项目loader，比如vue、react、handlerbars等等，尝试搭建自己的开发框架，以此更好的了解项目框架的执行过程；
+3. 可通过对`HtmlWebpackPlugin`的相关钩子容器函数进行干预，追加对内容的输出的控制(比如上方的例子)；
+4. 
