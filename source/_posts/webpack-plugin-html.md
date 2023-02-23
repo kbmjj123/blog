@@ -194,4 +194,3 @@ module.exports = function (templateParams) {
 1. 在实际的项目研发中，尽量多采用自定义的模版html文件，可做到对项目在满足不同的场景的下的统一配置；
 2. 可尝试从零搭建自己的一个项目loader，比如vue、react、handlerbars等等，尝试搭建自己的开发框架，以此更好的了解项目框架的执行过程；
 3. 可通过对`HtmlWebpackPlugin`的相关钩子容器函数进行干预，追加对内容的输出的控制(比如上方的例子)；
-4. 
