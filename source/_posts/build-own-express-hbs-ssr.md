@@ -78,7 +78,6 @@ cover_picture: express-hbs-框架搭建封面.jpg
 ![partial的内容](partial的内容.png)
 
 **关于这个helper的配置**
----
 > `express-hbs`中并没有提供针对helper统一配置(像partialsDir那样搬来配置使用的方式)，这边模仿了它的一个机制，通过提供的统一的对外入口，直接实现一键式配置接入`helpers`，如下代码所示
 ```javascript
   //调用的方式
@@ -119,4 +118,31 @@ help(hbs.handlebars);
 ```hbs
 <p>以下是三方的helper</p>
 {{lowercase "LIQUID!"}}
+```
+
+### 三、接入bootstrap库支持
+> 要让自己所编写出来的站点能够美观而且支持响应式，可借助于`bootstrap`三方css库来辅助开发，满足平日的研发的同时，又可以提升研发效率！
+> 简单的方式就是直接在模版layout.hbs文档中加入bootstrap的css库地址，然后便可以在项目中直接使用到了，这里我们分享另外一种方式：采用npm的方式来引用
+
+:point_right: 首先，可以选择安装一三方库`node-sass-middleware`
+```bash
+  npm install node-sass-middleware
+```
+
+:point_right: 然后在对应的入口文件app.js在注册相关的静态目录之前，进行该中间件的配置使用：
+```javascript
+  const sassMiddleware = require('node-sass-middleware');
+  app.use(sassMiddleware({
+    src: relative('scss'),
+    dest: relative('public'),
+    debug: true,
+    outputStyle: 'compressed'
+  }));
+  // 这里必须在这静态化目录配置之前！
+  app.use(express.static(relative('public')));
+```
+
+:point_right: 然后对应的在src所配置的目录中声明定义好对应的`scss/stylesheets/style.scss`即可，并在这个`style.scss`文件中引用相关的`bootstrap`库，这里可根据实际情况进行对应引用！
+```scss
+  @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 ```
