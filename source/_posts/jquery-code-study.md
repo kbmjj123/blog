@@ -70,3 +70,5 @@ cover_picture: jquery源码分析封面.jpg
 :point_right: 也就是说`jquery.fn.init`的原型最终是`jquery.prototype`对象！因此在这个`jquery.fn.init()`方法中返回的`this`对象，最终也是**jquery对象**，同时也说明了为什么在`jquery.fn`上追加/修改的属性，将会影响到所有的`jquery`对象，因为修改了jquery的prototype对象，从而也就修改了所有的jquery实例对象！！
 
 **然后剩余的所有其他代码，我们都可以认为是通过`jquery.extend()`方法，将N多的属性/方法追加到jquery对象上！！！**
+![追加的自定义fn方法](追加的自定义fn方法.png)
+![追加fn方法执行结果](追加fn方法执行结果.png)
