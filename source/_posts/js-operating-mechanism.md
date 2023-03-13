@@ -7,7 +7,7 @@ categories:
 tags:
   - javascript
   - EventLoop
-cover_picture:
+cover_picture: js运行机制封面.png
 ---
 
 ### 一、前言
@@ -33,7 +33,7 @@ JS是`单线程`,`单线程`,`单线程`的，为毛是单线程的，这里的�
 #### 1.2、浏览器是多进程的
 打开资源管理器，可以看到浏览器开了很多个进程，每一个tab页都是单独的一个进程，所以一个页面奔溃之后一般不会影响到其他页面
 
-![浏览器是多进程](https://img.91temaichang.com/blog/system-task.png)
+![浏览器是多进程](system-task.png)
 
 浏览器包含以下几个进程：
 
@@ -44,7 +44,7 @@ JS是`单线程`,`单线程`,`单线程`的，为毛是单线程的，这里的�
 
 #### 1.3、浏览器渲染进程
 **浏览器渲染进程是多进程的**，也是一个前端人最关注的，它主要包括有以下几个线程：
-![浏览器进程以及线程](https://img.91temaichang.com/blog/browse_task.png)
+![浏览器进程以及线程](browse_task.png)
 - GUI渲染线程
     * 负责渲染浏览器界面，解析HTML，CSS，构建DOM树和RenderObject树，布局和绘制等；
     * 当界面需要重绘(Repaint)或由于某种操作引发回流(reflow)时，该线程就会执行；
@@ -101,7 +101,7 @@ WebWorker有几个特点：
   - 2. 当遇到异步任务是，`就交给其他线程执行`，当异步任务执行完了，就往事件队列里面`塞一个回调函数`；
   - 3. 一旦执行栈中所有的同步任务都执行完毕了，就会读取事件队列，从队列头部去一个任务塞到执行栈中，开始执行；
   - 4. 一直重复步骤3的操作
-![JS Event Loop](https://img.91temaichang.com/blog/JS-event-loop.png)
+![JS Event Loop](JS-event-loop.png)
 
 以上就是JS事件循环了，确保了同步任务与异步任务有条不紊的执行，只有当前执行栈中任务被执行完了，主线程才会去读取事件队列，看看有没有任务要执行，每次取一个来执行
 
@@ -125,7 +125,7 @@ JS引擎执行异步代码而不用等待，是因为有消息队列和事件循
     - 消息队列：消息队列是一个先进先出的队列，它里面存放着各种消息
     - 事件循环：主线程重复地从消息队列中取消息到执行栈中进行执行的过程
 
-![JS执行异步任务的示意图](https://img.91temaichang.com/blog/js-async-task.png)
+![JS执行异步任务的示意图](js-async-task.png)
 
 从上图我们可以得出这样子的一个结论，就是：
 > 异步过程的回调函数，一定不在当前这一轮事件循环中执行。
@@ -149,7 +149,7 @@ JS的执行顺序就是每次事件循环中的宏任务-微任务。
     - 反复执行上述操作
 
 具体如下示意图所示：
-![宏任务与微任务的调度](https://img.91temaichang.com/blog/task_job_schedule.png)
+![宏任务与微任务的调度](task_job_schedule.png)
 用代码来翻译一下就是：
 ```javascript
   //宏任务
@@ -164,7 +164,7 @@ JS的执行顺序就是每次事件循环中的宏任务-微任务。
     ui_render();
   }
 ```
-![宏任务与微任务执行流程](https://img.91temaichang.com/blog/task_job_luicheng.png)
+![宏任务与微任务执行流程](task_job_luicheng.png)
 ##### 2.2.3 事件循环与页面渲染
 在ECMAScript中，微任务称为jobs，宏任务称为task。
 浏览器为了能够使得JS内部task与DOM任务有序的执行，会在一个task执行结束后，在下一个task执行开始前，对页面进行重新渲染；
@@ -185,7 +185,7 @@ JS的执行顺序就是每次事件循环中的宏任务-微任务。
   }, 17);
 ```
 我们来看一个效果
-![宏任务与微任务效果](https://img.91temaichang.com/blog/task_job_demo.gif)
+![宏任务与微任务效果](task_job_demo.gif)
 刚开始div的文本内容会变红色，跟着等到console打印完成后，变为蓝色
 针对上述的运行效果，我们来分析一波：
   - 第一轮事件循环，将代码塞到JS线程栈中执行，dom使文本变为黄色，然后遇到Promise微任务，微任务塞到事件队列中，接着遇到宏任务setTimeout，则交由定时器触发线程；

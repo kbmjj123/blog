@@ -7,7 +7,7 @@ categories:
 tags:
     - vue
     - 指令
-cover_picture: https://img.91temaichang.com/blog/vue-v-model.jpeg
+cover_picture: vue-v-model.jpeg
 ---
 
 ### 自定义Vue中的v-model双向绑定

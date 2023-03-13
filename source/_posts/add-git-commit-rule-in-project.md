@@ -7,14 +7,14 @@ categories:
 tags:
     - 工具
     - git
-cover_picture : https://img.91temaichang.com/blog/add-git-commit-template-rule-in-project.png
+cover_picture : add-git-commit-template-rule-in-project.png
 ---
 ### 前言
 大家在日常的coding生活中，不免需要提交代码，然后每次代码commit的message，是否有认真地描述过呢？
 
 我想不少童鞋应该是直接随便编写点简单的描述内容就直接提交上去了，但是，要是遇到下图这个情况：
 
-![随便提交的git commit message](https://img.91temaichang.com/blog/git-commit-without-correct-msg.png)
+![随便提交的git commit message](git-commit-without-correct-msg.png)
 
 作为项目管理员，在做这个代码的code reviewing的时候，要看每次提交的代码具体都是做了什么事情的时候，估计心里会有一顿F开头的话语。
 
@@ -22,7 +22,7 @@ cover_picture : https://img.91temaichang.com/blog/add-git-commit-template-rule-i
 
 根据业界开发人员整理了关于这个commit的规范，且在相关的IDE开发工具中提供的相关的插件
 
-![git提交规范](https://img.91temaichang.com/blog/git-commit-template.png)
+![git提交规范](git-commit-template.png)
 
 供我们方便的使用。
 
@@ -79,6 +79,6 @@ cover_picture : https://img.91temaichang.com/blog/add-git-commit-template-rule-i
 
 这样子，一旦我们执行的不符合`git commit template`的提交的时候，ide就会自动禁止提交，并提示对应的内容，如下所示：
 
-![异常的commit提交规范](https://img.91temaichang.com/blog/commot-error.png)
+![异常的commit提交规范](commit-error.png)
 
 必须在修改为正确的git commit message之后，才可以正常提交代码。

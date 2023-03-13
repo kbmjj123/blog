@@ -7,13 +7,13 @@ categories:
 tags:
   - css
 
-cover_picture: https://img.91temaichang.com/blog/css-structure.jpeg
+cover_picture: css-structure.jpeg
 top: 1
 ---
 
 
 关于CSS学习的路线架构图，长期维护更新，每次添加的文章，都会已这个作为文章的目录
-![玩转CSS架构图](https://img.91temaichang.com/blog/playCSS.png)
+![玩转CSS架构图](playCSS.png)
 
 
 ### 一、[准备篇]()

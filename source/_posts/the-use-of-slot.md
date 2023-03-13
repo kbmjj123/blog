@@ -7,7 +7,7 @@ categories:
 tags:
     - vue
     - javascript
-cover_picture: https://img.91temaichang.com/blog/vue-slots.jpeg
+cover_picture: vue-slots.jpeg
 ---
 
 ### 前言

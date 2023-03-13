@@ -7,7 +7,7 @@ categories:
 tags:
     - javascript
     - function
-cover_picture: https://img.91temaichang.com/blog/debounce-cover.jpeg
+cover_picture: debounce-cover.jpeg
 ---
 
 ### 问题引入
@@ -37,7 +37,7 @@ cover_picture: https://img.91temaichang.com/blog/debounce-cover.jpeg
 ```
 看一下这个运行结果：
 
-![未使用防抖的](https://img.91temaichang.com/blog/no-debounce-input.gif)
+![未使用防抖的](no-debounce-input.gif)
 
 ➡️ 从上述结果中我们可以看出，只要我们按下这个键盘，就会触发这个ajax请求，不仅从资源上来说这个是很浪费资源的行为，而且在实际应用中，用户也是输出完成的字符后，才会请求的。
 下面我们优化一下：
@@ -64,7 +64,7 @@ cover_picture: https://img.91temaichang.com/blog/debounce-cover.jpeg
 ```
 再看一下这个运行结果：
 
-![使用了防抖的函数](https://img.91temaichang.com/blog/debounce-input.gif)
+![使用了防抖的函数](debounce-input.gif)
 
 可以看到，我们假如了防抖之后，当频繁输入的时候，并不会发送请求，只有当我们在指定的时间间隔内没有输入时，才会执行函数，如果停止输入但是在指定的事件间隔内又输入，会重新触发计时。
 
@@ -83,7 +83,7 @@ cover_picture: https://img.91temaichang.com/blog/debounce-cover.jpeg
 ```
 再看看上述代码的运行结果
 
-![使用了setInterval来配合debounce](https://img.91temaichang.com/blog/setInterval-debounce.gif)
+![使用了setInterval来配合debounce](setInterval-debounce.gif)
 
 这个🌰就很好的解释了，如果在事件间隔内执行函数，就会重新触发计时，👆biu 会在第1.5s执行后，每隔1s执行一次，而boom一次也不会执行，因此它的防抖的时间间隔是2s，而执行时间是1s，所以计时器每次都会被重新开始激活
 
@@ -119,7 +119,7 @@ cover_picture: https://img.91temaichang.com/blog/debounce-cover.jpeg
 ```
 看下这个运行结果：
 
-![throttle运行结果](https://img.91temaichang.com/blog/throttle.gif)
+![throttle运行结果](throttle.gif)
 
 从👆可以看到，我们不断输入时，ajax会按照我们设定的时间，每1s执行一次，直接忽略我们疯狂输入的过程，直接1s到了，就拿当前输入框中的值
 

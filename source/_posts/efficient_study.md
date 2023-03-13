@@ -7,10 +7,10 @@ categories:
 tags:
  - 高效学习
  - 技多不压身
-cover_picture: https://img.91temaichang.com/blog/efficient_stydu.png
+cover_picture: efficient_stydu.png
 ---
 
-![高效学习](https://img.91temaichang.com/blog/%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0.png)
+![高效学习](高效学习.png)
 
 ### 前言
 > 社会不断前进发展，我们会很明显的发现，如果自己和5年前的自己相比，没有任何增长，包括技能、价值、积累资金等，那么可以认为在者5年的时间内，自己没有

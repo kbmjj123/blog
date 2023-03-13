@@ -7,7 +7,7 @@ categories:
 tags:
   - javascript
   - 基础概念
-cover_picture: https://img.91temaichang.com/blog/js-data-type.jpg
+cover_picture: js-data-type.jpeg
 ---
 
 ***请注意：JS的数据类型有8种***
@@ -18,7 +18,7 @@ ES6中新增一种Symbol，这种类型的对象永不相等，即使创建的�
 谷歌67版本还出现了一种bigInt，是指安全存储、操作大整数。
 
 根据上面描述，我们可以整理出对应如下的结构图：
-![JS数据类型结构图](https://img.91temaichang.com/blog/js-data-type-struture.png)
+![JS数据类型结构图](js-data-type-struture.png)
 
 可以将js的8中数据类型拆分为3个大类：基本数据类型 + 对象类型 + 其他类型
 然后基本数据类型包含：`Number`、`String`、`Boolean`、`undefined`、`Null`，
@@ -34,7 +34,7 @@ ES6中新增一种Symbol，这种类型的对象永不相等，即使创建的�
 
 `关于isNaN的注意点`
 1. 用isNaN()检测是否是非数值类型，如下图：
-![isNaN](https://img.91temaichang.com/blog/WX20210309-184249.png)
+![isNaN](WX20210309-184249.png)
 2. Number('123') == NaN?，这里Number('123')输出的是123，123是不等于NaN的，因此为false
 
 ### 三、如何判断数据类型？
@@ -46,19 +46,19 @@ ES6中新增一种Symbol，这种类型的对象永不相等，即使创建的�
 #### 3.3 toLocalString()
 函数作用：将数组转成本地字符串
 
-![toLocalString](https://img.91temaichang.com/blog/WX20210309-185011.png)
+![toLocalString](WX20210309-185011.png)
 #### 3.4 检测数据类型的方法
 1. instanceof 操作符
 
-![instanceof 操作符](https://img.91temaichang.com/blog/WX20210309-185237.png)
+![instanceof 操作符](WX20210309-185237.png)
 
 2. 对象的constructor属性
 
-![利用对象的contructor属性](https://img.91temaichang.com/blog/WX20210309-185616.png)
+![利用对象的contructor属性](WX20210309-185616.png)
 
 3. Array.isArray()检查数据是否为数组
 
-![利用Array.isArray](https://img.91temaichang.com/blog/WX20210309-185747.png)
+![利用Array.isArray](WX20210309-185747.png)
 
 ### 四、null与undefined有什么区别？
 Null只有一个值，是null，一个不存在的对象；

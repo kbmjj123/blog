@@ -6,7 +6,7 @@ categories:
     - [开发框架, vue]
 tags:
     - vue
-cover_picture: https://img.91temaichang.com/blog/vue-extend-study.jpeg
+cover_picture: vue-extend-study.jpeg
 ---
 
 ### 前言
@@ -131,7 +131,7 @@ Vue.extend作为一全局api，作为我们去实现编程式组件的重要途�
 ```
 看传递进来的模版中是否有包含name属性，如果没有则用父组件的name，然后对name通过validateComponent函数进行校验，主要判断就是name不能是html元素或者非法命名。
 
-![validateComponent](https://img.91temaichang.com/blog/vue-validate-component.png)
+![validateComponent](vue-validate-component.png)
 
 4、
 ```javascript

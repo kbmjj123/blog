@@ -5,7 +5,7 @@
 访问地址为：[https://www.91temaichang.com](https://www.91temaichang.com)
 
 当前博客系统的框架目录为：
-![模块目录框架](https://img.91temaichang.com/blog/blog-structure.png)
+![模块目录框架](blog-structure.png)
 
 ### 相关指令：
 `hexo new [Layout] <title>`

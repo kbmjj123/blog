@@ -8,7 +8,7 @@ tags:
   - hexo
   - github
   - netlify
-cover_picture: https://img.91temaichang.com/blog/hexo-github.jpg
+cover_picture: hexo-github.jpeg
 top: 1
 ---
 
@@ -40,7 +40,7 @@ cd blog && npm install
 ```
 #### 2.2 目录结构分析说明
 进入blog项目，并安装相关的依赖，通过以下示意图我们可以简单的讲解下项目的目录结构，以及对应的文件作用：
-![目录结构](https://img.91temaichang.com/blog/directory-structure.png)
+![目录结构](directory-structure.png)
 1. .deploy_git: 通过github进行打包部署，所生成的待提交的静态资源文件；
 2. scaffold: 通过`new`命令创建出来的页面所需的模版，默认是拿的page作为模版；
 3. source: 通过`new`命令创建出来的页面资源的*.md文件目录，一般我们创建的页面，都在这个目录里面，按照`new`命令对应的标题来命名的；
@@ -74,21 +74,21 @@ hexo g && hexo d // g为generate、d为deploy的缩写
 ### 五、托管到Netlify
 #### 5.1 注册Netlify
 打开[链接](https://www.netlify.com)进行netlify的注册，并选择代码托管的方式来注册
-![注册方式](https://img.91temaichang.com/blog/directory-structure.png)
+![注册方式](directory-structure.png)
 #### 5.2 创建新的Site，并选择github作为来源
-![创建site](https://img.91temaichang.com/blog/netlify-create.png)
+![创建site](netlify-create.png)
 #### 5.3 然后选择我们刚刚在github上创建的项目
-![选择项目](https://img.91temaichang.com/blog/netlify-choose-project.png)
+![选择项目](netlify-choose-project.png)
 #### 5.4 选择对应的项目分支
-![选择分支](https://img.91temaichang.com/blog/netlify-choose-branch.png)
+![选择分支](netlify-choose-branch.png)
 #### 5.5 接着等一会，netlify会帮我们创建对应的网站，并生成其二级域名
-![创建成功](https://img.91temaichang.com/blog/netlify-created-site.png)
+![创建成功](netlify-created-site.png)
 #### 5.6 添加项目域名
-![配置域名](https://img.91temaichang.com/blog/netlify-edit-domain.png)
+![配置域名](netlify-edit-domain.png)
 #### 5.7 配合下拉弹出的记录值，到域名注册服务商那边，对应配置记录
-![获取记录](https://img.91temaichang.com/blog/netlify-edit-domain2.png)
+![获取记录](netlify-edit-domain2.png)
 对应登录阿里云控制台，找到域名，对应进入解析配置中心，并对应添加两条记录：
-![阿里云DNS解析](https://img.91temaichang.com/blog/aliyun.png)
+![阿里云DNS解析](aliyun.png)
 #### 5.8 解析成功后，我们即可以直接使用自定义域名的方式，来直接访问到我们的blog了
-![配置后的访问](https://img.91temaichang.com/blog/blog.png)
+![配置后的访问](blog.png)
 

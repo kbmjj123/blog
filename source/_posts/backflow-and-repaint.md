@@ -6,14 +6,14 @@ categories:
     - [html]
 tags:
     - 浏览器
-cover_picture: https://img.91temaichang.com/blog/backflow-and-repaint.jpeg
+cover_picture: backflow-and-repaint.jpeg
 ---
 
 ### 写在前面
 ---
 在讨论回流与重绘之前，我们需要知道`浏览器的渲染过程`
 
-![浏览器渲染过程](https://img.91temaichang.com/blog/backflow-and-repaint-guide.jpeg)
+![浏览器渲染过程](backflow-and-repaint-guide.jpeg)
 
 从上面这个图我们可以看出，浏览器的渲染过程如下：
 
@@ -25,7 +25,7 @@ cover_picture: https://img.91temaichang.com/blog/backflow-and-repaint.jpeg
 
 渲染过程看起来很简单，让我们来了解一下每一步都具体做了什么。
 #### 生成渲染树
-![生成渲染树](https://img.91temaichang.com/blog/product-render-tree.jpeg)
+![生成渲染树](product-render-tree.jpeg)
 
 为了构建渲染树，浏览器主要完成了以下工作：
 1. 从DOM树的根节点开始便利每个可见节点；【`渲染树只包含可见的节点`】
@@ -53,7 +53,7 @@ cover_picture: https://img.91temaichang.com/blog/backflow-and-repaint.jpeg
     </body>
   </html>
 ```
-![回流例子](https://img.91temaichang.com/blog/backflow-demo.jpeg)
+![回流例子](backflow-demo.jpeg)
 
 从👆，我们可以看到，第一个div将节点的显示尺寸设置为视口宽度的50%，第二个div将其尺寸设置为父节点的50%，而在这个回流的阶段，我们就需要根据视口具体的宽度，将其转为实际的像素值。
 

@@ -6,7 +6,7 @@ categories:
     - [开发框架, vue]
 tags:
     - vue
-cover_picture: https://img.91temaichang.com/blog/vue-plugins-develop.png
+cover_picture: vue-plugins-develop.png
 ---
 
 ### 前言

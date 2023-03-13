@@ -9,7 +9,7 @@ tags:
   - npm
   - nrm
   - Node.js
-cover_picture: https://img.91temaichang.com/blog/verdaccio.jpeg
+cover_picture: verdaccio.jpeg
 ---
 
 *关于如何要共享组件？目前公司的前端项目比较多，涉及到中后台业务系统，有存在不少组件，在不同的业务系统中使用的，为了避免疯狂的ctrl +C > ctrl + V，一堆的维护工作，这边搭建了内部的私有源，又不能将公司的一个资源扔到公共的npm上，因此这边利用verdaccio + gitlab来搭建以及维护蜘点前端公共的组件服务，通过verdaccio来管理组件的上传以及可视化管理，gitlab来管理组件的版本以及迭代，满足组件的更新迭代；*
@@ -35,7 +35,7 @@ cover_picture: https://img.91temaichang.com/blog/verdaccio.jpeg
 listen: 0.0.0.0:4873
 ```
 verdaccis 跑一下，显示一下内容就正常了；
-![verdaccio效果图](https://img.91temaichang.com/blogimage2021-1-18%2017_8_18.png)
+![verdaccio效果图](blogimage2021-1-18%2017_8_18.png)
 
 ### 三、日常使用–切换npm源
 
@@ -44,7 +44,7 @@ verdaccis 跑一下，显示一下内容就正常了；
 3. 输入命令：```shell nrm ls```，可以看到以下截图，前面有个小星星的，代表当前源是指向哪里的
 4. 输入命令：```shell nrm add``` 源名称 源地址，创建一个新的源
 5. 输入命令：```shell nrm use``` 源名字，切换使用的源
-![nrm 切换源](https://img.91temaichang.com/blog/image2021-1-18%2017_11_37.png)
+![nrm 切换源](image2021-1-18%2017_11_37.png)
 
 ### 四、日常使用
 
@@ -54,4 +54,4 @@ verdaccis 跑一下，显示一下内容就正常了；
 ### 结束
 至此，整个内部npm的使用以及发布就已经全部说明完成了，无论团队的开发者/使用者来说，只要用nrm将源切换为私有源就可以了。
 verdaccio通过代理的形式，把私有包和官方包且分开；
-![内部npm管理示意图](https://img.91temaichang.com/blog/6622941-aa413cf524c5fa90.png)
+![内部npm管理示意图](6622941-aa413cf524c5fa90.png)

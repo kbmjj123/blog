@@ -8,14 +8,14 @@ tags:
   - javascript
   - 基础
   - function
-cover_picture: https://img.91temaichang.com/blog/js-data-type.jpg
+cover_picture: js-data-type.jpeg
 ---
 
 **js立即执行的函数可以让函数在创建之后立马执行，这种编写模式本质上就是函数表达式(命名的或者匿名的)，在创建之后立即执行**
 
 ### 一、立即执行函数的写法
 
-![立即执行函数写法](https://img.91temaichang.com/blog/immedialtely-js.png)
+![立即执行函数写法](immedialtely-js.png)
 
 一般立即执行的函数，都是正常写一js函数(命名或者匿名的)，然后用一()将整个函数包括函数给括起来，然后再加一()紧跟随其后，有需要的就对应传递相关函数调用参数
 
@@ -60,7 +60,7 @@ js词法引擎在解析function关键词之后，认为后面跟随的是函数�
 原因：为毛上述的输出总是6呢？im因为输出的i是全局作用域的，当循环结束后i的值是6，所以i输出的就是6
 幅图：
 
-![幅图](https://img.91temaichang.com/blog/immediately-js-result.png)
+![幅图](immediately-js-result.png)
 
 解决方案：
 

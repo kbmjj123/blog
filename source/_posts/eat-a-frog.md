@@ -4,7 +4,7 @@ author: Zhenggl
 date: 2021-09-30 14:37:59
 categories:
 tags:
-cover_picture: https://img.91temaichang.com/blog/eat-a-frog-cover.png
+cover_picture: eat-a-frog-cover.png
 ---
 
 ### 序言
@@ -32,7 +32,7 @@ cover_picture: https://img.91temaichang.com/blog/eat-a-frog-cover.png
 哪个优先级比较高，下一个应该做什么，只会白白浪费时间。计划在制定的过程中，拆分为每天的任务的时候，可以按照任务的紧急程度来将任务进行排序，可以是有：重要且紧急、重要不紧急、不重要紧急、不重要不紧急，
 这4中类型的任务。
 
-![任务紧急程度](https://img.91temaichang.com/blog/task_urgent.png)
+![任务紧急程度](task_urgent.png)
 
 按照任务紧急程度，我们可以将每天的任务进行划分为4个象限，通过在4个象限中对应填写相应的任务，我这边每天一般是安排3～5个重要且紧急的任务给自己，这样子每天就知道自己应该优先来做哪个任务了，
 配合番茄工作法，我将这里的3～5个任务，制定对应的预定番茄任务来执行，每执行完成一个🍅的时候，就休息5分钟，在休息的时候，顺便思考下一个任务的安排，是否有所调整，这也就是我们所要的🐸。

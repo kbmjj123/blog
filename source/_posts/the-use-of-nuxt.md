@@ -8,7 +8,7 @@ tags:
 - nuxt
 - vue
 - ssr
-cover_picture: https://img.91temaichang.com/blogs/nuxt-cover.png
+cover_picture: nuxt-cover.png
 ---
 
 ### 1⃣️、nuxt的概念

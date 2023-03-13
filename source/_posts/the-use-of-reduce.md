@@ -7,7 +7,7 @@ categories:
 tags:
     - javascript
     - coding
-cover_picture: https://img.91temaichang.com/blog/the-use-of-reduce.png
+cover_picture: the-use-of-reduce.png
 ---
 ### 前言
 相信不少初学者都曾经被JavaScript数组的`reduce`方法困扰过，一直搞不明白到底应该怎么来用。

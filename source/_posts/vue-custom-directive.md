@@ -7,7 +7,7 @@ categories:
 tags:
     - vue
     - 指令
-cover_picture: https://img.91temaichang.com/blog/vue-custom-directive.jpeg
+cover_picture: vue-custom-directive.jpeg
 ---
 
 ### 前言

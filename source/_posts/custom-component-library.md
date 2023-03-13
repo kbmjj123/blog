@@ -8,7 +8,7 @@ tags:
     - vue
     - 自定义组件
     - npm
-cover_picture: https://img.91temaichang.com/blog/custom-component-library.jpeg
+cover_picture: custom-component-library.jpeg
 ---
 
 ### 一、前言
@@ -17,7 +17,7 @@ cover_picture: https://img.91temaichang.com/blog/custom-component-library.jpeg
 #### 2.1 组件库的初始化
 这里是在vue脚手架的基础上，自定义开发项目的公共组件库，并调整组件库的项目目录结构：
 
-![组件库目录](https://img.91temaichang.com/blog/component-directory-structure.png)
+![组件库目录](component-directory-structure.png)
 
 从👆组件库我们可以看出，与标准的vuecli创建出来的项目有所区别的：
 

@@ -7,6 +7,7 @@ categories:
 tags:
   - javascript
   - 基础概念
+cover_picture: setTimeout-setInterval封面.png
 ---
 ###  一、setTimeout和setInterval的基本用法
 1. setTimeout指定延迟XX秒后执行函数；
@@ -68,7 +69,7 @@ tags:
 ```
 对应的执行结果如下：
 
-![setTimeout中this的指向](https://img.91temaichang.com/blog/setTimeout-this.png)
+![setTimeout中this的指向](setTimeout-this.png)
 
 从上述代码执行结果我们可以看出，由于timer5是立即执行代码，并且在执行的时候将this作为参数传递给setTimeout的回调，因此它是最先被执行的；
 而且，就算setTimeout设置为0秒执行，它也是按照EventLoop的机制，塞到事件队列中，再从事件队列中获取，比如上图中的timer4；
@@ -88,18 +89,18 @@ tags:
  ```
 上面这个代码块，每隔100毫秒执行func函数，如果func函数的执行时间少于100毫秒的话，则下一个100毫秒都能够执行到func，执行的示意图如下：
 
-![正常的setInterval](https://img.91temaichang.com/blog/interval1.png)
+![正常的setInterval](interval1.png)
 
 但是，如果func函数的执行时间大雨100毫秒的话，本来应该春发下一个func函数之前的还没有执行完毕，这时应该怎么办？
 答案如下图所示，那么第二个func会在队列(EventLoop)中等待，直到第一个函数执行完
 
-![被挂起的setInterval](https://img.91temaichang.com/blog/interval3.png)
+![被挂起的setInterval](interval3.png)
 
 如果第一个函数的执行时间超级长，在执行的过程中本来应该触发了许多的func函数的话，这些应该触发的函数都会进入到队列中吗？
 `*不，只要发现队列中有一个被执行的函数存在，那么其他的统统忽略*`，如下图所示，在第300毫秒和第400毫秒处的func都被抛弃掉，
 一旦第一个函数执行完后，接着执行队列中的第二个，即使这个函数已经"过时"很久了。
 
-![执行过时很久的setInterval回调](https://img.91temaichang.com/blog/interval3.png)
+![执行过时很久的setInterval回调](interval4.png)
 
 还有一点，虽然在setInterval里面制定的周期是100毫秒，但它不能保证两个函数之间调用的间隔一定是100毫秒。在上面的情况中，
 如果队列中的第二个函数是在第450毫秒处结束的话，在第500毫秒时，它会执行第二个func，也就是说这之间的间隔只有50毫秒，并非100毫秒
