@@ -205,5 +205,5 @@ var md = require('markdown-it')({
 ```
 
 #### 使用过程需注意的点
-1. linkify-it: 在其中 :u6709: 使用到对文档字符串中的中文链接检测库；
+1. linkify-it: 在其中 :u6709: 使用到对文档字符串中的中文链接检测库[linkfy-it链接](http://markdown-it.github.io/linkify-it/doc/#LinkifyIt)；
 2. highlighting: 在markdown一般都有对代码高亮的展示，可通过引用该库来实现代码高亮的配置；
