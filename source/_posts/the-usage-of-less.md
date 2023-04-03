@@ -379,6 +379,46 @@ cover_picture: less封面.jpg
 ![逆向使用的嵌套选择器](逆向使用的嵌套选择器.png)
 
 ### CSS守卫(when与if)
-> `less`中允许通过使用`when`以及`if`关键词，来实现针对某个符合条件下的
+> `less`中允许通过使用`when`以及`if`关键词，来实现针对某个符合条件下的样式
+```less
+@my-option: true;
+button when (@my-option = true) {
+  color: white;
+}
+p{
+  & when (@my-option = true) {
+    button {
+      color: white;
+    }
+    a {
+      color: blue;
+    }
+  }
+}
+```
+![when样式守卫](when样式守卫.png)
+```less
+  @my-option: true;
+  @dr: if(@my-option = true, {
+    button {
+      color: white;
+    }
+    a {
+      color: blue;
+    }
+  });
+  .k{
+      @dr();
+  }
+```
+![if样式守卫](if样式守卫.png)
 
 ### 函数
+![less函数](less函数.png)
+{% link "官方函数" "https://less.bootcss.com/functions/#less-%E5%87%BD%E6%95%B0" true 官方函数 %}
+
+### 做点什么
+> 在学习完成了关于`less`的相关知识点之后，并结合自身在实际项目过程中，对于`less`的使用可谓是少之又少，或者比较有限，这边结合项目并整理了 :point_down: 几个可能经常使用到的场景：
+1. 变量的使用，将项目中公用的值都存储到统一的一个变量中，并通过`import`或者`全局导入`的方式，来保持访问的同一个变量；
+2. 嵌套的继续使用，并结合`&`关键词，进行整体的配合使用；
+3. 混入，对于需要有不同套的样式风格，采用混入的机制，结合`each函数`，生成多套不同的样式文件！
