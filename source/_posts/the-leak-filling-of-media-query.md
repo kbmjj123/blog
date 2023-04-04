@@ -63,12 +63,13 @@ cover_picture: 媒体查询精进攻略封面.jpeg
 `eg: @media not (min-resolution: 96dpi) and (max-resolution: 156dpi){...}`
 
 #### 媒体特性描述符一览
-⚠️ 以下所有的描述符的值都不能为负数，而且特性描述符必须用括号包裹起来！！！
+:warning: 以下所有的描述符的值都不能为负数，而且特性描述符必须用括号包裹起来！！！
+
 | 描述符 | 取值 | 描述 |
 |---|---|---|
 | **width/min-width/max-width** | length | 🈯️用户代理显示区域的宽度 |
 | **height/min-height/max-height** | length | 🈯️用户代理显示区域的高度 |
-| *device-width/min-device-width/max-device-width*** | length | 🈯️输出设配整个渲染区域的宽度，即屏幕宽度 |
+| **device-width/min-device-width/max-device-width** | length | 🈯️输出设配整个渲染区域的宽度，即屏幕宽度 |
 | **device-height/min-device-height/max-device-height** | length | 🈯️输出设配整个渲染区域的宽度，即屏幕高度 |
 | **aspect-ratio/min-aspect-ratio/max-aspect-ratio** | ratio | 🈯️媒体特性中的width/height的比值 |
 | **device-aspect-ratio/device-min-aspect-ratio/device-max-aspect-ratio** | ratio | 🈯️媒体特性中的device-width/device-height的比值 |
