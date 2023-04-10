@@ -203,7 +203,6 @@
     d.addEventListener('scroll', function () {
         var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
         Blog.showHeaderMenu(scrollTop);
-        Blog.showRecentPost(scrollTop);
         Blog.showBackTop(scrollTop);
         Blog.showToc(scrollTop);
     }, false);
