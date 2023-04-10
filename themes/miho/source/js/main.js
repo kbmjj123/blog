@@ -15,19 +15,16 @@
         clientHeight = d.documentElement.clientHeight; //获取可视区的高度
     var Blog = {
         showHeaderMenu: function (scrollTop) {
-            if (scrollTop > clientHeight * 0.1) {
-                headerMenu.removeClass("slide-down");
-                headerMenu.addClass("slide-up");
-            } else {
-                headerMenu.removeClass("slide-up");
-                headerMenu.addClass("slide-down");
-            }
+          if (scrollTop > clientHeight * 0.1) {
+            headerMenu.addClass("color-header");
+          }else{
+            headerMenu.removeClass("color-header");
+          }
         },
         showBackTop: function (scrollTop) {
             backTop.css('display', (scrollTop > clientHeight) ? "block" : "none");
         },
         setTags: function (tags) {
-            console.info(tags);
             var labels = tags.find("a");
             labels.css({"font-size" : "15px"});
             for(var i = 0, len = labels.length; i < len; i++){
@@ -136,7 +133,7 @@
             }
         },
     };
-
+    
     //初始化搜索数据
     initSearch();
     //搜索点击事件
@@ -206,6 +203,7 @@
     d.addEventListener('scroll', function () {
         var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
         Blog.showHeaderMenu(scrollTop);
+        Blog.showRecentPost(scrollTop);
         Blog.showBackTop(scrollTop);
         Blog.showToc(scrollTop);
     }, false);
@@ -234,6 +232,7 @@
         Blog.reward();
     }
     //body
+    // body.css('overflow', 'overlay');
     body.click(function () {
         Blog.showSidebarBox(false);
         sideMenuBoxIsOpen = true;
