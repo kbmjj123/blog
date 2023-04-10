@@ -21,9 +21,9 @@ date: 2021-03-06 09:47:48
 热爱`运动`，尤其喜爱`篮球`、`跳绳`、`电影（Top250）`、`阅读`。
 ### 联系我
 * Home: [91temaichang.com](https://91temaichang.com)
-* Blog: [blog.minhow.com](http://91temaichang.com)
+* Blog: [91temaichang.com](http://91temaichang.com)
 * Email: kbmjj123@gmail.com
-* GitHub: [MinHow](https://github.com/kbmjj123)
+* GitHub: [kbmjj123](https://github.com/kbmjj123)
 
 ### 博客更新日历
 {% calendar %}
