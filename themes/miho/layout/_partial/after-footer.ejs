@@ -56,9 +56,10 @@
 <%- js('js/mouse') %>
 
 <script>
-  if(!(function(){
+  function isMobile(){
     // 根据 HTTP_USER_AGENT 判断设备是否为手机
     var userAgentInfo = navigator.userAgent;
+    alert(userAgentInfo);
     var agents = ["Android", "iPhone", "iPad", "iPod"];
     for (var i = 0; i < agents.length; i++) {
       if (userAgentInfo.indexOf(agents[i]) >= 0) {
@@ -66,7 +67,8 @@
       }
     }
     return false;
-  })()){
+  }
+  if(!isMobile()){
     var wife = document.createElement('script');
     wife.type = 'text/javascript';
     wife.src = 'js/core/wife/waifu-tips.js?=2';
