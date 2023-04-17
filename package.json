@@ -16,7 +16,9 @@
     "clean:git-file": "rm -rf .deploy_git",
     "clean:self-file": "rm -rf public",
     "build:diy": "webpack --config diy/build/webpack.config.js",
-    "dev:diy": "webpack-dev-server --inline --progress --config diy/build/webpack.config.js"
+    "dev:diy": "webpack-dev-server --inline --progress --config diy/build/webpack.config.js",
+    "pre-commit": "node hello",
+    "hello": "node hello"
   },
   "hexo": {
     "version": "6.3.0"
@@ -63,6 +65,7 @@
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.4.1",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^4.2.1",
+    "husky": "^8.0.0"
   }
 }
