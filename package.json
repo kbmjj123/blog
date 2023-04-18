@@ -24,7 +24,6 @@
   "hexo": {
     "version": "6.3.0"
   },
-  "type": "module",
   "dependencies": {
     "hexo": "^6.0.0",
     "hexo-calendar": "^1.0.6",
