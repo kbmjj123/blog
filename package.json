@@ -17,8 +17,7 @@
     "clean:self-file": "rm -rf public",
     "build:diy": "webpack --config diy/build/webpack.config.js",
     "dev:diy": "webpack-dev-server --inline --progress --config diy/build/webpack.config.js",
-    "prepare": "husky-hook install",
-    "pre-commit": "husky install",
+    "prepare": "husky install",
     "hello": "node hello"
   },
   "hexo": {
@@ -61,7 +60,6 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^8.0.0",
-    "husky-hook": "^1.3.0",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.7.0",
