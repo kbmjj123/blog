@@ -17,8 +17,7 @@
     "clean:self-file": "rm -rf public",
     "build:diy": "webpack --config diy/build/webpack.config.js",
     "dev:diy": "webpack-dev-server --inline --progress --config diy/build/webpack.config.js",
-    "prepare": "husky install",
-    "hello": "node hello"
+    "prepare": "husky install"
   },
   "hexo": {
     "version": "6.3.0"
@@ -52,6 +51,7 @@
     "autoprefixer": "^9.6.0",
     "babel-loader": "^8.0.6",
     "commitlint": "^17.6.1",
+    "commitlint-config-git-commit-emoji": "^1.0.0",
     "css-loader": "^2.1.1",
     "cssnano": "^4.1.10",
     "ejs-loader": "^0.3.3",
