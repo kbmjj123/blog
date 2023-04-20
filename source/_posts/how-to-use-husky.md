@@ -45,6 +45,12 @@ cover_picture: husky封面.png
 
 :trollface: 当然，我们也可以直接在对应的`package.json`中添加勾子以及勾子对应的程序动作！无须去专门记住这个`husky`的相关脚本！
 
+### husky的工作原理
+> `husky`的代码也比较简单，无非就是 :four: 个命令: install、uninstall、add、set
+![husky的相关代码](husky的相关代码.png)
+
+:trollface: 其中的`add`与`set`命令，主要是在对应的`.husky`目录下创建对应的参数对对应的文件，并在文件中可以直接执行到对应的程序命令， :star: 从`husky`的`add/set`命令可以看出，创建的文件是对应的`git勾子函数`名称来命名的，是一个普通的**bash脚本**， :art: 我们可以在这个脚本中加入自己的一个动作，比如`npm run scripts中的自定义命令`，这样子，还可以在勾子被触发的时候，顺便触发我们的自定义node程序！
+
 ### 与husky的延伸扩展
 
 #### 1. 与git-commit的结合(commitlint)
