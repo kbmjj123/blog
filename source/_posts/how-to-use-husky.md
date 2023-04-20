@@ -47,7 +47,67 @@ cover_picture: husky封面.png
 
 ### 与husky的延伸扩展
 
-#### 1. 与git-commit的结合(husky-hook)
+#### 1. 与git-commit的结合(commitlint)
 > 在实际的项目过程中，我们需要从其他同事的代码提交记录中查找相关的资料，而且这个也是业界所认同的方式！
 > 因此需要项目成员遵循统一的团队内部规范，确保大家提交的代码尽量是保持统一的一个风格！
+> **假设已安装好对应的`husky`环境**
+1. 添加`commit-msg`勾子，执行信息的校验
 ```bash
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
+```
+2. 安装commitlint校验工具(commitlint)以及校验规则(@commitlint/config-conventional)
+```bash
+npm install commitlint @commitlint/config-conventional --save-dev
+```
+:stars: 这里的`@commitlint/config-conventional`是一个提交的msg规范，默认采用的Angular的提交规范！
+3. 创建commitlint.config.js配置文件
+```js
+module.exports = {
+  extends: [
+    "@commitlint/config-conventional"
+  ]
+}
+```
+4. 执行命令，校验配置的内容(输入不合规的msg)
+![执行commit-msg动作](执行commit-msg动作.png)
+
+5. 输入合规的msg
+![输入合法commit-msg内容](输入合法commit-msg内容.png)
+
+:warning: 在进行整体配置的过程中，还是比较坎坷的，主要有 :point_down: 几个点，记录一下，以免后续踩坑：
++ commitlint.config.js文件名称写错或者是编码格式有问题，导致在`git commit`的时候，一直提示解析异常；
++ node的版本问题，之前采用的v12系列的版本，致使程序不能够被正常的运行，后面升级到了v14系列的node版本，并采用nvm进行默认版本的配置，使得husky程序能够被正常地执行！
++ 与ide工具的配合，由于采用的是业界使用率较高的`git-commit-plugin`插件，其中 :u6709: 配置的emoji表情相关的，因此需要采用另外的一个三方库`commitlint-config-git-commit-emoji`，并将其配置到对应的`commitlint.config.js`文件中
+```javascript
+module.exports = {
+  extends: ["git-commit-emoji"] 
+};
+```
+![vscode的git插件](vscode的git插件.png)
++ `set-script`命令在新或者较旧的npm中已经被删除，所以自己手动配置对应的脚本程序即可
+
+#### 2. 与changelog(conventional-changelog)的配合
+> 在实际的代码管理过程中，可以针对相关的阶段勾子，提供一公共的脚本`changelog`，来创建阶段性的changelog，代表某一个阶段的里程碑！
+1. 添加对应的`conventional-changelog`
+```bash
+npm install conventional-changelog conventional-changelog-cli --save-dev
+```
+2. 添加对应的脚本到`package.json`的scripts中
+```json
+{
+  "scripts": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+  }
+}
+```
+3. 初次执行命令，全量生成changelog信息
+```bash
+npm run changelog
+```
+![初次生成CHANGELOG文件内容](初次生成CHANGELOG文件内容.png)
+
+:stars: 官方推荐的关于`changelog`的最佳实践：
+![changelog的最佳实践](changelog的最佳实践.png)
+
+:point_down: 是`conventional-changelog`的相关参数一览：
+![conventional_changelog命令的相关参数](conventional_changelog命令的相关参数.png)
