@@ -41,7 +41,7 @@
   <% } %>
 
   <% if (page.description){ %>
-    <meta name="description" itemprop="description" content="【<%= page.description %>】<%= config.title %>发布<%= page.description %>">
+    <meta name="description" itemprop="description" content="【<%= page.description %>】<%= config.title %>发布-<%= page.description %>">
   <% } else if (config.description&&(!is_post())){ %>
     <meta name="description" content="<%= config.indexDesc %>">
   <% } else if (page.excerpt){ %>
