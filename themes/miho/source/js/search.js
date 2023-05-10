@@ -3,7 +3,6 @@ function initSearch() {
         back = $('#back'),
         searchContainer = $('#search-container'),
         searchResult = $('#search-result'),
-        searchTpl = $('#search-tpl').html(),
         JSON_DATA = '/content.json?v=' + (+ new Date()),
         searchData;
 
@@ -29,18 +28,20 @@ function initSearch() {
         }
     }
 
-    function tpl(html, data) {
-        return html.replace(/\{\w+\}/g, function (str) {
-            var prop = str.replace(/\{|\}/g, '');
-            return data[prop] || '';
-        });
+    function tpl(data) {
+      return `<li class="search-result-item">
+                <a href="${data.url}" class="search-item-li" target="_blank">
+                  <span class="search-item-li-title" title="${data.title}">${data.title}</span>
+                </a>
+              </li>
+              `;
     }
 
     function render(data) {
         var html = '';
         if (data.length) {
             html = data.map(function (post) {
-                return tpl(searchTpl, {
+                return tpl({
                     title: post.title,
                     url: (window.mihoConfig.root + '/' + post.path)
                 });

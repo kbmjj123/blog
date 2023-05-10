@@ -14,7 +14,7 @@ timezone: 'Asia/Shanghai'
 
 jsonContent:
   meta: true
-  pages: false
+  pages: true
   posts:
     title: true
     date: true
@@ -26,10 +26,11 @@ jsonContent:
     updated: true
     comments: true
     link: false
-    permalink: false
+    permalink: true
     excerpt: false
-    categories: false
-    tags: false
+    categories: true
+    tags: true
+    keywords: true
 
 
 # Content
