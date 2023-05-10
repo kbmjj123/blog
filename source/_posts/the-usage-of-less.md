@@ -4,7 +4,7 @@ description: less的使用, less如何使用, 肝了less
 author: Zhenggl
 date: 2023-03-30 21:39:27
 categories:
-  - [前端, css, les]
+  - [前端, css, less]
 tags:
   - 前端
   - css

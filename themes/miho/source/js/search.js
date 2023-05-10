@@ -65,11 +65,11 @@ function initSearch() {
             containerDisplay(false);
             return;
         }
-
         loadData(function (items) {
             var results = [];
             items.forEach( function(item) {
-                if (item.title.toLowerCase().indexOf(keywords) > -1 || item.text.toLowerCase().indexOf(keywords) > -1) {
+              //! 调整搜索仅针对文章标题进行的搜索
+                if (item.title.toLowerCase().indexOf(keywords) > -1) {
                     results.push(item);
                 }
             });
