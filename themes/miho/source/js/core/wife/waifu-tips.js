@@ -437,7 +437,7 @@ function loadModel(modelId, modelTexturesId){
     localStorage.setItem('modelId', modelId);
     if (modelTexturesId === undefined) modelTexturesId = 0;
     localStorage.setItem('modelTexturesId', modelTexturesId);
-    loadlive2d('live2d', 'https://www.91temaichang.com/js/core/wife/model.json', console.log('live2d','模型 '+modelId+'-'+modelTexturesId+' 加载完成'));
+    loadlive2d && loadlive2d('live2d', 'https://www.91temaichang.com/js/core/wife/model.json', console.log('live2d','模型 '+modelId+'-'+modelTexturesId+' 加载完成'));
 }
 
 function loadOtherModel(){

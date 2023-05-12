@@ -60,11 +60,16 @@
   <% if(config.google_ad){ %>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2363518550463295" crossorigin="anonymous"></script>
     <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-2363518550463295",
-        enable_page_level_ads: true,
-        overlays: {bottom: true}
-      });
+      var addFlag = false;
+      var adsbygoogle = window.adsbygoogle || [];
+      if(!addFlag){
+        adsbygoogle.push({
+          google_ad_client: "ca-pub-2363518550463295",
+          enable_page_level_ads: true,
+          overlays: {bottom: true}
+        });
+        addFlag = true;
+      }
     </script>
   <% } %>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">

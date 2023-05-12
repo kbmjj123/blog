@@ -1,5 +1,5 @@
 <%- js('js/core/busuanzi.pure.mini.js') %>
-<%- js('js/core/jquery.min.js') %>
+<script src="//cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
 
 <script>
   var mihoConfig = {
@@ -71,14 +71,16 @@
     var wife = document.createElement('script');
     wife.type = 'text/javascript';
     wife.src = '/js/core/wife/waifu-tips.js?=2';
+    wife.onload = function(){
+      setTimeout(function(){
+        initModel();
+      }, 2000);
+    };
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(wife);
     var wifeLive = document.createElement('script');
     wifeLive.type = 'text/javascript';
     wifeLive.src = '/js/core/wife/live2d.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(wifeLive);
-    setTimeout(function(){
-      initModel();
-    }, 5000);
   }
 </script>
 
