@@ -5,12 +5,14 @@
 # Site
 title: online阳光
 subtitle: '一个专注于大前端的技术博客'
-indexDesc: 'online阳光是个人开发者的技术内容分享平台，专注于大前端领域，通过技术文章的分析，来对相关的开源框架进行深入的了解，更懂得自己编写的代码，沉淀见解思维。'
-description: 'online阳光, 专注于大前端行业领域的学习，javascript，css，html，react，android，ios，react-native，grunt，Node.js，webpack，gulp，小程序，一个都不能少'
-keywords: 'online阳光, zhenggl, koby, 阳光online, javascript，css，html，react，android，ios，react-native，grunt，Node.js，webpack，gulp，小程序'
+indexDesc: 'online阳光是个人开发者的技术内容分享平台,专注于大前端领域,通过技术文章的分析,来对相关的开源框架进行深入的了解,更懂得自己编写的代码,沉淀见解思维'
+description: 'online阳光, 专注于大前端行业领域的学习, javascript, css, html, vue, react, android, ios, react-native, grunt, Node.js, webpack, gulp, 小程序, 一个都不能少'
+keywords: 'online阳光, zhenggl, koby, 阳光online, javascript, css, html, vue, react, android, ios, react-native, grunt, Node.js, webpack, gulp, 小程序'
 author: Genglin Zheng
 language: zh-CN
 timezone: 'Asia/Shanghai'
+email: kbmjj123@gmail.com
+userIcon: https://secure.gravatar.com/avatar/40041fb63116f0207c65083f47f32ddb?s=96&d=mm&r=g
 
 jsonContent:
   meta: true
@@ -27,7 +29,7 @@ jsonContent:
     comments: true
     link: false
     permalink: true
-    excerpt: false
+    excerpt: true
     categories: true
     tags: true
     keywords: true

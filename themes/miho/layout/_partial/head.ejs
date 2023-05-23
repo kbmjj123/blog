@@ -17,7 +17,6 @@
   </script>
   <%
   var title = page.title;
-
   if (is_archive()){
     title = __('archive_a');
 
@@ -34,8 +33,8 @@
   %>
   <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <% if (page.title){ %>
-    <meta name="keywords" content="<%- theme.keywords + '-' +  page.title %>" />
+  <% if (page.tags && page.tags.length > 0){ %>
+    <meta name="keywords" content="<%- page.tags && page.tags.map(item => item.name).join(', ') %>, <%- theme.keywords %>" />
   <% } else if(theme.keywords){ %>
     <meta name="keywords" content="<%- theme.keywords %>" />
   <% } %>
@@ -78,4 +77,6 @@
   <%- partial('plugins/analytics/google-analytics') %>
   <%- partial('plugins/analytics/baidu-analytics') %>
   <%- partial('plugins/analytics/cnzz-analytics') %>
+  <!-- 以下是添加的json-ld节点 -->
+  <%- partial('json-ld') %>
 </head>

@@ -1,6 +1,6 @@
 ---
 title: vue源码学习与分析(一)：vm实例如何渲染
-description: 主要分析Vue框架中如何将一个Vue实例对象渲染成为一个html，并最终展示到界面上
+description: 主要分析Vue框架中如何将一个Vue实例对象渲染成为一个html，并最终展示到界面上，同时梳理其中vnode以及patch的算法原理
 author: Zhenggl
 date: 2023-05-15 18:43:43
 categories:
@@ -66,6 +66,9 @@ export function _createElement(
   children: ['Hello Vue!']
 }
 ```
+
+:trollface: 附带上这个虚拟dom的一个完整过程流程图
+![渲染出虚拟dom的过程](渲染出虚拟dom的过程.jpg)
 
 ### 渲染过程分析
 > 回到原点，从以下 :point_down: 代码出发
@@ -218,15 +221,14 @@ export function createPatchFunction (backend) {
         // 备份要替换旧的节点
         const oldElm = oldVnode.elm
         const parentElm = nodeOps.parentNode(oldElm)
-        // 创建新节点
+        // 创建新节点并同时更新旧节点
         createElm(
           vnode,
           insertedVnodeQueue,
           oldElm._leaveCb ? null : parentElm,
           nodeOps.nextSibling(oldElm)
         )
-        // 更新新的HtmlDom节点
-
+        // 此处暂时省略循环patch动作
         // 销毁旧的HtmlDom节点
         if (isDef(parentElm)) {
           removeVnodes([oldVnode], 0, 0)
