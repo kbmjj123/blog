@@ -208,8 +208,15 @@ export function createPatchFunction (backend) {
   // 此处隐藏一系列代码...
   return function patch (oldVnode, vnode, hydrating, removeOnly) {
     // 生成目标html的地方
+    // 如果新的vnode未定义而旧的vnode存在，那么则直接删掉并清空旧节点信息
+    if (isUndef(vnode)) {
+      if (isDef(oldVnode)) invokeDestroyHook(oldVnode)
+      return
+    }
+    let isInitialPatch = false
+    const insertedVnodeQueue = []
     if (isUndef(oldVnode)) {
-      // 如果没有定义旧节点，则直接创建一目标HtmlNode元素
+      // 如果没有定义旧节点，则属于是第一次创建的节点对象，直接创建一个对应的html节点
       createElm(vnode, insertedVnodeQueue)
     }else{
       const isRealElement = isDef(oldVnode.nodeType)
@@ -242,6 +249,14 @@ export function createPatchFunction (backend) {
   }
 }
 ```
+
+:trollface: 上述代码对应的一个流程图如下所示：
+![new一个vue的patch流程](new一个vue的patch流程.jpg)
+
+:point_right: 套上最开始的`new Vue({})`的一个过程结合分析一波：
+![实际的newVue的patch过程](实际的newVue的patch过程.png)
+:point_up: 就是这么的简单，旧的dom不存在，直接根据新的虚拟dom来创建对应的结果html，并替换添加到旧的html位置，然后将旧的html给移除掉！
+
 :stars: `patch()`方法是重要的虚拟dom更新函数，主要用于将虚拟dom转换为真实的dom并应用到页面上！他主要作用是对比新旧节点，并更新视图。
 一般来说，`patch()` :u6709: :two: 步骤：
 1. 通过`createElm()`函数创建一个真实的HtmlDom元素；
@@ -250,7 +265,37 @@ export function createPatchFunction (backend) {
 :warning: 这里需要注意的是，`patch()`方法从头到尾并没有操作到数据(即组件的状态和数据)！！
 
 ###### 创建真实的Dom元素-createElm
-> `createElm`函数是用于创建 dom 元素并添加到文档中的方法，主要将虚拟的dom转换为真实的dom！
+> `createElm`函数是用于创建 `dom` 元素并添加到文档中的方法，主要将虚拟的dom转换为真实的dom！
+> :stars: 一个vnode中的elm属性如果为非空的话，那么这个vnode则之前肯定有被使用过，因为在vue的领域中，`vnode.elm`属性只在此方法中创建过，直接去覆盖这个已使用过的elm
+> 属性，可能会存在一些错误覆盖的问题，因此`createElm`一般采用克隆的方式！
+**参数说明：**
+1. vonde: 代表即将被渲染的虚拟dom；
+2. insertedVnodeQueue: 一个数组，用于存储已经挂载的 vnode，确保它们的钩子函数正确地执行；
+3. parentElm: 虚拟dom对应的父节点；
+4. relElm: 参照物节点，用以标识vnode即将是在参照物节点之前还是之后插入；
+5. nested: 一个布尔值，表示当前节点是否为嵌套节点；
+6. ownerArray: 当前节点所属的数组，用来维护节点的位置信息；
+7. index: 当前节点在其父级节点中的索引位置
+
+**执行流程：**
+![vue中createElm的过程](vue中createElm的过程.jpg)
+
+:stars: 从上面我们可以看出`createElm`无非是根据tag标签类型，调用`document`的相关API动作来创建对应的真实Dom节点元素 :point_right: 这里有一个疑问 :confused: 就是如果待创建的节点是嵌套的孩子节点元素的话，那么它的创建顺序应该是怎样的呢？根据代码分析：*应该是从做往右一颗子树的创建完毕，才进入下一个节点的创建*
+
+比如有 :point_down: 的一个代码：
+```html
+<div id="app">
+  <div id="node2">
+    <div id="node3">3</div>
+    <div id="node4">4</div>
+  </div>
+  <div id="node5">5</div>
+</div>
+```
+:point_down: 是对应的输出结果：
+![创建的节点顺序结果](创建的节点顺序结果.png)
+从这里的输出结果，我们可以得出 :point_down: 对应的一个节点创建的顺序：
+![vue创建html的节点顺序](vue创建html的节点顺序.png)
 
 ###### 更新真实的Dom元素-updateChildren
 > `updateChildren`函数是用于对比新旧节点并更新视图的关键函数。它是由 `patch` 函数内部调用的，用于处理同一层级下的多个子节点的更新！
