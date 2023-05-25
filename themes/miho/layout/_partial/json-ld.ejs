@@ -16,6 +16,7 @@
             "height": "60"
         }
       },
+      "image": "https://www.91temaichang.com/images/banner.jpg",
       "keywords": "<%= config.keywords %>", 
       "url": "<%= config.url %>",
       "description": "<%= config.description %>",
@@ -44,7 +45,7 @@
       "headline": "<%= page.title || config.title %>",
       "publisher": "https://www.91temaichang.com",
       "keywords": "<%= page.tags && page.tags.map(item => item.name).join(',') %>", 
-      "image": "http://example.com/image.jpg",
+      "image": "<%= page.permalink %><%= page.cover_picture %>",
       "url": "<%= page.permalink %>",
       "dateCreated": "<%= page.date %>",
       "dateModified": "<%= page.updated %>",
