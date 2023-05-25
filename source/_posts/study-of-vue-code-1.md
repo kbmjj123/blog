@@ -353,4 +353,7 @@ export default{
 ###### 更新真实的Dom元素-updateChildren
 > `updateChildren`函数是用于对比新旧节点的孩子节点的关键函数。它是由 `patch` 函数内部调用的，用于处理同一层级下的多个子节点的更新！
 > :point_down: 是对应的更新孩子节点的差分对比逻辑
+![updateChildren的工作流程](updateChildren的工作流程.png)
+
+:stars: 将上述的流程进行一个简化流程的分析，如下图所示：
 ![updateChildren的差分对比逻辑](updateChildren的差分对比逻辑.png)
