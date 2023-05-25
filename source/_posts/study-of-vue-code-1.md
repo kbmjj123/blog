@@ -260,7 +260,8 @@ export function createPatchFunction (backend) {
 :stars: `patch()`方法是重要的虚拟dom更新函数，主要用于将虚拟dom转换为真实的dom并应用到页面上！他主要作用是对比新旧节点，并更新视图。
 一般来说，`patch()` :u6709: :two: 步骤：
 1. 通过`createElm()`函数创建一个真实的HtmlDom元素；
-2. 通过`updateChildren()`函数对比新旧节点并更新视图
+2. 通过`patchVnode()`函数对比新旧节点并更新视图
+3. 通过`updateChildren()`最终更新孩子节点视图的入口
 
 :warning: 这里需要注意的是，`patch()`方法从头到尾并没有操作到数据(即组件的状态和数据)！！
 
@@ -297,5 +298,59 @@ export function createPatchFunction (backend) {
 从这里的输出结果，我们可以得出 :point_down: 对应的一个节点创建的顺序：
 ![vue创建html的节点顺序](vue创建html的节点顺序.png)
 
+###### 差分并更新新旧节点元素-patchVnode
+> `patchVnode`函数是用于对比更新单个节点的，其差分的流程如下图所示：
+![patchVnode的过程](patchVnode的过程.png)
+
+:alien: 在vnode中存在着一个属性`isStatic`，该属性主要用来标识当前节点是否为**静态节点**，而所谓的静态节点，是指在编译阶段就已确定，不会发生变化的节点，通常包括纯文本节点、静态子节点等，这些节点在后续的更新过程中，不需要重新渲染和比对，就可以直接复用之前的渲染结果，从而提高渲染性能！！
+
+:alien: 在vnode中存在着一个属性`isAsyncPlaceholder`，该属性用来标记当前节点是否为**异步组件的占位符**，而所谓的异步组件，就是指在Vue.js中，可以通过`Vue.component`方法来定义的组件，该函数的第二个参数是一个函数式组件，该组件会异步加载并渲染， :point_right: 当渲染异步组件时，会先渲染一个占位符，也就是`isAsyncPlaceholder`属性所在的节点，然后等待异步组件加载完成后，再将异步组件渲染到该节点位置上！！
+
+:alien: 在vnode中存在着一个属性`isComment`，该属性用来标记当前节点是否为**注释节点**，就是`<!-- 这是注释 -->`，在虚拟DOM中，注释节点也可以被表示为一个虚拟节点对象，当渲染到注释节点时，会直接忽略该节点并继续往下渲染，而且需要注意 :warning: 的是**注释节点虽然不参与渲染，但是存在于DOM树中，因此可以通过DOM API 访问到注释节点，而且还可以在模版中使用注释节点来进行一些特殊处理，例如在模版中注释掉一些内容等**
+
+:alien: 在vnode存在着一个属性`data.hook.prepatch`，该属性为一个函数回调，主要接收两个参数(旧的vnode，新的vnode)，用来在更新过程中标记是否需要执行一些预处理操作的标识属性，会在每次的`update`阶段被调用，并且会在执行真正的`patch`操作之前被调用，用来执行一些预处理操作！！
+```javascript
+new Vue({
+  el: '#app',
+  render: h => {
+    data: {
+      hook: {
+        prepatch(oldNode, node){
+          console.info('我是prepatch勾子方法！')
+        },
+        // 除了prepatch属性之外，还有update、postpatch
+        update(oldNode, node){
+          console.info('我是update勾子方法！')
+        },
+        postpatch(oldNode, node){
+          console.info('我是postpatch方法！')
+        }
+      }
+    }
+  }
+});
+```
+:stars: `hook`属性可用来注册一些生命周期函数，当一个节点需要被更新时，会依次执行`prepatch`、`update`、`postpatch`方法，分别代表节点更新前的预处理、节点更新时的处理以及节点更新后的处理动作！
+:confused: 思考这样子的一个问题，如果想要在普通的template模版中使用这个hook的话，应该如何使用呢？
+```vue
+<template>
+  <div
+    :data="{hook: {postpatch: handlePostPatch}}"
+  ></div>
+</template>
+export default{
+  methods: {
+    handlePostPatch(oldvNode, vNode){
+      console.info('节点更新完成')
+    }
+  }
+}
+```
+
+:alien: 在vnode中存在着一个属性`text`，该属性用来标识节点内包含的文本内容，如果该节点是一个纯文本节点，则`text`属性就是该节点的全部内容，如果该节点包含了其他的子节点，则`text`属性会被忽略，通常在更新的过程中判断节点是否需要重新渲染，如果一个节点的`text`属性没有发生变化，则表示该节点的内容没有被修改过，不需要重新渲染，否则渲染之！！
+
+
 ###### 更新真实的Dom元素-updateChildren
-> `updateChildren`函数是用于对比新旧节点并更新视图的关键函数。它是由 `patch` 函数内部调用的，用于处理同一层级下的多个子节点的更新！
+> `updateChildren`函数是用于对比新旧节点的孩子节点的关键函数。它是由 `patch` 函数内部调用的，用于处理同一层级下的多个子节点的更新！
+> :point_down: 是对应的更新孩子节点的差分对比逻辑
+![updateChildren的差分对比逻辑](updateChildren的差分对比逻辑.png)

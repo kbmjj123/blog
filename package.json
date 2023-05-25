@@ -1,6 +1,6 @@
 {
   "name": "zhengg-blog",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "scripts": {
     "generate-calendar": "hexo gc -w=40",
