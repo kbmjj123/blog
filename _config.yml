@@ -153,28 +153,6 @@ icp: 粤ICP备14102113号-1
 
 #  以下是github的部署
 url: https://www.91temaichang.com
-# 以下是码云的部署
-#url: https://blog-document.gitee.io/t-blog/
-#root: /t-blog/
-
-# deploy:
-  # 以下是码云的部署
-#  type: git
-#  repo: https://gitee.com/blog-document/t-blog.git # 关联github仓库
-#  branch: master
-  # 以下是github的部署
-  # type: git
-  # repo: https://github.com/kbmjj123/hexo-blog.git # 关联github仓库
-  # branch: main
-
-#  type: git
-#  repo:
-#    github:
-#      url: https://github.com/kbmjj123/hexo-blog.git
-#      branch: main
-#    gitee:
-#      url: https://gitee.com/blog-document/t-blog.git
-#      branch: master
 
 #pwa:
 #  manifest:

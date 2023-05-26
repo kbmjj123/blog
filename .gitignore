@@ -19,7 +19,6 @@ coverage
 
 # nyc test coverage
 .nyc_output
-
 .package-lock.json
 yarn.lock
 

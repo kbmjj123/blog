@@ -12,7 +12,7 @@
     "githubDeploy": "hexo clean && hexo generate --config _config.yml,github.yml && hexo d --config _config.yml,github.yml && npm run clean:git-file",
     "giteeDeploy": "hexo clean && hexo generate --config _config.yml,gitee.yml && hexo d --config _config.yml,gitee.yml && npm run clean:git-file",
     "selfDeploy": "hexo clean && hexo generate --config _config.yml,self.yml && hexo d --config _config.yml,self.yml && npm run clean:self-file",
-    "remoteDeploy": "npm run generate-calendar && hexo clean && hexo generate --config _config.yml && hexo d --config _config.yml && rsync -a public/* /usr/local/nginx/html/blog/ && npm run clean:self-file",
+    "remoteDeploy": "npm run generate-calendar && hexo clean && hexo generate --config _config.yml,url_submit.yml && hexo d --config _config.yml,url_submit.yml && rsync -a public/* /usr/local/nginx/html/blog/ && npm run clean:self-file",
     "clean:git-file": "rm -rf .deploy_git",
     "clean:self-file": "rm -rf public",
     "build:diy": "webpack --config diy/build/webpack.config.js",
@@ -42,6 +42,7 @@
     "hexo-renderer-pug": "^3.0.0",
     "hexo-renderer-stylus": "^2.0.0",
     "hexo-server": "^2.0.0",
+    "hexo-submit-urls-to-search-engine": "^2.1.0",
     "hexo-theme-landscape": "^0.0.3"
   },
   "devDependencies": {
