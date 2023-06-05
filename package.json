@@ -7,7 +7,7 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo clean && hexo server",
+    "server": "hexo clean && hexo server --config _config.yml,url_submit.yml",
     "oneKeyDeploy": "hexo clean && hexo generate && hexo deploy",
     "githubDeploy": "hexo clean && hexo generate --config _config.yml,github.yml && hexo d --config _config.yml,github.yml && npm run clean:git-file",
     "giteeDeploy": "hexo clean && hexo generate --config _config.yml,gitee.yml && hexo d --config _config.yml,gitee.yml && npm run clean:git-file",

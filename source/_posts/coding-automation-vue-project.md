@@ -166,7 +166,8 @@ module.exports = {
 > :confused: 有观察过这个github开源的一些项目，他们所提交的代码都有对应的这个changelog，那么这个业界的changelog应该是怎样的呢？如何与网络上的大伙保持在同一个水平线上呢？关于这个changelog可以参考之前的另外一个主题：[husky是如何实现自动化代码管理的](/2023/04/17/how-to-use-husky/#2-与changelog-conventional-changelog-的配合)
 
 ##### 7. 安装lint-staged
-> 假如每一次提交的代码，都需要进行`eslint`、`stylelint`、`prettier`、`commit-msg`一系列动作的话，随着代码量的逐渐增加，估计会加大每次提交代码的等待时长，因此，可以使用这个`lint-staged`，仅针对每次提交的代码进行这个检查动作
+> 假如每一次提交的代码，都需要进行`eslint`、`stylelint`、`prettier`、`commit-msg`一系列动作的话，随着代码量的逐渐增加，估计会加大每次提交代码的等待时长，因此，可以使用这个`lint-staged`，仅针对每次提交的代码进行这个检查动作!
+
 ```bash
   npm install lint-staged --save-dev
 ```
@@ -178,6 +179,13 @@ module.exports = {
     '*.vue': ['eslint --cache --fix', 'git add'],
   }
 ```
+
+:trollface: 这个`lint-staged`的执行过程就是根据已经匹配的文件，执行对应的脚本，将匹配到的文件与脚本做一个关联合并执行，这是什么意思呢？还是以上面 :point_up: 的配置做一个对应的说明：
+
+:point_right: 这里假设匹配到的文件是main.js以及utils.js两个js文件，那么执行`lint-staged`的时候，将会是以下的过程：
+1. 遍历脚本对象/数组，与匹配到的文件进行连接：`eslint --cache --fix main.js utils.js`、`git add main.js utils.js`;
+2. 将上述形成的连接，形成两个顺序执行的命令，等待第一个执行完毕之后，继续执行下一个命令；
+3. 对于不同的文件的配置，像这里的js以及vue，则将形成对应两个并列待执行的数组命令，也就是说对js文件的处理以及对vue文件的处理过程，两者是并行的
 
 #### 自动化配置(追加配置)
 > 借助于脚手架创建的项目进行的二次配置，且借助于其中的`@vue/cli-plugin-eslint`
