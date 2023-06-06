@@ -248,3 +248,30 @@ console.log(proxyObj.age) // "Getting age property"，35
 :trollface: 这里通过使用`extend`关键词，可实现类似于java中的继承关系，而且，还可以将继承的范畴提升至视图层，实现公共视图component的父子继承关系，比如有这样子的一个场景：项目有很多的场合需要定义不同的modal，但是将modal拆分出来之后，发现许多地方都需要自定义`v-model`的相关代码，代码重复冗余，因此可以定义这样子的一个组件，将相关的视图以及API定义其中，然后通过slot的方式来加载目标视图，而且还可以通过重载的方式，覆盖父类的相关属性/方法，实现具体的业务场景！！
 
 :confused: 这里有一个情况，就是要继承(extend)的组件，他是一个组件，但是我们不想每一个页面都去做一个Page组件的注册动作，因此，我们可以将这个Page父类组件，定义为全局的组件，直接可在所有的组件中直接访问，省去重复编写的注册代码的目的！！！
+
+:stars: 有的人可能会认为没有必要用`Vue.extend`，可以直接使用`mixin`来替代， :confused: 是的，没有错，可以直接使用`mixin`来替代这个`Vue.extend`，将公共部分进行混入，但是不建议全局混入，除非是确定不会与其他的场景冲突的，否则应该考虑局部混入：比如我有这样子的一个场景，我需要针对page页面以及modal窗口视图进行公共的混入，那么可以是抽离公共的部分，然后定义两个`mixin`对象，按需混入！！
+
+4. 异步导入组件时，当被导入的组件过大，可能会出现空白的状态，是否可以提供对应的loading效果？
+:point_right: 在学习这个源码的过程中，无意中看到 :u6709: :point_down: 的一段代码：
+```javascript
+export function resolveAsyncComponent (){
+  // 这里在resolve component的时候，是可以根据组件是否有loading状态，对应返回这个组件的loadingComp组件效果的
+  if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
+    return factory.loadingComp
+  }
+}
+```
+:stars: 也就是说，我们可以通过在异步导入组件的时候，追加一个loading字段，代表加载中的组件效果使用方式如下：
+```javascript
+import Loading from './Loading.vue'
+export default{
+components: {
+    Com: () => {
+      return {
+        loading: Loading,
+        component: import('./Com.vue')
+      }
+    }
+  }
+}
+```
