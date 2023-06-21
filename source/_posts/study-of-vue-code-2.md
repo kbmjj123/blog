@@ -94,7 +94,6 @@ const watcher = new Watcher(vm, function () {
 {% codepen slug_hash:'abRgoRv' %}
 
 :trollface: 在上面这个例子中，我们创建了一个 :u7a7a: 的obj对象，然后采用`Object.defineProperty()`方法给这个对象添加了一个`name`属性，可对其进行值的修改，如果我们将`writable`设置为false的话，那么将无法修改到这个`name`属性的值！
-
 #### Proxy
 > `Proxy` 是 JavaScript 的一个内置类，在 `ES6` 中被引入。
 > 它可以拦截对一个对象的访问，从而允许我们修改对象的行为，并提供了一些附加的操作接口。
@@ -142,7 +141,6 @@ console.log(proxyObj.age) // "Getting age property"，35
 > 当该数据对象发生变化时，`Dep` 对象会通知所有依赖于该数据对象的 `Watcher` 对象，让它们重新计算数据并更新视图!
 :confused: 那么当我们定义了一个data对象的时候，这个时候在vue的领域内发生了什么事情呢？ :point_down: 是相关的代码块(隐藏其他相关的代码！)
 ![watcher与dep的代码层的合作监听](watcher与dep的代码层的合作监听.png)
-
 
 #### 两者配合工作
 > 在学习`vue`的监听分析过程中，只有将上述两者给结合起来，才是完整的`vue的数据双向绑定的原理过程`，其完成的工作流程如下图所示：
@@ -228,6 +226,50 @@ console.log(proxyObj.age) // "Getting age property"，35
   }
 ```
 :trollface: 这里也就是获取之前所存储的子组件Sub对象，然后通过`new VueComponent(options)`的方式，来创建一个新的孩子组件对象，而且在该构造调用的过程中，这个孩子组件会调用自身的`_init`，我们从之前的学习可以得知，这个`Vue()._init()`的过程，也就是将这个Sub组件中的`data()`函数所返回的对象的一个“响应化”包装，使得它其中的数据拥有了响应式的回调监听操作！然后再去触发该Sub组件自身的`$mount()`方法，那么这页将会是针对每一个组件都去new 出来一个`Watcher`对象，用来负责对自身进行一个监听与响应更新界面的`updateComponent`操作！
+
+#### 对于数组的监听
+> 我们知道数组中并无像`Object.defineProperty()`的方式来实现双向绑定，那么在`vue`的领域中，它是如何更新的呢？？当我们通过更新数组的时候，数组为什么能够做到对应更新界面的效果的呢？
+> :confused: `vue`中将与数组相关的的操作数组API进行一层包装，然后在调用对应的包装方法的时候，去触发对应更新操作即可！
+```javascript
+// 获取原数组原型对象
+const arrayProto = Array.prototype
+// 从数组原型对象中创建新的对象，等待被包裹拦截
+export const arrayMethods = Object.create(arrayProto)
+// 整理待拦截处理的方法列表
+const methodsToPatch = [
+  'push',
+  'pop',
+  'shift',
+  'unshift',
+  'splice',
+  'sort',
+  'reverse'
+]
+methodsToPatch.forEach(function(method){
+  // 获取原来的js数组方法地址
+  const original = arrayProto[method]
+  def(arrayProto, method, function mutator(...args){
+    // 执行原始的js数组API方法
+    const result = original.apply(this, args)
+    const ob = this.__ob__  // 是一个Observer对象，提供对数组数据进行监听以及可通过引用的dep来触发通知机制
+    let inserted
+    switch(method){
+      case 'push':
+      case 'unshift':
+        inserted = args
+        break
+      case 'splice':
+        inserted = args.slige(2)
+        break
+    }
+    if(inserted) ob.observeArray(inserted)
+    // 这里就是真正的触发更新的地方！
+    ob.dep.notify()
+    return result
+  })
+})
+```
+:trollface: 也就是当我们调用的数组的API(比如push)，其实是调用的包装好的push方法，然后再自动调用`ob.dep.notify()`方法来触发更新操作的！
 
 #### 总结
 **针对上述的一个分析过程，我们可以对应得出以下的一个总结：**

@@ -25,9 +25,7 @@ cover_picture:
 7. [减少渲染的次数：频繁地修改数据会导致 Vue 不停地重新渲染，可以使用 `debounce` 或者 `throttle` 等方式控制渲染的频率](#7-减少渲染的次数);
 8. [及时销毁不再使用的组件：在组件不再使用时，调用 `$destroy()` 方法销毁组件及其相关资源](#8-及时销毁不再使用的组件);
 9. [调用实例的`$mount()`方法，如果没有传递参数的时候，为什么是创建一个游离的真实DOM的过程呢？](#9-$mount()的过程)
-
 10. vue中的style标签中的scope设置了之后，为什么就能够解决全局冲突的问题
-
 11. [vue在使用的过程中往this追加新的变量，并在对应的template中监听该变量，为什么界面没有对应的更新？](#11-data响应化的过程)
 
 
@@ -127,3 +125,35 @@ cover_picture:
 {% codepen slug_hash:'OJaNKQN' %}
 
 :stars: 从上述的例子我们可以看出，当我们通过追加属性的方式，往obj对象中追加b属性的时候，对应模版中的b属性的值并不能正常地被展示出来，而当我们通过`vm.$set()`的方式来往`obj`对象中追加属性的时候，就可以实现界面的对应更新， :warning: 这里有另外一个需要注意的是，我们在`$set`之后，又调用了`vm.$forceUpdate()`方法，才使得界面上的b能够正常展示对应的值出来， :confused: 这里是为什么呢？ :point_right: 因为我们通过`this.$set()`方法的时候，我们仅仅是往这个obj对象中追加了一个b属性，并设置了对应响应式`getter/setter`操作而已，此时并没有触发这个回调，它只在下次回调中将更新，但是这里的值已经不是原来的值了，因此，需要通过调用`this.$forceUpdate()`flush掉vue中的等待更新池子中的动作，也就是主动触发这个`setter`方法，让界面自动重新`render()`
+
+:confused: 那么这个`this.$set()`的过程是怎样的呢？为什么调用了它就能够触发页面的更新？ :point_right: 猜测应该也是直接/间接用的watcher来更新的！
+```javascript
+export function stateMixin(Vue){
+  Vue.prototype.$set = set
+}
+export function set(target: Array|Object, key: any, val: any){
+  // 待处理的对象是一个数组对象
+  if(Array.isArray(target) && isValidArrayIndex(key)){
+    target.length = Math.max(target.length, key)
+    // 这里将触发splice包装后的拦截方法，将会触发对应的Watcher对象更新
+    target.splice(key, 1, val)
+    return val
+  }
+  // 如果这个属性已经在对象中了
+  if(key in target && !(key in Object.prototype)){
+    target[key] = val
+    return val
+  }
+  // 获取之前是否有监听过的标志(即Observer对象)
+  const ob = target.__ob__
+  if(!ob){
+    // 如果这个对象还没有被监听(即无需监听)，则将直接保留忽略监听
+    target[key] = val
+    return val
+  }
+  // 以下是对象属性的设置监听
+  defineReactive(ob.val, key, val)
+  ob.dep.notify() // 触发更新机制 
+  return val
+}
+```
