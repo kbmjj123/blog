@@ -33,6 +33,7 @@ cover_picture: vue中的监听机制.jpg
 3. [Observer](#Observer): 数据响应包装器；
 4. [Object.defineProperty](#Object的defineProperty): 对象数据定义；
 5. [Proxy](#Proxy): js中的代理
+6. [VNode](VNode): 虚拟Dom
 
 #### Watcher
 > `Watcher` 是一个观察者对象，用来监听数据的变化，并执行相应的回调函数。
@@ -123,6 +124,19 @@ proxyObj.age = 35 // "Setting age property to 35"
 console.log(proxyObj.age) // "Getting age property"，35
 ```
 :trollface: 在以上示例代码中，我们创建了一个普通的 js 对象 obj，然后创建了一个 `Proxy` 对象 proxyObj，并将 obj 对象作为其第一个参数。在第二个参数中，我们定义了两个拦截器函数：get 和 set。当我们访问 proxyObj 对象的属性时，会触发 get 拦截器函数，它会输出一段提示信息，并返回实际的属性值。当我们设置 proxyObj 对象的属性时，会触发 set 拦截器函数，它会输出一段提示信息，并将新的属性值保存到底层的 obj 对象中
+
+#### VNode
+> :confused: 什么是VNode？为什么要引入VNode呢？
+
+##### 什么是VNode?
+> 简单地说 :point_right: *`VNode`可以理解为DOM节点描述对象，它描述了应该怎样去创建真实的DOM节点*
+> 一般的VNode都拥有 :point_down: 的一个执行流程：
+![vnode虚拟dom的简单过程](vnode虚拟dom的简单过程.png)
+:stars: 从上述我们可以看出每次这个`VNode`在被创建的过程中的，都会将每次新的`VNode`缓存起来，之后，每次需要重新渲染视图时，将新创建的`VNode`与上一次缓存的`VNode`进行对比，查看两者之间有哪些地方不一样，找出这些不一样的地方，并基于此去修改真实的DOM！
+
+##### 为什么要引入VNode?
+> 我们都知道js的执行速度要远远快于界面的更新，假如我们使用原生js或jquery来操作/更新DOM的话，那么我们将会频繁地导致界面的回流以及重绘，而`VNode`则是将这个虚拟化、对比、差分的逻辑，交由js来实现，然后才最终对比差分出应该需要被更新、移除的相关DOM，以最小的颗粒度来更新DOM，使得DOM的更新达到最小级别，因此使用了`VNode`将会大大的提升本地化界面操作的流畅性。
+> 而且，对于越来越复杂的业务，假如一直都采用操作并更新DOM的话，界面也将会很难维护！
 
 ### 不同方式的数据监听机制分析
 > 接下来针对这两种方式具体分析对应的设计流程以及实际程序的运行过程分析，以及两者又是如何配合工作来完成整个vm实例的手动监听与自我监听的!！
