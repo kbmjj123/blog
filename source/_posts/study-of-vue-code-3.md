@@ -1,5 +1,5 @@
 ---
-title: vue源码学习与分析(三)：业界关于vue使用过程中提升性能的编码习惯
+title: vue源码学习与分析(三)：vue指令
 description: 本文关于vue指令是什么？如何使用指令？如何自定义自己的执行？并从源码的角度来分析使用了指令的过程，使得对vue指令有一个深刻的认识！
 author: Zhenggl
 date: 2023-06-19 23:37:00
@@ -8,6 +8,7 @@ categories:
 tags:
   - 开发框架
   - vue
+cover_picture: vue指令封面.jpg
 ---
 
 ### 前言

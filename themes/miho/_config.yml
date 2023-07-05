@@ -74,7 +74,7 @@ excerpt_link: more>>
 # New window open link | 新窗口打开文章
 open_new_link: true
 # Article default cover picture，size：350*150 | 文章默认封面图，尺寸：350*150
-cover_picture: https://img.91temaichang.com/blog/default-cover.jpg
+cover_picture: https://www.91temaichang.com/images/default-cover.jpeg
 # Open background particles | 开启背景粒子
 open_bg_particle: false
 # Open animation in homepage and head | 开启主页及头部动画
