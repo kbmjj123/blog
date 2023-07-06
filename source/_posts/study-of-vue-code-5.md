@@ -1,5 +1,5 @@
 ---
-title: vue源码学习与分析(四)：业界关于vue使用过程中提升性能的编码习惯
+title: vue源码学习与分析(五)：业界关于vue使用过程中提升性能的编码习惯
 description: 本文整理了业界关于一些提升vue编程的编码习惯，从源码的角度来分析为什么要这样子提出，为什么要这样子使用的一个原因，从底层角度来理解这样子优化的一个目的！
 author: Zhenggl
 date: 2023-05-15 22:53:43
@@ -8,7 +8,7 @@ categories:
 tags:
   - 开发框架
   - vue
-cover_picture:
+cover_picture: vue常用技巧封面.jpg
 ---
 
 ### 前言
