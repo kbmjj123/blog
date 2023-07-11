@@ -86,6 +86,7 @@ onerror(){
 2. 对于客户端的请求，如果没有与之对应的处理中间件函数，则默认都是404来响应；
 3. 在创建出来的上下文context对象中，采用state来作为中间件数据通信的载体
 
+![koa串联中间件执行过程](koa串联中间件执行过程.png)
 :confused: 那么上面的`compose(this.middleware)`方法执行的时候，做了什么事情呢？为什么我们在使用中间件的时候，它是以一种洋葱的执行顺序来执行的呢？下面将分析一波对`compose()`方法，来加深对这个洋葱执行顺序的理解：
 ```javascript
 function compose(middleware){
