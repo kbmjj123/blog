@@ -44,7 +44,7 @@ cover_picture: HtmlWebpackPlugin封面.jpg
 ![HtmlWebpackPlugin在html中支持的变量](HtmlWebpackPlugin在html中支持的变量.png)
 :stars: 也就是说，我们可以通过在模版html文件中引用 :point_up: 几个变量，进而直接创建html元素，从`webpack`打包编译过程，到最终文件输出，形成有js :point_right: 的单向通讯！
 
-:confused: 这里 :u6709: :one: 疑问，就是这个在`html模版`中所使用的变量，它是如何最终渲染成为对应的html到界面上的呢？？？这个问题，将在下方的对`HtmlWebpackPlugin`的执行过程进行一个具体的分析时顺带提及一下，主要还是借助于 {% post_link lodash-study-and-usage Lodash三方库 %} 所提供的支持！！
+:confused: 这里 :u6709: :one: 疑问，就是这个在`html模版`中所使用的变量，它是如何最终渲染成为对应的html到界面上的呢？？？这个问题，将在下方的对`HtmlWebpackPlugin`的执行过程进行一个具体的分析时顺带提及一下，主要还是借助于[Lodash三方库](https://www.lodashjs.com/)所提供的支持！！
 
 ### HtmlWebpackPlugin的执行过程是怎样的？
 > 要分析这个`HtmlWebpackPlugin`它是如何执行的话，需要先准备一下源码，以及对源码的调试分析过程！
