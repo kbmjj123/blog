@@ -1,6 +1,6 @@
 ---
 title: 路由配置中间件：koa-router
-description: 路由配置中间件：koa-router
+description: 整理了关于如何使用koa-router，并罗列了其中关于router实例上的不同API的使用，并从源码层面来剖析关于该中间件的执行过程，加深对koa-router的理解
 author: Zhenggl
 date: 2023-07-12 05:04:07
 categories:
