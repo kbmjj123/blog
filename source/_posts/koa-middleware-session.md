@@ -1,6 +1,6 @@
 ---
 title: 路由会话管理中间件：koa-session
-description: 路由会话管理中间件：koa-session
+description: 整理了关于koa-session的使用，详细从整个请求/响应过程来具体分析session的工作过程，并从运行过程代码剖析了关于内部存储与外部存储，加深对koa-session的理解
 author: Zhenggl
 date: 2023-07-13 08:19:41
 categories:
