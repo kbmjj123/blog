@@ -142,6 +142,7 @@ app.use(router.allowedMethods());
 :alien: 在Koa应用中使用.use()方法来注册router.allowedMethods()中间件，这样，当请求到达路由时，中间件会自动检查请求的方法，并根据路由配置生成Allow字段的值，然后将其添加到响应头中
 
 ### 源码分析
+![koa-router的执行过程](koa-router的执行过程.png)
 > 通过源码的阅读，我们发现，其中关键核心的方法是这个`register()`，作为`koa-router`底层的注册方法，其中做了什么动作呢？使得`koa-router`的实例能够管理这个路由与中间件的关系？
 :confused: 我想应该先要有一个fn的路由数组对象，用来维护已配置的中间件吧
 ```javascript
