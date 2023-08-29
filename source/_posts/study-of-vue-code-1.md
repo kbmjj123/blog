@@ -112,7 +112,7 @@ export function mountComponent(
 ): Component{
   // 存储当下的HtmlNode节点到$el
   vm.$el = el;
-  callHook(vm, 'beforeMount);
+  callHook(vm, 'beforeMount');
   new Watcher(vm, () => {vm._update(vm._render(), hudrating)}, noop, {
     before(){
       if(vm._isMounted && !vm.isDestroyed){

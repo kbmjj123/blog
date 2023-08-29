@@ -9,14 +9,14 @@
       "request": "launch",
       "name": "blog online",
       "skipFiles": [
-        // "<node_internals>/node_modules"
+        "<node_internals>/node_modules"
       ],
-      // "program": "${workspaceFolder}/node_modules/.bin/hexo",
-      // "runtimeVersion": "12.3.1",
-      // "args": ["server"]
-      "program": "${workspaceFolder}/node_modules/.bin/husky-hook",
-      "args": ["install"],
-      "runtimeVersion": "14.17.3"
+      "program": "${workspaceFolder}/node_modules/.bin/hexo",
+      "runtimeVersion": "12.3.1",
+      "args": ["server"]
+      // "program": "${workspaceFolder}/node_modules/.bin/husky-hook",
+      // "args": ["install"],
+      // "runtimeVersion": "14.17.3"
     }
   ]
 }
