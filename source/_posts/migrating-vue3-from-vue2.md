@@ -46,6 +46,64 @@ cover_picture: vue2往vue3的迁移之路.jpg
 > 多语言包的相关目录，借助于`vue-i18n`三方库的实现
 :point_right: 关于该三方库的描述，见 {% link "i18n官网" "https://vue-i18n.intlify.dev/" true i18n官网 %} 的描述
 
+:alien: 关于这个`vue-i18n`的简单使用如下：
+
+:one: 首先创建一`i18n`实例，并对外提供相关的API：
+```typescript
+// 可以将这个实例的创建，放到单独的ts文件中来进行统一维护
+import { createI18n } from 'vue-i18n'
+const i18n = createI18n({
+  locale: 'zh-CN',  // 一般是将这个参数给store化以及本地化，实现缓存控制
+  fallbackLocale: 'en-US',
+  allowComposition: true,
+  // messages则代表项目中每个字段所对应的关键词，用于后续在js代码中或者template模版中使用
+  messages: {
+    'en-US': enUS,
+    'ko-KR': koKR,
+    'zh-CN': zhCN,
+    'zh-TW': zhTW,
+    'ru-RU': ruRU,
+  },
+})
+export const t = i18n.global.t  // 对外暴露对应的在js中调用的api
+// 对外提供将在app上使用的全局实例
+export function setupI18n(app: App) {
+  app.use(i18n)
+}
+```
+:two: 关于 :point_up: 中使用的每个语言包的格式定义如下：
+```typescript
+  export default{
+    // 这里根据实际业务场景进行一个个字符串的声明
+    common: {
+      add: '添加',
+      addSuccess: '添加成功',
+      edit: '编辑'
+    }
+  }
+```
+:three: 在template模版中或者在js代码中使用：
+```vue
+<template>
+  <!-- i18n提供了隐式全局模版可访问的api，因此可以直接在对应的模块中直接调用对应的api -->
+  <NTabPane name="local" :tab="$t('store.local')"></NTabPane>
+</template>
+<script setup lang='ts'>
+  import { t } from '@/locales'
+  message.error(t('store.addRepeatTitleTips'))
+</script>
+```
+:confused: 如果我们需要占位符的字符串展示的话，我们可以借助于在配置中定义占位符的方式来使用国际化的字符串：
+```typescript
+  export default {
+    common: {
+      editRepeatContentTips: '内容冲突{msg} ，请重新修改'
+    }
+  }
+  // 然后在对应的t方法调用中传递对应的参数
+  t('common.editRepeatContentTips', {msg: '我是对应的占位字符串'})
+```
+:trollface: 这里有一个疑问 :confounded: ，就是如果展示的文案内容是来自于后台的响应的话，那么这里应当如何做到全局统一配置比较好呢？ :point_right: 个人的猜想可以是将这个字符串key与后台协商好，返回的在语言包中定义的一关键词key(比如是：common.addMsg)，然后在对应的语言包中预先声明好即可，也就是后台返回的预先定义在语言包中的相关key属性！！！
 
 #### 7、plugins
 > 插件目录，一般用于对*HTML*进行额外的追加动作，一般是对html的原生层面的“加持”，比如是追加的样式，追加的meta等等，由于是动作，所以一般可定义为一函数，在`main.ts`应用程序入口来使用，在`main.ts`中来直接调用！！！
