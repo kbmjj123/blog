@@ -1,5 +1,6 @@
 ---
 title: vue中8个有用的自定义指令
+description: 本文主要介绍了关于在项目过程中可能经常会使用到的几个指令，以便于后续快速进入业务的开发！
 author: Zhenggl
 date: 2021-05-06 20:06:17
 categories:
@@ -7,7 +8,7 @@ categories:
 tags:
     - vue
     - 指令
-cover_picture: vue-custom-directive.jpeg
+cover_picture: vue中8个有用的自定义指令.jpg
 ---
 
 ### 前言
