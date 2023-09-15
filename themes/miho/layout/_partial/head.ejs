@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="format-detection" content="telephone=no"/>
   <meta name="format-detection" content="address=no"/>
   <meta name="wap-font-scale" content="no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="360-site-verification" content="2d7b06c140d91a7743cb2c697e59f8a5" />
   <meta name="bytedance-verification-code" content="3t3T+QeGj84i9NhoCCiC" />
@@ -46,7 +47,6 @@
   }
   %>
   <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <% if (page.tags && page.tags.length > 0){ %>
     <meta name="keywords" content="<%- page.tags && page.tags.map(item => item.name).join(', ') %>, <%- page.keywords %>" />
   <% } else if(theme.keywords){ %>
