@@ -24,6 +24,8 @@ cover_picture: tailwindcss封面.jpg
 #### 理解tailwindcss中的数字
 > 在`tailwindcss`中的数字，代表着整个`tailwindcss`的尺寸、间距等基准单位，所有的与尺寸相关的类名，都离不开这个基准的尺寸，可以说，在`tailwindcss`中所涉及到的尺寸，都与这个基本的数字有所关联(当然，我们可以直接重新定义属于自己的一套尺寸)，在`tailwindcss`中的尺寸定义见 {% link "尺寸定义" "https://tailwindcss.com/docs/customizing-spacing#default-spacing-scale" true 尺寸定义 %}
 
+#### 如何进行响应式编码
+> 在`tailwindcss`中默认划分了`sm(640px)`、`md(768px)`、`lg(1024px)`、`xl(1280px)`、`2xl(1536px)`5个默认屏幕断点，我们可通过在类名前缀追加断点描述符，可实现针对该**min-width**断点下的样式外观控制，而一般的响应式编码要求，则需要以移动的优先，然后慢慢向上尺寸进行对应控制，而不是以PC为准，再慢慢向移动来靠拢，这个也是自己之前针对响应式处理的一个错误想法，具体可见 {% link "官网移动优先的设计" "https://tailwindcss.com/docs/responsive-design#targeting-mobile-screens" true 官网移动优先的设计 %}
 
 ### 如何使用tailwindcss?
 > :point_down: 将简单介绍关于如何使用这个`tailwind csss`
