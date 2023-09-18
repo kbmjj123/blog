@@ -21,6 +21,10 @@ cover_picture: tailwindcss封面.jpg
 ### 什么是tailwindcss?
 > `tailwind css`的工作原理就是扫描所有的HTML文件、JavaScript组件以及任何其他模版来获取其中出现的类型，生成对应的样式，然后将它们写入到静态的css文件中，也就是说通过`tailwind css`所产生的css文件，将不会冗余一行代码，也不会遗漏一行css代码，按需分类对应的样式来展示! 另外，为了确保生成的类中的样式属性不重复定义，`tailwind css`制定了一整套关于样式的组装的最颗粒度的css单位元素，通过库内部提供的组装样式的逻辑，展现出各个不同的样式组装结果，从而让`tailwind css`生态内提供**样式重复率最低**的css结果文件，提供页面的渲染速度！下面就要对这个库进行一个具体的使用与分析！！
 
+#### 理解tailwindcss中的数字
+> 在`tailwindcss`中的数字，代表着整个`tailwindcss`的尺寸、间距等基准单位，所有的与尺寸相关的类名，都离不开这个基准的尺寸，可以说，在`tailwindcss`中所涉及到的尺寸，都与这个基本的数字有所关联(当然，我们可以直接重新定义属于自己的一套尺寸)，在`tailwindcss`中的尺寸定义见 {% link "尺寸定义" "https://tailwindcss.com/docs/customizing-spacing#default-spacing-scale" true 尺寸定义 %}
+
+
 ### 如何使用tailwindcss?
 > :point_down: 将简单介绍关于如何使用这个`tailwind csss`
 #### 1、安装Tailwind Css
