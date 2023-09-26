@@ -113,14 +113,76 @@ export default defineNuxtRouteMiddleware((to, from) => {
 :star: 关于这个路由器中间件的一个执行顺序，具体见 {% link 路由中间件执行顺序 https://nuxt.com/docs/guide/directory-structure/middleware#what-order-middleware-runs-in true 路由中间件执行顺序 %}的描述！！
 
 #### modules
+> `Nuxt`提供的一额外扩展模块，可以给应用程序直接追加的一个特性，比如像语言转换、图片加载等等！！
+> 我们可以使用官方所提供的一系列的 {% link modules https://nuxt.com/modules true modules %}，来给应用快速加持功能，一般有以下两种方式来创建自己的module
+```typescript
+// 方式一
+import { createResolver, defineNuxtModule, addServerHandler } from 'nuxt/kit'
+export default defineNuxtModule({
+  meta: {
+    name: 'hello'
+  },
+  setup(){
+    const { resolve } = createResolver(import.meta.url)
+    // Add an API route
+    addServerHandler({
+      route: '/api/hello',
+      handler: resolve('./runtime/api-route')
+    })
+  }
+})
+// 方式二
+import { defineNuxtModule } from '@nuxt/kit'
+export default defineNuxtModule((options, nuxt) => {
+  nuxt.hook('pages:extend', pages => {
+    console.log(`Discovered ${pages.length} pages`)
+  })
+})
+```
+
+:stars: 关于`modules`的自定义，更多详见{% link 官方自定义module https://nuxt.com/docs/guide/going-further/modules true 官方自定义module %}
 
 #### plugins
+> `Nuxt`将自动加载`plugins`目录中的相关ts文件，并在创建vue实例的时候自动触发对应的函数，同时还可以通过增加`.server`以及`.client`来声明是在服务端还是客户端使用的插件！
+> 与*modules*一样，`Nuxt`默认仅加载plugins根目录下的ts来作为插件。
+> 一般地定义一插件的方式如下：
+```typescript
+import { defineNuxtPlugin } from 'nuxt/kit'
+export default defineNuxtPlugin(nuxtApp => {
+  // 对nuxtApp进行折腾
+})
+```
 
-#### layer
+#### layout
+> `Nuxt`中的layout就像是一个模版，提供了`pages`中各个页面所要共享的元素、交互、动作等等，一般默认的layer是`default.vue`
+> 在实际项目过程中，一般在app.vue文件中通过使用`NuxtLayout`组件，来作为各个page页面下的页面组件的容器，然后通过在这个`default.vue`组件中提供一`slot`插槽，
+> 来作为项目过程中所有不同的页面的实际内容，将公共的部分进行了一个抽离！
+
+#### app.vue
+> `app.vue`作为`Nuxt`中应用程序的入口，与SPA中的app.vue类似，作为Vue实例的入口，一般我们是在该页面中添加一`NuxtLayout`组件(RouterView的替代品)，来代表即将
+> 被加载的页面视图组件，这里与layout中的模版组件 :u6709: 一个明显的不同点就是：
+> app.vue中的资源刷新时仅加载一次，而且仅保留一份，而layout中代表的是所有的页面组件都copy并独享一份资源！！
 
 #### server
-
+> `Nuxt`不单单是局限于纯前端的开发，还提供了`server`目录，用来向客户端提供接口(~/server/api)、路由(~/server/routes)、中间件服务(~/server/middleware)，
+> 通过在各个模块中采用`defineEventHandler()`或者`eventHandler()`方法，接收`event`(可理解为网络请求的request对象)，并在调用该函数时返回的结果(json data、promise、event.node.res.end())来响应出不同的结果，如下代码所示：
+```typescript
+// ~/server/api/hello.ts
+export default defineEventHandler(event => {
+  return { hello: 'world' }
+})
+```
+:point_down: 然后，相应的在对应的组件中可直接调用
+```vue
+<script setup lang="ts">
+  const { data } = await useFetch('/api/hello')
+</script>
+<template>
+  <div>{{ data }}</div>
+</template>
+```
 #### utils
+
 
 #### app.config.ts
 > `Nuxt`提供了该配置文件，用于提供用户将自定义APP的变量都存储在这个配置文件中，这可以当作是一个安卓应用程序中存储在`Application`应用程序全局对象中的变量
@@ -146,23 +208,18 @@ declare module 'nuxt/schema'{
   }
 }
 ```
-#### app.vue
 
 #### nuxt.config.ts
+> 作为`Nuxt`应用程序的配置文件，用于向`Nuxt`提供配置化参数，比如使用的外部module、使用的plugins、项目配置等等，具体见{% link nuxt.config.ts配置 https://nuxt.com/docs/api/configuration/nuxt-config true nuxt.config.ts配置 %}
 
 ### state管理
 > `Nuxt`提供的*useState*组合式API，可以方面地来创建跨服务端与客户端共享的state，一般是服务端创建一state，然后由所有的客户端来共享， :warning: 该API只能够在`setup`以及组件的生命周期钩子方法中调用！！
 > `useState`作为`ref`在服务端的替换，可保证服务端只有一个这样子的状态，然后客户端可直接共享这样子的一个状态！！！
 
 
-### transitions动画支持
-
 ### fetching网络请求
 > `Nuxt`提供了`*useFetch*`、`*useAsyncData*`、`*$fetch*`三种方式的API来进行网络通讯，`useFetch`是组件内处理数据的最直接方法，**具有响应式的状态**，而`*$fetch*`则用于处理用户交互过程中的数据处理，主要来自于{% link ofetch https://github.com/unjs/ofetch true ofetch %}三方库的支持，`useAsyncData`则是`useFetch`与`$fetch`两者的结合体：`useFetch(url) ===> useAsyncData(url, () => $fetch(url))`，一般情况下，可使用这个`useAsyncData`来包装请求，并缓存请求响应体，减少重复的无效请求！
 > 
 
-### 错误处理
-
-### seo与meta处理
-
 ### 关于Nuxt3.0的使用思考
+:trollface: 可能只有实战一波，踩完对应的坑之后，才能够回答这个问题了！！！
