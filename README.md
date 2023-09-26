@@ -59,6 +59,11 @@
 {% jsfiddle shorttag [tabs] [skin] [width] [height] %}
 ```
 
+9. 在文章中引入stackblitz
+```markdown
+{% stackblitz title:'展示的链接标题' projet:'使用的项目名称' %}
+```
+
 ### 自定义页面
 > 当我们需要丰富站点的网页内容时(采用不同的风格的根目录站点)，可以采用在`source目录`直接创建对应的目录以及对应的文件，这里的文件可以是`*.md`，也可以时`*.ejs`，还可以是`*.pug`，也就是我们可以使用对应的文件格式，来编写额外的自定义页面！
 
