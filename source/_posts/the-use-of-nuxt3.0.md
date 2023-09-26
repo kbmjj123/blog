@@ -91,9 +91,26 @@ export default function(){
 ```
 
 #### content
-
+> 提供的`content`目录，可将该目录下的`*.json`、`*.md`、`*.yml`、`*.csv`文件给渲染出来，可用于当前应用的CMS服务，一般直接使用{% link content官网 https://content.nuxt.com/ true content官网 %}
 
 #### middleware
+> `Nuxt`提供了一个可自定义的路由中间件框架，使得我们自行控制导航之前运行的相关代码，`Nuxt`提供了3种类型的路由器中间件：
+1. 匿名中间件，直接定义在pages页面中，仅限于当前页面中可使用；
+2. 定义在`middleware`目录中，将会被自动加载到各个页面中，当页面中的路由发生变动时自动触发加载；
+3. 定义在`middleware`目录中，且以`.global`后缀拼接，当每一个路由变更时都会自动触发调用。
+
+:point_right: 一般情况下通过使用`defineNuxtRouteMiddle`方法来定义一路由中间件
+```typescript
+export default defineNuxtRouteMiddleware((to, from) => {
+  if(to.params.id === '1'){
+    return absortNavigation()
+  }
+  if(to.path !== '/'){
+    return navigate('/')
+  }
+})
+```
+:star: 关于这个路由器中间件的一个执行顺序，具体见 {% link 路由中间件执行顺序 https://nuxt.com/docs/guide/directory-structure/middleware#what-order-middleware-runs-in true 路由中间件执行顺序 %}的描述！！
 
 #### modules
 
