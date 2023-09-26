@@ -185,6 +185,9 @@ codepen:
   theme_id: light
   style: 'height: 400px; width: 100%;'
 
+stackblitz:
+  style: 'display: inline-block;color: #fff;background-color:#ff8b48;padding: 8px 12px;border-radius: 4px;'
+
 githubEmojis:
   enable: true
   className: github-emoji
