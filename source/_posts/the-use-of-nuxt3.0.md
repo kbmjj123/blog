@@ -51,18 +51,44 @@ export default defineNuxtConfig({
 
 #### composables
 > `Nuxt`在`Vue3`的基础上新增了额外的组合式API，通过这些组合式API，可以快速访问到整个Nuxt对象、上下文、应用实例、网络请求等告性能、高效率动作，:point_down: 将简单介绍以下几个常见组合式API，具体各个useAPI见 {% link "Nuxt官方composables" "https://nuxt.com/docs/api/composables/use-state" true Nuxt官方composables %}
+> :earth: `Nuxt`官方提供了一系列的useAPI，我们平时在使用的时候，无需显式地导入来使用对应的API！！ :point_right: 对应的composables方法，将对应生成在`.nuxt/imports.d.ts`文件中，因此我们才可以无需导入直接使用！
 > :point_down: 所阐述的相关API，基本上都可以在**pages、components、plugins**中直接使用到！
-1. useAsyncData
-2. useFetch
-3. useLazyAsyncData
-4. useLazyFetch
-5. useNuxtApp: 
-6. useNuxtData
-7. useRuntimeConfig
-8. useSeoMeta
+1. useAsyncData: 通过该组合式API，可实现服务端向客户端传递payload数据的机制，避免客户端重新加载的结果；
+2. useFetch: `Nuxt`提供的用于接口调用的最直接API，具有一定的响应式状态机制，比如可以通过请求链接/参数设置为响应式的，使其自动load对应的数据，一般可以通过对这个API进行二次包装实现自定义统一的fetch处理动作；
+3. useLazyAsyncData: 使用包装后的`useAsyncData`，避免阻塞；
+4. useLazyFetch: 使用包装后的`useFetch`，通过内置传递的`lazy=true`，来加载接口调用，使得原本阻塞的`useFetch`成为异步操作，让组件/页面正常跳转；
+5. useNuxtApp: 获取运行时应用程序的访问，可以帮助我们访问到运行时的上下文、Vue实例、运行时配置以及变量等属性；
+6. useNuxtData: 可以通过提供的key关键词来访问通过`useFetch`、`useAsyncData`、`useLazyFetch`、`useLazyAsyncData`所缓存的数据(通过请求时传递在options中的key关键词来映射)；
+7. useRuntimeConfig: 通过该API可以来访问配置在`nuxt.config.ts`中的`runtimeConfig`对象所使用的属性；
+8. useSeoMeta: 通过该API可以向页面/站点添加seo相关的tag标签以及配置；
 9. useState: `Nuxt`中用于提供跨组件响应式状态的API，在服务端渲染时保留，并在各个客户端中共享，该API只能在`setup`或者组件声明周期方法中使用；
 10. useCookie: 用于读取与写入到cookie中的工具方法；
 11. useAppConfig: 可直接访问到项目中的`app.config.ts`文件中的配置，进而对`app.config.ts`中的配置进行组合式操作，具体的`app.config.ts`的描述见 {% link "app.config.ts" "https://nuxt.com/docs/guide/directory-structure/app-config" true app.config.ts描述 %}
+
+**如何自定义composables**
+:stars: 一般地，我们直接在`composables`目录中创建对应的ts文件， :u6709: :two: 种不同的方式来创建自己的组合式API
+```typescript
+// composables/useFoo.ts 或者是 composables/use-foo.ts
+// 方式一
+export const useFoo = () => {
+  return useState('foo', () => 'bar')
+}
+// 方式二
+export default function(){
+  return useState('foo', () => 'bar')
+}
+```
+:trollface: 然后，就可以在对应的目标页面/组件中使用
+```vue
+<script setup lang="ts">
+  const foo = useFoo()
+</script>
+<template>
+  <div>
+    {{ foo }}
+  </div>
+</template>
+```
 
 #### content
 
@@ -111,11 +137,12 @@ declare module 'nuxt/schema'{
 > `Nuxt`提供的*useState*组合式API，可以方面地来创建跨服务端与客户端共享的state，一般是服务端创建一state，然后由所有的客户端来共享， :warning: 该API只能够在`setup`以及组件的生命周期钩子方法中调用！！
 > `useState`作为`ref`在服务端的替换，可保证服务端只有一个这样子的状态，然后客户端可直接共享这样子的一个状态！！！
 
-{% stackblitz project:'simplest-vue-project' title:'demo项目' %}
 
 ### transitions动画支持
 
 ### fetching网络请求
+> `Nuxt`提供了`*useFetch*`、`*useAsyncData*`、`*$fetch*`三种方式的API来进行网络通讯，`useFetch`是组件内处理数据的最直接方法，**具有响应式的状态**，而`*$fetch*`则用于处理用户交互过程中的数据处理，主要来自于{% link ofetch https://github.com/unjs/ofetch true ofetch %}三方库的支持，`useAsyncData`则是`useFetch`与`$fetch`两者的结合体：`useFetch(url) ===> useAsyncData(url, () => $fetch(url))`，一般情况下，可使用这个`useAsyncData`来包装请求，并缓存请求响应体，减少重复的无效请求！
+> 
 
 ### 错误处理
 
