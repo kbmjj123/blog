@@ -1,6 +1,6 @@
 ---
 title: Nuxt3.0的学习与使用
-description: Nuxt3.0的学习与使用
+description: Nuxt3.0的学习与使用，并结合项目实战，整理关于Nuxt3.0是如何使用以及如何避免踩坑，结合官方所提供的第三方modules模块，来完成服务端渲染项目的快速开发！
 author: Zhenggl
 date: 2023-09-25 06:16:35
 categories:
@@ -10,7 +10,7 @@ tags:
   - vue
   - ssr
 keywords: Nuxt.js, 基于Vue.js的框架, 服务器端渲染(SSR), 静态站点生成(SSG), Vue3支持, 插件系统改进, SEO优化
-cover_picture: Nuxt封面.png
+cover_picture: 服务端渲染框架Nuxt封面.png
 ---
 
 ### 前言
