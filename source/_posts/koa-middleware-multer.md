@@ -8,7 +8,7 @@ categories:
 tags:
   - koa
   - middleware
-cover_picture: koa-multer文件上传封面.jpg
+cover: koa-multer文件上传封面.jpg
 ---
 
 ### 前言

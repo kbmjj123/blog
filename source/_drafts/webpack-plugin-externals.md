@@ -8,5 +8,5 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: ExternalsPlugin封面.png
+cover: ExternalsPlugin封面.png
 ---

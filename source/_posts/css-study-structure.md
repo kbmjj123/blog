@@ -7,7 +7,7 @@ categories:
 tags:
   - css
 
-cover_picture: css-structure.jpeg
+cover: css-structure.jpeg
 top: 1
 ---
 

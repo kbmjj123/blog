@@ -8,7 +8,7 @@ categories:
 tags:
   - http
   - tls
-cover_picture: 你好TLS封面.gif
+cover: 你好TLS封面.gif
 ---
 
 ### 前言

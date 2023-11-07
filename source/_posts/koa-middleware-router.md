@@ -8,7 +8,7 @@ categories:
 tags:
   - koa
   - middleware
-cover_picture: koa-router封面.jpg
+cover: koa-router封面.jpg
 ---
 ### 前言
 {% link "koa-router官网" "https://github.com/koajs/router" true koa-router官网 %}

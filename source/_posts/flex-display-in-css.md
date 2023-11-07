@@ -9,7 +9,7 @@ tags:
     - css
     - display
     - flex
-cover_picture: flex布局查漏补缺封面.jpeg
+cover: flex布局查漏补缺封面.jpeg
 ---
 
 ### 前言

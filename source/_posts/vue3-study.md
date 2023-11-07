@@ -11,7 +11,7 @@ tags:
   - typescript
   - vite
 keywords: Vue.js 3, Vue 3全家桶, Vue Router 4, Pina, Composition API, 响应式编程, 组件化开发, Vue3性能优化, Vue3架构设计, Vue3常见问题接单, Vue3中的Typescript支持, Vue3生态系统, Vue3最佳实战
-cover_picture: vue3全家桶封面.jpeg
+cover: vue3全家桶封面.jpeg
 ---
 
 ### 前言

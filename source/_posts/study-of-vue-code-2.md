@@ -8,7 +8,7 @@ categories:
 tags:
   - 开发框架
   - vue
-cover_picture: vue中的监听机制.jpg
+cover: vue中的监听机制.jpg
 ---
 ### 前言
 > `网络上充斥着一堆的看法，说这个`vue`是一个MVVM的前端框架，将双向数据绑定做了很好的实现。`

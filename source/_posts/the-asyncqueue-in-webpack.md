@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - AsyncQueue
-cover_picture: AsyncQueue封面.jpg
+cover: AsyncQueue封面.jpg
 ---
 
 ### 前言

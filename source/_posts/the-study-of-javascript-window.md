@@ -8,7 +8,7 @@ tags:
     - web
     - javascript
     - window
-cover_picture: window结构.jpeg
+cover: window结构.jpeg
 ---
 
 ### 前言

@@ -8,7 +8,7 @@ tags:
   - javascript
   - 基础
   - function
-cover_picture: js-data-type.jpeg
+cover: js-data-type.jpeg
 ---
 
 **js立即执行的函数可以让函数在创建之后立马执行，这种编写模式本质上就是函数表达式(命名的或者匿名的)，在创建之后立即执行**

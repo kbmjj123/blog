@@ -4,7 +4,7 @@ author: Zhenggl
 date: 2021-09-30 14:37:59
 categories:
 tags:
-cover_picture: eat-a-frog-cover.png
+cover: eat-a-frog-cover.png
 ---
 
 ### 序言

@@ -9,7 +9,7 @@ tags:
     - javascript
     - prototype
     - constructor
-cover_picture: 原型封面.jpeg
+cover: 原型封面.jpeg
 ---
 
 ### 前言

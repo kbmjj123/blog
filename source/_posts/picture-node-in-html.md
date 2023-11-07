@@ -9,7 +9,7 @@ tags:
   - html
   - picture
   - source
-cover_picture: html中的picture节点封面.jpg
+cover: html中的picture节点封面.jpg
 ---
 
 ### 前言

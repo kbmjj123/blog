@@ -9,7 +9,7 @@ tags:
   - 前端
   - vue
   - 实战
-cover_picture: 单页转多页实战封面.jpg
+cover: 单页转多页实战封面.jpg
 ---
 
 ### 前言

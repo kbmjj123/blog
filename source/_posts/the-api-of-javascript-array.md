@@ -8,7 +8,7 @@ tags:
 - javascript
 - 基础概念
 - Array
-cover_picture: javascript-array.png
+cover: javascript-array.png
 ---
 
 ### JavaScript中的数组

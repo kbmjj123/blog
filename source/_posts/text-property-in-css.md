@@ -8,7 +8,7 @@ categories:
 tags:
     - css
     - text
-cover_picture: css中的文本属性封面.jpeg
+cover: css中的文本属性封面.jpeg
 ---
 
 ### 前言

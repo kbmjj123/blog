@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: EntryOptionPlugin封面.png
+cover: EntryOptionPlugin封面.png
 ---
 
 ### 前言

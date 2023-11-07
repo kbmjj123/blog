@@ -8,7 +8,7 @@ categories:
 tags:
     - vue
     - 编程技巧
-cover_picture: vue中的透传机制封面.jpeg
+cover: vue中的透传机制封面.jpeg
 ---
 
 ### 需求背景

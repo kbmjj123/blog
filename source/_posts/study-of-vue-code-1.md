@@ -8,7 +8,7 @@ categories:
 tags:
   - 开发框架
   - vue
-cover_picture: vm实例如何渲染.png
+cover: vm实例如何渲染.png
 ---
 
 ### 前言

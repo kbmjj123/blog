@@ -8,7 +8,7 @@ categories:
 tags:
   - koa
   - middleware
-cover_picture: koa-bodyparser封面.jpg
+cover: koa-bodyparser封面.jpg
 ---
 
 ### 前言

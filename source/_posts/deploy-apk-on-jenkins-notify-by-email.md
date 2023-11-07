@@ -4,7 +4,7 @@ author: Zhenggl
 date: 2021-05-18 00:48:49
 categories:
 tags:
-cover_picture: jenkins%20android.jpeg
+cover: jenkins%20android.jpeg
 ---
 
 #### 前言

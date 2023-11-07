@@ -7,7 +7,7 @@ categories:
     - [开发框架, vue]
 tags:
     - vue
-cover_picture: Vue中静态方法封面.jpeg
+cover: Vue中静态方法封面.jpeg
 ---
 
 ### 前言

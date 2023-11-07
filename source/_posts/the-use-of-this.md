@@ -6,7 +6,7 @@ categories:
     - []
 tags:
     - [javascript]
-cover_picture:
+cover: 
 ---
 
 ### 前言

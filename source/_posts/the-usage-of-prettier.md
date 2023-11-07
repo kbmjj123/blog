@@ -8,7 +8,7 @@ categories:
 tags:
   - lint
   - prettier
-cover_picture: prettier封面.png
+cover: prettier封面.png
 ---
 
 ### 前言

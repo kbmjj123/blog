@@ -8,7 +8,7 @@ categories:
 tags:
   - koa
   - middleware
-cover_picture: koa-userauth封面.jpg
+cover: koa-userauth封面.jpg
 ---
 
 ### 前言

@@ -8,7 +8,7 @@ categories:
 tags:
     - css
     - animation
-cover_picture: 实现自由落体的球封面.jpeg
+cover: 实现自由落体的球封面.jpeg
 ---
 
 ### 前言

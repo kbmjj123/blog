@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: NodeEnvironmentPlugin封面.jpg
+cover: NodeEnvironmentPlugin封面.jpg
 ---
 
 ### 前言

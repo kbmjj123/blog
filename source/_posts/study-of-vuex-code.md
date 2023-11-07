@@ -8,7 +8,7 @@ categories:
 tags:
   - 开发框架
   - vuex
-cover_picture: Vuex封面.png
+cover: Vuex封面.png
 ---
 
 ### 前言

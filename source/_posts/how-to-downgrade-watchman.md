@@ -9,7 +9,7 @@ tags:
   - 前端
   - 跨平台开发
   - react-native
-cover_picture: watchman的安装.png
+cover: watchman的安装.png
 ---
 
 ### 前言

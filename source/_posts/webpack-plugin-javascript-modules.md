@@ -9,7 +9,7 @@ tags:
   - webpack
   - plugin
   - 代码生成
-cover_picture: webpack中的代码生成插件.png
+cover: webpack中的代码生成插件.png
 ---
 
 ### 前言

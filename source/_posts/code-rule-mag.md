@@ -8,7 +8,7 @@ tags:
   - 编码规范
   - javascript
   - css
-cover_picture: code-rule.jpeg
+cover: code-rule.jpeg
 ---
 
 ### 一、css规范

@@ -7,7 +7,7 @@ categories:
 tags:
   - javascript
   - 基础概念
-cover_picture: setTimeout-setInterval封面.png
+cover: setTimeout-setInterval封面.png
 ---
 ###  一、setTimeout和setInterval的基本用法
 1. setTimeout指定延迟XX秒后执行函数；

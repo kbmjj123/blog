@@ -6,7 +6,7 @@ categories:
     - [前端,javascript]
 tags:
     - javascript
-cover_picture: js-slice-and-splice.png
+cover: js-slice-and-splice.png
 ---
 
 ### 前言

@@ -8,7 +8,7 @@ tags:
     - 前端
     - 日志监控
     - Sentry
-cover_picture: sentry-cover.jpeg
+cover: sentry-cover.jpeg
 ---
 
 ### 前言

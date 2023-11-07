@@ -7,7 +7,7 @@ categories:
 tags:
     - javascript
     - coding
-cover_picture: js-coding-pratise.jpg
+cover: js-coding-pratise.jpg
 ---
 
 ### 编写JavaScript的10个小技巧

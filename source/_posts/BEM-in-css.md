@@ -8,7 +8,7 @@ categories:
 tags:
     - css
     - 规范
-cover_picture: 什么是CSS中的BEM命名规范.jpeg
+cover: 什么是CSS中的BEM命名规范.jpeg
 ---
 
 ### 前言

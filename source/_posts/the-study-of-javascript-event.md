@@ -9,7 +9,7 @@ tags:
     - web
     - 浏览器
     - event
-cover_picture: the-event-in-web-browse.jpeg
+cover: the-event-in-web-browse.jpeg
 ---
 
 ### 前言

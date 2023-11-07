@@ -8,7 +8,7 @@ categories:
 tags:
   - nodejs
   - koa
-cover_picture: koa封面.jpeg
+cover: koa封面.jpeg
 ---
 
 ### 前言

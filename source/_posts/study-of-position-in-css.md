@@ -8,7 +8,7 @@ categories:
 tags:
     - css
     - position
-cover_picture: 定位属性查漏补缺封面.jpeg
+cover: 定位属性查漏补缺封面.jpeg
 ---
 
 ### 前言

@@ -6,7 +6,7 @@ categories:
     - [开发框架, vue]
 tags:
     - vue
-cover_picture: vue-extend-study.jpeg
+cover: vue-extend-study.jpeg
 ---
 
 ### 前言

@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: AssetModulesPlugin封面.jpg
+cover: AssetModulesPlugin封面.jpg
 ---
 
 ### 我是谁

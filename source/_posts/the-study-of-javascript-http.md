@@ -9,7 +9,7 @@ tags:
     - web
     - 浏览器
     - http
-cover_picture: http请求.jpeg
+cover: http请求.jpeg
 ---
 
 ### 前言

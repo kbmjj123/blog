@@ -5,7 +5,7 @@ author: Zhenggl
 date: 2022-04-23 10:55:36
 categories:
 tags:
-cover_picture: 理解不一样的padding-border-margin封面.jpeg
+cover: 理解不一样的padding-border-margin封面.jpeg
 ---
 
 ### 前言

@@ -11,7 +11,7 @@ tags:
   - prettier
   - husky
   - commitlint
-cover_picture: 编码自动化管理封面.png
+cover: 编码自动化管理封面.png
 ---
 
 ### 前言

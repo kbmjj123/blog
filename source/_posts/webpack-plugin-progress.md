@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: ProgressPlugin封面.jpg
+cover: ProgressPlugin封面.jpg
 ---
 
 ### 前言

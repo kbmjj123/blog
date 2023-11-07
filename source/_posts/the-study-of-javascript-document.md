@@ -8,7 +8,7 @@ tags:
     - javascript
     - web
     - 浏览器
-cover_picture: document组织架构图.jpeg
+cover: document组织架构图.jpeg
 ---
 
 ### 前言

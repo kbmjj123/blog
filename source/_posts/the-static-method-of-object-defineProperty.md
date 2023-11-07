@@ -5,7 +5,7 @@ author: Zhenggl
 date: 2022-03-24 19:10:53
 categories:
 tags:
-cover_picture: Object.defineProperty封面.jpg
+cover: Object.defineProperty封面.jpg
 ---
 
 

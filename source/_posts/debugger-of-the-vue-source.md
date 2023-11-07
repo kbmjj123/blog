@@ -8,7 +8,7 @@ categories:
 tags:
     - vue
     - 源码
-cover_picture: vue源码调试封面.jpeg
+cover: vue源码调试封面.jpeg
 ---
 
 ### 前言

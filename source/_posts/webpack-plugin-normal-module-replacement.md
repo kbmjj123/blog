@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: NormalModuleReplacementPlugin封面.png
+cover: NormalModuleReplacementPlugin封面.png
 ---
 
 ### 前言

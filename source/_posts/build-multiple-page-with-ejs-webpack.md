@@ -8,7 +8,7 @@ categories:
 tags:
     - ejs
     - webpack
-cover_picture: ejs+webpack从0搭建多页应用封面.jpeg
+cover: ejs+webpack从0搭建多页应用封面.jpeg
 ---
 
 ### 前言

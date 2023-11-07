@@ -7,7 +7,7 @@ categories:
   - [webpack]
 tags:
   - webpack
-cover_picture: webpack中的模块封面.jpg
+cover: webpack中的模块封面.jpg
 --- 
 
 ### 前言

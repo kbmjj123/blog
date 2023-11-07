@@ -9,7 +9,7 @@ tags:
   - webpack
   - plugin
   - html
-cover_picture: HtmlWebpackPlugin封面.jpg
+cover: HtmlWebpackPlugin封面.jpg
 ---
 
 ### 前言

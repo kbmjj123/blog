@@ -10,7 +10,7 @@ tags:
     - codepen
     - 技巧
     - codepen
-cover_picture: codepen在gitbook与hexo中的应用封面.jpeg
+cover: codepen在gitbook与hexo中的应用封面.jpeg
 ---
 
 ### 前言

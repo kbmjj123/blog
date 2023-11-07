@@ -8,7 +8,7 @@ categories:
 tags:
     - css
     - 视觉
-cover_picture: css视觉效果经验分析封面.jpeg
+cover: css视觉效果经验分析封面.jpeg
 ---
 
 ### 前言

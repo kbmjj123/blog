@@ -6,7 +6,7 @@ categories:
     - [前端, 开发框架, jquery]
 tags:
     - [jquery]
-cover_picture: jquery源码分析封面.jpg
+cover: jquery源码分析封面.jpg
 ---
 
 ### 前言

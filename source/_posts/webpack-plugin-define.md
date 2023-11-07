@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: DefinePlugin封面.jpg
+cover: DefinePlugin封面.jpg
 ---
 
 ### 前言

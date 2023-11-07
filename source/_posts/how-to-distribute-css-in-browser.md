@@ -8,7 +8,7 @@ categories:
 tags:
     - css
     - 浏览器
-cover_picture: 浏览器中的css工作机制封面.jpeg
+cover: 浏览器中的css工作机制封面.jpeg
 ---
 
 ### 前言

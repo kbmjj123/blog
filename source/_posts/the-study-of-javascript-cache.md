@@ -11,7 +11,7 @@ tags:
     - localStorage
     - sessionStorage
     - cookie
-cover_picture: 浏览器存储封面.jpeg
+cover: 浏览器存储封面.jpeg
 ---
 
 ### 前言

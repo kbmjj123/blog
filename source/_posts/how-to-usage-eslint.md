@@ -8,7 +8,7 @@ categories:
 tags:
   - lint
   - ESlint
-cover_picture: ESlint封面.jpg
+cover: ESlint封面.jpg
 ---
 
 ### 前言

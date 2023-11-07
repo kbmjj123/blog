@@ -10,7 +10,7 @@ tags:
   - nodejs
   - grunt
   - Gruntfile
-cover_picture: grunt封面.jpeg
+cover: grunt封面.jpeg
 ---
 
 ### 前言

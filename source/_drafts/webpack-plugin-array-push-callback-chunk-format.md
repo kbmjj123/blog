@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: ArrayPushCallbackChunkFormatPlugin封面.png
+cover: ArrayPushCallbackChunkFormatPlugin封面.png
 ---
 
 ### 前言

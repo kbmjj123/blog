@@ -9,7 +9,7 @@ tags:
   - koa
   - middleware
 keywords: koa中间件, JSON Web Token (JWT), JWT验证, koa JWT中间件, token身份验证, 令牌授权, 客户端身份验证
-cover_picture: koa-jwt封面.jpg
+cover: koa-jwt封面.jpg
 ---
 
 ### 前言

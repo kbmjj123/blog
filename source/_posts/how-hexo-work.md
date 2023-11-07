@@ -9,7 +9,7 @@ tags:
   - html
   - ejs
   - hexo
-cover_picture: hexo封面.jpeg
+cover: hexo封面.jpeg
 ---
 
 ### 前言

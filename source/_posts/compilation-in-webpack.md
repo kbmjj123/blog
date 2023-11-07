@@ -7,7 +7,7 @@ categories:
   - [webpack, Compilation]
 tags:
   - webpack
-cover_picture: Compilation封面.jpg
+cover: Compilation封面.jpg
 ---
 
 ### 前言

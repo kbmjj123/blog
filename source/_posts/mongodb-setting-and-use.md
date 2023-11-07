@@ -8,7 +8,7 @@ categories:
 tags:
   - 数据库
   - mongodb
-cover_picture: mongodb封面.png
+cover: mongodb封面.png
 ---
 
 ### 前言

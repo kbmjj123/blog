@@ -7,7 +7,7 @@ categories:
 tags:
   - javascript
   - 基础概念
-cover_picture: js-data-type.jpeg
+cover: js-data-type.jpeg
 ---
 
 ***请注意：JS的数据类型有8种***

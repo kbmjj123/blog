@@ -9,7 +9,7 @@ tags:
   - npm
   - nrm
   - Node.js
-cover_picture: verdaccio.jpeg
+cover: verdaccio.jpeg
 ---
 
 *关于如何要共享组件？目前公司的前端项目比较多，涉及到中后台业务系统，有存在不少组件，在不同的业务系统中使用的，为了避免疯狂的ctrl +C > ctrl + V，一堆的维护工作，这边搭建了内部的私有源，又不能将公司的一个资源扔到公共的npm上，因此这边利用verdaccio + gitlab来搭建以及维护蜘点前端公共的组件服务，通过verdaccio来管理组件的上传以及可视化管理，gitlab来管理组件的版本以及迭代，满足组件的更新迭代；*

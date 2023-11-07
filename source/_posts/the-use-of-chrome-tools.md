@@ -7,7 +7,7 @@ categories:
 tags:
     - 调试
     - 工具
-cover_picture: the-use-of-chrome-tools.png
+cover: the-use-of-chrome-tools.png
 ---
 ### 引言
 前端设备参差不齐、环境复杂，因此给前端的研发童鞋制造了许多的BUG，为了快速解决BUG，灵活运营调试工具就显得特别的重要了，因此这边整理了关于`Chrome`浏览器的调试方法，在Mac下，使用F12或者右键"检查"即可打开浏览器的调试工具。

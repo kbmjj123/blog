@@ -8,7 +8,7 @@ categories:
 tags:
   - 开发框架
   - vue
-cover_picture: vue指令封面.jpg
+cover: vue指令封面.jpg
 ---
 
 ### 前言
