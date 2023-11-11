@@ -11,7 +11,6 @@ hexo.extend.helper.register('aside_categories', function (categories, options) {
     options = categories
     categories = this.site.categories
   }
-
   if (!categories || !categories.length) return ''
   options = options || {}
   const { config } = this
@@ -79,7 +78,7 @@ hexo.extend.helper.register('aside_categories', function (categories, options) {
   }
 
   const list = hierarchicalList(limit, 0)
-
+  
   const moreButton = function () {
     if (categories.length <= limit) return ''
     const moreHtml = `<a class="card-more-btn" href="${categoryDir}/" title="${buttonLabel}">
