@@ -1,6 +1,7 @@
 footer:
   framework: Framework
   theme: Theme
+  friendLink: Friend Link
 
 copy:
   success: Copy Successful

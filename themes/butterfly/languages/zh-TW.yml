@@ -1,6 +1,7 @@
 footer:
   framework: 框架
   theme: 主題
+  friendLink: 友情链接
 
 copy:
   success: 複製成功

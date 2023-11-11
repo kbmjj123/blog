@@ -5,7 +5,7 @@
 nav:
   logo: img/logo.png
   display_title: true
-  fixed: false # fixed navigation bar
+  fixed: true # fixed navigation bar
 
 # Menu 目錄
 menu:
@@ -34,8 +34,8 @@ code_word_wrap: false
 #   icon: link || the description || color
 social:
   fab fa-github: https://github.com/kbmjj123 || Github || '#24292e'
-  fas fa-envelope: mailto:kbmjj123@gmail.com || Email || '#4a7dbe'
-  fab fa-twitter: https://twitter.com/kbmjj123 || Twitter || '#4a7dbe'
+  fas fa-envelope: mailto:kbmjj123@gmail.com || Email || '#24292e'
+  fab fa-twitter: https://twitter.com/kbmjj123 || Twitter || '#49b1f5'
 
 # Image (圖片設置)
 # --------------------------------------
@@ -139,7 +139,7 @@ photofigcaption: true
 copy:
   enable: true
   copyright:
-    enable: false
+    enable: true
     limit_count: 50
 
 # Post
@@ -211,6 +211,11 @@ footer:
     since: 2020
   custom_text:
   copyright: true # Copyright of theme and framework
+  friend_link:
+    - title: 技术知识堂
+      link: https://www.jhelp.net/
+    - title: Jason技术流水账
+      link: http://tech.jasonsoso.com/
 
 # aside (側邊欄)
 # --------------------------------------
