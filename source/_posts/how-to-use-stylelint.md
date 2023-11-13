@@ -8,7 +8,7 @@ categories:
 tags:
   - lint
   - stylelint
-cover_picture: stylelint封面.jpg
+cover: stylelint封面.jpg
 ---
 
 ### 前言

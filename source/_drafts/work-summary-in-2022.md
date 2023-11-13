@@ -9,7 +9,7 @@ tags:
   - 生活点滴
   - 工作
   - 总结
-cover_picture: 2022年年终复盘.png
+cover: 2022年年终复盘.png
 ---
 
 ### 前言

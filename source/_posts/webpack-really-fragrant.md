@@ -8,7 +8,7 @@ categories:
 tags:
     - 打包工具
     - webpack
-cover_picture: webpack真香封面.jpeg
+cover: webpack真香封面.jpeg
 ---
 
 ### 前言

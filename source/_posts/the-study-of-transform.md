@@ -8,7 +8,7 @@ categories:
 tags:
     - css
     - transform
-cover_picture: css变形学习封面.jpeg
+cover: css变形学习封面.jpeg
 ---
 
 ### 前言

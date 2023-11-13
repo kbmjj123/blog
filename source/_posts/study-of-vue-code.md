@@ -8,7 +8,7 @@ categories:
 tags:
   - 开发框架
   - vue
-cover_picture: vue源码解析封面.png
+cover: vue源码解析封面.png
 ---
 
 ### 前言

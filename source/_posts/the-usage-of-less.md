@@ -9,7 +9,7 @@ tags:
   - 前端
   - css
   - less
-cover_picture: less封面.jpg
+cover: less封面.jpg
 ---
 
 ### 前言

@@ -8,5 +8,5 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: ResolverCachePlugin封面.png
+cover: ResolverCachePlugin封面.png
 ---

@@ -8,7 +8,7 @@ categories:
 tags:
     - 读书笔记
     - 个人提升
-cover_picture: 认知突围卷四封面.jpeg
+cover: 认知突围卷四封面.jpeg
 ---
 
 ### 前言

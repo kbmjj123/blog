@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - loader
-cover_picture: webpack中的loader封面.jpg
+cover: webpack中的loader封面.jpg
 ---
 
 ### 前言

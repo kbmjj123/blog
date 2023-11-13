@@ -9,7 +9,7 @@ tags:
     - javascript
     - 设计模式
     - 结构设计模式
-cover_picture: 享元设计模式封面.jpeg
+cover: 享元设计模式封面.jpeg
 ---
 
 ### 前言

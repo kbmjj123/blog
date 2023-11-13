@@ -4,7 +4,7 @@ author: Zhenggl
 date: 2022-03-03 08:44:56
 categories:
 tags:
-cover_picture: vue指令封面.jpeg
+cover: vue指令封面.jpeg
 ---
 
 ### 前言

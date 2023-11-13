@@ -7,7 +7,7 @@ categories:
 tags:
     - 微信支付
     - 微信商户
-cover_picture: https://img2.zhidianlife.com/image/2022/02/16/c4a01f06-bfc1-4d61-9396-0ca92d971399.jpeg
+cover: https://img2.zhidianlife.com/image/2022/02/16/c4a01f06-bfc1-4d61-9396-0ca92d971399.jpeg
 ---
 
 ### 前言

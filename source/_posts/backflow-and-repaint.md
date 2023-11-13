@@ -6,7 +6,7 @@ categories:
     - [html]
 tags:
     - 浏览器
-cover_picture: backflow-and-repaint.jpeg
+cover: backflow-and-repaint.jpeg
 ---
 
 ### 写在前面

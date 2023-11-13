@@ -8,7 +8,7 @@ categories:
 tags:
     - vue
     - 指令
-cover_picture: vue中8个有用的自定义指令.jpg
+cover: vue中8个有用的自定义指令.jpg
 ---
 
 ### 前言

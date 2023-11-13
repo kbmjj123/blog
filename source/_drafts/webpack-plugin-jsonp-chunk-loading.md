@@ -8,5 +8,5 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: JsonpChunkLoadingPlugin封面.jpg
+cover: JsonpChunkLoadingPlugin封面.jpg
 ---

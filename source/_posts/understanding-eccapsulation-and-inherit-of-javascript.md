@@ -7,7 +7,7 @@ categories:
 tags:
     - javascript
     - prototype
-cover_picture: JavaScript封装与继承.jpeg
+cover: JavaScript封装与继承.jpeg
 ---
 
 ### 前言

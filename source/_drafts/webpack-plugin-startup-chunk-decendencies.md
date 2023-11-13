@@ -8,5 +8,5 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: StartupChunkDependenciesPlugin封面.png
+cover: StartupChunkDependenciesPlugin封面.png
 ---

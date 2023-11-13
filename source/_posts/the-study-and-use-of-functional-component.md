@@ -10,7 +10,7 @@ tags:
     - vue
     - 查漏补缺
     - 函数式组件
-cover_picture: 函数式组件封面.jpeg
+cover: 函数式组件封面.jpeg
 ---
 
 ### 前言

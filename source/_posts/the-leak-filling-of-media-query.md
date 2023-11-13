@@ -9,7 +9,7 @@ tags:
     - css
     - media
     - print
-cover_picture: 媒体查询精进攻略封面.jpeg
+cover: 媒体查询精进攻略封面.jpeg
 ---
 
 ### 前言

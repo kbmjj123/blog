@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: IgnorePlugin封面.png
+cover: IgnorePlugin封面.png
 ---
 
 ### 前言

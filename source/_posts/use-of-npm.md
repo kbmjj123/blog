@@ -8,7 +8,7 @@ categories:
 tags:
     - code
     - npm
-cover_picture: npm常用功能.jpg
+cover: npm常用功能.jpg
 ---
 
 ### 前言

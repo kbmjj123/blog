@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - tapable
-cover_picture: tapable的使用与源码分析.jpg
+cover: tapable的使用与源码分析.jpg
 ---
 
 ### 前言

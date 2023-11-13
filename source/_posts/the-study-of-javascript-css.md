@@ -8,7 +8,7 @@ tags:
     - javascript
     - web
     - 浏览器
-cover_picture: javascript-css.jpeg
+cover: javascript-css.jpeg
 ---
 
 ### 前言

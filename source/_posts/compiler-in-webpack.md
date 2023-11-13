@@ -7,7 +7,7 @@ categories:
   - [webpack, Compiler]
 tags:
   - webpack
-cover_picture: Compiler封面.jpg
+cover: Compiler封面.jpg
 ---
 
 ### 前言

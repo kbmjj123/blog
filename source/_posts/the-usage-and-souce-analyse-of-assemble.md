@@ -10,7 +10,7 @@ tags:
   - grunt
   - handlebars
   - assemble
-cover_picture: assemble使用与源码分析封面.png
+cover: assemble使用与源码分析封面.png
 ---
 
 ### 前言

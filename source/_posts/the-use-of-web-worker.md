@@ -6,7 +6,7 @@ categories:
 - [javascript]
 tags:
 - javascript
-cover_picture: cover-web-worker.png
+cover: cover-web-worker.png
 ---
 ### 前言
 > JavaScript是单线程的，如果需要进行多线程的话，一般是不可能的，因为从头到尾只有一个线程在执行，对于多线程则需要协同配合，分享可执行时间，线程A执行一段时间，

@@ -8,7 +8,7 @@ categories:
 tags:
     - css
     - float
-cover_picture: css中的浮动属性封面.jpeg
+cover: css中的浮动属性封面.jpeg
 ---
 
 ### 前言

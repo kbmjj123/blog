@@ -8,7 +8,7 @@ tags:
     - javascript
     - 设计模式
     - 创建对象
-cover_picture: 简单工厂模式封面.jpeg
+cover: 简单工厂模式封面.jpeg
 ---
 
 ### 前言

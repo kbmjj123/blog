@@ -9,7 +9,7 @@ tags:
     - javascript
     - coding
     - markdown
-cover_picture: markdown-it-封面.jpeg
+cover: markdown-it-封面.jpeg
 ---
 
 ### 前言

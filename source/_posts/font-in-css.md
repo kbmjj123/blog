@@ -8,7 +8,7 @@ categories:
 tags:
     - css
     - font
-cover_picture: css中字体的二三事.jpeg
+cover: css中字体的二三事.jpeg
 ---
 
 ### 前言

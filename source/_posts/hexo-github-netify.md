@@ -8,7 +8,7 @@ tags:
   - hexo
   - github
   - netlify
-cover_picture: hexo-github.jpeg
+cover: hexo-github.jpeg
 top: 1
 ---
 

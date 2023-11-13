@@ -8,5 +8,5 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: SplitChunksPlugin封面.png
+cover: SplitChunksPlugin封面.png
 ---

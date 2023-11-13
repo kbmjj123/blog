@@ -8,7 +8,7 @@ tags:
     - 编码规范
     - UI规范
     - 交互规范
-cover_picture: the-rule-of-web.jpeg
+cover: the-rule-of-web.jpeg
 ---
 
 ### 前言

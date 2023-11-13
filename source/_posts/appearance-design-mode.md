@@ -9,7 +9,7 @@ tags:
     - javascript
     - 设计模式
     - 结构性模式
-cover_picture: 外观模式封面.jpeg
+cover: 外观模式封面.jpeg
 ---
 
 ### 前言

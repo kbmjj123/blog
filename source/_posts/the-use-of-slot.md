@@ -7,7 +7,7 @@ categories:
 tags:
     - vue
     - javascript
-cover_picture: vue-slots.jpeg
+cover: vue-slots.jpeg
 ---
 
 ### 前言

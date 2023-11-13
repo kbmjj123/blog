@@ -8,7 +8,7 @@ categories:
 tags:
   - koa
   - middleware
-cover_picture: koa-generic-session封面.jpg
+cover: koa-generic-session封面.jpg
 ---
 
 ### 前言

@@ -8,7 +8,7 @@ categories:
 tags:
   - http
   - tcp
-cover_picture: 你好TCP封面.jpeg
+cover: 你好TCP封面.jpeg
 ---
 
 ### 前言

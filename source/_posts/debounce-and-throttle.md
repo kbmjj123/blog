@@ -7,7 +7,7 @@ categories:
 tags:
     - javascript
     - function
-cover_picture: debounce-cover.jpeg
+cover: debounce-cover.jpeg
 ---
 
 ### 问题引入

@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - NormalModuleFactory
-cover_picture: NormalModuleFactory封面.png
+cover: NormalModuleFactory封面.png
 ---
 
 ### 前言

@@ -8,7 +8,7 @@ categories:
 tags:
   - vue
   - 调试
-cover_picture: vue源码调试封面.png
+cover: vue源码调试封面.png
 ---
 
 ### 前言

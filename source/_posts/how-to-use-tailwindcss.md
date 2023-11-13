@@ -9,7 +9,7 @@ tags:
   - css
   - tailwindcss
 keywords: css框架, 样式管理工具, 快速构建样式, 响应式设计, 自定义样式, 类型优先css, css实用工具, 样式组件化, 构建可扩展样式库, 打包和优化样式代码, 模块化开发, 提高开发效率, 样式性能优化, 前端工程化, 可维护性和可扩展性
-cover_picture: tailwindcss封面.jpg
+cover: tailwindcss封面.jpg
 ---
 
 ### 前言

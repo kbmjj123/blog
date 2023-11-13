@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: DllReferencePlugin封面.jpg
+cover: DllReferencePlugin封面.jpg
 ---
 ### 前言
 > {% link 官方链接 https://www.webpackjs.com/plugins/dll-plugin/ true 官方链接 %}

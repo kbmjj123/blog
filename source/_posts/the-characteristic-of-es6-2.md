@@ -7,7 +7,7 @@ categories:
 tags:
 - javascript
 - es6
-cover_picture: characteristic-cover.png
+cover: characteristic-cover.png
 ---
 ### 前言
 采用通用模块来组织和复用代码，能够显著提高代码的可读性与可礼节性。  

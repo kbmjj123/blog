@@ -7,7 +7,7 @@ categories:
 tags:
   - javascript
   - EventLoop
-cover_picture: js运行机制封面.png
+cover: js运行机制封面.png
 ---
 
 ### 一、前言

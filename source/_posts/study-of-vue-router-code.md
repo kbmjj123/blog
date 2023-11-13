@@ -8,7 +8,7 @@ categories:
 tags:
   - 开发框架
   - vue-router
-cover_picture: vue-router封面.png
+cover: vue-router封面.png
 ---
 
 ### 前言

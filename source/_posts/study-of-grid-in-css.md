@@ -9,7 +9,7 @@ tags:
     - css
     - grid
 keywords: CSS Grid, 栅格布局, Grid容器, Grid项, 栅格行和列, 栅格模版, 栅格轨道, 栅格单元格, 栅格间距, 栅格对齐, 栅格流动性, 栅格线命名, 栅格区域
-cover_picture: 初次见你栅格布局.jpeg
+cover: 初次见你栅格布局.jpeg
 ---
 
 ### 前言

@@ -11,7 +11,7 @@ tags:
   - express
   - handlebars
   - javascript
-cover_picture: express-hbs-框架搭建封面.jpg
+cover: express-hbs-框架搭建封面.jpg
 ---
 
 ### 前言

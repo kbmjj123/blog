@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - module
-cover_picture: module封面.jpg
+cover: module封面.jpg
 ---
 
 ### 前言

@@ -10,7 +10,7 @@ tags:
   - 编码规范
   - 自动化
   - husky
-cover_picture: husky封面.png
+cover: husky封面.png
 ---
 
 ### 前言

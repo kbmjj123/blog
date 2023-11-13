@@ -8,7 +8,7 @@ categories:
 tags:
     - css
     - bootstrap
-cover_picture: bootstrap从入门到掌握.jpeg
+cover: bootstrap从入门到掌握.jpeg
 ---
 
 ### 前言

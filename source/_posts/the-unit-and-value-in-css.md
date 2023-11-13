@@ -7,7 +7,7 @@ categories:
     - [css]
 tags:
     - css
-cover_picture: css中的单位与值封面.jpeg
+cover: css中的单位与值封面.jpeg
 ---
 
 ### 前言

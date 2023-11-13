@@ -7,7 +7,7 @@ categories:
 tags:
 - javascript
 - es6
-cover_picture: characteristic-cover.png
+cover: characteristic-cover.png
 ---
 
 ### 前言

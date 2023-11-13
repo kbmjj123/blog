@@ -9,7 +9,7 @@ tags:
     - css
     - grid
 keywords: 栅格布局, CSS布局, 网格系统, 栅格容器, 栅格元素, 栅格属性, 栅格实例, 栅格布局最佳实践
-cover_picture: 栅格布局总结与实战封面.jpeg
+cover: 栅格布局总结与实战封面.jpeg
 ---
 
 ### 前言

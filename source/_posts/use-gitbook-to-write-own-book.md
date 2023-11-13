@@ -5,7 +5,7 @@ author: Zhenggl
 date: 2022-04-01 08:51:16
 categories:
 tags:
-cover_picture: 如何利用gitbook来编写自己的网络书籍.jpeg
+cover: 如何利用gitbook来编写自己的网络书籍.jpeg
 ---
 
 ### 前言

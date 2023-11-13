@@ -9,7 +9,7 @@ tags:
     - javascript
     - 设计模式
     - 创建对象
-cover_picture: 单例模式封面.jpeg
+cover: 单例模式封面.jpeg
 ---
 
 ### 前言

@@ -7,7 +7,7 @@ categories:
 tags:
  - 高效学习
  - 技多不压身
-cover_picture: efficient_stydu.png
+cover: efficient_stydu.png
 ---
 
 ![高效学习](高效学习.png)

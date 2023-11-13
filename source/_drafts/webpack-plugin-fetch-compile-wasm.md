@@ -8,5 +8,5 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: FetchCompileWasmPlugin封面.png
+cover: FetchCompileWasmPlugin封面.png
 ---

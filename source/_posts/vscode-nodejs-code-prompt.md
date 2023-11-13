@@ -8,7 +8,7 @@ categories:
 tags:
   - vscode
   - coding
-cover_picture: 在vscode中开启代码提示封面.gif
+cover: 在vscode中开启代码提示封面.gif
 ---
 
 ### 小技能

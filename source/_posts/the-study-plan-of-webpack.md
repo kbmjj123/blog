@@ -7,7 +7,7 @@ categories:
   - [webpack]
 tags:
   - webpack
-cover_picture: webpack学习计划封面.jpg
+cover: webpack学习计划封面.jpg
 ---
 
 ### 前言

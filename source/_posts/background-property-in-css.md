@@ -8,7 +8,7 @@ categories:
 tags:
     - css
     - background
-cover_picture: css中的background属性封面.jpeg
+cover: css中的background属性封面.jpeg
 ---
 
 ### 前言

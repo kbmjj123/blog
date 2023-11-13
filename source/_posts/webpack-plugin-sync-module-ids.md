@@ -8,7 +8,7 @@ categories:
 tags:
   - webpack
   - plugin
-cover_picture: SyncModuleIdsPlugin封面.png
+cover: SyncModuleIdsPlugin封面.png
 ---
 
 ### 前言

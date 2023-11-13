@@ -8,7 +8,7 @@ tags:
     - vue
     - 自定义组件
     - npm
-cover_picture: custom-component-library.jpeg
+cover: custom-component-library.jpeg
 ---
 
 ### 一、前言

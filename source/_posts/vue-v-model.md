@@ -7,7 +7,7 @@ categories:
 tags:
     - vue
     - 指令
-cover_picture: vue-v-model.jpeg
+cover: vue-v-model.jpeg
 ---
 
 ### 自定义Vue中的v-model双向绑定

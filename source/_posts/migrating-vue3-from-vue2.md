@@ -11,7 +11,7 @@ tags:
   - typescript
   - vite
 keywords: vue 2 to vue 3 migration, composition API, optinos API, 数据绑定, 响应式系统, vuex迁移, 单文件组件迁移, 自定义指令迁移, 代码重构, 工具和插件支持, 兼容性考虑
-cover_picture: vue2往vue3的迁移之路.jpg
+cover: vue2往vue3的迁移之路.jpg
 ---
 
 ### 前言

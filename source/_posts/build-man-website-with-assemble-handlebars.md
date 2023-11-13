@@ -10,7 +10,7 @@ tags:
   - grunt
   - handlebars
   - assemble
-cover_picture: 使用assemble+hbs来构建基础在线man站点封面.jpg
+cover: 使用assemble+hbs来构建基础在线man站点封面.jpg
 ---
 
 ### 前言

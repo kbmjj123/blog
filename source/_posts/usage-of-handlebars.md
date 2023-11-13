@@ -9,7 +9,7 @@ tags:
   - javascript
   - javascript模版引擎
   - handlebarse
-cover_picture: handlebars封面.png
+cover: handlebars封面.png
 ---
 
 ### 前言
