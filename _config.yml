@@ -87,6 +87,9 @@ external_link:
 filename_case: 0
 render_drafts: false
 post_asset_folder: true
+marked:
+  prependRoot: true
+  postAsset: true
 relative_link: false
 future: true
 highlight:
@@ -181,13 +184,6 @@ friendLink:
     link: https://www.jhelp.net
   - title: Jason技术流水账
     link: http://tech.jasonsoso.com
-
-# 以下是图片懒加载
-lazyload:
-  enable: true
-  onlypost: true
-  isSPA: false
-  loadingImg: /images/loading.gif
 
 # 以下是生成网站的
 sitemap:
