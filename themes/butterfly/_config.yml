@@ -889,7 +889,7 @@ pangu:
 lazyload:
   enable: true
   field: site # site/post
-  placeholder:
+  placeholder: img/loading.gif
   blur: false
 
 # PWA
