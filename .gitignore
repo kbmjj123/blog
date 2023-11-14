@@ -96,4 +96,4 @@ db.json
 diy/
 jmeter/
 puppeteer/
-source/_data/calendar.json
+/source/_data/calendar.json
