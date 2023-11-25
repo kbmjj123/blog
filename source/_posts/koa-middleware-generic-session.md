@@ -8,6 +8,7 @@ categories:
 tags:
   - koa
   - middleware
+keywords: koa, koa-generic-session, koa-session的运用
 cover: koa-generic-session封面.jpg
 ---
 
@@ -56,7 +57,7 @@ app.listen(8888)
 | store | Object | MemoryStore | 外部存储store，默认是`MemoryStore` |
 | ttl | Number｜Function｜Object | null | sessionStore的过期时间(与cookie.maxAge不是同一个)，默认是null(表示将从`cookie.magAge`或者`cookie.expires`中获取ttl) |
 | prefix | String | `koa:sess:` | 即将存储的key的前缀 |
-| cookie | Object | `{path:'/',httpOnly:true,maxAge:null,overwrite:true,signed:true}` | 会话`cookie`设置，默认是一cookie对象的内容 |
+| cookie | Object | path、httpOnly、maxAge、overwrite、signed | 会话`cookie`设置，默认是一cookie对象的内容 |
 | defer | Boolean | false | 当通过`ctx.session`获取session时，是否延迟创建`session`对象 |
 | reconnectTimeout | Number | 10 | 当store断开链接时，不立刻跑出`store unavailable`错误，等待配置的时间后重新链接，默认时10s |
 | rolling | Boolean | false | 是否自动重置会话的标识，默认为false |
