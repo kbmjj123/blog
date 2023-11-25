@@ -8,6 +8,7 @@ categories:
 tags:
     - vue
     - 指令
+keywords: vue, vue如何自定义指令, 常见的便捷指令
 cover: vue中8个有用的自定义指令.jpg
 ---
 
