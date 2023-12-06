@@ -204,6 +204,18 @@ tagcloud:
   documentId: card-tag-cloud
 
 algolia:
-  applicationID: FNUVK6MSFA
+  enable: true
+  appId: FNUVK6MSFA
   apiKey: ee9d0896b281fb923271bdd86e9e231d
-  indexName: '...'
+  indexName: blogIndex
+  adminApiKey: 52a145b96d14def827bdfa5d0c931a1d
+  chunkSize: 5000
+  fields:
+    - content:strip:truncate,0,500
+    - excerpt:strip
+    - gallery
+    - permalink
+    - photos
+    - slug
+    - tags
+    - title
