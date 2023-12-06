@@ -143,6 +143,8 @@ include:
 exclude:
 ignore:
 
+plugins:
+  - hexo-algoliasearch
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/

@@ -12,6 +12,8 @@
 - var themeColorLight = theme.theme_color && theme.theme_color.enable && theme.theme_color.meta_theme_color_light || '#ffffff'
 - var themeColorDark = theme.theme_color && theme.theme_color.enable && theme.theme_color.meta_theme_color_dark || '#0d0d0d'
 - var themeColor = theme.display_mode === 'dark' ? themeColorDark : themeColorLight
+- var keywords = is_home() ? config.keywords : page.keywords ? page.keywords : pageTitle
+- var description = is_home() ? config.description : page.description ? page.description : tabTitle
 
 meta(charset='UTF-8')
 meta(http-equiv="X-UA-Compatible" content="IE=edge")
@@ -26,11 +28,8 @@ meta(name="wap-font-scale" content="no")
 meta(name="apple-mobile-web-app-capable" content="yes")
 meta(name="apple-mobile-web-app-status-bar-style" content="black")
 
-if (page.keywords)
-  meta(name="keywords" content=page.keywords)
-
-if (page.description) 
-  meta(name="description" itemprop="description" content=page.description)
+meta(name="keywords" content=keywords)
+meta(name="description" itemprop="description" content=description)
 
 //- Open_Graph
 include ./head/Open_Graph.pug
