@@ -385,7 +385,7 @@ docsearch:
   enable: true
   appId: DAIJFFR2MZ
   apiKey: 35e7678a0ac8d9edd03d77d11a0e4b50
-  indexName: blogIndex
+  indexName: 91temaichang
   adminApiKey: 88e8be6308254635e5ccac5d3ad9bf0b
   chunkSize: 5000
   fields:
