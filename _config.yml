@@ -205,10 +205,10 @@ tagcloud:
 
 algolia:
   enable: true
-  appId: FNUVK6MSFA
-  apiKey: ee9d0896b281fb923271bdd86e9e231d
+  appId: DAIJFFR2MZ
+  apiKey: 35e7678a0ac8d9edd03d77d11a0e4b50
   indexName: blogIndex
-  adminApiKey: 52a145b96d14def827bdfa5d0c931a1d
+  adminApiKey: 88e8be6308254635e5ccac5d3ad9bf0b
   chunkSize: 5000
   fields:
     - content:strip:truncate,0,500
