@@ -6,6 +6,6 @@ categories:
   - ''
 tags:
 keywords:
-cover_picture:
+cover:
 ---
 
