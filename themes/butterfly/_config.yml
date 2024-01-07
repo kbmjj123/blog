@@ -212,6 +212,10 @@ footer:
   custom_text:
   copyright: true # Copyright of theme and framework
   friend_link:
+    - title: 像java一样来思考nodejs
+      link: https://nodejs.91temaichang.com/
+    - title: 像编写javascript一样来编写样式
+      link: https://sass.91temaichang.com/
     - title: 技术知识堂
       link: https://www.jhelp.net/
     - title: Jason技术流水账
