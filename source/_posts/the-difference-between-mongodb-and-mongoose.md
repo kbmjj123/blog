@@ -1,6 +1,6 @@
 ---
 title: Mongodb与Mongoose关于schemaType的差异性
-description: 通过对接分析关于schemaType在mongoosedb与mongoose的差异性，来加深对schemaType的理解与掌握
+description: 通过对接分析关于schemaType在mongoosedb与mongoose的差异性，来加深对schemaType的理解与掌握，并同时延伸了关于mongoose中不同类型所能够支持的属性，方便后续校验直接使用
 author: Zhenggl
 date: 2024-01-07 07:47:22
 categories:
