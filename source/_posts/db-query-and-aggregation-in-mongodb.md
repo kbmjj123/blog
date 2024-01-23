@@ -131,12 +131,87 @@ cover:
   db.users.find({$where: <string|jscode>})
   db.users.find({$text: {$search:<string>}})
 ```
+:point_right: 语句一($expr)用于执行部分聚合管道操作。
+语句二($jsonSchema)用于验证待查询的数据是否满足某个jsonSchema说明对象。
+语句三($mod)用于过滤某个值是否能够被divisor求余，且余数为remainder。
+语句四($regex)用于正则匹配某个字段是否满足某个正则表达式。
+语句五($where)用户执行字符串表达式或者一个js函数，用于动态执行结果的集合判断。
 
 #### 投影相关
+> 投影运算符将指定操作返回的字段。
+> **:stars: 语法规则如下**
+```shell
+  db.collection.find(query, projection)
+```
+:star2: 这里`query`为查询条件，用于过滤文档，而`projection`是投影操作符，用于指定要返回的字段，通过在projection对象中指定某些属性是否为1来控制是否查询返回结果中是否包含对应的字段！
+
+> **:stars: `<array>.$`语法规则如下**
+```shell
+  db.collection.find(query, {"<field>.$": 1})
+```
+:point_right: 代表查询每个文档中的field数组中的第一个元素!
+
+> **:stars: `$elemMatch`语法规则如下**
+```shell
+  db.collection.find({<field>: {$elemMatch: {condition1, condition2, ...}}})
+```
+:point_right: 可以在查询中用于指定对数组中的元素应用多个条件，从而筛选出对应的结果集合，可以理解为对记录中的数组字段进行瘦身，使得查询结果中仅返回符合搜索结果的结果！
+
+:trollface: 比如有以下的一个文档：
+```json
+{
+  "_id": 1,
+  "scores": [
+    {"type": "exam", "score": 80},
+    {"type": "quiz", "score": 85},
+    {"type": "homework", "score": 88},
+    {"type": "homework", "score": 92},
+  ]
+}
+```
+:point_right: 如果我们想查找`scores`数组中`type`为"homework"并且`score`大于等于90的元素，可以使用`elemMatch`对数组进行投影瘦身操作：
+```javascript
+  db.collection.find({
+    $elemMatch: {
+      type: "homework",
+      score: {$gte: 90}
+    }
+  })
+```
+:point_right: 将最终返回以下的结果：
+```json
+  {
+    "_id": 1,
+    "scores": [
+      {"type": "homework", "score": 92}
+    ]
+  }
+```
+:confused: 这里我们可以看到`scores`属性被瘦身了，仅返回符合条件的查询结果！
+
+> **:stars: `$slice`语法规则如下**
+```shell
+  db.collection.find(<query>, {<arrayField>: {$slice: <number>}})
+  db.collection.find(<query>, {<arrayField>: {$slice: [<numer to skip>, <number to return>]}})
+```
+:point_right: 对查询结果中的arrayField属性进行裁剪，仅保留前number个元素集合
 
 #### 位运算匹配
 
 #### 其他匹配操作
+1. $comment: 添加注释到查询的位次，使得配置文件数据更加容易解释和跟踪；
+其语法规则如下：
+```shell
+  db.collection.find({<query>, $comment: <comment>})
+```
+:stars: 这里将用comment字符串来说明这个查询的过滤动作。
+
+2. $rand: 生成一个0到1之间的随机小数数字；
+其语法规则如下：
+```shell
+  db.collection.find({$expr: {$lt: [0.5, {$rand: {}}]}})
+```
+:stars: 这里将生成一个0到1的小数，使得聚合管道能够正常的运行！
 
 ### mongodb中的聚合管道分类
 
