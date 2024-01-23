@@ -99,10 +99,38 @@ cover:
 | $type | 存在某个BSON类型的字段值所组成的数据集合 |
 
 #### 数组匹配
+> 主要基于数据表中的数组类型字段进行匹配查询操作
+> **:stars: 语法规则**
+```shell
+  db.users.find({<field>: {$all: [<value1>, <value2>, ... <valueN>]}})
+  db.users.find({<field>: {$elemMatch: {<query1>, {query2}, ..., {queryN}}}})
+  db.users.find({<field>: {$size: 3}})
+```
+:point_right: 上述语句一主要查询数组类型属性field的值是否都在`value1`、`value2`、`valueN`中出现到，如果是的话，则将其所在的记录添加到查询结果集合中。
+语句二则是针对数组属性field中的元素进行query过滤筛选操作，也就是将数组属性中集合中的对象进行query匹配操作。
+语句三则是针对数组属性field中元素长度等于3的记录，加入到集合中。
+
+所有的*数组匹配*一览
+
+| 操作符号 | 描述 |
+|---|:---|
+| $all | 针对某个数组类型的字段进行全亮匹配筛选，全部包含才将所在记录加入到结果集中 |
+| $elemMatch | 针对数组属性中的元素进行query匹配操作，符合条件所在记录加入到结果集合中 |
+| $size | 针对数组属性长度为size的记录，加入到结果集合中  |
 
 #### 地理位置运算筛选
 
 #### 数学运算匹配
+> 通过数学运算求值操作，符合条件的情况，加入到查询结果集中！
+> **:stars: 语法规则**
+```shell
+  db.users.find({$expr: {<expresstion>]}})
+  db.users.find({$jsonSchema: {JSON Schema Object}})
+  db.users.find({$mod: {divisor, remainder}})
+  db.users.find({$regex: /pattern/})
+  db.users.find({$where: <string|jscode>})
+  db.users.find({$text: {$search:<string>}})
+```
 
 #### 投影相关
 
