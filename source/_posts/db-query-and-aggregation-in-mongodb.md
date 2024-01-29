@@ -380,13 +380,209 @@ cover:
 
 :trollface: 在上述的语法规则中有另外的两个参数`on`和`let`，`on`参数用于指定在目标集合中匹配文档的条件，一般是一个表达式，用于指定源文档与目标文档对比条件，一般默认是`_id`， 代表将使用两个collection中的`_id`来进行做对比
 
+###### $bucket
+> 用于将文档根据指定的范围或条件分为多个桶（buckets），每个桶表示一个区间或满足一定条件的文档集合，只为包含至少一个输入文档的存储桶生成输出文档，这对于对数据进行分组并进行统计分析非常有用。
+:star: 语法规则：
+```javascript
+  db.collections.aggregation([
+    {
+      $bucket: {
+        groupBy: <expression>,
+        boundaries: [<lowerbound1>, <lowerbound2>, ...],
+        default: <literal>,
+        output: {
+          <output1>: { <$accumulator expression> },
+          ...
+          <outputN>: { <$accumulator expression> }
+        }
+      }
+    }
+  ])
+```
+:star2: 上述语法规则中各参数说明：
++ `groupBy`: 指定用于分组的字段或表达式；
++ `boundaries`: 指定用于定义桶的范围的边界值数组，比如[0, 5, 10]，代表将拆分为两个桶(分别是：`[0, 5)`,`[5, 10]` );
++ `default`: 可选参数，当文档不匹配任何桶时将使用的默认值；
++ `output`: 指定每个桶的输出字段，可以包含聚合操作符来对桶内的文档进行进一步的计算
+
+:point_down: 有一个简单的例子，假设我们有一个存储了学生成绩的集合：
+```json
+  [
+    { "_id": 1, "name": "Alice", "score": 85 },
+    { "_id": 2, "name": "Bob", "score": 92 },
+    { "_id": 3, "name": "Charlie", "score": 75 },
+    { "_id": 4, "name": "David", "score": 88 },
+    { "_id": 5, "name": "Eva", "score": 78 }
+  ]
+```
+:point_right: 这里我们将使用`$bucket`将成绩分成不同的桶，比如，根据分组所达到的分值，将其拆分为`[0-60)`, `[60-70)`, `[70-80)`, `[80-90)`, `[90-100]` 等范围：
+```javascript
+  db.collections.agregation([
+    {
+      $bucket: {
+        groupBy: '$score',
+        boundaries: [0, 60, 70, 80, 90, 100],
+        default: 'Other',
+        output: {
+          count: { $sum: 1 },
+          students: { $push: '$name' }
+        }
+      }
+    }
+  ])
+```
+:point_right: 这里我们使用`$bucket`将按照学生成绩字段`score`进行分组，`default`是一个可选的参数，表示当文档不匹配任何的桶的时候，使用'Other'作为默认值，`output`则定义了每个桶的输出，包括数量和学生姓名数组
+
+:point_down: 输出的结果可能如下：
+```json
+[
+  {
+    "_id": 0,
+    "count": 1,
+    "students": ["Charlie"],
+    "min": 75,
+    "max": 80
+  },
+  {
+    "_id": 1,
+    "count": 2,
+    "students": ["Eva", "Alice"],
+    "min": 80,
+    "max": 90
+  },
+  {
+    "_id": 2,
+    "count": 2,
+    "students": ["David", "Bob"],
+    "min": 90,
+    "max": 92
+  },
+  {
+    "_id": 3,
+    "count": 0,
+    "students": [],
+    "min": 92,
+    "max": 100
+  },
+  {
+    "_id": 4,
+    "count": 0,
+    "students": [],
+    "min": 100,
+    "max": Infinity
+  }
+]
+```
+
 ###### $lookup
+> 用于在聚合管道中执行类似于关系型数据库中的左连接操作，这将允许我们从其他集合中获取相关联的文档，并将他们合并到当前文档中，这样子就可以在聚合操作中实现在多个集合之间的联结。
+:star: 语法规则：
+```javascript
+  db.collections.aggregation([
+    {
+      $lookup: {
+        from: <collection>,
+        localField: <field>,
+        foreignField: <field>,
+        as: <outputArray>
+      }
+    }
+  ])
+```
+相关参数的说明如下：
++ `from`: 指定要连接的目标集合名称；
++ `localField`: 在当前集合中的用于在目标集合中匹配的字段；
++ `foreignField`: 目标集合中的字段，用于与当前集合中的`localField`进行匹配；
++ `as`: 指定输出结果中的数组字段，用于存储匹配的文档。
+
+:point_down: 有一个简单的例子，假设有两个集合，一个存储了订单信息，另外一个存储了用户信息
+
+```json
+// orders 集合
+[
+  { "_id": 1, "product": "A", "customerId": 101 },
+  { "_id": 2, "product": "B", "customerId": 102 },
+  { "_id": 3, "product": "C", "customerId": 101 }
+]
+// customers 集合
+[
+  { "_id": 101, "name": "Alice" },
+  { "_id": 102, "name": "Bob" }
+]
+```
+:point_right: 这里我们可以使用`$lookup`来将订单信息中的`customerId`与用户信息中的`_id`进行关联：
+```javascript
+  db.orders.aggregation([
+    {
+      $lookup: {
+        from: 'customers',
+        localField: 'customerId',
+        foreignField: '_id',
+        as: 'customerArray'
+      }
+    }
+  ])
+```
+:point_down: 其输出结果：
+```json
+[
+  { "_id": 1, "product": "A", "customerId": 101, "customerArray": [{ "_id": 101, "name": "Alice" }] },
+  { "_id": 2, "product": "B", "customerId": 102, "customerArray": [{ "_id": 102, "name": "Bob" }] },
+  { "_id": 3, "product": "C", "customerId": 101, "customerArray": [{ "_id": 101, "name": "Alice" }] }
+]
+```
+:stars: 在上面这个例子中，输出的文档结果中`customerArray`数组包含了与订单关联的客户信息，如果没有匹配的文档，则`customerArray`将会是一个空的数组！
+
+:confused: 这里假如我反过来的话，应该可以实现一个用户下了什么订单的目的：
+```javascript
+  db.customers.aggregation([
+    {
+      $lookup: {
+        from: 'orders',
+        localField: '_id',
+        foreignField: 'customerId',
+        as: 'orderArray'
+      }
+    }
+  ])
+```
+:point_down: 将会是这样子的输出结果：
+```json
+[
+  { "_id": 101, "name": "Alice", "orderArray": [
+    { "_id": 1, "product": "A", "customerId": 101 },
+    { "_id": 3, "product": "C", "customerId": 101 }
+  ] },
+  { "_id": 102, "name": "Bob", "orderArray": [
+    { "_id": 2, "product": "B", "customerId": 102 },
+  ] }
+]
+```
+
+###### $unwind
+> 用于将文档中的数组字段给"展开"，当某个文档中包含一个数组字段，而我们希望将这个数组中的每一个元素都给展开的话，就可以直接使用这个`$unwind`
+:star: 语法规则：
+```javascript
+  db.collections.aggregation([
+    {
+      $unwind: {
+        path: <arrayField>,
+        includeArrayIndex: <string>,
+        preserveNullAndEmptyArrays: <boolean>
+      }
+    }
+  ])
+```
+相关参数的说明如下：
++ `path`: 指定要展开的数组字段；
++ `includeArrayIndex`: 可选，指定一个新字段名，用于存储数组的索引位置，如果不需要索引，则可以直接忽略；
++ `preserveNullAndEmptyArrays`: 可选，当设置为true时，如果要展开的数组字段不存在或为空，则继续保留空数组字段
 
 #### 聚合管道使用思考
 > :confused: 既然聚合管道可以理解一个个串联起来的待执行函数，那么如果数据量一旦大的话，数据库的执行效率将有很大的限制因素，因此需要针根据实际情况，仅进行相关顺序的控制， :point_down: 整理了相关情况下的一个`stage`执行顺序的声明:
 
 1. 对于需要筛选过滤后再执行的管道，采用`$match`，且必须将这个`$match`给放置在第一的位置，因此可以筛掉很大一部分数据，为后续其他`stage`的执行获得了较大的性能提升空间；
-2. 对于需要将聚合结果怼到另外一个collection中的情况，需要将使用`$merge`，并且还需要将其作为最后的一个`stage`来使用；
+2. 对于需要将聚合结果怼到另外一个collection中的情况，需要将使用`$merge`，并且还需要将其作为**最后**的一个`stage`来使用；
 
 
 
