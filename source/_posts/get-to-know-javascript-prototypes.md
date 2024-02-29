@@ -2,13 +2,17 @@
 title: 从新开始认识JavaScript原型
 author: Zhenggl
 date: 2022-03-09 08:45:20
-description: 从新开始认识JavaScript原型
+description: 本文从js的原型的查找过程来深入了解关于js的原型
 categories:
     - [javascript, prototype]
 tags:
     - javascript
     - prototype
     - constructor
+keywords:
+		- js原型
+		- js prototype
+		- 原型查找过程
 cover: 原型封面.jpeg
 ---
 
