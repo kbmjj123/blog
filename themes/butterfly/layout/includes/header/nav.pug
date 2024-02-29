@@ -2,7 +2,7 @@ nav#nav
   span#blog-info
     a(href=url_for('/') title=config.title)
       if theme.nav.logo
-        img.site-icon(src=url_for(theme.nav.logo))
+        img.site-icon(src=url_for(theme.nav.logo) alt=config.title)
       if theme.nav.display_title
         span.site-name=config.title
     
